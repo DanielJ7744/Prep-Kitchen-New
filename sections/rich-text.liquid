@@ -1,0 +1,70 @@
+<style>
+  .rich_text_section {
+    margin-top: 40px;
+  }
+
+  .rich_text_inner {
+    width: 75%;
+    margin: 0 auto 93px;
+    text-align: center;
+    font-family: rubikregular;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 35px;
+    color: #2c2c2c;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .rich_text_inner { width: 75%; margin: 30px auto 55px; font-size: 20px; line-height: 30px; } 
+  }
+  
+  @media screen and (max-width: 767px) {
+    .rich_text_section { margin-top: 80px; }
+  }
+  
+  @media screen and (max-width: 640px) {    
+    .rich_text_section { margin-top: 35px; }
+    
+    .rich_text_inner { width: 100%; max-width: 330px; margin: 0 auto 42px; }
+    
+    .rich_text_inner p { font-size: 18px; line-height: 28px; }
+  }
+</style>
+
+<div class="rich_text_wrapper-{{ section.id }}">
+  <div class="page-width">
+    <div class="rich_text_inner">
+      {{ section.settings.text }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Rich Text",
+"tag": "section",
+"class": "rich_text_section",
+"settings": [
+{
+"type" : "richtext",
+"id" : "text",
+"label" : "Text"
+}
+],
+"presets": [
+{
+"name" : "Rich Text",
+"category" : "Image"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

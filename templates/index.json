@@ -1,0 +1,196 @@
+{
+  "sections": {
+    "165709385827297c11": {
+      "type": "rich-text",
+      "settings": {
+        "text": "<p>The Prep Kitchen delivers cooked, healthy, and gourmet meals to the doorstep of those who want to eat well, but who would rather be out doing what they love instead of grocery shopping and working all day in the kitchen.<\/p>"
+      }
+    },
+    "16570944724a08f31c": {
+      "type": "services-section",
+      "blocks": {
+        "f18ad23d-2729-4201-a1bf-d6bff7ab9f10": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/ser1.png",
+            "title": "Build Your Order",
+            "subtitle": "select your meals <br>\nsave your favorites"
+          }
+        },
+        "f55637a5-3cc5-4160-81ae-3890b644969f": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/ser2.png",
+            "title": "Delivery",
+            "subtitle": "doorstep delivery <br>\nlocal pickup in DFW"
+          }
+        },
+        "85c891bd-de97-427e-914e-734d4d0b44f4": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/ser3.png",
+            "title": "Enjoy",
+            "subtitle": "heat & eat <br>\nearn rewards"
+          }
+        }
+      },
+      "block_order": [
+        "f18ad23d-2729-4201-a1bf-d6bff7ab9f10",
+        "f55637a5-3cc5-4160-81ae-3890b644969f",
+        "85c891bd-de97-427e-914e-734d4d0b44f4"
+      ],
+      "settings": {
+        "head": "It's Simple"
+      }
+    },
+    "1657099938bb341206": {
+      "type": "slider-and-text",
+      "blocks": {
+        "89aa3fc2-043f-43fe-82b7-b6f1d901a665": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/slide1.png"
+          }
+        },
+        "a4400738-7e56-441a-98f0-f0f9bed7a314": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/slide2.png"
+          }
+        },
+        "e0aad228-f330-4f80-9e37-c90f39643320": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/slide3.png"
+          }
+        },
+        "afa0b615-90d4-455c-a08a-26f1631ad7d1": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/slide4.png"
+          }
+        },
+        "d852d10e-742f-463c-a87c-7567e8b31d96": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/slide5.png"
+          }
+        }
+      },
+      "block_order": [
+        "89aa3fc2-043f-43fe-82b7-b6f1d901a665",
+        "a4400738-7e56-441a-98f0-f0f9bed7a314",
+        "e0aad228-f330-4f80-9e37-c90f39643320",
+        "afa0b615-90d4-455c-a08a-26f1631ad7d1",
+        "d852d10e-742f-463c-a87c-7567e8b31d96"
+      ],
+      "settings": {
+        "slider_alignment": "left",
+        "head": "our food is... <br>gourmet. healthy. Simple.",
+        "icon1_img": "shopify:\/\/shop_images\/icon1.png",
+        "icon1_head": "Chef Prepared",
+        "icon2_img": "shopify:\/\/shop_images\/icon2.png",
+        "icon2_head": "All Natural",
+        "icon3_img": "shopify:\/\/shop_images\/icon3.png",
+        "icon3_head": "Responsibly sourced",
+        "icon4_img": "shopify:\/\/shop_images\/icon4.png",
+        "icon4_head": "Generously portioned",
+        "content": "<p>We not only care about how you want to look on the outside but also how you want to feel on the inside. Because of our responsibly sourced, non-GMO, and high-quality ingredients, you’ll feel great after each bite. Our fresh, seasonal vegetables are picked up daily. We give you the best so that you can be your best.<\/p>",
+        "meal_options_head": "Order from our 3 delicious meal options.",
+        "btn1_label": "Bulk Basics",
+        "btn1_link": "shopify:\/\/collections\/all",
+        "btn2_label": "Prepped Meals",
+        "btn2_link": "https:\/\/theprepkitchen.com\/collections\/all?meals=pre-fixed-meals",
+        "btn3_label": "Build Your Meal",
+        "btn3_link": "shopify:\/\/products\/custom-meal"
+      }
+    },
+    "1657104968ef42f4e2": {
+      "type": "reviews-section",
+      "settings": {
+        "head": "real reviews from real customers"
+      }
+    },
+    "165710594865a59e6a": {
+      "type": "three-columns-section",
+      "blocks": {
+        "35a948f2-241d-4e36-a449-a3d9df0b4c85": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/op1.png",
+            "option_head": "Local <br> Delivery",
+            "option_content": "Available in DFW area."
+          }
+        },
+        "1da66184-edfb-4216-a89f-1c4a1cb15c9e": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/op2.png",
+            "option_head": "Local store <br> Pick-up",
+            "option_content": "Available in DFW area."
+          }
+        },
+        "83acf7f5-5d09-4f3c-9c70-efdfd0d0a187": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/op3.png",
+            "option_head": "National <br> Shipping",
+            "option_content": "Eco-friendly shipping boxes."
+          }
+        }
+      },
+      "block_order": [
+        "35a948f2-241d-4e36-a449-a3d9df0b4c85",
+        "1da66184-edfb-4216-a89f-1c4a1cb15c9e",
+        "83acf7f5-5d09-4f3c-9c70-efdfd0d0a187"
+      ],
+      "settings": {
+        "bg": "shopify:\/\/shop_images\/bg.png",
+        "head": "3 delivery options.",
+        "subhead": "Making delivery convenient & simple."
+      }
+    },
+    "16571733445b4ebe1d": {
+      "type": "featured-collection",
+      "blocks": {
+        "420e1b44-9c2f-458e-be91-d615105187b5": {
+          "type": "product",
+          "settings": {
+            "product": "ground-turkey-jasmine-rice-green-beans",
+            "pro_img": "shopify:\/\/shop_images\/pro1.png"
+          }
+        },
+        "d26a5df4-6046-4f50-b4fb-8595de36822a": {
+          "type": "product",
+          "settings": {
+            "product": "shrimp",
+            "pro_img": "shopify:\/\/shop_images\/pro2.png"
+          }
+        },
+        "04b524ff-945c-48e4-910f-34936637ba85": {
+          "type": "product",
+          "settings": {
+            "product": "cod-brown-rice-asparagus",
+            "pro_img": "shopify:\/\/shop_images\/pro3.png"
+          }
+        }
+      },
+      "block_order": [
+        "420e1b44-9c2f-458e-be91-d615105187b5",
+        "d26a5df4-6046-4f50-b4fb-8595de36822a",
+        "04b524ff-945c-48e4-910f-34936637ba85"
+      ],
+      "settings": {
+        "head": "What's popular?"
+      }
+    }
+  },
+  "order": [
+    "165709385827297c11",
+    "16570944724a08f31c",
+    "1657099938bb341206",
+    "1657104968ef42f4e2",
+    "165710594865a59e6a",
+    "16571733445b4ebe1d"
+  ]
+}

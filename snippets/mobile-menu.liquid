@@ -1,0 +1,110 @@
+{%- assign locale_selector = false -%}
+{%- assign currency_selector = false -%}
+
+{%- if settings.show_currency_selector == true and shop.enabled_currencies.size > 1 -%}
+  {%- assign currency_selector = true -%}
+{%- endif -%}
+
+{%- if settings.show_locale_selector == true and shop.published_locales.size > 1 -%}
+  {%- assign locale_selector = true -%}
+{%- endif -%}
+
+<div class="mobile-menu">
+  <div class="mobile-menu__content">
+    <ul class="mobile-menu__list has-margin-bottom">
+      {% if settings.header_layout == 'vertical' %}
+        {% for block in nav_blocks %}
+          {% if block.type == 'navigation' %}
+            {% assign main_menu = linklists[block.settings.main_linklist] %}
+            {% render 'mobile-menu-loop', main_menu: main_menu %}
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% if section.settings.mobile_linklist == blank %}
+        {% assign main_menu = linklists[section.settings.main_linklist] %}
+        {% else %}
+        {% assign main_menu = linklists[section.settings.mobile_linklist] %}
+        {% endif %}
+        {% render 'mobile-menu-loop', main_menu: main_menu %}
+      {% endif %}
+
+      <!-- {% if shop.customer_accounts_enabled %}
+        <li>
+          {% if customer %}
+            <a class="mobile-menu__item item-with-icon" href="{{ routes.account_url }}" >
+              {% if settings.icon_style != 'text' %}
+                {% render 'icon', name: 'avatar' %}
+              {% endif %}
+              <span class="icon-caption">
+                {{ 'layout.customer.my_account' | t | escape }}
+              </span>
+            </a>
+          {% else %}
+            <a class="mobile-menu__item item-with-icon" href="{{ routes.account_login_url }}" >
+              {% if settings.icon_style != 'text' %}
+                {% render 'icon', name: 'avatar' %}
+              {% endif %}
+              <span class="icon-caption">
+                {{ 'layout.customer.log_in' | t | escape }}
+              </span>
+            </a>
+          {% endif %}
+        </li>
+      {% endif %} -->
+
+
+      {% if shop.customer_accounts_enabled %}
+        {% if customer %}
+            <li class="mobile-menu__list-item">
+              <div class="mobile-menu__first-level has-no-submenu">
+                <label class="submenu__label ">
+                  <a class="mobile-menu__item " href="{{ routes.account_url }}">
+                    Account / Reorder
+                  </a>
+                </label>
+              </div>
+            </li>
+            <li class="mobile-menu__list-item">
+              <div class="mobile-menu__first-level has-no-submenu">
+                <label class="submenu__label ">
+                  <a class="mobile-menu__item " href="/account/logout">
+                    Logout
+                  </a>
+                </label>
+              </div>
+            </li>
+            {% else %}
+            <li class="mobile-menu__list-item">
+              <div class="mobile-menu__first-level has-no-submenu">
+                <label class="submenu__label ">
+                  <a class="mobile-menu__item " href="{{ routes.account_login_url }}">
+                    Login / Reorder
+                  </a>
+                </label>
+              </div>
+            </li>
+            <li class="mobile-menu__list-item">
+              <div class="mobile-menu__first-level has-no-submenu">
+                <label class="submenu__label ">
+                  <a class="mobile-menu__item " href="/account/register">
+                    Create Account
+                  </a>
+                </label>
+              </div>
+            </li>
+        {% endif %}
+      {% endif %}
+
+
+
+    </ul>
+    {%
+      render 'localization-switcher',
+      id: 'selector-form--mobile',
+      additional_classes: 'selectors-form--mobile',
+      currency_selector: currency_selector,
+      locale_selector: locale_selector,
+      show_currency: settings.show_currency_selector,
+     %}
+  </div>
+</div>

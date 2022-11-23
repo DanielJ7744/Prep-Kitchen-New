@@ -1,0 +1,56 @@
+<ul class="nav navbar-nav">
+  {% for block in section.blocks %}
+  {% assign link_active_chck = shop.url | append: block.settings.link %}
+  <li class="{% case block.type %}{% when 'link-linklist' %} nav-item dropdown{% endcase %}">
+    <a class="nav-link active 
+              {% case block.type %}{% when 'link-linklist' %}{% if block.settings.links.size > 0 %} dropdown-toggle{% endif %}{% endcase %}
+              "
+       {% case block.type %}{% when 'link-linklist' %}{% if block.settings.links.size > 0 %}
+       id="dropdown{{forloop.index}}" aria-haspopup="true" aria-expanded="false"
+       {% endif %}{% endcase %}
+       href="{{block.settings.link}}">
+      {{block.settings.title}}
+
+      {% case block.type %}
+      {% when 'link-linklist' %}
+      {% if block.settings.links.size > 0 %}
+      <span class="caret two"></span>
+      {% endif %}
+      {% endcase %}
+    </a>
+
+    {% case block.type %}
+    {% when 'link-linklist' %}
+    {% if block.settings.links.size > 0 %}
+    {%- assign links = block.settings.links -%}
+    {% if linklists[links].links.size > 0 %}
+    <ul class="dropdown-menu" aria-labelledby="dropdown{{forloop.index}}">
+      {% for link in linklists[links].links %}
+      <li class="dropdown-item{% if link.links.size > 0 %} dropdown{% endif %}">
+        <a class="{% if link.active %}active{% endif %}{% if link.links.size > 0 %} dropdown-toggle{% endif %}"
+           {% if link.links.size > 0 %} id="dropdown{{forloop.index}}-{{forloop.index}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}
+           {% unless link.links.size > 0 %}
+           href="{{link.url}}"
+           {% endunless %}
+           >
+          {{link.title}}
+          {% if link.links.size > 0 %}
+          <span class="caret three"></span>
+          {% endif %}
+          {% if link.links.size > 0 %}
+          <ul class="dropdown-menu" aria-labelledby="dropdown{{forloop.index}}-{{forloop.index}}">
+            {% for child_link in link.links %}
+            <li class="padding dropdown-item"><a href="{{child_link.url}}">{{child_link.title}}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endif %}
+    {% endcase %}
+  </li>
+  {% endfor %}
+</ul>

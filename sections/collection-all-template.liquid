@@ -1,0 +1,516 @@
+<style>
+  .header_container {
+    max-width: 1900px;
+    padding: 0 15px;
+    margin: 0 auto;
+    background: #2C2C2C;
+    position: relative;
+    position: fixed;
+    top: 102.39px;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .header_container ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header_container ul li {
+    margin-right: 66px;
+    position: relative;
+    transition: all .3s ease-in-out;
+  }
+
+  .header_container ul li a {
+    color: #f5f5f5;
+    text-transform: capitalize;
+    font-size: 15px;
+    padding: 8px 0 7px;
+    font-family: rubikregular;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .header_container ul li a:hover {
+    color: #23d16a;
+  }
+
+  .coll_filters img {
+    margin-right: 13px;
+  }
+
+  .coll_filters h5 a {
+    margin: 0;
+    color: #23d16a;
+    text-transform: capitalize;
+    font-family: rubikregular;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .coll_filters h5 a:hover {
+    text-decoration: none;
+  }
+
+  .coll_filters {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+  }
+
+  .black_filter .black_filter_inner2 h5 a {
+    font-size: 14px;
+  }
+
+  .header_container .shop_left {
+    position: absolute;
+    z-index: 9;
+    right: 50px;
+    top: 41px;
+    padding: 20px 20px;
+    background: #fff;
+    display: none;
+    box-shadow: 0 0 12px rgb(0 0 0 / 20%), 0 0 0.5px rgb(0 0 0 / 50%);
+    max-width: 197px;
+    margin: 0 0 0 auto;
+    max-height: 500px;
+    overflow-y: scroll;
+  }
+
+  .collection-filters__actions {
+    margin-bottom: 10rem;
+  }
+
+  .header_container .shop_left h5 img {
+    margin-right: 10px;
+  }
+
+  .header_container .shop_left h5 {
+    font-size: 14px;
+    line-height: 17px;
+    color: #464646;
+    font-weight: normal;
+    font-family: 'rubikregular';
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #F5F5F5;
+    padding: 0 0 5px;
+    margin: 0 0 17px;
+  }
+
+  .header_container .shop_left .category_div {
+    padding-bottom: 10px;
+  }
+
+  .header_container .shop_left .category_div .tabin {
+    flex-direction: column;
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 10px;
+    grid-template-rows: repeat(10,auto);
+  }
+
+  .header_container .shop_left .category_div .cat_list {
+    margin-bottom: 0;
+    padding: 0px 0 15px;
+    line-height: 18px;
+  }
+
+  .header_container .shop_left .category_div .cat_list input {
+    margin: 4px 0 0;
+    line-height: normal;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .header_container .shop_left .category_div .cat_tx {
+    font-size: 14px;
+    line-height: 17px;
+    color: #464646;
+    font-weight: normal;
+    font-family: 'rubikregular';
+    position: relative;
+    text-transform: capitalize;
+    padding-top: 0;
+    margin-left: 0;
+    padding-left: 34px;
+    word-break: break-word;
+    padding-left: 25px;
+    cursor: pointer;
+  }
+
+  .header_container .shop_left .category_div .cat_tx:before {
+    content: ''!important;
+    width: 16px;
+    height: 16px;
+    display: block;
+    background: #fff;
+    float: left;
+    border-radius: 5px !important;
+    position: absolute;
+    top: 0 !important;
+    left: 0;
+    border: 2px solid #4B4B4B;
+  }
+
+  .header_container .shop_left .category_div .listcol.cat_list input:checked + .cat_tx:before {
+    background-color: #2c2c2c;
+  }
+
+  .listcol.cat_list input:checked + .cat_tx:before {
+    border: 1px #000 solid;
+  }
+
+  .cat_list input:checked + .cat_tx:before {
+    background: #000;
+  }
+
+  .header_container .listcol .cat_tx:hover:before {
+    background-color: #ccc;
+  }
+
+  .header_container .cat_tx:hover:before {
+    transition: .3s ease-in-out;
+  }
+
+  .listcol .cat_tx:hover:before {
+    border: 1px #000 solid;
+  }
+
+  /*   COLLECTION BANNER */
+
+  .coll_all_header_inner {
+    {% if section.settings.bg != blank %}
+    background: url({{ section.settings.bg | img_url: '1296x' }});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    {% else %}
+    background: #fff;
+    {% endif %}
+    width: 100%;
+    height: 100%;
+    min-height: 306px;
+    position: relative;
+  }
+
+  .ca_inner_wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .coll_all_header_inner .breadcrumb {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: #fff;
+  }
+
+  .coll_all_header_inner .breadcrumb a,
+  .coll_all_header_inner .breadcrumb span {
+    color: #fff !important;
+    font-size: 14px;
+    font-family: rubikregular;
+    line-height: 17px;
+    text-transform: capitalize;
+    display: inline;
+  }
+
+  .coll_all_header_title h1 {
+    color: #fff;
+    text-transform: lowercase;
+    font-size: 52px;
+    line-height: 65px;
+    margin-top: 10px;
+    font-family: 'rubikregular';
+  }
+
+  .collection_div {
+    padding: 55px 0;
+  }
+
+  .coll_head h2 {
+    font-size: 40px;
+    line-height: 47px;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-family: rubikmedium;
+    color: #2c2c2c;
+  }
+
+  /*   PRODUCTS CARD */
+  div#Collection .collection_div h2 {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 0 0 5px;
+    text-align: center;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-family: rubikmedium;
+    color: #23d16a;
+  }
+
+  .pro_wrapper {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.products_per_row}}, 1fr);
+    gap: 30px;
+  }
+</style>
+
+<div
+  class="collection_all_section collection-section"
+  data-section-id="{{ section.id }}"
+  data-section-type="collection-template"
+>
+  {% if collection.handle == 'all' %}
+    <div class="header_container">
+      <ul class="hidden-xs">
+        {% for link in linklists.collection-menu.links %}
+          <li
+            {% if link.active %}
+              class="site-nav--active"
+            {% endif %}
+          >
+            <a
+              href="#{{ link.url | handle | remove:'collections-' }}"
+              class="site-nav__link site-nav__link--main{% if link.active %} site-nav__link--active{% endif %}"
+              {% if link.current %}
+                aria-current="page"
+              {% endif %}
+            >
+              <span class="site-nav__label">{{ link.title | escape }}</span>
+            </a>
+
+            {% if link.links != blank %}
+              <ul class="dropdown-menu">
+                {% for childlink in link.links %}
+                  <li class="dropdown-item{% if link.links.size > 0 %} dropdown{% endif %}">
+                    <a
+                      href="{{ childlink.url }}"
+                      class="site-nav__link site-nav__child-link{% if forloop.last %} site-nav__link--last{% endif %}"
+                      {% if childlink.current %}
+                        aria-current="page"
+                      {% endif %}
+                    >
+                      {{ childlink.title | escape }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+
+      <div class="coll_filters">
+        <h5>
+          <a href="javascript:void(0)" onclick="show_category()"
+            ><img src="{{ 'filter_g.svg' | asset_url }}" title="" alt=""> Dietary Filters</a
+          >
+        </h5>
+      </div>
+
+      {% render 'collection-filter-popup' %}
+    </div>
+
+    <div class="coll_all_header_wrapper">
+      <div class="coll_all_header_inner">
+        <div class="ca_inner_wrap">
+          {% render 'breadcrumbs' %}
+
+          {% if section.settings.head != blank %}
+            <div class="coll_all_header_title">
+              <h1>{{ section.settings.head }}</h1>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="collection_div" style="padding-bottom:0; ">
+      <div class="page-width">
+        {% if section.settings.coll_head != blank %}
+          <div class="coll_head">
+            <h2>{{ section.settings.coll_head }}</h2>
+            {% if section.settings.coll_text != blank %}
+              <p>{{ section.settings.coll_text }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="page-width" id="Collection">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% assign collection = block.settings.collection %}
+          {% if block.settings.title != blank %}
+            <div class="collection_div" id="{{ collection.handle }}">
+              <h2>{{ block.settings.title }}</h2>
+            </div>
+          {% endif %}
+
+          <div class="pro_wrapper">
+            {% for product in collection.products %}
+              {%
+                render 'product-thumbnail-cus',
+                product: product,
+                limit: section.settings.pagination_limit,
+                products_per_row: products_per_row,
+                mobile_products_per_row: mobile_products_per_row,
+                align_height: section.settings.align_height,
+                height: section.settings.collection_height,
+                collection_group_thumb: collection_group_thumb,
+                collection_group_mobile: collection_group_mobile,
+                related_products: related_items
+              %}
+            {% endfor %}
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  function show_category(){
+    $('.shop_left').slideToggle();
+  }
+
+  $(document).on('click', 'a[href^="#"]', function(e){
+    var id = $(this).attr('href');
+
+    var $id = $(id);
+    if($id.length === 0) {
+      return;
+    }
+
+    e.preventDefault();
+
+    var pos = $id.offset().top-120;
+
+    $('body, html').animate({scrollTop: pos}, 1000);
+  })
+</script>
+
+{% schema %}
+{
+  "name": "Collection All",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg",
+      "label": "Section Background"
+    },
+    {
+      "type": "textarea",
+      "id": "head",
+      "label": "Page Heading"
+    },
+    {
+      "type": "text",
+      "id": "coll_head",
+      "label": "Collection Head"
+    },
+    {
+      "type": "textarea",
+      "id": "coll_text",
+      "label": "Collection Content"
+    },
+    {
+      "type": "header",
+      "content": "Product thumbnails"
+    },
+    {
+      "type": "checkbox",
+      "id": "align_height",
+      "label": "Align to height",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "collection_height",
+      "label": "Product image height",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "default": 200,
+      "unit": "px",
+      "info": "Applied when 'Align to height' is enabled. [Learn more](https://help.outofthesandbox.com/hc/en-us/articles/360022543913)"
+    },
+    {
+      "type": "range",
+      "id": "products_per_row",
+      "label": "Products per row",
+      "min": 2,
+      "max": 7,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "mobile_products_per_row",
+      "label": "Products per row on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pagination_limit",
+      "label": "Products per page",
+      "min": 2,
+      "max": 50,
+      "step": 1,
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Collection",
+      "type": "collections",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Collection Title"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% style sheet %}{% endstyle %}
+
+{% javascript %}
+
+{% endjavascript %}

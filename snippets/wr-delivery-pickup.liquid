@@ -1,0 +1,74 @@
+<div
+  {% if totalEligableItemCount == cart.item_count %}
+    class="skip-calendar" style="display:none;"
+  {% else %}
+    class=""
+  {% endif %}
+  id="store-front-cart-delivery-pickup"
+></div>
+<input type="hidden" id="cart-shippingmethod" value="pickup">
+<input type="hidden" name="attributes[Checkout-Method]" value="">
+<input type="hidden" name="attributes[Pickup-Location-Id]" value="">
+<input type="hidden" name="attributes[Delivery-Location-Id]" value="">
+<input type="hidden" name="attributes[Pickup-Date]" value="">
+<input type="hidden" name="attributes[Delivery-Date]" value="">
+<input type="hidden" name="attributes[Pickup-Location-Company]" value="">
+<input type="hidden" name="attributes[Pickup-Location-Address-Line-1]" value="">
+<input type="hidden" name="attributes[Pickup-Location-Address-Line-2]" value="">
+<input type="hidden" name="attributes[Pickup-Location-City]" value="">
+<input type="hidden" name="attributes[Pickup-Location-Region]" value="">
+<input type="hidden" name="attributes[Pickup-Location-Region-Code]" value="">
+<input type="hidden" name="attributes[Pickup-Location-Postal-Code]" value="">
+<input type="hidden" name="attributes[Pickup-Location-Country]" value="">
+<input type="hidden" name="attributes[Pickup-Location-Country-Code]" value="">
+
+
+<style>
+
+  .swal-content table {
+    margin: 0 auto;
+    width: 100%;
+}
+
+  div#search-area {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 20px;
+}
+
+  div#search-area input {
+    margin-bottom: 15px;
+}
+  
+.form-group.col-lg-8.col-sm-8.col-xs-24.form-vertical {
+    width: 100%;
+  padding: 0;
+}
+  .ui-widget.ui-widget-content {
+    width: 100% !important;
+}
+  .notes-wrapper {
+    margin-bottom: 20px;
+    width:70%;
+}
+
+  button#search-area-btn, button#search-area-clearbtn {
+    font-family: 'rubikmedium';
+    letter-spacing: 1px;
+    font-size: 15px;
+    color: #fff;
+    background-color: #23d16a;
+    border-color: #0000;
+}
+  #store-front-cart-delivery-pickup #location-container {
+     padding-left: 2px;
+  }
+  p#home-zip-text {
+    margin-top: 10px;
+}
+  @media screen and (max-width: 768px) {  
+   .notes-wrapper {  width: 100%;}
+     .ui-widget.ui-widget-content {  width: 34em !important;}  
+  }
+</style>

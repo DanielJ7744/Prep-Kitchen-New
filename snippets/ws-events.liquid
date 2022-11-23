@@ -1,0 +1,28 @@
+{%- comment -%} Added by westmountsolutions.com template V1.20200212 {%- endcomment -%}
+<script>
+    'use strict';
+    const WSEvents = {
+        indexTemplate: () => {
+          // Your JavaScript here
+        },
+        collectionTemplate: () => {
+          // Your JavaScript here
+        },
+        productTemplate: () => {
+          // Your JavaScript here
+        },
+        cartTemplate: () => {
+          // Your JavaScript here
+        },
+        accountTemplate: () => {
+            console.log('so here loading?')
+          $('body').on('click', '.ws-re-order__button', function() {               
+
+            //$(this).hide();      
+            console.log($(this).parent().attr('data-id'))
+                        
+            WSFunctions.accountPage.getOrderItems($(this).parent().attr('data-id'));                  
+          });
+        }
+    };
+</script>

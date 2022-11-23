@@ -1,0 +1,124 @@
+<style>
+  .build_your_order_inner {
+    margin: 89px 0 103px;
+  }
+
+  .byo_heading h2 {
+    font-size: 40px;
+    line-height: 47px;
+    margin: 0 0 74px;
+    text-align: center;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    font-weight: 400;
+    font-family: 'rubikmedium';
+    color: #2c2c2c;
+  }
+
+  .byo_wrapper {
+    text-align: center;
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .byo_wrapper h3 {
+    font-size: 25px;
+    line-height: 29px;
+    margin: 22px 0 16px;
+    font-weight: 400;
+    font-family: 'rubikmedium';
+    color: #23D16A;
+  }  
+
+  .byo_wrapper p {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0;
+    font-weight: 400;
+    font-family: 'rubikregular';
+    color: #2c2c2c;
+  }
+
+  @media only screen and (min-width: 200px) and (max-width: 767px) {
+    .build_your_order_inner { margin: 43px 0 50px; }
+
+    .byo_heading h2 { font-size: 20px; line-height: 24px; margin: 0 0 32px; }    
+    
+    .byo_wrapper { max-width: 425px; margin: 0 auto; }
+
+    .byo_img { height: 58px; display: flex; justify-content: center; }
+
+    .byo_img img { height: 100%; }
+
+    .byo_wrapper h3 { font-size: 18px; line-height: 22px; margin: 22px 0 7px; }
+
+    .byo_wrapper p { font-size: 14px; line-height: 17px; }
+  }
+</style>
+
+<div class="build_your_order_wrapper-{{ section.id }}">
+  <div class="page-width">
+    <div class="build_your_order_inner">
+      <div class="byo_heading">
+        {% if section.settings.head != blank %}
+        <h2>{{ section.settings.head }}</h2>
+        {% endif %}
+      </div>
+      <div class="byo_wrapper">
+        {% if section.settings.byo_img != blank %}
+        <div class="byo_img">
+          <img src="{{ section.settings.byo_img | img_url: '187x' }}"/>
+        </div>
+        {% if section.settings.byo_head != blank %}
+        <h3>{{ section.settings.byo_head }}</h3>
+        {% endif %}
+        {% if section.settings.byo_content != blank %}
+        {{ section.settings.byo_content }}
+        {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Build Your Order",
+"tag": "section",
+"class": "build-your-order-section", 
+"settings": [
+{
+"type" : "text",
+"id" : "head",
+"label" : "Heading" 
+},
+{
+"type" : "image_picker",
+"id" : "byo_img",
+"label" : "Select Image"
+},
+{
+"type" : "text",
+"id" : "byo_head",
+"label" : "Title"
+},
+{
+"type" : "richtext",
+"id" : "byo_content",
+"label" : "Content"
+}
+],
+"presets": [
+{
+"name": "Build Your Order",
+"category" : "image"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

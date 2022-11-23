@@ -1,0 +1,247 @@
+<style>
+  .main_banner_inner {
+    position: relative;
+  }
+
+  .main_banner_inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .banner_heading {
+    position: absolute;
+    max-width: 410px;
+    bottom: 22%;
+    left: 22%;
+    transform: translate(-20%);
+  }
+
+  .banner_heading h3 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    line-height: 30px;
+    font-family: 'rubikregular';
+    color: #fff;
+  }
+
+  .banner_heading h1 {
+    font-size: 35px;
+    line-height: 42px;
+    margin-bottom: 26px;
+    font-family: 'rubikmedium';
+    color: #fff;
+  }
+
+  .banner_btns a {
+    margin-left: 9px;
+    min-width: 175px;
+    padding: 10px 22px;
+    background: #fff;
+    color: #23d16a;
+    font-size: 18px;
+    line-height: 20px;
+    font-family: 'rubikregular';
+    border-radius: 25px;
+    display: inline-block;
+    text-align: center;
+    transition: all .3s;
+  }
+
+  .banner_btns a:hover {
+    box-shadow: 0 0 4px #fff;
+    text-decoration: none;
+  }
+
+  span.stars {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    position: relative;
+    top: 2px;
+  }
+
+  span.stars img {
+    height: 13px;
+    width: 72px;
+  }
+
+  p.reviews {
+    font-size: 12px;
+    line-height: 14px;
+    font-family: rubikregular;
+    color: #07602c;
+    border-bottom: 3px solid #07602C;
+    max-width: 220px;
+    margin: 48px 0 0;
+    padding-bottom: 6px;
+  }
+
+  .banner_alert {
+    position: absolute;
+    right: 5%;
+    bottom: 24%;
+    width: 330px;
+    padding: 12px 19px 14px 30px;
+    background: #fff;
+    border-radius: 0 50px 50px 50px;
+  }
+
+  .banner_alert p {
+    padding: 6px 0 0;
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: rubikregular;
+    color: #2c2c2c;
+    text-transform: none;
+    letter-spacing: -.36px;
+  }
+  
+  .mob_img {
+    display: none;
+  }
+
+  @media screen and (min-width: 1800px) {
+    .banner_heading { max-width: 580px; bottom: 30%; }
+
+    .banner_heading h3 { margin-bottom: 16px; font-size: 30px; line-height: 36px; }
+
+    .banner_heading h1 { font-size: 50px; line-height: 56px; margin-bottom: 40px; }
+
+    .banner_btns a { margin-left: 19px; min-width: 245px; font-size: 22px; line-height: 27px; padding: 10px 30px; }
+
+    p.reviews { font-size: 20px; line-height: 24px; max-width: 342px; margin: 49px 0 0; }
+
+    .banner_alert { right: 17%; bottom: 31%; width: 457px; padding: 17px 47px 25px 56px; }
+
+    .banner_alert p { font-size: 18px; line-height: 22px; }
+  }
+
+  @media screen and (max-width: 798px) {
+    {% if settings.header_layout == 'classic' %}
+    .main_banner_wrapper-main-banner { margin-top: 50px; }
+    {% endif %}
+    
+    .banner_heading { position: absolute; max-width: 326px; bottom: 10% !important; left: 15%; transform: translate(-20%); }
+
+    .banner_heading h3 { margin-bottom: 10px; font-size: 18px; line-height: 22px; }
+
+    .banner_heading h1 { font-size: 28px; line-height: 34px; margin-bottom: 17px; }
+
+    .banner_btns a { margin-left: 9px; min-width: 155px; padding: 10px 16px; }
+
+    .banner_alert { right: 5%; bottom: 13%; width: 330px; padding: 12px 19px 14px 30px; }    
+  }
+  
+  @media screen and (max-width: 640px) {
+    .mob_img { display: block; }
+    
+    .desk_img { display: none; }
+    
+    .banner_heading { max-width: 270px; bottom: 44% !important; left: 0; right: 0; transform: translate(0); margin: auto; 	}
+    
+    .banner_btns a { margin-left: 0; min-width: 195px; margin-top: 8px; }
+    
+    .banner_alert { right: 0; left: 0; width: 300px; margin: auto; }
+  }
+</style>
+
+<div class="main_banner_wrapper-{{ section.id }}">
+  <div class="main_banner_inner">
+    {% if section.settings.img != blank %}    
+    <img class="desk_img" src="{{ section.settings.img | img_url: '1296x' }}" />
+    {% endif %}
+    {% if section.settings.mob_img != blank %}
+    <img class="mob_img" src="{{ section.settings.mob_img | img_url: '1296x' }}" />
+    {% endif %}
+    <div class="banner_heading">
+      {% if section.settings.subhead != blank %}
+      <h3>{{ section.settings.subhead }}</h3>
+      {% endif %}
+      {% if section.settings.head != blank %}
+      <h1>{{ section.settings.head }}</h1>
+      {% endif %}
+
+      {% if section.settings.link != blank %}
+      <div class="banner_btns">
+        <a href="{{ section.settings.link }}">{{ section.settings.label }}</a>
+      </div>
+      {% endif %}
+
+      {% if section.settings.reviews != blank %}
+      <p class="reviews">{{ section.settings.reviews }}</p>
+      {% endif %}     
+    </div>
+
+    {% if section.settings.alert != blank %}
+    <div class="banner_alert">
+      {{ section.settings.alert }}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Main Banner",
+"tag": "section",
+"class": "main-banner-section",
+"settings": [
+{
+"type" : "image_picker",
+"id" : "img",
+"label" : "Select Image"
+},
+{
+"type" : "image_picker",
+"id" : "mob_img",
+"label" : "Select Mobile Image"
+},
+{
+"type" : "text",
+"id" : "subhead",
+"label" : "Sub Heading"
+},
+{
+"type" : "text",
+"id" : "head",
+"label" : "Heading"
+},
+{
+"type" : "text",
+"id" : "label",
+"label" : "Button Label"
+},
+{
+"type" : "url",
+"id" : "link",
+"label" : "Button Link"
+},
+{
+"type" : "textarea",
+"id" : "reviews",
+"label" : "Reviews Content"
+},
+{
+"type" : "text",
+"id" : "alert",
+"label" : "Alert Content"
+}
+],
+"presets": [
+{
+"name" : "Main Banner",
+"category" : "Image"
+}
+]	
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

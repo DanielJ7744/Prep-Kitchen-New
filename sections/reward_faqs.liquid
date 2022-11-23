@@ -1,0 +1,452 @@
+<div class="faq_search">
+    <div class="container">
+      <form class="search-form search-bar__form" action="{{ routes.search_url }}" method="get" role="search">
+        <div class="search-form__input-wrapper">
+          <input
+                 type="text"
+                 name="q"
+                 role="combobox"
+                 aria-autocomplete="list"
+                 aria-owns="predictive-search-results"
+                 aria-expanded="false"
+                 aria-label="{{ 'general.search.placeholder' | t }}"
+                 aria-haspopup="listbox"
+                 class="search-form__input search-bar__input"
+                 data-predictive-search-drawer-input
+                 />
+          <input type="hidden" name="options[prefix]" value="last" aria-hidden="true" />
+          <div class="predictive-search-wrapper predictive-search-wrapper--drawer" data-predictive-search-mount="drawer"></div>
+        </div>
+  
+        <button class="search-bar__submit search-form__submit"
+                type="submit"
+                data-search-form-submit>
+          <img src="{{ 'd_search.svg' | asset_url }}" title="" alt="">
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  <div class="faq_heading">
+    <div class="containerrewardfaq">
+      <h2>{{ section.settings.life-heading }}</h2>   
+      <p>{{ section.settings.life-content }}</p>     
+    </div>
+  </div>
+  
+  <div class="faq_main" data-aos="slide-up">
+    <div class="containerrewardfaq">
+      <div class="faq">
+        <div class="faq_about">
+          <h3> {{ section.settings.panel-title }} </h3>
+          <div class="panel-group accordion11">
+            {% for block in section.blocks %} 
+            {% case block.type %}
+            {% when 'first-block' %}
+            <div class="panel panel-default">
+              <div class="panel-heading" >
+                <i class="fa-duotone fa-plus"></i>
+                <h4 class="panel-title">
+                  <a href="#collapse{{forloop.index}}">
+                    {{ block.settings.faq-title }}
+                  </a>
+                </h4>
+              </div>
+              <div class="panel-collapse">
+                <div class="panel-body">
+                  {{ block.settings.faq-description }}
+                </div>
+              </div>
+            </div>
+            {% endcase %}
+            {% endfor %} 
+          </div>
+        </div>
+  
+        <div class="faq_delivery">
+          <h3> {{ section.settings.panel-title-two }} </h3>
+  
+          <div class="panel-group accordion12">
+            {% for block in section.blocks %} 
+            {% case block.type %}
+            {% when 'second-block' %}
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <i class="fa-duotone fa-plus"></i>
+                <h4 class="panel-title">
+                  <a href="#collapse{{forloop.index}}">                      
+                    {{ block.settings.faq-title-one }}
+                  </a>
+                </h4>
+              </div>
+              <div class="panel-collapse">
+                <div class="panel-body">
+                  {{ block.settings.faq-description-one }}
+                </div>
+              </div>
+            </div>
+            {% endcase %}
+            {% endfor %} 
+          </div>
+        </div>
+  
+        <div class="faq_delivery">
+          <h3> {{ section.settings.panel-title-third }} </h3>
+  
+          <div class="panel-group accordion13">
+            {% for block in section.blocks %} 
+            {% case block.type %}
+            {% when 'third-block' %}
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <i class="fa-duotone fa-plus"></i>
+                <h4 class="panel-title">
+                  <a href="#collapse{{forloop.index}}">                      
+                    {{ block.settings.faq-title-two }}
+                  </a>
+                </h4>
+              </div>
+              <div class="panel-collapse">
+                <div class="panel-body">
+                  {{ block.settings.faq-description-two }}
+                </div>
+              </div>
+            </div>
+            {% endcase %}
+            {% endfor %} 
+          </div>
+        </div>
+  
+        <div class="faq_contact">
+          <h3>{{ section.settings.question-title }}</h3>
+          <div class="">
+  <!--         
+            {%- assign formId = 'ContactForm' -%}
+            {% form 'contact', id: formId %}
+            {% include 'form-status', form: form, form_id: formId %} -->
+            
+            <div class="faq_contact_max">
+            <div class="form-group">
+              <input type="text" id="{{ formId }}-name" placeholder="Full Name" name="contact[{{ 'contact.form.name' | t }}]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            </div>
+            <div class="form-group">
+              <input
+                     type="email"
+                     id="{{ formId }}-email" placeholder="Email"
+                     name="contact[email]"
+                     autocorrect="off"
+                     autocapitalize="off"
+                     value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                     aria-required="true"
+                     {%- if form.errors contains 'email' -%}
+                     class="input--error"
+                     aria-invalid="true"
+                     aria-describedby="{{ formId }}-email-error"
+                     {%- endif -%}
+                     >
+              {%- if form.errors contains 'email' -%}
+              <span id="{{ formId}}-email-error" class="input-error-message">
+                <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+                {% include 'icon-error' %}
+                <span>{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+              </span>
+              {%- endif -%}
+            </div>      
+            <div class="form-group">
+              <textarea rows="10" placeholder="Question" id="{{ formId }}-message" name="contact[{{ 'contact.form.message' | t }}]">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+            </div>
+            <div class="form-group text-right">
+                <input type="submit" class="btn" value="Submit">
+            </div>
+            </div>
+            {% endform %} 
+            
+          </div>
+        </div>
+        
+      </div>
+      <div>      
+      </div>
+    </div>
+  </div>
+  
+  <style>
+    *{
+        box-sizing: border-box;
+    }
+    .panel-title a:hover, .panel-title a:focus, .panel-titlea:hover, .panel-title a:focus{
+    color: #000 !important;
+      text-decoration: none !important;
+    }
+     button.search-bar__submit.search-form__submit {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: inline-block;
+    padding: 0 12px;
+    height: 100%;
+    vertical-align: middle;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    color: #000;
+}
+    .page_header2{margin: 0;  background: url({{'pk-green-1-01.svg' | asset_url }}) no-repeat; background-size: cover; min-height: 306px;padding: 0; position: relative;}
+  .page_header2_position{ position: absolute; max-width: 1600px; padding: 0 30px;left: 0;    right: 0; margin: 0 auto;  top: 50%; transform: translateY(-50%);}
+  .page_header2 .page-title { color: #fff;text-transform: lowercase;font-size: 52px; line-height: 65px;    margin-top: 10px; }
+  .faq .panel-default{border:none;-webkit-box-shadow:none;box-shadow:none}
+  .faq .panel-title i{float:right;font-weight:100;font-size:.75em}
+  .faq .faq_about .panel-heading.active{background-color:#23D16A;}
+  .faq .faq_about .panel-heading.active a{color:#FFF}
+   .containerrewardfaq{
+     padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+   }
+    
+    .faq_search{padding:40px 0 32px;}
+    .faq_search .search-bar__input {
+      padding-right: 45px;
+      width: 100%;
+      min-height: 47px;
+      border-radius: 24px;
+      color: #000;
+      background-color: #fff;
+      border: 1px solid #E8E8E8;}
+    .faq_search .search-bar__form { max-width: 410px; margin: 0 auto;
+      flex: 1 1 100%;
+    position: relative;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    } 
+    .faq_heading h2{font-size:40px;line-height:47px;margin:0 0 33px;text-align:center;letter-spacing:0;text-transform: lowercase;font-weight: normal;font-family: 'rubikmedium';color:#2c2c2c;}
+    .faq_heading p{font-size:18px;line-height:28px;max-width:830px;margin:0 auto 0px;text-align:center;letter-spacing:0;font-weight: normal;font-family: 'rubikregular';color:#2c2c2c;}
+    .faq_about{margin:45px 0 0;}
+    .faq_delivery{margin:54px 0 0 ;}
+  
+    .faq h3{font-size:30px;line-height:36px;margin:0 0 20px;text-align:left;letter-spacing:0;text-transform: lowercase;font-weight: normal;font-family: 'rubikmedium';color:#23D16A;}
+    .faq .panel-heading{background: #E8E8E8;padding:17px 24px;position: relative;}
+    .faq .panel-heading i {
+    position: absolute;
+      right: 24px;
+    }
+  
+    .faq .panel-title {margin: 0;font-size:16px;line-height:19x;text-transform: capitalize;font-weight: normal;font-family: 'rubikmedium';color:#2c2c2c;  }
+    .faq .panel-title a{font-size:16px;line-height:19x;}
+    .faq_contact{padding:65px 0 50px ;}
+    .faq_contact h3{font-size:30px;line-height:36px;margin:0 0 30px;text-align:left;letter-spacing:0;text-transform: lowercase;font-weight: normal;font-family: 'rubikmedium';color:#23D16A;}
+    .faq_contact_max{max-width:400px;}
+    .faq_contact_max input , .faq_contact_max textarea{width:100%;border: 1px solid #2C2C2C;border-radius: 15px;font-weight: normal;font-family: 'rubikregular';color:#2c2c2c;height:50px;padding: 10px 18px;}
+    .faq_contact_max input::placeholder , .faq_contact_max textarea::placeholder{opacity:1;color: #A7A7A7;font-weight: normal;font-family: 'rubikregular';font-size:16px;line-height:26px;}
+    .faq_contact_max textarea{height:219px;resize:none;}
+    .faq_contact_max .btn{border:none;background: #23D16A;color:#fff;border-radius:24px;min-width:161px;height:44px;text-align:center;font-size:18px;line-height:22px;font-weight: normal;font-family: 'rubikregular';width: auto;}
+    .faq .panel-body{padding: 23px 24px 25px;font-size:16px;line-height:24px;color:#2c2c2c;}
+    .faq .panel-group .panel+.panel {margin-top: 11px;}
+  
+    @media only screen and (min-width:200px) and (max-width:767px){
+      .faq_search{padding:28px 0 25px;}
+      .faq_search .search-bar__input {min-height: 35px;}
+      .faq_heading h2{font-size:20px;line-height:24px;margin:0 0 17px;}
+      .faq_heading p{font-size:14px;line-height:21px;}
+      .faq_about { margin: 31px 0 0;}
+      .faq h3{font-size:20px;line-height:24px;margin:0 0 16px;} 
+      .faq .panel-title a {font-size:12px;line-height:19x;}
+      .faq_delivery{margin:40px 0 0 ;}
+      .panel-body{font-size:12px;line-height:18px;}
+      .faq_contact{padding:40px 0 40px ;}
+      .page_header2 .page-title {line-height: 30px;font-size: 23px;}
+      .faq_search .search-bar__input{min-height: 35px;}
+      .faq_heading h2 {
+      font-size: 20px;
+      line-height: 24px;
+      margin: 0 0 17px;
+  }
+      .faq_heading p {
+      font-size: 14px;
+      line-height: 21px;
+  }
+      .faq_delivery {
+      margin: 40px 0 0;
+  }
+      .faq h3 {
+      font-size: 20px;
+      line-height: 24px;
+      margin: 0 0 16px;
+  }
+      .faq .panel-title a {
+      font-size: 12px;
+  }
+      .faq_contact {
+      padding: 40px 0 40px;
+  }
+      .faq h3 {
+      font-size: 20px;
+      line-height: 24px;
+      margin: 0 0 16px;
+  }
+      .page_header2 {
+      background-size: cover;
+      min-height: 164px;
+  }
+      .search-bar__submit{
+          top: 7px;
+      }
+    }
+    @media only screen and (min-width:750px){
+      .faq_search .search-bar__input{
+      padding: 10px 45px 10px 18px;
+      }
+    }
+    @media only screen and (min-width:768px) and (max-width:991px){}
+    @media only screen and (min-width:992px) and (max-width:1199px){}
+    @media only screen and (min-width:1200px) and (max-width:1367px){}
+    @media only screen and (min-width:1368px) and (max-width:1630px){}
+    @media (min-width:1200px) {
+      .containerrewardfaq{width:100%;max-width:1360px;margin-left:auto;margin-right:auto;padding:0 15px}
+    }
+    @media only screen and (min-width:1200px) and (max-width:1367px) {
+      .containerrewardfaq{width:100%;max-width:1170px}
+      .product_img{height:300px}
+    }
+    @media only screen and (min-width:1368px) and (max-width:1630px) {
+      .containerrewardfaq{width:100%;max-width:1200px}
+    }
+    @media screen and (min-width: 992px) and (max-width:1199px){
+  .containerrewardfaq {
+      width: 970px;
+  }
+    }
+    @media screen and (min-width: 768px) and (max-width:991px){
+  .containerrewardfaq {
+      width: 750px;
+  }
+    }
+    .active-heading{
+    display:block;
+    }
+  </style>
+  
+  <script>
+  var allPanels = $('.accordion11 .panel-collapse, .accordion12 .panel-collapse, .accordion13 .panel-collapse').hide();
+  $('.accordion11 .panel .panel-heading .panel-title, .accordion12 .panel .panel-heading .panel-title, .accordion13 .panel .panel-heading .panel-title').click(function() {
+    $this = $(this);
+    $target =  $this.parent().next();
+    $('.accordion11 .panel-collapse, .accordion12 .panel-collapse, .accordion13 .panel-collapse').removeClass('active').slideUp();
+    if(!$target.hasClass('active')){
+      allPanels.removeClass('active').slideUp();
+      $target.addClass('active').slideDown();
+    }
+  });
+   
+  </script>
+  {% schema %}
+  {
+  "name": "FAQ V2",
+  "settings": [
+      {
+      "type": "html",
+      "id": "head_title",
+      "label": "Title"
+      },
+      {
+      "type": "text",
+      "id": "life-title",
+      "label": "Life Title"
+      },
+  
+      {
+      "type": "text",
+      "id": "life-heading",
+      "label": "Life heading"
+      },
+      {
+      "type": "html",
+      "id": "life-content",
+      "label": "Life content"
+      },
+      {
+      "type": "text",
+      "id": "panel-title",
+      "label": "About Title"
+      },
+      {
+      "type": "text",
+      "id": "panel-title-two",
+      "label": "Other Title Two"
+      },
+      {
+      "type": "text",
+      "id": "panel-title-third",
+      "label": "Other Title Third"
+      },
+      {
+      "type": "text",
+      "id": "question-title",
+      "label": "Question Title"
+      }
+  ],
+  
+  "blocks": [
+    {
+    "type": "first-block",
+    "name": "First block",
+    "settings": [
+    {
+    "type": "text",
+    "id": "faq-title",
+    "label":"Faq Text"
+    },
+    {
+    "type": "html",
+    "id": "faq-description",
+    "label":"Faq Description"
+    }
+    ]
+    },
+    {
+    "type": "second-block",
+    "name": "Second block",
+    "settings": [                 
+    {
+    "type": "text",
+    "id": "faq-title-one",
+    "label":"Faq Text"
+    },
+    {
+    "type": "html",
+    "id": "faq-description-one",
+    "label":"Faq Description One"
+    }
+    ]
+    },
+    {
+    "type": "third-block",
+    "name": "Third block",
+    "settings": [
+    {
+    "type": "text",
+    "id": "faq-title-two",
+    "label":"Faq Text"
+    },
+    {
+    "type": "html",
+    "id": "faq-description-two",
+    "label":"Faq Description Two"
+    }
+    ]
+    }
+  ],
+      "presets": [
+          {
+              "name" : "FAQ V2",
+              "category" : "Image"
+          }
+      ]
+  }
+  {% endschema %}
+  
+  {% javascript %}
+  {% endjavascript %}
+  

@@ -1,0 +1,289 @@
+<style>
+  .black_filter {
+    background: #2C2C2C;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    position: relative;
+  }
+  .header_container {
+    max-width: 1900px;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+  .black_filter .black_filter_upper {
+    position: relative;
+  }
+  .black_filter .black_filter_inner1 ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .black_filter .black_filter_inner1 ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .black_filter .black_filter_inner1 ul li {
+    margin-right: 66px;
+    position: relative;
+    transition: all .3s ease-in-out;
+  }
+  .black_filter .black_filter_inner1 ul li a {
+    color: #f5f5f5;
+    text-transform: capitalize;
+    font-size: 15px;
+    padding: 8px 0 7px;
+    font-family: rubikregular;
+    text-decoration: none;
+    display:block;
+  }
+  .black_filter .black_filter_inner1 ul li a:hover {
+    color: #23d16a;
+    text-decoration: none;
+  }
+  .site-nav__link:focus .site-nav__label, .site-nav__link:not([disabled]):hover .site-nav__label {
+    border-bottom-color: #2c2c2c;
+  }
+  .black_filter .black_filter_inner2 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+  }
+  .black_filter .black_filter_inner2 h5 {
+    margin: 0;
+    color: #23d16a;
+    text-transform: capitalize;
+    font-family: rubikregular;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .black_filter .black_filter_inner2 h5 a {
+    color: #23d16a;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .black_filter .black_filter_inner2 h5 img {
+    margin-right: 13px;
+  }
+  .banner--stick {
+    width: 100%;
+    left: 0;
+    position: fixed!important;
+    z-index: 1;
+    top: 100px;
+  }
+  .black_filter {
+    background: #2C2C2C;
+  }
+  .black_filter_inner1 h6 {
+    font-size: 16px;
+    margin: 0;
+    text-align: left;
+    color: #fff;
+    font-weight: 400;
+    font-family: rubikregular;
+    text-transform: capitalize;
+  }
+  .mob_cat {
+    display: none;
+  }
+  .black_filter .black_filter_inner1 ul li.site-nav--active a {
+    color: #23d16a;
+}
+  @media only screen and (min-width:768px) and (max-width:991px) {
+    .black_filter .black_filter_inner1 ul li{margin-right:19px}
+    .black_filter .black_filter_inner1 ul li a{
+        font-size: 11px;
+    }
+  }
+  @media only screen and (min-width:992px) and (max-width:1199px) {
+    .black_filter .black_filter_inner1 ul li{margin-right:40px}
+  }
+  @media screen and (max-width: 767px){
+    .hidden-xs {
+      display: none!important;
+    }
+    .visible-xs {
+      display: block!important;
+    }
+    .mob_cat ul {
+      display: block!important;
+    }
+
+    .black_filter_inner1 .visible-xs {
+      padding: 2px;
+    }
+    .black_filter .black_filter_inner2 {
+    position: absolute;
+    top: 15px;
+    transform: translateY(-50%);
+    right: 0;
+}
+  }
+</style>
+
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+{% if template.name == 'collection' or template.name ==  'list-collections' or template.name == 'product' %}
+<div class="black_filter">
+  <div class="header_container">
+    <div class="black_filter_upper">
+      <div class="black_filter_inner1">
+        <ul class="hidden-xs">
+          {% for link in linklists[section.settings.secondary_linklist].links %}
+          <li {% if link.active %} class="site-nav--active"{% endif %}>
+            <a href="{% if collection.handle == 'all' and template.name != 'product' %}#{% endif %}{% if template.name == 'product' %}{{ link.url }}{% else %}{{ link.url | handle | remove:'collections-' }}{% endif %}"
+               class="scrollOnClick site-nav__link site-nav__link--main{% if link.active %} site-nav__link--active{% endif %}"
+               duration="2000" 
+                easing="smooth" 
+                scrollTo="{% if template.name == 'product' %}{{ link.url }}{% else %}{{ link.url | handle | remove:'collections-' }}{% endif %}"
+               {% if link.current %} aria-current="page"{% endif %}
+               >
+              <span class="site-nav__label">{{ link.title | escape }}</span>
+            </a>
+
+            {% if link.links != blank %}
+            <ul class="dropdown-menu">
+              {% for childlink in link.links %}
+              <li class="dropdown-item{% if link.links.size > 0 %} dropdown{% endif %}">
+                <a href="{{ childlink.url }}"
+                   class="scrollOnClick site-nav__link site-nav__child-link{% if forloop.last %} site-nav__link--last{% endif %}"
+                   duration="2000" 
+                    easing="smooth" 
+                    scrollTo="{% if template.name == 'product' %}{{ link.url }}{% else %}{{ link.url | handle | remove:'collections-' }}{% endif %}"
+                   {% if childlink.current %} aria-current="page"{% endif %}
+                   >
+                  {{ childlink.title | escape }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+
+        <div class="visible-xs">
+          <h6 onclick="mob_cat()">
+            <span class="mobile-menu__secondary--title">Menu Categories</span>
+          </h6>
+          <div class="mob_cat">
+            <ul>
+              {% for link in linklists[section.settings.secondary_linklist].links %}
+              <li onclick="mob_cat()" {% if link.active %} class="site-nav--active"{% endif %}>
+                <a href="{% if collection.handle == 'all' and template.name != 'product' %}#{% endif %}{% if template.name == 'product' %}{{ link.url }}{% else %}{{ link.url | handle | remove:'collections-' }}{% endif %}"
+                   class="scrollOnClick site-nav__link site-nav__link--main{% if link.active %} site-nav__link--active{% endif %}"
+                    duration="2500" 
+                    easing="smooth" 
+                    scrollTo="{% if template.name == 'product' %}{{ link.url }}{% else %}{{ link.url | handle | remove:'collections-' }}{% endif %}"
+                   {% if link.current %} aria-current="page"{% endif %}
+                   >
+                  <span class="site-nav__label">{{ link.title | escape }}</span>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      {% if collection.handle == 'all' and template.name != 'product' %}
+      <div class="black_filter_inner2">
+        <h5><a href="javascript:void(0)" onclick="show_category()"><img src="{{ 'filter_g.svg' | asset_url }}" title="" alt=""> Dietary Filters</a></h5>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% if collection.handle == 'all' and template.name != 'product' %}
+  {% render 'collection_filter_popup' %}
+  {% endif %}
+</div>
+{% endif %}
+
+
+<style>
+  html {
+    scroll-behavior: unset;
+  }
+</style>
+
+
+<script>
+  function setvar(id,vid,vprice, pid) {
+    $('#dclick_green'+id+' .variant_ul li').removeClass('var_selected');
+    $('#mclick_green'+id+' .variant_ul li').removeClass('var_selected');
+    $('#d'+vid).addClass('var_selected');
+    $('#m'+vid).addClass('var_selected');
+
+    $('#dprovar'+id).val(vid);
+    $('#mprovar'+id).val(vid);
+
+    $('#dclick_green'+id+' h6').text(vprice);
+    $('#mclick_green'+id+' .pdp_text_div h6').text(vprice);
+
+    $('#pd'+pid+' .iWishAddColl').attr('data-variant', vid);
+  }
+
+  function show_category(){
+    $('.shop_left').slideToggle();
+  } 
+  function mob_cat(){
+    $('.mob_cat').slideToggle();
+  } 
+  // $(".mob_cat ul li a").click(function(){
+  //   $('.mob_cat').slideUp();
+  // });
+</script>
+
+<script>
+  //   $(document).ready(function() {
+  //     $('.plus').on('click',function(e){
+  //       var val = parseInt($(this).prev('input').val());
+  //       $(this).prev('input').val( val+1 );
+  //     });
+  //     $('.minus').on('click',function(e){
+  //       var val = parseInt($(this).next('input').val());
+  //       if(val > 1){
+  //         $(this).next('input').val( val-1 );
+  //       }
+  //       if(val == 0){
+  //         $(this).next('input').val( 1 );
+  //       }
+  //     });
+  //   });
+
+  function show_detail(para){
+    $('#dclick_green'+ para).show();
+  }
+
+  function hide_detail(para){
+    $('#dclick_green'+ para).hide();
+  }
+
+  // handle links with @href started with '#' only
+  // $(document).on('click', 'a[href^="#"]', function(e) {
+  //   // target element id
+  //   var id = $(this).attr('href');
+
+  //   // target element
+  //   var $id = $(id);
+  //   if ($id.length === 0) {
+  //     return;
+  //   }
+
+  //   // prevent standard hash navigation (avoid blinking in IE)
+  //   e.preventDefault();
+
+  //   // top position relative to the document
+  //   var pos = $id.offset().top-120;
+
+  //   // animated top scrolling
+  //   $('body, html').animate({scrollTop: pos}, 1000);
+
+  //   // if(window.outerWidth < 767) {
+  //   //   mob_cat()
+  //   // }
+  // });
+</script>

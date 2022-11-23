@@ -1,0 +1,288 @@
+{
+  "sections": {
+    "16588934494a806cf6": {
+      "type": "how-it-works-header",
+      "settings": {
+        "bg": "shopify:\/\/shop_images\/pk-green-1_1000x_optimized.jpg",
+        "head": "You have questions. We have answers."
+      }
+    },
+    "16571645055b2f5022": {
+      "type": "reward_faqs",
+      "blocks": {
+        "738ade71-ed92-44fc-9ff9-4bf4d6e75b23": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "WHAT IS THE THEME OF YOUR MENU?",
+            "faq-description": "We focus on real, whole foods and natural forms of fiber in our menu design. We strive for ingredients that are responsibly sourced and local. We work hard to find proteins naturally raised without antibiotics, hormones, and have room to roam. Our fresh, seasonal vegetables are picked up daily. We give you the best so that you can be your best."
+          }
+        },
+        "7692474e-e2c4-412e-b772-e70c68c52b42": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "WHERE IS MY FOOD PREPARED AND COOKED?",
+            "faq-description": "Your food is prepared in our on-site, CDC-approved sanitized, commercial-grade kitchen in Dallas, Texas by a highly-trained, certified chef with over 20 years of experience in a gourmet kitchen"
+          }
+        },
+        "51d41afd-ffed-49c9-875a-36a8996c4db1": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "WHAT KIND OF INGREDIENTS DO YOU USE?",
+            "faq-description": "We source local suppliers, whole-foods, and nutrient-dense ingredients. The majority of our meals are dairy and soy-free. In our food containing animal products, we include grass-fed meat, free-range poultry, and sustainable fish. Our fresh, seasonal vegetables are picked up daily. We give you the best so that you can be your best."
+          }
+        },
+        "80e4c495-dd9c-4d09-88a6-de4bee9bbbbf": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "WHERE CAN I FIND NUTRITIONAL INFORMATION ABOUT YOUR MEALS?",
+            "faq-description": "Each and every meal contains nutrition facts and ingredients on the website under each item’s description page."
+          }
+        },
+        "c71bf19a-2464-4af0-9a47-3a3b5280921d": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "IS THE FOOD EVER FROZEN BY THE PREP KITCHEN?",
+            "faq-description": "We strive to provide the highest quality of food to our customers. We prepare and cook all of the food fresh to order and never jeopardize the taste and quality by freezing our food or using frozen ingredients."
+          }
+        },
+        "d022905d-a9b3-4972-9b55-18535a64a1cb": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "HOW LONG WILL THE FOOD LAST? (fRIDGE SHELF LIFE)",
+            "faq-description": "Thanks to our commitment to high-quality control, your food can be kept up to 4-5 days in the fridge. After 4-5 days, you can move them to the freezer to extend the meals. Either way, they will still be flavorful and delicious."
+          }
+        },
+        "5783553b-11fb-4848-a326-af557fcc9e59": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "HOW DO YOU RECOMMEND HEATING IT?",
+            "faq-description": "For Bulk items (proteins, carbs, veggies, sauces, etc.): Portion out how much you want in a separate container\n\nFor microwave: on HIGH for 1-2 minutes or until heated through.\n\nFor Meals: Lift the lid’s corner and microwave for 1.5 - 3 minutes or until heated through.\n\nOvens: Preheat the oven to 350° F.\n\nTransfer to oven-safe dish; remove sauce 15-17 minutes at 350°F Keep in mind heating times are approximate so make sure the internal meal temperature is 165 degrees.\n\nIf you have an item or dish that you would prefer to heat in a skillet, (such as Chili) we recommend to heat\/warm it up slowly making sure the internal meal temperature reaches 165 degrees.\n\nIf you decide to place meals in the freezer, we would recommend letting them overnight in the refrigerator. The next day the meal will be thawed and you can follow the above heating instructions."
+          }
+        },
+        "e07c48f2-0b93-4ac0-826c-e9d4c0f6a2cf": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "WHAT IS THE BULK BASICS MENU?",
+            "faq-description": "Pick your favorite Proteins, Carbs and Veggies in either 16oz or 24oz options, ready for you to portion and enjoy! Wanting to mix it up? Grab a sauce from our sauces menu to create a new spin on it at home!"
+          }
+        },
+        "8c2ff121-8bb4-4618-b9d7-a4a1d86fffce": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "DO YOU HAVE DIFFERENT CATEGORIES OF MEALS?",
+            "faq-description": "YES! We have done the portioning for you! Choose from Breakfast, Chef-Inspired, and Simple Meals (Aka Prepped Classics)!"
+          }
+        },
+        "c38370e0-5c1e-40a0-b4a4-30c8629009ea": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "WHAT IS BUILD YOUR MEAL?",
+            "faq-description": "Time to get creative! Now you can truly create the exact meal that you are wanting from more than 40 items!"
+          }
+        },
+        "20406517-f314-4e47-a288-6b1caf7441c4": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "ALLERGENS AND ADDITIONAL INFORMATION",
+            "faq-description": "Though best practices are used when preparing meals, our kitchen environment does contain nuts, eggs, fresh &amp; wild-caught seafood, shellfish, vegetable protein from non-fermented, non-gmo soybeans, and gluten so we cannot guarantee the complete absence of allergens. The Prep Kitchen's production facilities actively store, portion, and distribute ingredients that contain seven (7) major food allergens determined by the U.S. Food and Drug Administration (“FDA”) (milk, egg, soy, fish, shellfish, peanuts and tree nuts). While The Prep Kitchen takes precautions to reduce the risk of cross-contamination between ingredients and food products, cross-contamination may unintentionally occur during production and transit, which may cause meals or other products offered by The Prep Kitchen to contain some or all of those allergens. If you suspect that you have an allergic reaction or other adverse health event, immediately contact your health care provider and\/or seek immediate medical treatment. In addition, due to the variable nature of ingredient availability, nutritional information provided by The Prep Kitchen may differ from the nutritional information published."
+          }
+        },
+        "d7779b7a-ccc1-4cf0-9175-9c90987ae899": {
+          "type": "second-block",
+          "settings": {
+            "faq-title-one": "I SEE YOU OFFER ONE-TIME ORDERS. WILL YOU OFFER SUBSCRIPTIONS IN THE FUTURE?",
+            "faq-description-one": "One-Time Orders: Order as much or as little as you want- when you want. <p>\n<\/p><p>\n<\/p><p>\n<br> (Coming Soon) By setting up PK Quick Checkout, you can store your preferred payment method for a speedy checkout in the future. \n<\/p><p>\n<\/p><p>\n<\/p><p>\n<br>\n(COMING SOON) Subscriptions- Stayed tuned as this will be added in a few months!  <\/p>"
+          }
+        },
+        "4d9c3d7c-81e5-449b-895c-78edabc2ebe0": {
+          "type": "second-block",
+          "settings": {
+            "faq-title-one": "DO YOU HAVE PICKUP LOCATIONS IN DALLAS \/ FORT WORTH?",
+            "faq-description-one": "Yes, we have order-pickup locations in the Dallas-Fort Worth area. <br>\nIf you live outside of DFW, please use our our FedEx Shipping Service."
+          }
+        },
+        "068a3c99-1e57-4043-964b-ad6b7bcfd22f": {
+          "type": "second-block",
+          "settings": {
+            "faq-title-one": "IS THERE A MINIMUM ORDER AMOUNT?",
+            "faq-description-one": "There is no minimum order amount."
+          }
+        },
+        "9c7e9bc7-4992-49fc-8ade-347153421bec": {
+          "type": "second-block",
+          "settings": {
+            "faq-title-one": "CAN I USE A DISCOUNT CODE ONCE I’VE PLACED THE ORDER?",
+            "faq-description-one": "Unfortunately, once the order is placed, a discount code can’t be applied. Be sure to use it on your next order!"
+          }
+        },
+        "77ff9d4f-6dbd-4950-8eb4-ebc68458dac0": {
+          "type": "second-block",
+          "settings": {
+            "faq-title-one": "IS THERE A MINIMUM ORDER AMOUNT?",
+            "faq-description-one": "There is no minimum order amount."
+          }
+        },
+        "ea254bc0-575b-408e-b588-21cff83aed44": {
+          "type": "second-block",
+          "settings": {
+            "faq-title-one": "WHEN WILL I BE BILLED?",
+            "faq-description-one": "For One-Time Orders, you will be billed at the time of checkout."
+          }
+        },
+        "2fc7373d-d16a-4985-b833-53105af8ef0a": {
+          "type": "second-block",
+          "settings": {
+            "faq-title-one": "CANCELLATION & REFUNDS",
+            "faq-description-one": "To cancel your order, you must contact our customer services team directly via email (info@theprepkitchen.com), web chat or by phone at: \n  214-876-1653.<br><br> Refund requests for items shipped\/delivered require photos of containers involved in the claim for damaged containers or issues related to standard product quality. We require photos showing both the containers and food items. These  photos must be submitted to us at (info@theprepkitchen.com) within two days (48 hours) of the order's delivery date.  In addition, the Prep Kitchen has no obligation to cancel your order and or refund you any payment without the notice below.<br><br> \nDue to the nature of our business, we require the following notice to successfully cancel your order. We pay our vendors up front for the freshest produce and proteins, based on the orders we receive. These are perishable foods that we cannot return once sourced. <br><br> \nIf you place A One-Time order and wish to cancel it, you must do it within 2 hours of placing your order as these foods often ship right away. In addition, on order deadline days, all changes &amp; cancellations must be made by 11PM CST.<br><br> \nOrder deadline days:<p><\/p><p>\nDeliveries for Sunday – Deadlines is Friday\n<\/p><p>\nDeliveries for Monday\/ Tuesday – Deadline is Saturday\n<\/p><p>\nDeliveries for Wednesday\/ Thursday – Deadline is Monday\n<\/p><p>\nDeliveries for Friday\/ Saturday – Deadline is Wednesday\n<br><br> \nFor a  Subscription Plan, a minimum of 5 days prior to the next scheduled payment. Note  for subscriptions, you have no obligation to continue service past any given delivery date, however, we do have a cancellation deadline before each delivery date as all of our meals are made fresh and require us to source perishable items.<\/p>"
+          }
+        },
+        "f65b7a5f-3d70-44c4-8d6f-5dca5409f8c0": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "CAN I RETURN \/ RECYCLE MY GREEN PK BAGS?",
+            "faq-description-two": "You can absolutely return the bags. You can just return the empty bags to the fridge at your chosen pickup location at any time. If it is a home delivery order you can just place them outside your door and we'll grab them on your next home delivery. That way we can sanitize them again for reuse."
+          }
+        },
+        "5c2f6417-c11c-43f4-8523-a910bd6bba61": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "WHAT’S THE DIFFERENCE BETWEEN HOME DELIVERY AND FEDEX SHIPPING?",
+            "faq-description-two": "Home Delivery: Personal home delivery service available in many DFW zip codes. We utilize our TPK drivers for local DFW home delivery. $10 flat fee regardless of order size. Free delivery for orders over $125.  Use code: FREEDELIVERY\n<p><\/p><p><\/p>\nAt checkout, you’ll select home delivery and either \"Early Morning\" or \"Daytime Home Delivery\". \n<p><\/p><p><\/p>\nHome Deliveries:<p><\/p><p><\/p>\n Early Morning-\nDeliveries occur typically between 4am &amp; 7AM for early morning home delivery.<p><\/p><p><\/p>\n  <p><\/p><p><\/p> Daytime-  Deliveries occur typically between 9am &amp; 4PM for daytime home delivery. \nComes packed in insulated totes with ice packs for freshness. Designed for you to retrieve from your doorstep in the morning.\n<p><\/p><p><\/p>\n<br>\n<p><\/p><p><\/p>\nFedEx:  FedEx shipping in a refrigerated cooler.  (FedEx is one to two day delivery depending on your area). Your FedEx package is typically delivered before 8:00 PM."
+          }
+        },
+        "b21efd46-4c5b-4602-a0e5-3f2b444b1d79": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "ABOUT HOME DELIVERY \/ REFUNDS",
+            "faq-description-two": "At checkout, you’ll select home delivery and either \"Early Morning\" or \"Daytime Home Delivery\".<p><\/p><p><\/p>\nHome Deliveries:<p><\/p><p><\/p>\nEarly Morning- Deliveries occur typically between 4am &amp; 7AM for early morning home delivery.<p><\/p><p><\/p>\nDaytime- Deliveries occur typically between 9am &amp; 4PM for daytime home delivery. Comes packed in insulated totes with ice packs for freshness. Designed for you to retrieve from your doorstep in the morning.\n<p><\/p><p><\/p>\nPOLICY:\nDesigned for you to retrieve from your doorstep in the morning.<p><\/p><p><\/p>\nAccess instructions are REQUIRED to perform a successful delivery (i.e. gate codes, door codes, distinguishing markers, etc.)<p><\/p><p><\/p>\nONLY eligible for Dallas\/Fort Worth Zip Codes.<p><\/p><p><\/p>\nPK is not responsible for any lost or stolen bags, our drivers are required to internally submit a picture of all orders dropped off."
+          }
+        },
+        "7e9efa95-638d-4167-ba1a-16c7f13fd01d": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "DO YOU SHIP OUTSIDE OF THE DALLAS METROPLEX?",
+            "faq-description-two": "Currently, we provide our regular meal service to the entire state of Texas, and parts of Oklahoma and Louisiana that are near the Texas border. We utilize our TPK drivers for local DFW home delivery and FedEx to ship outside of DFW.  (FedEx is one to two day delivery depending on your area). Your FedEx package is delivered in a cooler box (delivered before 8:00 PM)"
+          }
+        },
+        "cbaa6956-054f-4094-98ba-da50d5a5cbb2": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "IS THERE A FREE SHIPPING CODE?",
+            "faq-description-two": "At this time we offer Free Shipping for FedEx Ground orders in Texas and parts of Oklahoma! Use code: FREESHIPPING   --(orders over $125). One discount code at a time"
+          }
+        },
+        "b76ed610-bc3c-4992-865c-4bb5f5990af4": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "HOW DO I KNOW WHEN MY DELIVERY IS ON THE WAY?",
+            "faq-description-two": "For FedEx Customers: Your meals will be shipped FedEx, and a tracking number will be automatically emailed to you. You may check up on your meal delivery progress anytime. There is a ‘shipper release’ on all of our packages, so if you are not home at the time of delivery, the box will be left on your doorstep.\n<p><\/p><p><\/p>\nFor DFW customers using our early am PK Home Delivery service, you will receive an email the night before your delivery. Your order will be delivered to your doorstep early the next morning, typically by 5am."
+          }
+        },
+        "3cb9d3da-3a5a-474d-aafd-2a2fd756ed65": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "DOES SOMEONE NEED TO BE PRESENT TO RECEIVE THE DELIVERY?",
+            "faq-description-two": "Nope. The ‘shipper release’ means if you are not home at the delivery time, the box will be left on your doorstep. While we have high-quality control standards during our meals’ preparation and packaging, we have no control over FedEx operations. Please contact our customer support team at info@theprepkitchen.com regarding any delivery questions."
+          }
+        },
+        "0faeab6a-9a53-4edd-9014-2ee93d395af7": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "WHAT DO I DO AFTER RECEIVING MY DELIVERY?",
+            "faq-description-two": "Upon receiving your delivery, refrigerate your meals\/items as soon as possible. You can freeze the meals; however, we recommend eating them fresh for maximum flavor and texture. If you freeze them, we recommend letting your food thaw in your refrigerator 24 hours before reheating for best results."
+          }
+        },
+        "11e434c9-0045-43dd-a160-eba49d630393": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "I TRAVEL A LOT - CAN I HOLD MY ORDER OR CHANGE THE DELIVERY ADDRESS TO A HOTEL?",
+            "faq-description-two": "Yes, no problem! Because our containers are portable, our dishes are great to travel with. If you need to change your delivery address, just give us a call or email us at info@theprepkitchen.com. Please note: For a change of address, we need to be notified at least 5 days before an order’s delivery date. \n<p><\/p><p><\/p>\nThe same applies if you either want to pause or receive your box at a different location. Just let us know when you would like us to resume your deliveries."
+          }
+        },
+        "d8cf7447-766c-4a2c-a32a-47d222569e0c": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "WHAT HAPPENS IF I HAVE AN ISSUE WITH MY ORDER?",
+            "faq-description-two": "Call us or send us an email and photograph to info@theprepkitchen.com if there are any issues with your order on arrival. We will do everything we can to fix the issue!"
+          }
+        },
+        "cb982149-16b4-474c-8fc1-d1fcc127affb": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "WHAT HAPPENS IF MY ORDER ISN'T DELIVERED AS SCHEDULED BY FEDEX?",
+            "faq-description-two": "If you don’t receive your order, but do have a tracking number from Fedex, please contact them first at 1-800-463-3339 as they will want to the speak directly to you about coordinating the delivery. If you do not a have a tracking number, please contact us immediately to look into the issue. While we have high-quality control standards during our meals’ preparation and packaging, we have no control over FedEx operations. Call us or send us an email at info@theprepkitchen.com."
+          }
+        },
+        "81509a22-b9c8-4e06-b7b2-fe4b6950435a": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "HOW DO I CONTACT YOU?",
+            "faq-description-two": "During business hours, you can call us at 214-876-1653. Or you can send an email to info@theprepkitchen.com. All customer questions will be responded to within 48 hours. Outside of business hours, leave us a voicemail and send an email so we can get back to you straight away."
+          }
+        },
+        "71e070e4-e398-42f2-b7af-7175c8c2ad41": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "WHAT SHOULD I DO WITH MY SHIPPING BOX AFTER MY DELIVERY?",
+            "faq-description-two": "Sustainability is something we’re passionate about, so we’d love it if you could recycle our packaging after use! The trays are delivered in insulated cardboard boxes with ice packs to keep them at safe temperatures. The box can be recycled along with the plastic container and lid. Our ice packs are water-soluble – they can be cut open and poured into a sink, and the plastic casing can be recycled. The box liner \/ padding is recyclable depending on your location."
+          }
+        },
+        "74afb2d8-3f10-4e8a-8c97-983e9b9b07b7": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "ALLERGENS AND ADDITIONAL INFORMATION",
+            "faq-description": "Though best practices are used when preparing meals, our kitchen environment does contain nuts, eggs, fresh &amp; wild-caught seafood, shellfish, vegetable protein from non-fermented, non-gmo soybeans, and gluten so we cannot guarantee the complete absence of allergens.<br>\n\nThe Prep Kitchen's production facilities actively store, portion, and distribute ingredients that contain seven (7) major food allergens determined by the U.S. Food and Drug Administration (“FDA”) (milk, egg, soy, fish, shellfish, peanuts and tree nuts). While The Prep Kitchen takes precautions to reduce the risk of cross-contamination between ingredients and food products, cross-contamination may unintentionally occur during production and transit, which may cause meals or other products offered by The Prep Kitchen to contain some or all of those allergens. If you suspect that you have an allergic reaction or other adverse health event, immediately contact your health care provider and\/or seek immediate medical treatment. In addition, due to the variable nature of ingredient availability, nutritional information provided by The Prep Kitchen may differ from the nutritional information published."
+          }
+        }
+      },
+      "block_order": [
+        "738ade71-ed92-44fc-9ff9-4bf4d6e75b23",
+        "7692474e-e2c4-412e-b772-e70c68c52b42",
+        "51d41afd-ffed-49c9-875a-36a8996c4db1",
+        "80e4c495-dd9c-4d09-88a6-de4bee9bbbbf",
+        "c71bf19a-2464-4af0-9a47-3a3b5280921d",
+        "d022905d-a9b3-4972-9b55-18535a64a1cb",
+        "5783553b-11fb-4848-a326-af557fcc9e59",
+        "e07c48f2-0b93-4ac0-826c-e9d4c0f6a2cf",
+        "8c2ff121-8bb4-4618-b9d7-a4a1d86fffce",
+        "c38370e0-5c1e-40a0-b4a4-30c8629009ea",
+        "20406517-f314-4e47-a288-6b1caf7441c4",
+        "d7779b7a-ccc1-4cf0-9175-9c90987ae899",
+        "4d9c3d7c-81e5-449b-895c-78edabc2ebe0",
+        "068a3c99-1e57-4043-964b-ad6b7bcfd22f",
+        "9c7e9bc7-4992-49fc-8ade-347153421bec",
+        "77ff9d4f-6dbd-4950-8eb4-ebc68458dac0",
+        "ea254bc0-575b-408e-b588-21cff83aed44",
+        "2fc7373d-d16a-4985-b833-53105af8ef0a",
+        "f65b7a5f-3d70-44c4-8d6f-5dca5409f8c0",
+        "5c2f6417-c11c-43f4-8523-a910bd6bba61",
+        "b21efd46-4c5b-4602-a0e5-3f2b444b1d79",
+        "7e9efa95-638d-4167-ba1a-16c7f13fd01d",
+        "cbaa6956-054f-4094-98ba-da50d5a5cbb2",
+        "b76ed610-bc3c-4992-865c-4bb5f5990af4",
+        "3cb9d3da-3a5a-474d-aafd-2a2fd756ed65",
+        "0faeab6a-9a53-4edd-9014-2ee93d395af7",
+        "11e434c9-0045-43dd-a160-eba49d630393",
+        "d8cf7447-766c-4a2c-a32a-47d222569e0c",
+        "cb982149-16b4-474c-8fc1-d1fcc127affb",
+        "81509a22-b9c8-4e06-b7b2-fe4b6950435a",
+        "71e070e4-e398-42f2-b7af-7175c8c2ad41",
+        "74afb2d8-3f10-4e8a-8c97-983e9b9b07b7"
+      ],
+      "settings": {
+        "head_title": "You have questions. <br> We have answers.",
+        "life-title": "You have questions.<br> We have answers.",
+        "life-heading": "helping you live a vibrant life.",
+        "life-content": "You have a lot of questions. After all, this is your food and wellbeing we are talking about. Take a look below for a list of answers to common questions we get from customers.",
+        "panel-title": "about our food.",
+        "panel-title-two": "about our services.",
+        "panel-title-third": "about delivery.",
+        "question-title": "can’t find the question you’re looking for?"
+      }
+    }
+  },
+  "order": [
+    "16588934494a806cf6",
+    "16571645055b2f5022"
+  ]
+}

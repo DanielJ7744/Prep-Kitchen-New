@@ -1,0 +1,216 @@
+<style>
+    @media only screen and (min-width: 768px) and (max-width: 991px){
+.dp_text_section h2 {
+    font-size: 20px !important;
+    line-height: 27px !important;
+}
+  .dp_text_inner h3{
+    margin: 24px 0 10px !important;
+    font-size: 16px !important;
+  }
+  .dp_text_inner p{
+    line-height: 16px !important;
+    font-size: 12px !important;
+  }
+      .dp_text_inner{
+       padding-left: 29px 
+      }
+                     }
+  .emo_header h2 {
+    font-size: 40px;
+    line-height: 47px;
+    margin: 0 0 74px;
+    text-align: center;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    font-weight: 400;
+    font-family: 'rubikmedium';
+    color: #2c2c2c;
+  }
+
+  .easy_meal_options_inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .emo_left img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .emo_block {
+    display: flex;
+    margin-bottom: 50px;
+  }
+
+  .emo_block_text {
+    padding-left: 31px;
+  }
+
+  .emo_block_text h3 {
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0 0 24px;
+    text-transform: lowercase;
+    font-weight: normal;
+    font-family: 'rubikmedium';
+    color: #2c2c2c;
+  }
+
+  .emo_block_text p {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 30px;
+    font-family: 'rubikregular';
+    font-weight: normal;
+    color: #2c2c2c;
+  }
+
+  .emo_block_text a {
+    display: inline-block;
+    background: #23d16a;
+    color: #fff;
+    font-size: 18px;
+    font-family: 'rubikregular';
+    padding: 8px 34px;
+    border-radius: 25px;
+    font-weight: 400;
+    min-width: 150px;
+    border: 1px solid transparent;
+    line-height: 1.42857143;
+    transition: all .3s;
+  }
+
+  .emo_block_text a:hover {
+    box-shadow: 1px 1px 9px #ccc;
+    text-decoration: none;
+  }
+
+  @media only screen and (min-width: 200px) and (max-width: 767px) {
+    .emo_header h2 { font-size: 20px; line-height: 24px; }
+
+    .easy_meal_options_inner { grid-template-columns: 1fr; max-width: 307px; margin: auto; }
+
+   
+
+    .emo_block { display: block; position: relative; }
+
+    .emo_block_img { position: absolute; top: -35px; right: 0; width: 45px; }
+
+    .emo_block_text h3 { font-size: 16px; line-height: 19px; margin: 0 0 11px; }
+
+    .emo_block_text p { font-size: 12px; line-height: 18px; margin: 0 0 20px; }
+
+    .emo_block_text a { font-size: 14px; }
+  }
+
+</style>
+
+<div class="easy_meal_options_wrapper">
+  <div class="page-width">
+    {% if section.settings.head != blank %}
+      <div class="emo_header">
+        <h2>{{ section.settings.head }}</h2>
+      </div>
+    {% endif %}
+    <div class="easy_meal_options_inner">
+      <div class="emo_left">
+        {% if section.settings.img != blank %}
+          <img src="{{ section.settings.img | img_url: '1296x' }}">
+        {% endif %}
+      </div>
+      <div class="emo_right">
+        {% for block in section.blocks %}
+          <div class="emo_block">
+            <div class="emo_block_img">
+              {% if block.settings.emo_img != blank %}
+                <img src="{{ block.settings.emo_img | img_url: '500x' }}">
+              {% endif %}
+            </div>
+            <div class="emo_block_text">
+              {% if block.settings.title != blank %}
+                <h3>{{ block.settings.title }}</h3>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <p>{{ block.settings.text }}</p>
+              {% endif %}
+              {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}">{{ block.settings.label }}</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Easy Meal Options",
+  "tag": "section",
+  "class": "easy_meal_options_section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "head",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Left Section Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "img",
+      "label": "Select Image"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Meal Option",
+      "type": "text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "emo_img",
+          "label": "Select Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Easy Meal Options",
+      "category": "image"
+    }
+  ]
+}
+{% endschema %}
+
+{% style sheet %}{% endstyle %}
+
+{% javascript %}
+
+{% endjavascript %}

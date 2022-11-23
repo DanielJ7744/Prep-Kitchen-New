@@ -1,0 +1,136 @@
+{% comment %}Assign object as block or section{% endcomment %}
+{% if type == 'block' %}
+{%- assign object = block -%}
+{% else %}
+{%- assign object = section -%}
+{% endif %}
+{%- assign icon = settings.icon -%}
+
+{%- assign locale_selector = false -%}
+{%- assign currency_selector = false -%}
+
+{%- if object.settings.show_currency_selector == true and shop.enabled_currencies.size > 1 -%}
+{%- assign currency_selector = true -%}
+{%- endif -%}
+
+{%- if object.settings.show_locale_selector == true and shop.published_locales.size > 1 -%}
+{%- assign locale_selector = true -%}
+{%- endif -%}
+
+<div class="header__icons header__icon-style-{{ icon_style | replace: '_', '-' }} {{ header_icon_class }}">
+
+
+  {% comment %} Currency converter select {% endcomment %}
+  <div class="header__link">
+    {% render 'localization-switcher',
+      additional_classes: 'header-menu__disclosure',
+    id: 'header__selector-form--action-icons',
+    currency_selector: currency_selector,
+    locale_selector: locale_selector,
+    show_currency: section.settings.show_currency_selector
+    %}
+  </div>
+
+  {% if object.settings.display_search or header_icon_class == 'header__icons--sticky' %}
+  {% comment %} Search icon {% endcomment %}
+  {% comment %}
+  <a class="header__link action-area__link" data-show-search-trigger tabindex="0">
+    {% render 'icon',
+              name: 'search',
+    icon_class: 'header__icon'
+    %}
+    <span class="icon-caption">{{ 'general.search.title' | t | escape }}</span>
+  </a>
+  {% endcomment %}
+  <div class="search_form">
+    <form class="search-form search-popup__form" id="searchHeaderForm" action="{{ routes.search_url }}">
+      <div class="search__fields">
+        <input type="hidden" name="type" value="{{ settings.search_option }}" />
+        <label for="q" class="visuallyhidden">{{ settings.search_placeholder }}</label>
+        <div class="field">
+          <div class="control has-icons-left">
+            <input class="input" type="text" name="q" value="{{ search.terms }}" id="searchMainInput" x-webkit-speech autocapitalize="off" autocomplete="off" autocorrect="off" data-q/>
+            {% comment %} {% render 'icon',
+                        name: 'search',
+            class: 'icon is-left'
+            %}{% endcomment %}
+            <button type="submit" class="desktop-search-action">
+              <img class="d_search" src="{{ 'd_search.svg' | asset_url }}"/>
+            </button>
+          </div>
+        </div>
+        <input type="submit" name="search" class="visuallyhidden" value="" />
+      </div>
+    </form>
+  </div>
+  {% endif %}
+
+  <script>
+    $( document ).ready(function() {
+        $(document).on('keyup', '#searchMainInput', function(event) { 
+          if (event.keyCode == 13 || event.which == 13) {
+            document.forms.searchHeaderForm.submit();
+          }
+        });
+        $(document).on('keyup', '#searchMainInputMobile', function(event) { 
+          if (event.keyCode == 13 || event.which == 13) {
+            document.forms.searchHeaderFormMobile.submit();
+          }
+        });
+    });
+  </script>
+  
+  <a class="header__wishlist" href="/apps/iwish">
+    Wishlist (<span class="iWishCount">0</span>)    
+  </a>
+
+  {% if shop.customer_accounts_enabled %}
+    {% if customer %}
+      <a href="{{ routes.account_url }}" class="header_account header__link action-area__link" >
+        My Account - {{customer.first_name}} {{customer.last_name}}
+        <span class="icon-caption">{{ 'layout.customer.my_account' | t | escape }}</span>
+      </a>
+    {% else %}
+      <a href="{{ routes.account_login_url }}" class="header_account header__link action-area__link" >
+        My Account
+        <span class="icon-caption">{{ 'layout.customer.log_in' | t | escape }}</span>
+      </a>
+    {% endif %}
+  {% endif %}
+
+
+  <div class="header-cart action-area__link {% if cart.item_count != 0 %}has-cart-count{% endif %}" data-ajax-cart-trigger>
+    <a class="header__link" href="{{ routes.cart_url }}" >
+      
+      <span class="header-cart__icon">
+        {% comment %}
+          {% render 'icon',
+            name: settings.cart_icon,
+            icon_class: 'header__icon'
+          %}
+        {% endcomment %}
+        <span class="header-cart__icon--desktop">
+          <img src="{{ 'd_cart.svg' | asset_url }}"/>
+          <span class="c_count header-cart__count header-cart__count--badge badge" data-bind="itemCount">
+          {% comment %}
+            {{ cart.item_count }}
+          {% endcomment %}
+          {%- render 'bold-options-hybrid-cart-item-count' with cart -%}</span>
+        </span>
+       <span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_total" style="display:none !important;"></span> <span class="c_total" data-total="cartTotal">
+{{ cart.total_price | money }}</span>
+      </span>
+      <span class="header-cart__caption icon-caption">
+        {{ 'layout.general.cart' | t | escape }}
+        {%- if icon_style == 'text' -%}
+        <span class="header-cart__count cart__count--text" data-bind="itemCount">{% comment %}{{ cart.item_count }}{% endcomment %}{%- render 'bold-options-hybrid-cart-item-count' with cart -%}</span>
+        {%- endif -%}
+      </span>
+    </a>
+
+    {% if settings.cart_action == 'mini_cart' %}
+        {% render 'ajax-cart' %}
+    {% endif %}
+  </div>
+
+</div>

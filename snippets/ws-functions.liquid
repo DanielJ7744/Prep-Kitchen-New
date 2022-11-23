@@ -1,0 +1,311 @@
+{%- comment -%} Added by westmountsolutions.com template V1.20200212 {%- endcomment -%}
+<script>
+    'use strict';
+    const WSFunctions = {
+      accountPage: {
+        getOrderItems: async function (orderName) {
+          try {
+            let itemsProductOptions = [],
+              itemsRegular = [];
+            // Get the order items from the hidden input with the items data
+            let orderItems = JSON.parse(document.querySelector(`input[data-order-id="${orderName}"]`).value.trim().replace(/\n/g, ""));
+            // Separate PO items from normal items
+            for (let index = 0; index < orderItems.length; index++) {
+              const item = orderItems[index];
+              let itemProperties = this.getProductMetafields(item.handle);
+              if (item.properties) {
+                // Merge previous properties with new ones
+                item.properties = this.validateProductMetafields(itemProperties, item.properties);
+                if (Object.hasOwnProperty.call(item.properties, '_boldBuilderId')) {
+                  itemsProductOptions.push(item);
+                } else {
+                  itemsRegular.push(item);
+                }
+              } else {
+                // Assign the properties from the product template
+                item.properties = { ...itemProperties };
+                itemsRegular.push(item);
+              }
+            }
+            // Validate stock for regular items
+            let itemsRegularStock = this.validateStockRegularItems(itemsRegular);
+            // Validate stock for PO items
+            let itemsProductOptionsStock = this.validateStockPOItems(itemsProductOptions);
+            // Format the items from both arrays to add them to the cart
+            let itemsFormatted = this.formatItems(itemsRegularStock, itemsProductOptionsStock);
+            console.log({
+              itemsFormatted
+            });
+    			
+            // Add the items with the proper format to the cart
+            this.addItemsToCart(itemsFormatted);  			
+          } catch (error) {
+            console.log(`[WS] WSFunctions.accountPage.getOrderItems :: ${error}`);
+          }
+        },
+        validateStockPOItems: function (items) {
+          try {
+            let availableItems = [];
+            for (let index = 0; index < items.length; index++) {
+              const item = items[index];
+              if (Object.hasOwnProperty.call(item.properties, '_boldVariantIds')) {
+                let mainProductAvailable = false;
+                // Validate if the main product has stock available
+                // if the stock is not being tracked, the product is counted as available
+                if (item.inventory_management == "") {
+                  mainProductAvailable = true;
+                } else {
+                  // if the stock is being tracked, validate if the stock is more than 0
+                  if (item.available_stock > 0) {
+                    mainProductAvailable = true;
+                  }
+                }
+                // If the main product is available, proceed to validate the options available stock
+                if (mainProductAvailable) {
+                  let availableOptions = [],
+                    unavailableOptions = [];
+                  // Get the variant id from each option
+                  // and validate its available stock from the items array
+                  const variants = item.properties['_boldVariantIds'].split(',');
+                  variants.forEach((variant, index) => {
+                    let optionItem = items.find(item => item.variant_id == variant);
+                    // if the stock is not being tracked, the product is counted as available
+                    if (optionItem.inventory_management == "") {
+                      availableOptions.push(variant);
+                    } else {
+                      // if the stock is being tracked, validate if the stock is more than 0
+                      if (optionItem.available_stock > 0) {
+                        availableOptions.push(variant);
+                      } else {
+                        // If stock is below 0, add it to the unavailableOptions array
+                        unavailableOptions.push(variant);
+                      }
+                    }
+                  });
+                  console.log({
+                    unavailableOptions
+                  });
+                  // If the unavailableOptions is not empty, update the bundle properties
+                  // to not include the items out of stock or unavailable
+                  if (unavailableOptions.length > 0) {
+                  // if (availableOptions.length > 0) { // TEST
+                    // Update the Bold PO properties to only include the available options from the bundle
+                    let updatedItem = this.updateProductProperties(item, availableOptions, items);
+                    if (updatedItem != null) {
+                      // Remove the nutritional iformation property
+                      delete updatedItem.properties['_calorie-info'];
+                      // and add the item to the availableItems array
+                      availableItems.push(updatedItem);
+                    }
+                  } else {
+                    // Remove the nutritional iformation property
+                    delete item.properties['_calorie-info'];
+                    // and add the item to the availableItems array
+                    availableItems.push(item);
+                  }
+                }
+              }
+            }
+            return availableItems;
+          } catch (error) {
+            console.log(`[WS] WSFunctions.accountPage.validateStockPOItems :: ${error}`);
+          }
+        },
+        updateProductProperties: function (item, availableVariants, allItems) {
+          try {
+            let result = null;
+            console.log(item.variant_id);
+            console.log({
+              item
+            });
+            // availableVariants = availableVariants.filter((item, i) => item !== "27929771606039"); // TEST
+            // If the bundle has more than one option then add the available options
+            if (item.properties['_boldProductIds'].indexOf(',') > -1) {
+              let newProperties = {
+                _boldBuilderId: item.properties._boldBuilderId,
+                _boldProductIds: [],
+                _boldVariantIds: [],
+                _boldVariantNames: [],
+                _boldVariantPrices: []
+              };
+              // Get all Bold PO properties from the item object
+              let productIDs = item.properties['_boldProductIds'].split(',');
+              let variantIDs = item.properties['_boldVariantIds'].split(',');
+              let variantNames = item.properties['_boldVariantNames'].split(',');
+              let variantPrices = item.properties['_boldVariantPrices'].split(',');
+              console.log('more than 1');
+              console.log({
+                availableVariants
+              });
+              console.log({
+                productIDs,
+                variantIDs,
+                variantNames,
+                variantPrices
+              });
+              // Loop through the available options received
+              // and add them to the newProperties object
+              availableVariants.forEach((variant, index) => {
+                let position = variantIDs.indexOf(variant);
+                console.log(`position of ${variant}: ${index}`);
+                // Get the corresponding data from the current available variant
+                // Store the data in the newProperties object
+                newProperties._boldProductIds.push(productIDs[index]);
+                newProperties._boldVariantIds.push(variantIDs[index]);
+                newProperties._boldVariantNames.push(variantNames[index]);
+                newProperties._boldVariantPrices.push(variantPrices[index]);
+                // Search for the variant with the same id as the current option
+                let itemData = allItems.find(item => item.variant_id == variant);
+                // Loop through the properties to find the ones corresponding to the newly added option
+                // using the result from the itemData search
+                for (const key in item.properties) {
+                  if (Object.hasOwnProperty.call(item.properties, key)) {
+                    const value = item.properties[key];
+                    // Validate if the variant title includes the key or value in the property
+                    // to add it to the newProperties object
+                    if (itemData.title.includes(key)) {
+                      newProperties[key] = value;
+                    } else if (key == 'Protein' || key == 'Veggie' || key == 'Carb') {
+                      if (itemData.title.includes(value)) {
+                        newProperties[key] = value;
+                      }
+                    }
+                  }
+                }
+              });
+              console.log('after');
+              console.log({
+                newProperties
+              });
+              // Set the new values
+              newProperties._boldProductIds = newProperties._boldProductIds.join(',');
+              newProperties._boldVariantIds = newProperties._boldVariantIds.join(',');
+              newProperties._boldVariantNames = newProperties._boldVariantNames.join(',');
+              newProperties._boldVariantPrices = newProperties._boldVariantPrices.join(',');
+              item.properties = newProperties;
+              result = item;
+            } else {
+              // If its only one option, then do not include the bundle in the new order
+              result = null;
+            }
+            return result;
+          } catch (error) {
+            console.log(`[WS] WSFunctions.accountPage.updateProductProperties :: ${error}`);
+          }
+        },
+        validateStockRegularItems: function (items) {
+          try {
+            let availableItems = [];
+            // Loop through the regular items, and validate the available stock
+            items.forEach(item => {
+              // if the product is available, add it to the availableItems array
+              if (item.inventory_management == "") {
+                availableItems.push(item);
+              } else {
+                // if the stock is being tracked, validate if the stock is more than 0
+                if (item.available_stock > 0) {
+                  availableItems.push(item);
+                }
+              }
+            });
+            return availableItems;
+          } catch (error) {
+            console.log(`[WS] WSFunctions.accountPage.validateStockRegularItems :: ${error}`);
+          }
+        },
+        formatItems: function (items, itemsPO) {
+          try {
+            let formattedItems = [];
+            // Loop through the items with and without product options
+            // to store the variant id, quantity and properties if necessary
+            items.forEach(item => {
+              let data = {
+                quantity: item.quantity,
+                id: item.variant_id
+              };
+              if (item.properties) {
+                data.properties = item.properties;
+              }
+              formattedItems.push(data);
+            });
+            itemsPO.forEach(item => {
+              formattedItems.push({
+                quantity: item.quantity,
+                id: item.variant_id,
+                properties: item.properties
+              });
+            });
+            return formattedItems;
+          } catch (error) {
+            console.log(`[WS] WSFunctions.accountPage.formatItems :: ${error}`);
+          }
+        },
+        addItemsToCart: function (items) {
+          try {
+            // Add the items to the cart
+            $.ajax({
+              url: "/cart/add.js",
+              method: "POST",
+              dataType: "json",
+              cache: false,
+              async: false,
+              data: {
+                items: items
+              }
+            }).done(result => {
+              console.log('Success');
+              //$(this).attr('disabled', false);
+                                      
+              window.location.href = '/cart';
+            }).fail(result => {
+              console.log('Error');
+            });
+          } catch (error) {
+            console.log(`[WS] WSFunctions.accountPage.addItemsToCart :: ${error}`);
+          }                    
+        },
+        /* Added by WSDEV-220126-MM - Get product properties from product template */
+        getProductMetafields: function(productHandle) {
+          try {
+            let productProperties = {};
+            $.ajax({
+              type: 'GET',
+              url: `/products/${productHandle}`,
+              dataType: "html",
+              cache: false,
+              async: false
+            }).done(data => {
+              // Find hidden inputs with properties
+              const productFormProperties = $(data).find('form.product-form input[type="hidden"]');
+              productFormProperties.each((index, input) => {
+                if ($(input).attr('name').includes('properties[')) {
+                  // Add properties to object
+                  productProperties[$(input).attr('name').replace('properties[', '').replace(']', '')] = $(input).attr('value');
+                }
+              });
+            }).fail(error => {
+              console.log(error);
+            })
+            return productProperties;
+          } catch (error) {
+            console.log(`[WS] WSFunctions.accountPage.getProductMetafields :: ${error}`);
+          }          
+        },
+        validateProductMetafields: function(productTemplateProperties, previousProductProperties) {
+          try {
+            // Merge both objects and replace the previous properties 
+            // with the properties from the product template
+            // if they have the same name
+            let productProperties = {
+              ...previousProductProperties,
+              ...productTemplateProperties
+            }
+            return productProperties;
+          } catch (error) {
+            console.log(`[WS] WSFunctions.accountPage.validateProductMetafields :: ${error}`);
+          }
+        }
+        /* End of Added by WSDEV-220126-MM - Get product properties from product template */
+      }
+    };
+  </script>

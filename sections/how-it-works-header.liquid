@@ -1,0 +1,122 @@
+<style>
+    .how_it_works_header_inner {
+      background: url({{ section.settings.bg | img_url: '1296x' }});
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      width: 100%;
+      height: 100%;
+      min-height: 306px;
+      position: relative;
+    }
+
+    .hiw_inner_wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 1600px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    .how_it_works_header_inner .breadcrumb {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      color: #fff;
+    }
+
+    .how_it_works_header_inner .breadcrumb a,
+    .how_it_works_header_inner .breadcrumb span {
+      color: #fff !important;
+      font-size: 14px;
+      font-family: rubikregular;
+      line-height: 17px;
+      text-transform: capitalize;
+      display: inline;
+    }
+
+    .how_it_works_header_title h1 {
+      color: #fff;
+      text-transform: lowercase;
+      font-size: 52px;
+      line-height: 65px;
+      margin-top: 10px;
+      font-family: 'rubikregular';
+  /*     max-width: 30rem; */
+    }
+
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+      .how_it_works_header_title h1 { font-size: 36px; line-height: 47px; max-width: 20rem; }
+    }
+
+    @media screen and (max-width: 799px) {
+      /* .how_it_works_header_wrapper{
+        margin-top: 87.59px;
+      } */
+    }
+
+    @media only screen and (min-width: 200px) and (max-width: 767px) {
+      .how_it_works_header_inner .breadcrumb a, .how_it_works_header_inner .breadcrumb span { font-size: 12px; line-height: 14px; }
+
+      .how_it_works_header_inner { background-size: cover; min-height: 164px; }
+
+      .how_it_works_header_title h1 { line-height: 30px; font-size: 23px; }
+    }
+
+    @media screen and (max-width: 640px) {
+  /*     .how_it_works_header_wrapper { margin-top: 62.47px; } */
+
+      .contact-form .contact-form__form { padding: 20px; }
+
+      form#contact_form input { font-size: 16px; }
+    }
+</style>
+
+<div class="how_it_works_header_wrapper">
+  <div class="how_it_works_header_inner">
+    <div class="hiw_inner_wrap">
+      {% render 'breadcrumbs' %}
+
+      {% if section.settings.head != blank %}
+        <div class="how_it_works_header_title">
+          <h1>{{ section.settings.head }}</h1>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Banner",
+  "tag": "section",
+  "class": "banner-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg",
+      "label": "Section Background"
+    },
+    {
+      "type": "text",
+      "id": "head",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}
+
+{% style sheet %}{% endstyle %}
+
+{% javascript %}
+
+{% endjavascript %}

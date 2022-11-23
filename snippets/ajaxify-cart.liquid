@@ -1,0 +1,770 @@
+<script>    
+$(document).ready(function() {
+  Shopify.AjaxifyCart = (function($) {
+    
+    var _config = {
+      addToCartBtnLabel:             'Add to cart',
+      addedToCartBtnLabel:           'Thank you!',
+      addingToCartBtnLabel:          'Adding...',
+      soldOutBtnLabel:               'Sold Out',
+      howLongTillBtnReturnsToNormal: 2000, // in milliseconds.
+      cartCountSelector:             '.CartCount',
+      //cartCountSelectors:          '#CartCount',
+      cartTotalSelector:             '.cart-price',
+      // 'aboveForm' for top of add to cart form, 
+      // 'belowForm' for below the add to cart form, and 
+      // 'nextButton' for next to add to cart button.
+      feedbackPosition:              'nextButton',
+
+      // What you will never need to change
+      addToCartBtnSelector:          '[type="submit"]',
+      addToCartFormSelector:         'form[action="/cart/add"]',
+      shopifyAjaxAddURL:             '/cart/add.js',
+      shopifyAjaxCartURL:            '/cart.js'
+    };
+
+    // We need some feedback when adding an item to the cart.
+    // Here it is.  
+    var _showFeedback = function(success, html, $addToCartForm) {
+      $('.ajaxified-cart-feedback').remove();
+      var feedback = '<p class="ajaxified-cart-feedback ' + success + '">' + html + '</p>';
+      switch (_config.feedbackPosition) {
+        case 'aboveForm':
+          $addToCartForm.before(feedback);
+          break;
+        case 'belowForm':
+          $addToCartForm.after(feedback);
+          break;
+        case 'nextButton':
+        default:
+          //$addToCartForm.find(_config.addToCartBtnSelector).after(feedback);
+          break;   
+      }
+      // If you use animate.css
+      // $('.ajaxified-cart-feedback').addClass('animated bounceInDown');
+      $('.ajaxified-cart-feedback').slideDown();
+    };
+    var _setText = function($button, label) {
+      if ($button.children().length) {
+        $button.children().each(function() {
+          if ($.trim($(this).text()) !== '') {
+            $(this).text(label);
+          }
+        });
+      }
+      else {
+        $button.val(label).text(label);
+      }
+    };            
+    
+    var _init = function() {
+      $(document).ready(function() { 
+        $(_config.addToCartFormSelector).submit(function(e) {
+          e.preventDefault();
+          var $addToCartForm = $(this);
+          var $addToCartBtn = $addToCartForm.find(_config.addToCartBtnSelector);
+          _setText($addToCartBtn, _config.addingToCartBtnLabel);
+          $addToCartBtn.addClass('disabled activeb').prop('disabled', true);
+          // Add to cart.       
+          
+          $('.cdrawer').show('slide', {direction: 'right'}, 400);
+          $('.drawer-cover').show();
+          
+          $.ajax({
+            url: _config.shopifyAjaxAddURL,
+            dataType: 'json',
+            type: 'post',
+            data: $addToCartForm.serialize(),
+            success: function(itemData) {
+              
+              //addItemToCart($('#ctitle{{s}}').val(), $("#vid{{s}}").val());
+              //addItemToCart('sale', 36857094787);
+              
+              // Re-enable add to cart button.
+              $addToCartBtn.addClass('inverted');
+               _setText($addToCartBtn, _config.addedToCartBtnLabel);
+              _showFeedback('success','<i class="fa fa-check"></i> Added to cart!',$addToCartForm);
+              
+              window.setTimeout(function(){
+                $addToCartBtn.prop('disabled', false).removeClass('disabled').removeClass('inverted');
+                _setText($addToCartBtn,_config.addToCartBtnLabel);
+                _showFeedback();
+              }, _config.howLongTillBtnReturnsToNormal);
+              
+              // Update cart count and show cart link.
+              $.getJSON(_config.shopifyAjaxCartURL, function(cart) {
+                if(typeof window.BOLD !== 'undefined' && 
+   typeof window.BOLD.common !== 'undefined' && 
+   typeof window.BOLD.common.cartDoctor !== 'undefined') {
+    cart = window.BOLD.common.cartDoctor.fix(cart);
+}
+                if (_config.cartCountSelector && $(_config.cartCountSelector).length) {
+                  
+                  var value = $(_config.cartCountSelector).html() || '0';
+                  $(_config.cartCountSelector).html(value.replace(/[0-9]+/,cart.item_count)).removeClass('hidden-count');
+                  var ctot = value.replace(/[0-9]+/,cart.item_count);                                 
+                                    
+                  $('.cart-drawer__empty-text').addClass('hide');
+                  
+                  {% if settings.show_cart_note %}
+                  	$('.cart-drawer__note-container').show();
+                  {% endif %}
+
+                  $('.cart-drawer__footer').show();
+
+                  $('#proloop').empty();	
+                  var cartlength = cart.items.length;
+                  
+                  getItemCompPrice(cart.items);
+                  
+                  for(i=0; i<=cartlength-1; i++) {
+                    
+                    var protitle = cart.items[i].product_title;
+                    
+                    if(cart.items[i].variant_title == null) {
+                      var prooptions = '';
+                    } else {
+                      var prooptions = cart.items[i].variant_title;
+                    }
+                
+                    var proimage1 = cart.items[i].image;
+                    if(proimage1.indexOf('.png') != -1) {
+                      var proimage2 = proimage1.split('.png');
+                      var proimage = proimage2[0]+'_small.png';
+                    } else {
+                      var proimage2 = proimage1.split('.jpg');
+                      var proimage = proimage2[0]+'_small.jpg';
+                    }
+
+                    var provid = i+1;
+                    
+                    var proprice = theme.Currency.formatMoney(cart.items[i].price, _config.moneyFormat);
+						       
+                    if(cart.items[i].handle == '{{ settings.cproduct1}}'){$('#pro-'+cart.items[i].handle).hide();}
+                                                       
+                    var repeatitem = '<div class="'+cart.items[i].id+' cart-drawer__item" data-cart-item data-cart-item-id=""><a href="' +cart.items[i].url+ '" class="cart-drawer__item-image" style="background-image:url('+proimage+')" data-cart-item-background-image data-cart-item-href></a><div class="cart-drawer__item-content"><a href=' + cart.items[i].url + ' class="h4 cart-drawer__item-title" data-cart-item-href data-cart-item-title>' + protitle +'<span class="hide" style="color:#F00"> - sale</span></a><p class="cart-drawer__item-subtitle vartitle">' + prooptions +'</p><p class="cart-drawer__item-price">' + proprice + ' <s></s></p><div>'+ cart.items[i].properties_formatted +'</div><div class="qty-top"><div class="js-qty"><button type="button" onclick="quant(1, '+provid+', '+cart.items[i].id+')" id="minus'+provid+'" class="js-qty__adjust minus js-qty__adjust--minus icon-fallback-text" data-id="" data-qty="0"><span>−</span></button><input type="text" class="js-qty__num" value="'+cart.items[i].quantity+'" min="0" data-id="'+ cart.items[i].key +'" aria-label="quantity" pattern="[0-9]*" name="quantity" id="Quantity'+provid+'"><button type="button" onclick="quant(2, '+provid+', '+cart.items[i].id+')" id="plus'+provid+'" class="main plus js-qty__adjust js-qty__adjust--plus"><span>+</span></button></div><span><a class="detelecart" onclick="deletepr('+cart.items[i].id+', '+cart.items[i].quantity+')">Remove</a></span> </div></div>';
+                  	$('#proloop').append(repeatitem);	
+                  }
+                  $('.cart-drawer__subtotal-number').text(theme.Currency.formatMoney(cart.total_price, _config.moneyFormat));	 
+                  $('#totalpri').text(theme.Currency.formatMoney(cart.total_price, _config.moneyFormat));	 
+                  
+                  var cv = cart.total_price;
+                  var cvm = 5000 - cv;
+                  var cvmm = (cv/5000)*100;              
+
+                  //$('#awayp').html();
+                  $('#drawership').html(theme.Currency.formatMoney(cvm, theme.moneyFormat));
+
+                  if(cvmm > 100) {
+                    $('.ship1').hide();
+                    $('.ship2').show();
+                    $('.progress-bar').css({'width': '100%'});
+                  } else {
+                    $('.ship1').show();
+                    $('.ship2').hide();
+                    $('.progress-bar').css({'width': cvmm+'%'});
+                  }
+                }
+                
+                /*
+                if (_config.cartCountSelectors && $(_config.cartCountSelectors).length) {
+                  var value = $(_config.cartCountSelectors).html() || '0';
+                  $(_config.cartCountSelectors).html(value.replace(/[0-9]+/,cart.item_count)).removeClass('hidden-count');
+                }
+                */
+                
+                if (_config.cartTotalSelector && $(_config.cartTotalSelector).length) {
+                  if (typeof Currency !== 'undefined' && typeof Currency.moneyFormats !== 'undefined') {
+                    var newCurrency = '';
+                    if ($('[name="currencies"]').length) {
+                      newCurrency = $('[name="currencies"]').val();
+                    }
+                    else if ($('#currencies span.selected').length) {
+                      newCurrency = $('#currencies span.selected').attr('data-currency');
+                    }
+                    if (newCurrency) {
+                      $(_config.cartTotalSelector).html('<span class=money>' + theme.Currency.formatMoney(Currency.convert(cart.total_price, "{{ shop.currency }}", newCurrency), Currency.money_format[newCurrency]) + '</span>');
+                    } 
+                    else {
+                      $(_config.cartTotalSelector).html(theme.Currency.formatMoney(cart.total_price, "{{ shop.money_format | remove: "'" | remove: '"' }}"));
+                    }
+                  }
+                  else {
+                    $(_config.cartTotalSelector).html(theme.Currency.formatMoney(cart.total_price, "{{ shop.money_format | remove: "'" | remove: '"' }}"));                   	
+                  }
+                };
+              });        
+            }, 
+            error: function(XMLHttpRequest) {
+              var response = eval('(' + XMLHttpRequest.responseText + ')');
+              response = response.description;
+              if (response.slice(0,4) === 'All ') {
+                _showFeedback('error', response.replace('All 1 ', 'All '), $addToCartForm);
+                $addToCartBtn.prop('disabled', false);
+                _setText($addToCartBtn, _config.soldOutBtnLabel);
+                $addToCartBtn.prop('disabled',true);
+              }
+              else {
+                _showFeedback('error', '<i class="fa fa-warning"></i> ' + response, $addToCartForm);
+                $addToCartBtn.prop('disabled', false).removeClass('disabled');
+                _setText($addToCartBtn, _config.addToCartBtnLabel);
+              }
+            }
+          });   
+          return false;    
+        });
+      });
+    };
+    return {
+      init: function(params) {
+          // Configuration
+          params = params || {};
+          // Merging with defaults.
+          $.extend(_config, params);
+          // Action
+          $(function() {
+            _init();
+          });
+      },    
+      getConfig: function() {
+        return _config;
+      }
+    }  
+  })(jQuery);
+if (window.BOLD && BOLD.common && BOLD.common.eventEmitter 
+    && typeof BOLD.common.eventEmitter.emit === 'function'){
+    BOLD.common.eventEmitter.emit('BOLD_COMMON_cart_loaded');
+}
+  Shopify.AjaxifyCart.init();  
+});
+
+  function getItemCompPrice(items){    
+    let count=0;
+    for (var i=0;i<items.length;i++){
+      jQuery.getJSON(items[i].url + '.js', function(product){                
+        displayPrice(product.product, count)
+        count++;
+      });         
+    }
+  }
+  function displayPrice(product, index){    
+    for (var i=0;i<product.variants.length;i++){
+      //console.log(product.variants[i].id)         
+      //console.log(product.variants[i].compare_at_price)         
+      $('.'+product.variants[i].id+' .cart-drawer__item-subtitle s').text(product.variants[i].compare_at_price);
+      
+      if(product.variants[i].compare_at_price) {
+        $('.'+product.variants[i].id+' .cart-drawer__item-title span').removeClass('hide');
+      }
+    }
+  }
+</script>
+
+<script>
+  function addthistocart(vid,varrid,varrqty) {   
+    var _config = {
+      addToCartBtnLabel:             'Add to cart',
+      addedToCartBtnLabel:           'Thank you!',
+      addingToCartBtnLabel:          'Adding...',
+      soldOutBtnLabel:               'Sold Out',
+      howLongTillBtnReturnsToNormal: 2000, // in milliseconds.
+      cartCountSelector:             '.CartCount',
+      //cartCountSelectors:          '#CartCounts',
+      cartTotalSelector:             '.cart-price',
+      feedbackPosition:              'nextButton',
+
+      // What you will never need to change
+      addToCartBtnSelector:          '[type="submit"]',
+      addToCartFormSelector:         'form[action="/cart/add"]',
+      shopifyAjaxAddURL:             '/cart/add.js',
+      shopifyAjaxCartURL:            '/cart.js'
+    };
+
+
+    //nik 04/23/2021 START
+    let properties = '';
+    let _itemProperties = $(event.target).parents('.custom_prop_event').find('[name^="properties"]') ?? [];
+    let _itemVariantElem = $(event.target).parents('.custom_prop_event').find('[name^="id"]') ?? [];
+    if(_itemProperties.length > 0){
+      _itemProperties.map((index, item) => {
+        properties+=(properties === '' ? item.name+'='+item.value : "&"+item.name+'='+item.value);
+      });
+    }
+    
+    let _itemVariantId = varrid;
+    if(_itemVariantElem.length > 0 && _itemVariantElem[0].value!=""){
+      _itemVariantId = _itemVariantElem[0].value;
+    }
+      $.ajax({
+        url: _config.shopifyAjaxAddURL,
+        dataType: 'json',
+        type: 'post',
+        data: 'quantity='+varrqty+'&id='+_itemVariantId+(properties != '' ? '&'+properties : ''),
+        success: function(itemData) {
+
+          /*
+          $('.bodytop').css({'overflow':'hidden'});
+          $('.cdrawer').show('slide', {direction: 'right'}, 400);
+          $('.drawer-cover').show();
+          */
+          
+          /*
+          $('#Collection').flyto({
+            item      : 'div.product_img',
+            target    : '.cart-item',
+            button    : '.myc'
+          });
+          */
+          
+          $('.myc').on('click', function () {});
+
+
+            var cart = $('.cart-item');
+            var imgtodrag = $('#'+vid).find(".product_img").eq(0);
+          
+                       
+            if (imgtodrag) {
+              var imgclone = imgtodrag.clone()
+              .offset({
+               top: imgtodrag.offset().top,
+              
+                left: imgtodrag.offset().left
+            
+              })
+              
+              .css({
+                'opacity': '0.5',
+                'position': 'absolute',
+                'height': '150px',
+                'width': '150px',
+                'z-index': '100'
+              })
+              .appendTo($('body'))
+              .animate({
+                'top': cart.offset().top + 10,
+                'left': cart.offset().left + 10,
+                'width': 75,
+                'height': 75
+              }, 1000, 'easeInOutExpo');
+
+              setTimeout(function () {
+                cart.effect("shake", {
+                  times: 2
+                }, 200);
+              }, 1500);
+
+              imgclone.animate({
+                'width': 0,
+                'height': 0
+              }, function () {
+                $(this).detach()
+              });
+            }
+          
+          
+          $.getJSON(_config.shopifyAjaxCartURL, function(cart) {
+            if(typeof window.BOLD !== 'undefined' && 
+   typeof window.BOLD.common !== 'undefined' && 
+   typeof window.BOLD.common.cartDoctor !== 'undefined') {
+    cart = window.BOLD.common.cartDoctor.fix(cart);
+}
+            if (_config.cartCountSelector && $(_config.cartCountSelector).length) {
+
+              var value = $(_config.cartCountSelector).html() || '0';
+              $(_config.cartCountSelector).html(value.replace(/[0-9]+/,cart.item_count)).removeClass('hidden-count');
+              var ctot = value.replace(/[0-9]+/,cart.item_count);                                 
+
+              $('.cart-drawer__empty-text').addClass('hide');
+
+              {% if settings.show_cart_note %}
+              $('.cart-drawer__note-container').show();
+              {% endif %}
+
+              $('.cart-drawer__footer').show();
+
+              $('#proloop').empty();	
+              var cartlength = cart.items.length;
+              
+              for(i=0; i<=cartlength-1; i++) {
+
+                var protitle = cart.items[i].product_title;
+                
+                if(cart.items[i].variant_title == null) {
+                var prooptions = '';
+                } else {
+                var prooptions = cart.items[i].variant_title;
+                }
+                
+                var proimage1 = cart.items[i].image;
+                if(proimage1.indexOf('.png') != -1) {
+                  var proimage2 = proimage1.split('.png');
+                  var proimage = proimage2[0]+'_small.png';
+                } else {
+                  var proimage2 = proimage1.split('.jpg');
+                  var proimage = proimage2[0]+'_small.jpg';
+                }
+                
+                var provid = i+1;
+                var proprice = theme.Currency.formatMoney(cart.items[i].price, _config.moneyFormat);
+
+                if(cart.items[i].handle == '{{ settings.cproduct1}}'){$('#pro-'+cart.items[i].handle).hide();}
+
+                var repeatitem = '<div class="'+cart.items[i].id+' cart-drawer__item" data-cart-item data-cart-item-id=""><a href="' +cart.items[i].url+ '" class="cart-drawer__item-image" style="background-image:url('+proimage+')" data-cart-item-background-image data-cart-item-href></a><div class="cart-drawer__item-content"><a href=' + cart.items[i].url + ' class="h4 cart-drawer__item-title" data-cart-item-href data-cart-item-title>' + protitle +'<span class="hide" style="color:#F00"> - sale</span></a><p class="cart-drawer__item-subtitle vartitle">' + prooptions +'</p><p class="cart-drawer__item-subtitle">' + proprice + ' <s></s></p><div>'+ cart.items[i].properties_formatted +'</div><div class="qty-top"><div class="js-qty"><button type="button" onclick="quant(1, '+provid+', '+cart.items[i].id+')" id="minus'+provid+'" class="js-qty__adjust minus js-qty__adjust--minus icon-fallback-text" data-id="" data-qty="0"><span>−</span></button><input type="text" class="js-qty__num" value="'+cart.items[i].quantity+'" min="0" data-id="'+ cart.items[i].key +'" aria-label="quantity" pattern="[0-9]*" name="quantity" id="Quantity'+provid+'"><button type="button" onclick="quant(2, '+provid+', '+cart.items[i].id+')" id="plus'+provid+'" class="main plus js-qty__adjust js-qty__adjust--plus"><span>+</span></button></div><span><a class="detelecart" onclick="deletepr('+cart.items[i].id+', '+cart.items[i].quantity+')">Remove</a></span> </div></div>';
+                // var repeatitem = '<div class="'+cart.items[i].id+' cart-drawer__item" data-cart-item data-cart-item-id=""><a href="' +cart.items[i].url+ '" class="cart-drawer__item-image" style="background-image:url('+proimage+')" data-cart-item-background-image data-cart-item-href></a><div class="cart-drawer__item-content"><a href=' + cart.items[i].url + ' class="h4 cart-drawer__item-title" data-cart-item-href data-cart-item-title>' + protitle +'<span class="hide" style="color:#F00"> - sale</span></a><p class="cart-drawer__item-subtitle vartitle">' + prooptions +'</p><p class="cart-drawer__item-subtitle">' + proprice + ' <s></s></p><div></div><div class="qty-top"><div class="js-qty"><button type="button" onclick="quant(1, '+provid+', '+cart.items[i].id+')" id="minus'+provid+'" class="js-qty__adjust minus js-qty__adjust--minus icon-fallback-text" data-id="" data-qty="0"><span>−</span></button><input type="text" class="js-qty__num" value="'+cart.items[i].quantity+'" min="0" data-id="'+ cart.items[i].key +'" aria-label="quantity" pattern="[0-9]*" name="quantity" id="Quantity'+provid+'"><button type="button" onclick="quant(2, '+provid+', '+cart.items[i].id+')" id="plus'+provid+'" class="main plus js-qty__adjust js-qty__adjust--plus"><span>+</span></button></div><span><a class="detelecart" onclick="deletepr('+cart.items[i].id+', '+cart.items[i].quantity+')">Remove</a></span> </div></div>';
+                $('#proloop').append(repeatitem);	                
+              }
+              
+              $('.cart-drawer__subtotal-number').text(theme.Currency.formatMoney(cart.total_price, _config.moneyFormat));	 
+              $('#totalpri').text(theme.Currency.formatMoney(cart.total_price, _config.moneyFormat));
+
+              var cv = cart.total_price;
+              var cvm = 5000 - cv;
+              var cvmm = (cv/5000)*100;              
+
+              //$('#awayp').html();
+              $('#drawership').html(theme.Currency.formatMoney(cvm, theme.moneyFormat));
+
+              if(cvmm > 100) {
+                $('.ship1').hide();
+                $('.ship2').show();
+                $('.progress-bar').css({'width': '100%'});
+              } else {
+                $('.ship1').show();
+                $('.ship2').hide();
+                $('.progress-bar').css({'width': cvmm+'%'});
+              }
+            }
+
+            /*
+            if (_config.cartCountSelectors && $(_config.cartCountSelectors).length) {
+              var value = $(_config.cartCountSelectors).html() || '0';
+              $(_config.cartCountSelectors).html(value.replace(/[0-9]+/,cart.item_count)).removeClass('hidden-count');
+            } 
+            */
+            
+                if (_config.cartTotalSelector && $(_config.cartTotalSelector).length) {
+                  if (typeof Currency !== 'undefined' && typeof Currency.moneyFormats !== 'undefined') {
+                    var newCurrency = '';
+                    if ($('[name="currencies"]').length) {
+                      newCurrency = $('[name="currencies"]').val();
+                    }
+                    else if ($('#currencies span.selected').length) {
+                      newCurrency = $('#currencies span.selected').attr('data-currency');
+                    }
+                    if (newCurrency) {
+                      $(_config.cartTotalSelector).html('<span class=money>' + theme.Currency.formatMoney(Currency.convert(cart.total_price, "{{ shop.currency }}", newCurrency), Currency.money_format[newCurrency]) + '</span>');
+                    } 
+                    else {
+                      $(_config.cartTotalSelector).html(theme.Currency.formatMoney(cart.total_price, "{{ shop.money_format | remove: "'" | remove: '"' }}"));
+                    }
+                  }
+                  else {
+                    $(_config.cartTotalSelector).html(theme.Currency.formatMoney(cart.total_price, "{{ shop.money_format | remove: "'" | remove: '"' }}"));                   	
+                  }
+                };
+          });        
+        } 
+      });   
+                                                        
+    _check_cart();
+  }
+  
+  function quant(qtype, id, variantid) {    
+    if(qtype == 1) {
+      var val = parseInt($('#Quantity'+id).val());
+      $('#Quantity'+id).val( val-1 );      
+      
+      jQuery.post('/cart/update.js', 'updates['+variantid+']='+$('#Quantity'+id).val());
+    }
+    if(qtype == 2) {
+      var val = parseInt($('#Quantity'+id).val());
+      $('#Quantity'+id).val( val+1 );
+      
+      jQuery.post('/cart/update.js', 'updates['+variantid+']='+$('#Quantity'+id).val());
+    }
+    
+    setTimeout(function() {
+      var _config = {
+        cartCountSelector:             '.CartCount',
+        shopifyAjaxCartURL:            '/cart.js'
+      };
+
+      var params = {
+        //type: 'POST',
+        url: '/cart.js',
+        //data: { updates: {cid:0} },
+        dataType: 'json',
+        //async: false,
+        success: function(data) { //alert(data); 
+
+          $.getJSON(_config.shopifyAjaxCartURL, function(cart) {
+            if(typeof window.BOLD !== 'undefined' && 
+   typeof window.BOLD.common !== 'undefined' && 
+   typeof window.BOLD.common.cartDoctor !== 'undefined') {
+    cart = window.BOLD.common.cartDoctor.fix(cart);
+}
+            if (_config.cartCountSelector && $(_config.cartCountSelector).length) {
+              var value = $(_config.cartCountSelector).html() || '0';
+              $(_config.cartCountSelector).html(value.replace(/[0-9]+/,cart.item_count)).removeClass('hidden-count');
+              var ctot = value.replace(/[0-9]+/,cart.item_count);
+
+              $('.cart-drawer__empty-text').addClass('hide');
+
+              {% if settings.show_cart_note %}
+              $('.cart-drawer__note-container').show();
+              {% endif %}
+
+              $('.cart-drawer__footer').show();
+
+              $('#proloop').empty();	
+              var cartlength = cart.items.length;
+
+              getItemCompPrice(cart.items);
+
+              for(i=0; i<=cartlength-1; i++) {
+
+                var protitle = cart.items[i].product_title;
+                
+                if(cart.items[i].variant_title == null) {
+                var prooptions = '';
+                } else {
+                var prooptions = cart.items[i].variant_title;
+                }
+                
+                var proimage1 = cart.items[i].image;
+                if(proimage1.indexOf('.png') != -1) {
+                  var proimage2 = proimage1.split('.png');
+                  var proimage = proimage2[0]+'_small.png';
+                } else {
+                  var proimage2 = proimage1.split('.jpg');
+                  var proimage = proimage2[0]+'_small.jpg';
+                }
+                
+                var provid = i+1;
+
+                var proprice = theme.Currency.formatMoney(cart.items[i].price, _config.moneyFormat);
+                
+                           
+                if(cart.items[i].handle == '{{ settings.cproduct1}}'){$('#pro-'+cart.items[i].handle).hide();}
+      
+                var repeatitem = '<div class="'+cart.items[i].id+' cart-drawer__item" data-cart-item data-cart-item-id=""><a href="' +cart.items[i].url+ '" class="cart-drawer__item-image" style="background-image:url('+proimage+')" data-cart-item-background-image data-cart-item-href></a><div class="cart-drawer__item-content"><a href=' + cart.items[i].url + ' class="h4 cart-drawer__item-title" data-cart-item-href data-cart-item-title>' + protitle +'<span class="hide" style="color:#F00"> - sale</span></a><p class="cart-drawer__item-subtitle vartitle">' + prooptions +'</p><p class="cart-drawer__item-subtitle">' + proprice + ' <s></s></p><div>'+ cart.items[i].properties_formatted +'</div><div class="qty-top"><div class="js-qty"><button type="button" onclick="quant(1, '+provid+', '+cart.items[i].id+')" id="minus'+provid+'" class="js-qty__adjust minus js-qty__adjust--minus icon-fallback-text" data-qty="0"><span>−</span></button><input type="text" class="js-qty__num" value="'+cart.items[i].quantity+'" min="0" data-id="'+ cart.items[i].key +'" aria-label="quantity" pattern="[0-9]*" name="quantity" id="Quantity'+provid+'"><button type="button" onclick="quant(2, '+provid+', '+cart.items[i].id+')" id="plus'+provid+'" class="main plus js-qty__adjust js-qty__adjust--plus"><span>+</span></button></div><span><a class="detelecart" onclick="deletepr('+cart.items[i].id+', '+cart.items[i].quantity+')">Remove</a></span> </div></div>';
+                // var repeatitem = '<div class="'+cart.items[i].id+' cart-drawer__item" data-cart-item data-cart-item-id=""><a href="' +cart.items[i].url+ '" class="cart-drawer__item-image" style="background-image:url('+proimage+')" data-cart-item-background-image data-cart-item-href></a><div class="cart-drawer__item-content"><a href=' + cart.items[i].url + ' class="h4 cart-drawer__item-title" data-cart-item-href data-cart-item-title>' + protitle +'<span class="hide" style="color:#F00"> - sale</span></a><p class="cart-drawer__item-subtitle vartitle">' + prooptions +'</p><p class="cart-drawer__item-subtitle">' + proprice + ' <s></s></p><div></div><div class="qty-top"><div class="js-qty"><button type="button" onclick="quant(1, '+provid+', '+cart.items[i].id+')" id="minus'+provid+'" class="js-qty__adjust minus js-qty__adjust--minus icon-fallback-text" data-qty="0"><span>−</span></button><input type="text" class="js-qty__num" value="'+cart.items[i].quantity+'" min="0" data-id="'+ cart.items[i].key +'" aria-label="quantity" pattern="[0-9]*" name="quantity" id="Quantity'+provid+'"><button type="button" onclick="quant(2, '+provid+', '+cart.items[i].id+')" id="plus'+provid+'" class="main plus js-qty__adjust js-qty__adjust--plus"><span>+</span></button></div><span><a class="detelecart" onclick="deletepr('+cart.items[i].id+', '+cart.items[i].quantity+')">Remove</a></span> </div></div>';
+                $('#proloop').append(repeatitem);		
+              }
+              $('.cart-drawer__subtotal-number').text(theme.Currency.formatMoney(cart.total_price, _config.moneyFormat));	
+              $('#totalpri').text(theme.Currency.formatMoney(cart.total_price, _config.moneyFormat));	               
+
+              var cv = cart.total_price;
+              var cvm = 5000 - cv;
+              var cvmm = (cv/5000)*100;              
+
+              //$('#awayp').html();
+              $('#drawership').html(theme.Currency.formatMoney(cvm, theme.moneyFormat));
+
+              if(cvmm > 100) {
+                $('.ship1').hide();
+                $('.ship2').show();
+                $('.progress-bar').css({'width': '100%'});
+              } else {
+                $('.ship1').show();
+                $('.ship2').hide();
+                $('.progress-bar').css({'width': cvmm+'%'});
+              }
+              
+              if(cart.item_count == '0'){
+                $('.extra-pro').removeClass('hide');
+                $('.extra-pro').show();
+                $('.cart-drawer__empty-text').removeClass('hide');
+              }
+            }
+          });
+        },
+        error: function(XMLHttpRequest, textStatus) {
+          Shopify.onError(XMLHttpRequest, textStatus);
+        }
+      }
+      if (window.BOLD && BOLD.common && BOLD.common.eventEmitter 
+    && typeof BOLD.common.eventEmitter.emit === 'function'){
+    BOLD.common.eventEmitter.emit('BOLD_COMMON_cart_loaded');
+}
+      jQuery.ajax(params);
+    },200);
+  }  
+    
+  function deletepr(vid) {       
+    jQuery.post('/cart/update.js', 'updates['+vid+']=0');  
+    
+    setTimeout(function() {
+      var _config = {
+        cartCountSelector:             '.CartCount',
+        shopifyAjaxCartURL:            '/cart.js',
+        cartTotalSelector:             '.cart-price',
+      };
+
+      var params = {
+        //type: 'POST',
+        url: '/cart.js',
+        //data: { updates: {cid:0} },
+        dataType: 'json',
+        //async: false,
+        success: function(data) { //alert(data); 
+
+          $.getJSON(_config.shopifyAjaxCartURL, function(cart) {
+            if(typeof window.BOLD !== 'undefined' && 
+   typeof window.BOLD.common !== 'undefined' && 
+   typeof window.BOLD.common.cartDoctor !== 'undefined') {
+    cart = window.BOLD.common.cartDoctor.fix(cart);
+}
+
+            if (_config.cartCountSelector && $(_config.cartCountSelector).length) {
+              var value = $(_config.cartCountSelector).html() || '0';
+              $(_config.cartCountSelector).html(value.replace(/[0-9]+/,cart.item_count)).removeClass('hidden-count');
+              var ctot = value.replace(/[0-9]+/,cart.item_count);
+
+              /* get cart details Jifftech 24-1-2018 */
+              function getWords(str) {
+                return str.split(/\s+/).slice(0,9).join(" ");
+              }
+
+              $('.cart-drawer__empty-text').addClass('hide');
+
+              {% if settings.show_cart_note %}
+              $('.cart-drawer__note-container').show();
+              {% endif %}
+
+              $(".cart_mains").show();
+              $('.cart-drawer__footer').show();
+
+              $('#proloop').empty();	
+              var cartlength = cart.items.length;
+
+              getItemCompPrice(cart.items);
+
+              for(i=0; i<=cartlength-1; i++) {
+
+                var protitle = cart.items[i].product_title;
+                
+                if(cart.items[i].variant_title == null) {
+                var prooptions = '';
+                } else {
+                var prooptions = cart.items[i].variant_title;
+                }
+                
+                var proimage1 = cart.items[i].image;
+                if(proimage1.indexOf('.png') != -1) {
+                  var proimage2 = proimage1.split('.png');
+                  var proimage = proimage2[0]+'_small.png';
+                } else {
+                  var proimage2 = proimage1.split('.jpg');
+                  var proimage = proimage2[0]+'_small.jpg';
+                }
+                
+                var provid = i+1;
+
+                var proprice = theme.Currency.formatMoney(cart.items[i].price, _config.moneyFormat);
+                               
+                if(cart.items[i].handle == '{{ settings.cproduct1}}'){$('#pro-'+cart.items[i].handle).hide();}
+  
+                var repeatitem = '<div class="'+cart.items[i].id+' cart-drawer__item" data-cart-item data-cart-item-id=""><a href="' +cart.items[i].url+ '" class="cart-drawer__item-image" style="background-image:url('+proimage+')" data-cart-item-background-image data-cart-item-href></a><div class="cart-drawer__item-content"><a href=' + cart.items[i].url + ' class="h4 cart-drawer__item-title" data-cart-item-href data-cart-item-title>' + protitle +'<span class="hide" style="color:#F00"> - sale</span></a><p class="cart-drawer__item-subtitle vartitle">' + prooptions +'</p><p class="cart-drawer__item-subtitle">' + proprice + ' <s></s></p><div>'+ cart.items[i].properties_formatted +'</div><div class="qty-top"><div class="js-qty"><button type="button" onclick="quant(1, '+provid+', '+cart.items[i].id+')" id="minus'+provid+'" class="js-qty__adjust minus js-qty__adjust--minus icon-fallback-text" data-id="" data-qty="0"><span>−</span></button><input type="text" class="js-qty__num" value="'+cart.items[i].quantity+'" min="0" data-id="'+ cart.items[i].key +'" aria-label="quantity" pattern="[0-9]*" name="quantity" id="Quantity'+provid+'"><button type="button" onclick="quant(2, '+provid+', '+cart.items[i].id+')" id="plus'+provid+'" class="main plus js-qty__adjust js-qty__adjust--plus"><span>+</span></button></div><span><a class="detelecart" onclick="deletepr('+cart.items[i].id+', '+cart.items[i].quantity+')">Remove</a></span> </div></div>';
+                // var repeatitem = '<div class="'+cart.items[i].id+' cart-drawer__item" data-cart-item data-cart-item-id=""><a href="' +cart.items[i].url+ '" class="cart-drawer__item-image" style="background-image:url('+proimage+')" data-cart-item-background-image data-cart-item-href></a><div class="cart-drawer__item-content"><a href=' + cart.items[i].url + ' class="h4 cart-drawer__item-title" data-cart-item-href data-cart-item-title>' + protitle +'<span class="hide" style="color:#F00"> - sale</span></a><p class="cart-drawer__item-subtitle vartitle">' + prooptions +'</p><p class="cart-drawer__item-subtitle">' + proprice + ' <s></s></p><div></div><div class="qty-top"><div class="js-qty"><button type="button" onclick="quant(1, '+provid+', '+cart.items[i].id+')" id="minus'+provid+'" class="js-qty__adjust minus js-qty__adjust--minus icon-fallback-text" data-id="" data-qty="0"><span>−</span></button><input type="text" class="js-qty__num" value="'+cart.items[i].quantity+'" min="0" data-id="'+ cart.items[i].key +'" aria-label="quantity" pattern="[0-9]*" name="quantity" id="Quantity'+provid+'"><button type="button" onclick="quant(2, '+provid+', '+cart.items[i].id+')" id="plus'+provid+'" class="main plus js-qty__adjust js-qty__adjust--plus"><span>+</span></button></div><span><a class="detelecart" onclick="deletepr('+cart.items[i].id+', '+cart.items[i].quantity+')">Remove</a></span> </div></div>';
+                $('#proloop').append(repeatitem);		
+              }
+              $('.cart-drawer__subtotal-number').text(theme.Currency.formatMoney(cart.total_price, _config.moneyFormat));	
+              $('#totalpri').text(theme.Currency.formatMoney(cart.total_price, _config.moneyFormat));	 
+              
+              var cv = cart.total_price;
+              var cvm = 5000 - cv;
+              var cvmm = (cv/5000)*100;              
+
+              //$('#awayp').html();
+              $('#drawership').html(theme.Currency.formatMoney(cvm, theme.moneyFormat));
+
+              if(cvmm > 100) {
+                $('.ship1').hide();
+                $('.ship2').show();
+                $('.progress-bar').css({'width': '100%'});
+              } else {
+                $('.ship1').show();
+                $('.ship2').hide();
+                $('.progress-bar').css({'width': cvmm+'%'});
+              }
+              
+              if(cart.item_count == '0'){
+                $('.extra-pro').removeClass('hide');
+                $('.extra-pro').show();
+                $('.cart-drawer__empty-text').removeClass('hide');
+              }
+            }
+                
+                if (_config.cartTotalSelector && $(_config.cartTotalSelector).length) {
+                  if (typeof Currency !== 'undefined' && typeof Currency.moneyFormats !== 'undefined') {
+                    var newCurrency = '';
+                    if ($('[name="currencies"]').length) {
+                      newCurrency = $('[name="currencies"]').val();
+                    }
+                    else if ($('#currencies span.selected').length) {
+                      newCurrency = $('#currencies span.selected').attr('data-currency');
+                    }
+                    if (newCurrency) {
+                      $(_config.cartTotalSelector).html('<span class=money>' + theme.Currency.formatMoney(Currency.convert(cart.total_price, "{{ shop.currency }}", newCurrency), Currency.money_format[newCurrency]) + '</span>');
+                    } 
+                    else {
+                      $(_config.cartTotalSelector).html(theme.Currency.formatMoney(cart.total_price, "{{ shop.money_format | remove: "'" | remove: '"' }}"));
+                    }
+                  }
+                  else {
+                    $(_config.cartTotalSelector).html(theme.Currency.formatMoney(cart.total_price, "{{ shop.money_format | remove: "'" | remove: '"' }}"));                   	
+                  }
+                };
+          });
+        },
+        error: function(XMLHttpRequest, textStatus) {
+          Shopify.onError(XMLHttpRequest, textStatus);
+        }
+      }
+            if (window.BOLD && BOLD.common && BOLD.common.eventEmitter 
+    && typeof BOLD.common.eventEmitter.emit === 'function'){
+    BOLD.common.eventEmitter.emit('BOLD_COMMON_cart_loaded');
+}                                                                                              
+      jQuery.ajax(params);
+    },200);
+  }
+                    
+  function clearcart() {
+    jQuery.post('/cart/clear.js');
+
+    $('.cart-drawer__empty-text').removeClass('hide');
+
+    $('.cart-drawer__footer').hide();
+
+    $('#proloop').empty();
+  }
+</script>
+
+<script>
+  /* get cart details Jifftech 24-1-2018 */
+  function getWords(str) {
+    return str.split(/\s+/).slice(0,9).join(" ");
+  }
+</script>
+
+<style>
+  .ajaxified-cart-feedback {
+    display: block;
+    line-height: 36px;  
+    vertical-align: middle;
+    margin:0px;	
+  }
+  .ajaxified-cart-feedback.success { 
+    color: #3D9970;
+  }
+  .ajaxified-cart-feedback.error { 
+    color: #FF4136; 
+  } 
+  .ajaxified-cart-feedback a {
+    border-bottom: 1px solid;
+  }
+  .ajaxified-cart-feedback {
+    display: none !important;
+  }
+</style>

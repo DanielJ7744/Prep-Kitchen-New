@@ -1,0 +1,162 @@
+<style>
+  .services_wrapper-{{ section.id }} {
+    margin-bottom: 100px;
+  }
+
+  .services_header h2 {
+    font-size: 40px;
+    line-height: 42px;
+    margin: 0 0 45px;
+    text-align: center;
+    letter-spacing: 0;
+    text-transform: capitalize;
+    font-weight: 400;
+    font-family: 'rubikmedium';
+    color: #2c2c2c;
+  }
+
+  .services_inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  .service_text {
+    padding-left: 15px;
+  }
+
+  .service_block {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .service_text h3 {
+    font-size: 25px;
+    line-height: 29px;
+    margin: 0 0 7px;
+    font-weight: 400;
+    font-family: 'rubikmedium';
+    color: #2c2c2c;
+  }
+
+  .service_text p {
+    font-size: 18px;
+    line-height: 25px;
+    margin: 0;
+    font-family: 'rubikregular';
+    font-weight: 400;
+    color: #2c2c2c;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .services_header h2 { font-size: 32px; line-height: 35px; margin: 0 0 30px; }
+    
+    .service_img { width: 70px; }
+    
+    .service_text h3 { font-size: 18px; line-height: 22px; }
+    
+    .service_text p { font-size: 14px; line-height: 19px; } 
+    }
+  
+  @media screen and (max-width: 767px) {
+    .services_header h2 { font-size: 25px; margin: 0 0 20px; line-height: 29px; }
+    
+    .services_inner { flex-wrap: wrap; }     
+     
+    .service_block { width: 100%; margin: 0 auto 28px; max-width: 330px; justify-content: center; }    
+    
+    .service_img { width: 80px; }
+    
+    .text_section { margin-top: 50px; }
+    
+    .service_text h3 { font-size: 18px; line-height: 22px; }
+    
+    .service_text p { font-size: 14px; line-height: 19px; }
+  }
+  
+  @media screen and (max-width: 640px) {
+    .service_block { padding: 0 15px; }
+  }
+</style>
+
+<div class="services_wrapper-{{ section.id }}">
+  <div class="page-width">
+    {% if section.settings.head != blank %}
+    <div class="services_header">
+      <h2>{{ section.settings.head }}</h2>
+    </div>
+    {% endif %}
+    <div class="services_inner">
+      {% for block in section.blocks %}
+      <div class="service_block">
+        <div class="service_img">
+          {% if block.settings.img != blank %}
+          <img src="{{ block.settings.img | img_url: '102x' }}" />
+          {% endif %}
+        </div>
+        <div class="service_text">
+          {% if block.settings.title != blank %}
+          <h3>{{ block.settings.title }}</h3>
+          {% endif %}
+
+          {% if block.settings.subtitle != blank %}
+          <p>{{ block.settings.subtitle }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+"name": "Services",
+"tag": "section",
+"class": "services_section",
+"settings": [
+{
+"type" : "text",
+"id" : "head",
+"label" : "Heading"
+}
+],
+"blocks": [
+{
+"name" : "Service",
+"type" : "image",
+"settings" : [
+{
+"type" : "image_picker",
+"id" : "img",
+"label" : "Select Image"
+},
+{
+"type" : "text",
+"id" : "title",
+"label" : "Title"
+},
+{
+"type" : "textarea",
+"id" : "subtitle",
+"label" : "Sub Title"
+}
+]
+}
+],
+"presets": [
+{
+"name" : "Services",
+"category" : "Image"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

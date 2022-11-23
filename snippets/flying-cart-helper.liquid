@@ -1,0 +1,106 @@
+<div class="flying-cart-helper"></div>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        const allAddButtons =  document.querySelectorAll('.button--add-to-cart__flying')
+        for (const oneButton of allAddButtons) {
+            oneButton.addEventListener('click', function handleClick(e) {
+                for (const btn of allAddButtons) {
+                    btn.classList.remove('active')
+                }
+                oneButton.classList.add('active')
+            });
+        }
+    });
+</script>
+
+
+<style>
+    .product-wrap {
+        z-index: 10;
+        position: relative;
+    }
+    .product-wrap.flying{
+        position: relative;
+        z-index: unset;
+    }
+    .flying-img-before {
+        position: absolute;
+        top: 0;
+        width: auto;
+        border-radius: 16px;
+        z-index: 10000;
+    }
+    @media only screen and (max-width: 798px) {
+        .flying-img-before {
+            top: 0;
+            width: auto;
+        }
+    }
+    .flying-img {
+        position: absolute;
+        animation: fly_to_cart 1s ease-in-out;
+    }
+    @media only screen and (max-width: 798px) {
+        .flying-img {
+            animation: fly_to_cart_mobile 1s ease-in-out;
+            top: 0;
+            width: auto;
+        }
+    }
+    .header-cart__icon--desktop.active, .header-cart__icon--mobile.active {
+        animation: shakeCart .4s ease-in-out forwards;
+    }
+
+    @keyframes fly_to_cart {
+        0% {
+            left: 0;
+            top: 0;
+            opacity: 0.5;
+        }
+        45%, 50% {
+            left: 0;
+            top: -60px;
+            transform: scale(.4);
+            opacity: 0.5;
+        }
+        100% {
+            left: calc(var(--left) + 80px);
+            top: var(--top);
+            transform: scale(.02);
+            opacity: 0.5;
+        }
+    }
+
+    /* @keyframes fly_to_cart_mobile {
+        0% {
+            left: 0;
+            top: 0;
+        }
+        45%, 50% {
+            left: 0;
+            top: -60px;
+            transform: scale(.4);
+        }
+        100% {
+            left: var(--left);
+            top: var(--top);
+            transform: scale(.1);
+        }
+    } */
+
+    @keyframes shakeCart {
+        25% {
+            transform:translateX(6px)
+        }
+        50% {
+            transform:translateX(-4px);
+        }
+        75% {
+            transform:translateX(2px);
+        }
+        100% {
+            transform:translateX(0);
+        }
+    }
+
+</style>

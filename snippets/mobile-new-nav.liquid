@@ -1,0 +1,697 @@
+<div class="shop_left shop_left1">
+  <div class="">
+    <div class="category_div">
+      
+      <div class="all_category">
+          <ul class="shopul">
+            {% assign s = 1 %} 
+            {% for link in linklists[section.settings.main_linklist].links %}
+              {%- assign child_list_handle = link.title | handleize -%}
+
+              {%- assign three_level_nav = false -%}
+              {% if link.links != blank %}
+                {% if link.levels == 2 %}
+                  {%- assign three_level_nav = true -%}
+                {% endif %}
+              {% endif %}
+
+              {% if link.links != blank %}
+                <li {% if link.active or link.child_active %} class="li_active"{% endif %}>
+                  <a href="javascript:void(0)" onclick="firstnav({{s}})" class=""><span class="">{{ link.title | escape }}</span></a>
+
+                  <div onclick="firstnav({{s}})" data-in="#tab{{s}}" id="ac-title{{s}}" class="ac-title {% if link.active or link.child_active %}acc-active{% endif %}"></div>
+
+                  <div class="submenu">
+                    {% if three_level_nav %}
+                        <ul class="accordian-para" id="tab{{s}}" {% if link.active or link.child_active %}style="display: block;"{% endif %}>
+                          {% if link.links != blank %}
+                            {% assign ss = 1 %} 
+                            {% for childlink in link.links %}
+
+                              <!--This for checking if Child Nav created Seperately-->
+                              {% assign cc = childlink.handle | downcase %}            
+                              {% assign scc = linklists[cc].levels | plus:0 %}
+                              <li class="site-nav__childlist-item">
+                                <a href="{{ childlink.url }}"
+                                  class="site-nav__link site-nav__child-link"
+                                  {% if childlink.current %} aria-current="page"{% endif %}
+                                >
+                                  <span class="site-nav__label">{{ childlink.title | escape }}</span> 
+                                </a>
+                                {% if scc > 0 or childlink.links != blank %}<div onclick="secondnav({{s}}{{ ss }})" data-in="#tab11{{s}}{{ ss }}" id="ac-title11{{s}}{{ ss }}" class="ac-title11"></div>{% endif %}                              
+
+                                <!--This for direct Additional NAV-->
+                                <ul class="mega-sub-menu">
+                                  {% assign sss = 1 %} 
+                                  {% for cchild in linklists[cc].links %}  
+
+                                    {%- assign cfourth_level_nav = false -%}
+                                    {% if cchild.links != blank %}
+                                      {% if cchild.levels == 2 %}
+                                        {%- assign cfourth_level_nav = true -%}
+                                      {% endif %}
+                                    {% endif %}
+
+                                    <li class="site-nav__childlist-item">
+                                      <a href="{{ cchild.url }}">
+                                        <span class="site-nav__label">{{ cchild.title | escape }}</span> 
+                                      </a>
+                                      {% if cchild.links != blank %}<div onclick="secondnav({{s}}{{ss}}{{sss}})" data-in="#tab11{{s}}{{ss}}{{sss}}" id="ac-title11{{s}}{{ss}}{{sss}}" class="ac-title11"></div>{% endif %}
+
+                                      {% if cfourth_level_nav %}
+                                      <ul class="mega-sub-menu accordian-para" id="tab{{s}}{{ss}}{{sss}}">
+                                        {% assign ssss = 1 %} 
+                                        {% if cchild.links != blank %}
+                                        {% for cchild2 in cchild.links %}
+                                        <li class="site-nav__childlist-item">
+                                          <a href="{{ cchild2.url }}">
+                                            <span class="site-nav__label">{{ cchild2.title | escape }}</span> 
+                                          </a>
+                                          {% if cchild2.links != blank %}<div onclick="secondnav({{s}}{{ss}}{{sss}}{{ssss}})" data-in="#tab11{{s}}{{ss}}{{sss}}{{ssss}}" id="ac-title11{{s}}{{ss}}{{sss}}{{ssss}}" class="ac-title11"></div>{% endif %}
+
+                                          {% if cchild2.links != blank %}
+                                          <ul class="mega-sub-menu accordian-para" id="tab{{s}}{{ss}}{{sss}}{{ssss}}">
+                                            {% assign sssss = 1 %} 
+                                            {% for cchild3 in cchild2.links %}
+
+                                            {% assign pmm = childlink.handle | downcase %}            
+                                            {% assign pmml = cchild3.handle | downcase %}            
+
+                                            {% assign pmmll = pmm | append:'-' %}              
+                                            {% assign pmmlll = pmmll | append:pmml %} 
+
+                                            {% assign psmmm = linklists[pmmlll].levels | plus:0 %}
+
+                                            {% assign cmm = childlink.handle | downcase %}            
+                                            {% assign cmmm = linklists[cmm].levels | plus:0 %}
+
+                                            <li class="site-nav__childlist-item">
+                                              <a href="{{ cchild3.url }}">
+                                                <span class="site-nav__label">{{ cchild3.title | escape }}</span> 
+                                              </a>         
+                                              {% if psmmm > 0 %}<div onclick="secondnav({{s}}{{ss}}{{sss}}{{ssss}}{{sssss}})" data-in="#tab11{{s}}{{ss}}{{sss}}{{ssss}}{{sssss}}" id="ac-title11{{s}}{{ss}}{{sss}}{{ssss}}{{sssss}}" class="ac-title11"></div>{% endif %}
+
+                                              <ul class="mega-sub-menu accordian-para" id="tab{{s}}{{ss}}{{sss}}{{ssss}}{{sssss}}">
+                                                {% for cchild4 in linklists[pmmlll].links %} 
+                                                <li>
+                                                  <a href="{{ cchild4.url }}">
+                                                    <span class="site-nav__label">{{ cchild4.title | escape }}</span>
+                                                  </a>
+                                                </li>
+                                                {% endfor %}
+                                              </ul>
+                                            </li>
+                                            {% endfor %}
+                                          </ul>
+                                          {% endif %}
+
+                                        </li>
+                                        {% assign ssss = ssss | plus: 1 %} 
+                                        {% endfor %}
+                                        {% endif %}
+                                      </ul>
+                                      {% else %}
+                                      <ul class="mega-sub-menu">
+                                        {% for cchild2 in cchild.links %}
+                                        <li>
+                                          <a href="{{ cchild2.url }}">
+                                            <span class="site-nav__label">{{ cchild2.title | escape }}</span>
+                                          </a>
+                                        </li>
+                                        {% endfor %}
+                                      </ul>
+                                      {% endif %}    
+                                    </li>
+                                  {% assign sss = sss | plus: 1 %} 
+                                  {% endfor %}
+                                </ul>
+                                <!--This for direct Additional NAV-->
+
+                                {% if childlink.links != blank %}                                
+                                  <ul class="accordian-para11" id="tab11{{s}}{{ ss }}" style="display: none;">
+                                  {% for grandchildlink in childlink.links %}
+                                    {% assign mm = grandchildlink.handle | downcase %}
+                                    {% assign mmm = linklists[mm].levels | plus:0 %}
+                                    <li>
+                                      <a href="{{ grandchildlink.url }}"
+                                      class="site-nav__link site-nav__child-link"
+                                      {% if grandchildlink.current %} aria-current="page"{% endif %}
+                                    >
+                                        <span class="">{{ grandchildlink.title | escape }}</span>  
+                                      </a>
+                                      {% if mmm > 0 %}{% include 'icon-chevron-right' %}{% endif %}
+
+                                      <!--7th LEVEL NAV-->
+                                      <ul class="mega-sub-menu">
+                                        {% for gc4link in linklists[mm].links %}  
+
+                                          {%- assign fourth_level_nav = false -%}
+                                          {% if gc4link.links != blank %}
+                                            {% if gc4link.levels == 2 %}
+                                              {%- assign fourth_level_nav = true -%}
+                                            {% endif %}
+                                          {% endif %}
+
+                                          <li class="site-nav__childlist-item">
+                                            <a href="{{ gc4link.url }}">
+                                              <span class="site-nav__label">{{ gc4link.title | escape }}</span> {% if gc4link.links != blank %}{% include 'icon-chevron-right' %}{% endif %}
+                                            </a>
+
+                                            {% if fourth_level_nav %}
+                                            <ul class="mega-sub-menu">
+                                              {% if gc4link.links != blank %}
+                                              {% for gc5link in gc4link.links %}
+                                              <li class="site-nav__childlist-item">
+                                                <a href="{{ gc5link.url }}">
+                                                  <span class="site-nav__label">{{ gc5link.title | escape }}</span> {% if gc5link.links != blank %}{% include 'icon-chevron-right' %}{% endif %}
+                                                </a>
+
+                                                {% if gc5link.links != blank %}
+                                                <ul class="mega-sub-menu">
+                                                  {% for gc6link in gc5link.links %}
+                                                  {% assign smm = grandchildlink.handle | downcase %}            
+                                                  {% assign smml = gc6link.handle | downcase %}            
+
+                                                  {% assign smmll = smm | append:'-' %}              
+                                                  {% assign smmlll = smmll | append:smml %}            
+
+                                                  {% assign smmm = linklists[smmlll].levels | plus:0 %}
+
+                                                  <li class="site-nav__childlist-item">
+                                                    <a href="{{ gc6link.url }}">
+                                                      <span class="site-nav__label">{{ gc6link.title | escape }}</span> {% if smmm > 0 %}{% include 'icon-chevron-right' %}{% endif %}
+                                                    </a>         
+                                                    <ul class="mega-sub-menu">
+                                                      {% for gc7link in linklists[smmlll].links %} 
+                                                      <li>
+                                                        <a href="{{ gc7link.url }}">
+                                                          <span class="site-nav__label">{{ gc7link.title | escape }}</span>
+                                                        </a>
+                                                      </li>
+                                                      {% endfor %}
+                                                    </ul>
+                                                  </li>
+                                                  {% endfor %}
+                                                </ul>
+                                                {% endif %}
+
+                                              </li>
+                                              {% endfor %}
+                                              {% endif %}
+                                            </ul>
+
+                                            {% else %}
+                                            <ul class="mega-sub-menu">
+                                              {% for gc5link in gc4link.links %}
+                                              <li>
+                                                <a href="{{ gc5link.url }}">
+                                                  <span class="site-nav__label">{{ gc5link.title | escape }}</span>
+                                                </a>
+                                              </li>
+                                              {% endfor %}
+                                            </ul>
+                                            {% endif %}    
+                                          </li>
+                                        {% endfor %}
+                                      </ul>
+                                      <!--7th LEVEL NAV-->
+
+                                    </li>
+                                  {% endfor %}
+                                  </ul>
+                                {% endif %}
+                              </li>
+                            {% assign ss = ss | plus: 1 %} 
+                            {% endfor %}
+                          {% endif %}
+                        </ul>                  
+                    {% else %}
+
+                      <ul class="accordian-para" id="tab{{s}}" {% if link.active or link.child_active %}style="display: block;"{% endif %}>
+
+                            {% assign ss = 1 %} 
+                            {% for childlink in link.links %}
+                              <!--This for checking if Child Nav created Seperately-->
+                              {% assign cc = childlink.handle | downcase %}            
+                              {% assign scc = linklists[cc].levels | plus:0 %}
+                              <li class="site-nav__childlist-item">
+                                <a href="{{ childlink.url }}"
+                                  class="site-nav__link site-nav__child-link"
+                                  {% if childlink.current %} aria-current="page"{% endif %}
+                                >
+                                  <span class="site-nav__label">{{ childlink.title | escape }}</span> 
+                                </a>
+
+                                {% comment %}
+                                {% if scc > 0 or childlink.links != blank %}<div onclick="secondnav({{s}}{{ ss }})" data-in="#tab11{{s}}{{ ss }}" id="ac-title11{{s}}{{ ss }}" class="ac-title11"></div>{% endif %}                              
+
+                                <!--This for direct Additional NAV-->
+                                <div class="submenu">
+                                  <ul class="mega-sub-menu accordian-para" id="tab11{{s}}{{ss}}">
+                                  {% assign sss = 1 %} 
+                                  {% for cchild in linklists[cc].links %}  
+
+                                    {%- assign cfourth_level_nav = false -%}
+                                    {% if cchild.links != blank %}
+                                      {% if cchild.levels == 2 %}
+                                        {%- assign cfourth_level_nav = true -%}
+                                      {% endif %}
+                                    {% endif %}
+
+                                    <li class="site-nav__childlist-item">
+                                      <a href="{{ cchild.url }}">
+                                        <span class="site-nav__label">{{ cchild.title | escape }}</span> 
+                                      </a>
+                                      {% if cchild.links != blank %}<div onclick="secondnav({{s}}{{ss}}{{sss}})" data-in="#tab11{{s}}{{ss}}{{sss}}" id="ac-title11{{s}}{{ss}}{{sss}}" class="ac-title11"></div>{% endif %}
+
+                                      {% if cfourth_level_nav %}
+                                      <ul class="mega-sub-menu accordian-para" id="tab11{{s}}{{ss}}{{sss}}">
+                                        {% assign ssss = 1 %} 
+                                        {% if cchild.links != blank %}
+                                        {% for cchild2 in cchild.links %}
+                                        <li class="site-nav__childlist-item">
+                                          <a href="{{ cchild2.url }}">
+                                            <span class="site-nav__label">{{ cchild2.title | escape }}</span> 
+                                          </a>
+                                          {% if cchild2.links != blank %}<div onclick="secondnav({{s}}{{ss}}{{sss}}{{ssss}})" data-in="#tab11{{s}}{{ss}}{{sss}}{{ssss}}" id="ac-title11{{s}}{{ss}}{{sss}}{{ssss}}" class="ac-title11"></div>{% endif %}
+
+                                          {% if cchild2.links != blank %}
+                                          <div class="submenu">
+                                          <ul class="mega-sub-menu accordian-para" id="tab11{{s}}{{ss}}{{sss}}{{ssss}}">
+                                            {% assign sssss = 1 %} 
+                                            {% for cchild3 in cchild2.links %}
+
+                                            {% assign pmm = childlink.handle | downcase %}            
+                                            {% assign pmml = cchild3.handle | downcase %}            
+
+                                            {% assign pmmll = pmm | append:'-' %}              
+                                            {% assign pmmlll = pmmll | append:pmml %} 
+
+                                            {% assign psmmm = linklists[pmmlll].levels | plus:0 %}
+
+                                            {% assign cmm = childlink.handle | downcase %}            
+                                            {% assign cmmm = linklists[cmm].levels | plus:0 %}
+
+                                            <li class="site-nav__childlist-item">
+                                              <a href="{{ cchild3.url }}">
+                                                <span class="site-nav__label">{{ cchild3.title | escape }}</span> 
+                                              </a>         
+                                              {% if psmmm > 0 %}<div onclick="secondnav({{s}}{{ss}}{{sss}}{{ssss}}{{sssss}})" data-in="#tab11{{s}}{{ss}}{{sss}}{{ssss}}{{sssss}}" id="ac-title11{{s}}{{ss}}{{sss}}{{ssss}}{{sssss}}" class="ac-title11"></div>{% endif %}
+
+                                              <div class="submenu">
+                                              <ul class="mega-sub-menu accordian-para" id="tab11{{s}}{{ss}}{{sss}}{{ssss}}{{sssss}}">
+                                                {% for cchild4 in linklists[pmmlll].links %} 
+                                                <li>
+                                                  <a href="{{ cchild4.url }}">
+                                                    <span class="site-nav__label">{{ cchild4.title | escape }}</span>
+                                                  </a>
+                                                </li>
+                                                {% endfor %}
+                                              </ul>
+                                              </div>
+                                            </li>
+                                            {% endfor %}
+                                          </ul>
+                                          </div>
+                                          {% endif %}
+
+                                        </li>
+                                        {% assign ssss = ssss | plus: 1 %} 
+                                        {% endfor %}
+                                        {% endif %}
+                                      </ul>
+                                      {% else %}
+                                      <ul class="mega-sub-menu accordian-para" id="tab11{{s}}{{ss}}{{sss}}">
+                                        {% for cchild2 in cchild.links %}
+                                        <li>
+                                          <a href="{{ cchild2.url }}">
+                                            <span class="site-nav__label">{{ cchild2.title | escape }}</span>
+                                          </a>
+                                        </li>
+                                        {% endfor %}
+                                      </ul>
+                                      {% endif %}    
+                                    </li>
+                                  {% assign sss = sss | plus: 1 %} 
+                                  {% endfor %}
+                                </ul>
+                                </div>
+                                <!--This for direct Additional NAV-->
+                                {% endcomment %}
+
+                                {% if childlink.links != blank %}                                
+                                  <ul class="accordian-para11" id="tab11{{s}}{{ ss }}" style="display: none;">
+                                  {% for grandchildlink in childlink.links %}
+                                    {% assign mm = grandchildlink.handle | downcase %}
+                                    {% assign mmm = linklists[mm].levels | plus:0 %}
+                                    <li>
+                                      <a href="{{ grandchildlink.url }}"
+                                      class="site-nav__link site-nav__child-link"
+                                      {% if grandchildlink.current %} aria-current="page"{% endif %}
+                                    >
+                                        <span class="">{{ grandchildlink.title | escape }}</span>  
+                                      </a>
+                                      {% if mmm > 0 %}{% include 'icon-chevron-right' %}{% endif %}
+
+                                      <!--7th LEVEL NAV-->
+                                      <ul class="mega-sub-menu">
+                                        {% for gc4link in linklists[mm].links %}  
+
+                                          {%- assign fourth_level_nav = false -%}
+                                          {% if gc4link.links != blank %}
+                                            {% if gc4link.levels == 2 %}
+                                              {%- assign fourth_level_nav = true -%}
+                                            {% endif %}
+                                          {% endif %}
+
+                                          <li class="site-nav__childlist-item">
+                                            <a href="{{ gc4link.url }}">
+                                              <span class="site-nav__label">{{ gc4link.title | escape }}</span> {% if gc4link.links != blank %}{% include 'icon-chevron-right' %}{% endif %}
+                                            </a>
+
+                                            {% if fourth_level_nav %}
+                                            <ul class="mega-sub-menu">
+                                              {% if gc4link.links != blank %}
+                                              {% for gc5link in gc4link.links %}
+                                              <li class="site-nav__childlist-item">
+                                                <a href="{{ gc5link.url }}">
+                                                  <span class="site-nav__label">{{ gc5link.title | escape }}</span> {% if gc5link.links != blank %}{% include 'icon-chevron-right' %}{% endif %}
+                                                </a>
+
+                                                {% if gc5link.links != blank %}
+                                                <ul class="mega-sub-menu">
+                                                  {% for gc6link in gc5link.links %}
+                                                  {% assign smm = grandchildlink.handle | downcase %}            
+                                                  {% assign smml = gc6link.handle | downcase %}            
+
+                                                  {% assign smmll = smm | append:'-' %}              
+                                                  {% assign smmlll = smmll | append:smml %}            
+
+                                                  {% assign smmm = linklists[smmlll].levels | plus:0 %}
+
+                                                  <li class="site-nav__childlist-item">
+                                                    <a href="{{ gc6link.url }}">
+                                                      <span class="site-nav__label">{{ gc6link.title | escape }}</span> {% if smmm > 0 %}{% include 'icon-chevron-right' %}{% endif %}
+                                                    </a>         
+                                                    <ul class="mega-sub-menu">
+                                                      {% for gc7link in linklists[smmlll].links %} 
+                                                      <li>
+                                                        <a href="{{ gc7link.url }}">
+                                                          <span class="site-nav__label">{{ gc7link.title | escape }}</span>
+                                                        </a>
+                                                      </li>
+                                                      {% endfor %}
+                                                    </ul>
+                                                  </li>
+                                                  {% endfor %}
+                                                </ul>
+                                                {% endif %}
+
+                                              </li>
+                                              {% endfor %}
+                                              {% endif %}
+                                            </ul>
+
+                                            {% else %}
+                                            <ul class="mega-sub-menu">
+                                              {% for gc5link in gc4link.links %}
+                                              <li>
+                                                <a href="{{ gc5link.url }}">
+                                                  <span class="site-nav__label">{{ gc5link.title | escape }}</span>
+                                                </a>
+                                              </li>
+                                              {% endfor %}
+                                            </ul>
+                                            {% endif %}    
+                                          </li>
+                                        {% endfor %}
+                                      </ul>
+                                      <!--7th LEVEL NAV-->
+
+                                    </li>
+                                  {% endfor %}
+                                  </ul>
+                                {% endif %}
+                              </li>
+                            {% assign ss = ss | plus: 1 %} 
+                            {% endfor %}
+                      </ul>
+
+                    {% endif %}
+                  </div>
+                </li>
+              {% else %}
+                {% assign cc = link.handle | downcase %}            
+                {% assign scc = linklists[cc].levels | plus:0 %}
+                <li {% if link.active %} class="li_active"{% endif %}>
+                  <a href="{{ link.url }}"
+                    class=""{% if link.current %} aria-current="page"{% endif %}>
+                    <span class="">{{ link.title | escape }}</span>  
+                  </a>
+                  {% if scc > 0 or link.links != blank %}<div onclick="firstnav({{s}})" data-in="#tab{{s}}" id="ac-title{{s}}" class="ac-title"></div>{% endif %}
+
+                  <!--This for direct Additional NAV-->
+                  <div class="submenu">
+                  <ul class="mega-sub-menu accordian-para" id="tab{{s}}">
+                    {% assign ss = 1 %} 
+                    {% for cchild in linklists[cc].links %}  
+
+                    {%- assign cfourth_level_nav = false -%}
+                    {% if cchild.links != blank %}
+                    {% if cchild.levels == 2 %}
+                    {%- assign cfourth_level_nav = true -%}
+                    {% endif %}
+                    {% endif %}
+
+                    <li class="site-nav__childlist-item">
+                      <a href="{{ cchild.url }}">
+                        <span class="site-nav__label">{{ cchild.title | escape }}</span> 
+                      </a>
+                      {% if cchild.links != blank %}<div onclick="secondnav({{s}}{{ ss }})" data-in="#tab11{{s}}{{ ss }}" id="ac-title11{{s}}{{ ss }}" class="ac-title11"></div>{% endif %}
+
+                      {% if cfourth_level_nav %}
+                        <div class="submenu">
+                        <ul class="mega-sub-menu accordian-para11" id="tab11{{s}}{{ ss }}" style="display: none;">
+                          {% assign sss = 1 %} 
+                          {% if cchild.links != blank %}
+                          {% for cchild2 in cchild.links %}
+                          <li class="site-nav__childlist-item">
+                            <a href="{{ cchild2.url }}">
+                              <span class="site-nav__label">{{ cchild2.title | escape }}</span> 
+                            </a>
+                            {% if cchild2.links != blank %}<div onclick="secondnav({{s}}{{ss}}{{sss}})" data-in="#tab11{{s}}{{ss}}{{sss}}" id="ac-title11{{s}}{{ss}}{{sss}}" class="ac-title11"></div>{% endif %}
+
+                            {% if cchild2.links != blank %}
+                            <ul class="mega-sub-menu accordian-para" id="tab11{{s}}{{ss}}{{sss}}">
+                              {% assign ssss = 1 %} 
+                              {% for cchild3 in cchild2.links %}
+
+                              {% assign pmm = link.handle | downcase %}            
+                              {% assign pmml = cchild3.handle | downcase %}            
+
+                              {% assign pmmll = pmm | append:'-' %}              
+                              {% assign pmmlll = pmmll | append:pmml %} 
+
+                              {% assign psmmm = linklists[pmmlll].levels | plus:0 %}
+
+                              {% assign cmm = childlink.handle | downcase %}            
+                              {% assign cmmm = linklists[cmm].levels | plus:0 %}
+
+                              <li class="site-nav__childlist-item">
+                                <a href="{{ cchild3.url }}">
+                                  <span class="site-nav__label">{{ cchild3.title | escape }}</span> 
+                                </a>         
+                                {% if psmmm > 0 %}<div onclick="secondnav({{s}}{{ss}}{{sss}}{{ssss}})" data-in="#tab11{{s}}{{ss}}{{sss}}{{ssss}}" id="ac-title11{{s}}{{ss}}{{sss}}{{ssss}}" class="ac-title11"></div>{% endif %}
+
+                                <div class="submenu">
+                                  <ul class="mega-sub-menu accordian-para" id="tab11{{s}}{{ss}}{{sss}}{{ssss}}">
+                                    {% for cchild4 in linklists[pmmlll].links %} 
+                                    <li>
+                                      <a href="{{ cchild4.url }}">
+                                        <span class="site-nav__label">{{ cchild4.title | escape }}</span>
+                                      </a>
+                                    </li>
+                                    {% endfor %}
+                                  </ul>
+                                </div>
+                              </li>
+                              {% assign ssss = ssss | plus: 1 %}
+                              {% endfor %}
+                            </ul>
+                            {% endif %}
+
+                          </li>
+                          {% assign sss = sss | plus: 1 %} 
+                          {% endfor %}
+                          {% endif %}
+                        </ul>
+                        </div>
+                      {% else %}
+                      <div>
+                      <ul class="mega-sub-menu accordian-para11" id="tab11{{s}}{{ ss }}" style="display: none;">
+                        {% for cchild2 in cchild.links %}
+                        <li>
+                          <a href="{{ cchild2.url }}">
+                            <span class="site-nav__label">{{ cchild2.title | escape }}</span>
+                          </a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                      </div>
+                      {% endif %}    
+                    </li>
+                    {% assign ss = ss | plus: 1 %} 
+                    {% endfor %}
+                  </ul>
+                  </div>
+                  <!--This for direct Additional NAV-->
+
+                </li>
+              {% endif %}
+            {% assign s = s | plus: 1 %}
+            {% endfor %}
+            
+            {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+            <li>
+              <a href="{{ routes.account_url }}">
+                Account / Reorder
+              </a>
+            </li>
+            <li>
+              <a href="/account/logout">
+                Logout
+              </a>
+            </li>
+            {% else %}
+            <li>
+              <a href="{{ routes.account_login_url }}">
+                Login / Reorder
+              </a>
+            </li>
+            <li>
+              <a href="/account/register">
+                Create Account
+              </a>
+            </li>
+            {% endif %}
+            {% endif %}
+        </ul>
+      </div>      
+      
+    </div>
+  </div>
+</div>
+
+<style> 
+  .cross_icon {margin-left:15px;}
+  
+  .all_category{display: inline-block;width: 100%;}
+  .all_category h3{padding: 25px 15px 15px !important;}
+  .all_category ul{margin-bottom:0}
+  .all_category ul li{position:relative;margin-bottom:18px;float:left;margin-bottom:0;width:100%}
+  .all_category>ul>li{padding:0;}
+  .all_category ul li a{padding:7.7px 10px 2.7px 0px;margin-bottom:0;display:inline-block;width:100%}  
+  .all_category ul li a{color:#FFF;white-space: unset;}
+  .all_category ul li a:hover{transition:.3s ease-in-out;}
+  /*.all_category>ul>li:last-child{border:0}*/
+  .all_category .site-nav__child-link--parent {margin:0}
+  .all_category ul li ul{display:none;position:initial;float:left;width:100%;left:0;top:0;border:0;margin:0 0 15px;padding:0}
+  .all_category ul li ul li{position:relative;padding:0px; margin:0!important;float:left;border-bottom:none;width:100%;letter-spacing: 0.5px;text-transform: capitalize;}
+  .all_category ul li ul li a{float:left;padding: 1.7px 0px;}
+  .all_category li ul ul{top:-21px}
+  .all_category li ul li{}
+  .all_category li ul ul li{}
+  .accordian-para22{padding:0!important;background:0 0!important;b}
+  .accordian-para22 li{padding:0!important}
+  .all_category>ul>li .ac-title {vertical-align: middle;cursor: pointer;}
+  .ac-title, .ac-title11 {position: relative;padding: 16px 0;float: right;}
+  .ac-title:after, .ac-title11:after {
+    content:'';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 7px;
+    height: 7px;
+    cursor: pointer;
+    border: solid #FFF;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    cursor: pointer;
+  }
+  .ac-title.acc-active:after, .ac-title11.acc-active:after {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+  .all_category ul li ul li .ac-title:after, .all_category ul li ul li .ac-title11:after {top:40%}
+  .submenu {margin-left:10px;}
+  
+  .shop_left1 .times{display:none}
+  .shop_left1 h2{font-size:18px;font-weight:400;color:#000;position:relative;text-transform:capitalize;padding:15px 0 24PX;font-family:'DTLNobelT';letter-spacing:0;margin:0;border-bottom:1px solid #e0e0e0}
+  .shop_left1 h2 span{position:absolute;right:0}
+  .category_div{}
+  .category_div ul{margin:0}
+  .category_div ul li{text-transform: uppercase;letter-spacing: 1.3px;font-size: 13px;line-height: 30px;list-style:none;padding:0 15px;border-bottom:1px #a1e4bd solid;}
+  .category_div>ul>li>span:after{content:'\002B';color:#000;font-weight:700;float:right;margin-left:5px;right:14px;position:absolute;top:14px}
+  .category_div h3{text-transform: uppercase;font-weight: 600;font-size: 18px;display:table;cursor:pointer;position:relative;width:100%;margin:0;background-color:transparent;padding:0;border-bottom-width:1px}
+  .category_div h3 span{position:absolute;right:0}
+  .category_div li{margin-bottom:5px;text-transform:capitalize;}
+  
+  .tabin {margin-top:5px}
+  .tabcolo{}
+  .shp_catdiv {padding: 25px 15px;border-bottom: 1px #ccc solid;}  
+  .shp_catdiv.shp_last {border:0}
+  .shp_catdiv h3 span{float:right}
+  .shp_catdiv h3 span i{margin-right:10px;font-size:20px;color:#ccc}
+  .cat_list{margin-bottom:0;line-height:18px;padding:13px 0 0}
+  .cat_list.selected{color:#000}
+  .cat_list a{font-size:16px;text-decoration:none;color:#000}
+  .cat_tx{font-size: 14px;color: #3c3c3c;font-family: 'Roboto',sans-serif;font-weight: 400;position:relative;text-transform:capitalize;padding-top:0;margin-left:0;padding-left:34px;word-break:break-word;}
+  .cat_tx:before{content:''!important;width:15px;height:15px;display:block;background:#fff;float:left;border-radius:0;position:absolute;top:0;left:0;border:1px solid #e1e1e1}
+  .listcol .cat_tx:before{border-radius:100%;top:-15px}
+  .cat_tx:hover,.cat_tx:active{color:#000;transition:.3s ease-in-out}
+  .cat_list input:checked + .cat_tx:before{background:#000}
+  .listcol .cat_tx:hover:before{border:1px #000 solid}
+  .listcol.cat_list input:checked + .cat_tx:before{border:1px #000 solid}
+  .cat_tx:hover:before{background:#000;transition:.3s ease-in-out}
+  .item_list{margin-top:20px}
+  /*.li_active>a {text-decoration:underline;}*/
+  
+  /*.shopul>li:last-child {display:none}*/
+  
+  @media only screen and (min-width:200px) and (max-width:990px) {}
+</style>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    if($(window).width() <= 767 ) {
+      $('.shop_left1').appendTo('.catmob .MobileCollectionFiltering__Content');
+    } else {
+      $('.shop_left1').appendTo('.CollectionSideNav');
+    }
+    
+    /*
+    $(window).on("resize", function (e) {
+      if($(window).width() <= 767 ) {
+        $('.shop_left1').appendTo('.MobileCollectionFiltering__Content');
+      } else {
+        $('.shop_left1').appendTo('.CollectionSideNav');
+      }
+    });
+    */
+  });
+
+  function firstnav(e) {
+    $("#tab" + e).slideToggle(), $("#ac-title" + e).toggleClass("acc-active")
+  }
+
+  function secondnav(e) {    
+    $("#tab11" + e).slideToggle(), $("#ac-title11" + e).toggleClass("acc-active")
+  }
+
+  function thirdnav(e) {
+    $("#tab22" + e).slideToggle(), $("#ac-title22" + e).toggleClass("acc-active")
+  }
+</script>

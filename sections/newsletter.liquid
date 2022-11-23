@@ -1,0 +1,170 @@
+<style>
+  .newsletter_wrapper {
+    {% if section.settings.bg_img != blank %}
+    background: url({{ section.settings.bg_img | img_url: '1296x' }});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    {% else %}
+    background-color: {{ section.settings.bg }};
+    {% endif %}
+    color: #fff;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 37px 0;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+  }
+
+  .newsletter_wrapper .form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .newsletter_inner label {
+    font-size: 30px;
+    font-family: rubikmedium;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .newsletter_inner input {
+    width: 305px;
+    height: 50px;
+    font-size: 16px;
+    color: #a7a7a7;
+    font-family: rubikregular;
+    padding: 16px 28px;
+    margin-left: 19px;
+    border-radius: 23px;
+    border: 1px solid transparent;
+    box-shadow: none;
+  }	
+
+  .newsletter_inner button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 40px;
+    padding: 0;
+  }
+
+  .newsletter_inner button img {
+    width: 40px;
+    margin-left: 10px;
+  }
+
+  .newsletter_inner .form-message--success {
+    border: 1px solid #1f873d;
+    background-color: #f8fff9;
+    color: #1f873d;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-family: 'rubikmedium';
+    font-size: 25px;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .newsletter_inner label { line-height: 29px; text-align: center; }
+
+    .newsletter_inner input { width: 260px; height: 34px; }
+  }
+
+  @media (max-width: 767px) {
+    form#contact_form { position: relative; }
+
+    .newsletter_inner { max-width: 450px; margin: auto; text-align: center; }
+
+    .newsletter_inner .form-group { display: flex; flex-wrap: wrap; margin-bottom: 0; }
+
+    .newsletter_inner label { font-size: 20px; width: 100%; line-height: 35px; font-family: rubikregular; margin: 0 0 23px; text-align: center; }
+
+    .newsletter_inner input { width: 80%; margin-left: 0; height: 44px; }
+
+    .newsletter_inner button img { width: 33px; }
+  }
+</style>
+
+<div class="newsletter_wrapper">
+  <div class="page-width">
+    <div class="newsletter_inner">
+      {% form 'customer' %}
+      {%- if form.errors -%}
+      <div class="form-message form-message--error">
+        {{ form.errors | default_errors }}
+      </div>
+      {%- endif -%}
+      {% if form.posted_successfully? %}
+      <p class="form-message form-message--success">Thanks for subscribing!</p>
+      {% else %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="form-group">
+        {% if section.settings.newsletter_label_txt != blank %}
+        <label for="exampleInputEmail2">{{ section.settings.newsletter_label_txt }}</label>
+        {% endif %}
+        <input type="email"
+               name="contact[email]"
+               id="Email"
+               class="form-control"
+               value="{% if customer %}{{ customer.email }}{% endif %}"
+               placeholder="Enter your email"
+               autocorrect="off"
+               autocapitalize="off">
+        <button type="submit" class="theme-btn-1" name="commit" id="Subscribe">
+          <img src="{{'news.png' | asset_img_url: '57x' }}" alt="Subscribe">
+        </button>
+      </div>
+
+      {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+"name": "Newsletter",
+"tag": "section",
+"class": "newsletter_section",
+"settings": [
+{
+"type" : "image_picker",
+"id" : "bg_img",
+"label" : "Section Background Image"
+},
+{
+"type" : "header",
+"content" : "OR"
+},
+{
+"type" : "color",
+"id" : "bg",
+"label" : "Section Background Color",
+"default" : "#fff"
+},
+{
+"type" : "text",
+"id" : "newsletter_label_txt",
+"label" : "Newsletter Heading"
+}
+],
+"presets": [
+{
+"name" : "Newsletter",
+"category" : "Image"
+}
+]	
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,107 @@
+{
+  "sections": {
+    "banner": {
+      "type": "bannerV2",
+      "settings": {
+        "show_breadcrumbs_banner": true,
+        "image_select": "selected_image",
+        "image": "shopify:\/\/shop_images\/pk-green-1.jpg",
+        "image_darken": false,
+        "custom_title": "We do all the cooking, you do all that you love.",
+        "subtitle": "",
+        "width": "wide",
+        "banner_height": "small",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "main": {
+      "type": "collection__mainV2",
+      "blocks": {
+        "cb401f34-0196-42ed-9c5a-467b65ebf60e": {
+          "type": "collection_block",
+          "settings": {
+            "collection_title": "Bulk Basics",
+            "collection_block": "food"
+          }
+        },
+        "1aba5885-2179-46c7-a803-6980fe48a440": {
+          "type": "collection_block",
+          "settings": {
+            "collection_title": "Meal Basics",
+            "collection_block": "pre-fixed-meals"
+          }
+        },
+        "3a1f4de8-db41-45c5-8caf-368bc106f13f": {
+          "type": "collection_block",
+          "settings": {
+            "collection_title": "Breakfast",
+            "collection_block": "breakfast"
+          }
+        },
+        "2f75a1d4-49c9-4b41-a7cf-479b8d6063b1": {
+          "type": "collection_block",
+          "settings": {
+            "collection_title": "Chef Inspired",
+            "collection_block": "lifestyle-meals"
+          }
+        },
+        "1971be9b-5d3f-4c20-b292-85ac1576965a": {
+          "type": "collection_block",
+          "settings": {
+            "collection_title": "Sauces",
+            "collection_block": "sauces"
+          }
+        },
+        "2a200764-07aa-44aa-b48b-4dfc70a4e6d1": {
+          "type": "collection_block",
+          "settings": {
+            "collection_title": "Seasonings",
+            "collection_block": "pk-seasonings"
+          }
+        },
+        "2d9e749c-28a0-4e89-b268-0bb15c0d4c69": {
+          "type": "collection_block",
+          "settings": {
+            "collection_title": "Smart Snacks",
+            "collection_block": "smart-snacks"
+          }
+        }
+      },
+      "block_order": [
+        "cb401f34-0196-42ed-9c5a-467b65ebf60e",
+        "1aba5885-2179-46c7-a803-6980fe48a440",
+        "3a1f4de8-db41-45c5-8caf-368bc106f13f",
+        "2f75a1d4-49c9-4b41-a7cf-479b8d6063b1",
+        "1971be9b-5d3f-4c20-b292-85ac1576965a",
+        "2a200764-07aa-44aa-b48b-4dfc70a4e6d1",
+        "2d9e749c-28a0-4e89-b268-0bb15c0d4c69"
+      ],
+      "settings": {
+        "collection_breadcrumb": false,
+        "collection_tags": false,
+        "collection_sort": false,
+        "show_promo_banner": false,
+        "image_darken": true,
+        "promo_title": "Special sale on now!",
+        "promo_text": "<p>Description of promotion with lots of details.<\/p>",
+        "banner_height": "small",
+        "align_height": true,
+        "collection_height": 200,
+        "products_per_row": 4,
+        "mobile_products_per_row": "1",
+        "width": "standard",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main"
+  ]
+}

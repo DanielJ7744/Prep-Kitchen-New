@@ -1,0 +1,154 @@
+<style>
+  .enjoy_food_wrapper-{{ section.id }} {
+    margin: 80px 0 0; 
+  }
+
+  .enjoy_food_wrapper-{{ section.id }} h2 {
+    font-size: 40px;
+    line-height: 47px;
+    margin: 0 0 74px;
+    text-align: center;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    font-weight: normal;
+    font-family: 'rubikmedium';
+    color: #2c2c2c;
+  }
+
+  .enjoy_food_inner {
+    max-width: 845px;
+    margin: 0 auto;
+  }
+
+  .ef_block {
+    display: grid;
+    grid-template-columns: 100px 1fr; 
+    align-items: flex-start;
+  }
+  
+  .ef_img {
+    text-align: center;
+  }
+
+  .ef_text {
+    padding-left: 48px;
+  }
+
+  .ef_text h3 {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 0 0 11px;
+    text-transform: lowercase;
+    font-weight: normal;
+    font-family: 'rubikmedium';
+    color: #2c2c2c;
+  }
+
+  .ef_text p {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 50px;
+    font-family: 'rubikregular';
+    font-weight: normal;
+    color: #2c2c2c;
+  }
+  
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .ef_text h3 { font-size: 27px;  line-height: 32px; }
+  }
+
+  @media only screen and (min-width: 200px) and (max-width: 767px) {
+    .enjoy_food_wrapper-{{ section.id }} { margin: 40px 0 0; }
+    
+    .enjoy_food_wrapper-{{ section.id }} h2 { font-size: 20px; line-height: 24px; margin: 0 0 32px; }
+    
+    .enjoy_food_inner { max-width: 320px; margin: 0 auto; }
+    
+    .ef_block { grid-template-columns: 40px 1fr; }
+    
+    .ef_text { padding-left: 24px; }
+    
+    .ef_text h3 { font-size: 14px; line-height: 17px; margin: 0 0 6px; }
+    
+    .ef_text p { font-size: 12px; line-height: 16px; margin: 0 0 30px; }
+  }
+</style>
+
+<div class="enjoy_food_wrapper-{{ section.id }}">
+  <div class="page-width">
+    {% if section.settings.head != blank %}
+    <h2>{{ section.settings.head }}</h2>
+    {% endif %}
+    <div class="enjoy_food_inner">
+      {% for block in section.blocks %}
+      <div class="ef_block">
+        <div class="ef_img">
+          {% if block.settings.img != blank %}        
+          <img src="{{ block.settings.img | img_url: '98x' }}" />
+          {% endif %}
+        </div>
+        <div class="ef_text">
+          {% if block.settings.title != blank %}
+          <h3>{{ block.settings.title }}</h3>
+          {% endif %}
+
+          {% if block.settings.content != blank %}
+          <p>{{ block.settings.content }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor%}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+"name": "Enjoy Food",
+"tag": "section",
+"class": "enjoy_food_section",
+"settings": [
+{
+"type" : "text",
+"id" : "head",
+"label" : "Heading"
+}
+],
+"blocks": [
+{
+"name" : "Quality",
+"type" : "image",
+"settings" : [
+{
+"type" : "image_picker",
+"id" : "img",
+"label" : "Select Image"
+},
+{
+"type" : "text",
+"id" : "title",
+"label" : "Title"
+},
+{
+"type" : "textarea",
+"id" : "content",
+"label" : "Content"
+}	
+] 
+}
+],
+"presets": [
+{
+"name" : "Enjoy Food",
+"category" : "Image"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

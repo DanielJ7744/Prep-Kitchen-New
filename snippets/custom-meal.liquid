@@ -1,0 +1,676 @@
+<style>
+    .bold_option_value_swatch { width:35px; height:35px; }
+ /*   .bold_option_value_element, .bold_option_value_swatch { border-radius:999px !important; overflow:hidden; } */
+   
+   .bold_option.bold_option_swatch .bold_option_swatch_title{
+     display:none;
+   }
+   .bold_option.bold_option_swatch .bold_option_value_swatch span{
+     padding:2px 6px;
+   }
+  .product-custom-information th, .product-custom-information td{
+      padding: 10px 14px;
+  }
+   
+   .bold_option.bold_option_dropdown:nth-child(2) .bold_option_title,
+   .bold_option.bold_option_dropdown:nth-child(4) .bold_option_title,
+   .bold_option.bold_option_dropdown:nth-child(6) .bold_option_title,
+   .bold_option.bold_option_dropdown:nth-child(2) .bold_option_element,
+   .bold_option.bold_option_dropdown:nth-child(4) .bold_option_element,
+   .bold_option.bold_option_dropdown:nth-child(6) .bold_option_element,
+   .bold_option.bold_option_dropdown:nth-child(2) .bold_option_value_quantity,
+   .bold_option.bold_option_dropdown:nth-child(4) .bold_option_value_quantity,
+   .bold_option.bold_option_dropdown:nth-child(6) .bold_option_value_quantity{
+ /*     display:none; */
+   }
+   .qty-container .swatch.size input:checked+label{
+     border: 1px solid #41b16f;
+     background-color: #41b16f;
+     color: #fff !important;
+   }
+   .qty-container .swatch.size .swatch-element label:hover {
+     border: 1px solid #41b16f;
+     background-color: #41b16f;
+     color: #fff !important;
+   }
+   .qty-container .swatch label {
+    padding: 0 10px !important;
+    padding-bottom: 30px !important;
+   }
+  @media screen and (max-width:750px){
+  .product-custom-information th, .product-custom-information td {
+    padding: 10px 3px;
+    font-size: 10px;
+}
+    .product-custom-information table{
+    width:100%;
+    }
+  }
+ </style>
+ {%-capture customMeals-%}
+ {
+    "CHICKEN": {
+       "per_oz": 1,
+       "calories": 47,
+       "protein": 8.8,
+       "carbs": 0,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 1,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0.25,
+       "trans_fat": 0,
+       "cholesterol": 20,
+       "sodium": 18.75
+    },
+    "STEAK": {
+       "per_oz": 1,
+       "calories": 49,
+       "protein": 7.8,
+       "carbs": 0,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 1.8,
+       "saturated": 0.9,
+       "polsaturated": 0.25,
+       "monosaturated": 0.65,
+       "trans_fat": 0,
+       "cholesterol": 23,
+       "sodium": 20.5
+    },
+    "STEAK FAJITA": {
+       "per_oz": 1,
+       "calories": 66,
+       "protein": 7,
+       "carbs": 0,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 3.75,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 107
+    },
+    "GROUND TURKEY": {
+       "per_oz": 1,
+       "calories": 43,
+       "protein": 5.3,
+       "carbs": 0,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 2.4,
+       "saturated": 0.4,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 15,
+       "sodium": 16
+    },
+    "GROUND BEEF": {
+       "per_oz": 1,
+       "calories": 49,
+       "protein": 5.5,
+       "carbs": 0,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 2.8,
+       "saturated": 1.125,
+       "polsaturated": 0.25,
+       "monosaturated": 1.45,
+       "trans_fat": 0,
+       "cholesterol": 19,
+       "sodium": 19
+    },
+    "GROUND BISON": {
+       "per_oz": 1,
+       "calories": 48,
+       "protein": 9,
+       "carbs": 0,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 0.9,
+       "saturated": 1,
+       "polsaturated": 0.9,
+       "monosaturated": 0.1,
+       "trans_fat": 0,
+       "cholesterol": 20,
+       "sodium": 21.3
+    },
+    "SHRIMP": {
+       "per_oz": 1,
+       "calories": 28,
+       "protein": 5.9,
+       "carbs": 0,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 0.3,
+       "saturated": 0.1,
+       "polsaturated": 0.2,
+       "monosaturated": 0.1,
+       "trans_fat": 0,
+       "cholesterol": 38,
+       "sodium": 48.1
+    },
+    "SALMON": {
+       "per_oz": 1,
+       "calories": 48,
+       "protein": 6,
+       "carbs": 0,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 2.5,
+       "saturated": 0.7,
+       "polsaturated": 0.4,
+       "monosaturated": 1,
+       "trans_fat": 0,
+       "cholesterol": 20,
+       "sodium": 17
+    },
+    "SALMON FAJITA": {
+       "per_oz": 1,
+       "calories": 52,
+       "protein": 7.5,
+       "carbs": 0.5,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 2,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 13
+    },
+    "TILAPIA": {
+       "per_oz": 1,
+       "calories": 37,
+       "protein": 7.5,
+       "carbs": 0,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 0.75,
+       "saturated": 0.3,
+       "polsaturated": 0.1,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 16,
+       "sodium": 16
+    },
+    "COD": {
+       "per_oz": 1,
+       "calories": 23,
+       "protein": 5,
+       "carbs": 0,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 0.83,
+       "saturated": 0.2,
+       "polsaturated": 0.1,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 12,
+       "sodium": 25
+    },
+    "AHI TUNA": {
+       "per_oz": 1,
+       "calories": 30.5,
+       "protein": 6.9,
+       "carbs": 0,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 0.3,
+       "saturated": 0.1,
+       "polsaturated": 0.1,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 12.7,
+       "sodium": 10.1
+    },
+    "SWEET POTATOES": {
+       "per_oz": 1,
+       "calories": 33,
+       "protein": 0.5,
+       "carbs": 6,
+       "fiber": 0.5,
+       "sugar": 1.5,
+       "total_fat": 0.5,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 15.3
+    },
+    "RED POTATO": {
+       "per_oz": 1,
+       "calories": 30.75,
+       "protein": 0.75,
+       "carbs": 6,
+       "fiber": 0.5,
+       "sugar": 0.4,
+       "total_fat": 0.5,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 3.4
+    },
+    "JASMINE RICE": {
+       "per_oz": 1,
+       "calories": 30,
+       "protein": 0.625,
+       "carbs": 6,
+       "fiber": 0.3,
+       "sugar": 0,
+       "total_fat": 0,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 0.6
+    },
+    "WHOLE WHEAT PASTA": {
+       "per_oz": 1,
+       "calories": 43.25,
+       "protein": 2,
+       "carbs": 7.4,
+       "fiber": 1.3,
+       "sugar": 0.2,
+       "total_fat": 0.2,
+       "saturated": 0,
+       "polsaturated": 0.1,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 0.8
+    },
+    "BROWN RICE": {
+       "per_oz": 1,
+       "calories": 30,
+       "protein": 0.625,
+       "carbs": 6,
+       "fiber": 0.5,
+       "sugar": 0,
+       "total_fat": 0.2,
+       "saturated": 0,
+       "polsaturated": 0.1,
+       "monosaturated": 0.1,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 0.3
+    },
+    "QUINOA": {
+       "per_oz": 1,
+       "calories": 55.5,
+       "protein": 2,
+       "carbs": 9.75,
+       "fiber": 0.8,
+       "sugar": 0.9,
+       "total_fat": 0.5,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 2
+    },
+    "BRUSSEL SPROUTS": {
+       "per_oz": 1,
+       "calories": 10,
+       "protein": 0.75,
+       "carbs": 2,
+       "fiber": 0.7,
+       "sugar": 0.5,
+       "total_fat": 0.1,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 5.9
+    },
+    "ASPARAGUS": {
+       "per_oz": 1,
+       "calories": 6.25,
+       "protein": 0.75,
+       "carbs": 1.25,
+       "fiber": 0.6,
+       "sugar": 0.4,
+       "total_fat": 0.1,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 3.9
+    },
+    "BROCCOLI": {
+       "per_oz": 1,
+       "calories": 10,
+       "protein": 0.75,
+       "carbs": 2,
+       "fiber": 0.9,
+       "sugar": 0.4,
+       "total_fat": 0.1,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 11.5
+    },
+    "GREEN BEANS": {
+       "per_oz": 1,
+       "calories": 10.75,
+       "protein": 0.5,
+       "carbs": 2.5,
+       "fiber": 1,
+       "sugar": 0.4,
+       "total_fat": 0,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 1.7
+    },
+    "ZUCCHINI": {
+       "per_oz": 1,
+       "calories": 4.75,
+       "protein": 0.35,
+       "carbs": 1.1,
+       "fiber": 0.4,
+       "sugar": 0.5,
+       "total_fat": 0,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 0.8
+    },
+    "TOFU": {
+       "per_oz": 1,
+       "calories": 77,
+       "protein": 5.3,
+       "carbs": 2.5,
+       "fiber": 1.1,
+       "sugar": 0.8,
+       "total_fat": 5,
+       "saturated": 0.8,
+       "polsaturated": 0.7,
+       "monosaturated": 0.4,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 4.5
+    },
+    "CRIMINI MUSHROOMS": {
+       "per_oz": 1,
+       "calories": 4.5,
+       "protein": 0.5,
+       "carbs": 1,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 0.25,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 20
+    },
+    "CAULIFLOWER RICE": {
+       "per_oz": 1,
+       "calories": 7.5,
+       "protein": 0.5,
+       "carbs": 1.5,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 0.125,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 46
+    },
+    "FAJITA MIX": {
+       "per_oz": 1,
+       "calories": 22.25,
+       "protein": 0.34,
+       "carbs": 2,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 1,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 3.3
+    },
+    "ROASTED CARROTS": {
+       "per_oz": 1,
+       "calories": 20,
+       "protein": 0.34,
+       "carbs": 3,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 1,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 60
+    },
+    "ROASTED CAULIFLOWER": {
+       "per_oz": 1,
+       "calories": 20,
+       "protein": 0.67,
+       "carbs": 1.34,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 1.67,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 84
+    },
+    "ROASTED CORN": {
+       "per_oz": 1,
+       "calories": 30,
+       "protein": 1,
+       "carbs": 4.67,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 1.33,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 0
+    },
+    "VEGETABLE RICE": {
+       "per_oz": 1,
+       "calories": 8.33,
+       "protein": 0.33,
+       "carbs": 1.67,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 0.05,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 0
+    },
+    "ZUCCHINI NOODLES": {
+       "per_oz": 1,
+       "calories": 5,
+       "protein": 0.375,
+       "carbs": 0.875,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 0.125,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 0.8
+    },
+    "BROCCOLINI": {
+       "per_oz": 1,
+       "calories": 15,
+       "protein": 0.50,
+       "carbs": 1.67,
+       "fiber": 0,
+       "sugar": 0,
+       "total_fat": 1,
+       "saturated": 0,
+       "polsaturated": 0,
+       "monosaturated": 0,
+       "trans_fat": 0,
+       "cholesterol": 0,
+       "sodium": 4.40
+    }
+ }
+ {%-endcapture-%}
+ {%-assign customMealsJson = customMeals | strip_newlines -%}
+ <script>
+   var customMealsJson = JSON.parse('{{customMealsJson}}');
+   var caloriesInfo = [];
+   caloriesInfo['protine'] = [];                                 
+   caloriesInfo['carb'] = [];
+   caloriesInfo['veggie'] = [];
+   var totalCalorieInfo = {};                                   
+   
+   function isEmpty(obj) {
+     for(var key in obj) {
+       if(obj.hasOwnProperty(key))
+         return false;
+     }
+     return true;
+   }
+                                    
+   function generate_table(){
+    // get the reference for the body
+     var body = document.getElementById("calories-container");
+     body.style.display = 'none';
+     body.innerHTML = '';
+     // creates a <table> element and a <tbody> element
+     var tbl = document.createElement("table");
+     var tblHead = document.createElement("thead");
+     var tblBody = document.createElement("tbody");
+     var tblfoot = document.createElement("tfoot");
+     var theaders = ['Item','Calories','Protein(g)','Carbs(g)','Fat(g)','Sodium(mg)'];
+     var tbodyval = ['item','calories','protein','carbs','total_fat','sodium'];
+     
+     if(theaders.length> 0){
+       for(var c=0; c < theaders.length; c++){
+         var hcell = document.createElement("th");
+         var hcellText = document.createTextNode(theaders[c]);
+         hcell.appendChild(hcellText);
+         // add the row to the end of the table body
+         tblHead.appendChild(hcell);
+       }  
+     }
+     var finalInfo = [];
+     (caloriesInfo['protine'].length > 0 ? finalInfo.push(caloriesInfo['protine'][0]) : '');
+     (caloriesInfo['carb'].length > 0 ? finalInfo.push(caloriesInfo['carb'][0]) : '');
+     (caloriesInfo['veggie'].length > 0 ? finalInfo.push(caloriesInfo['veggie'][0]) : '');
+     if(finalInfo.length > 0){
+       var tfoot = {};
+       tfoot.item = 'Total';
+       tfoot.calories = 0;
+       tfoot.protein = 0;
+       tfoot.carbs = 0;
+       tfoot.total_fat = 0;
+       tfoot.sodium = 0;
+       for(var i=0; i < finalInfo.length; i++){
+ //         console.log(finalInfo);
+          // creates a table row
+          var row = document.createElement("tr");
+          for (var j = 0; j < 6; j++) {
+            // Create a <td> element and a text node, make the text
+            // node the contents of the <td>, and put the <td> at
+            // the end of the table row
+            var cell = document.createElement("td");
+            if(tbodyval[j] == 'calories' || tbodyval[j] == 'protein' || tbodyval[j] == 'carbs' || tbodyval[j] == 'total_fat' || tbodyval[j] == 'sodium'){
+              var cellText = document.createTextNode((parseFloat(finalInfo[i][tbodyval[j]]) * parseInt(finalInfo[i]['oz'])).toFixed(2)); 
+              var cellVal = (parseFloat(finalInfo[i][tbodyval[j]]) * parseInt(finalInfo[i]['oz'])).toFixed(2);
+              switch(tbodyval[j]){
+                case 'calories':
+                 tfoot.calories = parseFloat(tfoot.calories)+parseFloat(cellVal);
+                 break;
+                case 'protein':
+                 tfoot.protein = parseFloat(tfoot.protein)+parseFloat(cellVal);
+                 break;
+                case 'carbs':
+                 tfoot.carbs = parseFloat(tfoot.carbs)+parseFloat(cellVal);
+                 break;
+                case 'total_fat':
+                 tfoot.total_fat = parseFloat(tfoot.total_fat)+parseFloat(cellVal);
+                 break;
+                case 'sodium':
+                 tfoot.sodium = parseFloat(tfoot.sodium)+parseFloat(cellVal);
+                 break;  
+              }
+            }else{
+              var cellText = document.createTextNode(finalInfo[i][tbodyval[j]]);
+            } 
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+          }
+ 
+         // add the row to the end of the table body
+         tblBody.appendChild(row);
+       }
+       // table footer for grand
+       var tfootrow = document.createElement("tr");
+       for (var key in tfoot) {
+         var tcell = document.createElement("th");
+         var tcellText = document.createTextNode((isNaN(tfoot[key]) ? tfoot[key] : tfoot[key].toFixed(2)));
+         tcell.appendChild(tcellText);
+         tfootrow.appendChild(tcell);
+       }
+       
+       
+       if(isEmpty(tfoot)) {
+         totalCalorieInfo = {};
+       }else{
+         totalCalorieInfo = tfoot;
+         if($('#calorie-info').length > 0){
+           $('#calorie-info').val('');
+           $('#calorie-info').val("CALORIES: "+totalCalorieInfo.calories.toFixed(1)+" / PROTEIN: "+totalCalorieInfo.protein.toFixed(1)+"g / CARBS: "+totalCalorieInfo.carbs.toFixed(2)+"g FAT: "+totalCalorieInfo.total_fat.toFixed(1)+"g");
+         }
+       } 
+       
+       
+       //add footer row
+       tblfoot.appendChild(tfootrow);
+       
+ //       console.log(tfoot);
+       // put the <thead> in the <table>
+       tbl.appendChild(tblHead);
+       // put the <tbody> in the <table>
+       tbl.appendChild(tblBody);
+       //add footer
+       tbl.appendChild(tblfoot);
+       // appends <table> into <body>
+       body.appendChild(tbl);
+       body.style.display = 'block';
+     }
+   }
+  
+ </script>

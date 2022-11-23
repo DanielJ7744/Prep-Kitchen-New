@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "16588619761d0dec65": {
+      "type": "how-it-works-header",
+      "settings": {
+        "bg": "shopify:\/\/shop_images\/pk-green-1_1000x_optimized.jpg",
+        "head": "{{ collection.title }}"
+      }
+    },
+    "165721837358916033": {
+      "type": "collection__mainV2",
+      "blocks": {
+        "558192e9-ced0-4d1e-b5be-5348c40cdb76": {
+          "type": "collection_block",
+          "settings": {
+            "show_promo_banner": false,
+            "image_darken": true,
+            "promo_title": "Special sale on now!",
+            "promo_text": "<p>Description of promotion with lots of details.<\/p>",
+            "banner_height": "medium",
+            "collection_title": "{{ block.settings.collection_block.title }}",
+            "collection_block": "{{ collection }}"
+          }
+        }
+      },
+      "block_order": [
+        "558192e9-ced0-4d1e-b5be-5348c40cdb76"
+      ],
+      "settings": {
+        "heading": "",
+        "align_height": false,
+        "collection_height": 200,
+        "products_per_row": 3,
+        "mobile_products_per_row": "1",
+        "width": "standard",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "16588619761d0dec65",
+    "165721837358916033"
+  ]
+}

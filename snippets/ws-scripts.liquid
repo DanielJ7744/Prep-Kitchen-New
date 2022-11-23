@@ -1,0 +1,41 @@
+{%- comment -%} Added by westmountsolutions.com template V1.20200212 {%- endcomment -%}
+{% case template %}
+    {% when "index" %}
+        {% comment %} WS imports. {% endcomment %}
+        {% comment %} Script goes here. {% endcomment %}
+
+    {% when "collection" %}
+        {% comment %} WS imports. {% endcomment %}
+        {% comment %} Script goes here. {% endcomment %}
+
+    {% when "product" %}
+        {% comment %} WS imports. {% endcomment %}
+        {% comment %} Script goes here. {% endcomment %}
+
+    {% when "cart" %}
+        {% comment %} WS imports. {% endcomment %}
+        {% comment %} Script goes here. {% endcomment %}
+
+    {% when "customers/account" or "customers/order" %}
+        {% comment %} WS imports. {% endcomment %}
+        {{ 'ws-styles.css' | asset_url | stylesheet_tag }}
+        {% render 'ws-functions' %}
+        {% render 'ws-events' %}
+
+        {% comment %} Script goes here. {% endcomment %}
+        <script>
+            (function () {
+                document.addEventListener('DOMContentLoaded', () => {
+                    //Scripts here..
+                    if ('{{ customer }}') {
+                        WSEvents.accountTemplate();
+                    }
+                });
+            })();
+        </script>
+        
+    {% else %}
+        {% comment %} WS imports. {% endcomment %}
+        {% comment %} Script goes here. {% endcomment %}
+
+{% endcase %}

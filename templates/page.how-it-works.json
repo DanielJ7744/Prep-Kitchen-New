@@ -1,0 +1,206 @@
+{
+  "sections": {
+    "1657733685e2c473d9": {
+      "type": "bannerV2",
+      "disabled": true,
+      "settings": {
+        "show_breadcrumbs_banner": true,
+        "image_select": "selected_image",
+        "image": "shopify:\/\/shop_images\/pk-green-1-01.png",
+        "image_darken": false,
+        "custom_title": "meal prepping<br>made real simple.",
+        "subtitle": "",
+        "width": "wide",
+        "banner_height": "small",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1658877241243ecf04": {
+      "type": "bannerV2",
+      "disabled": true,
+      "settings": {
+        "show_breadcrumbs_banner": true,
+        "image_select": "selected_image",
+        "image": "shopify:\/\/shop_images\/pk-green-1_1000x_optimized.jpg",
+        "image_darken": false,
+        "custom_title": "meal prepping<br>made real simple.",
+        "subtitle": "",
+        "width": "wide",
+        "banner_height": "small",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "16588776168f102cc4": {
+      "type": "how-it-works-header",
+      "settings": {
+        "bg": "shopify:\/\/shop_images\/pk-green-1_1000x_optimized.jpg",
+        "head": "meal prepping<br>made real simple."
+      }
+    },
+    "165691208902562578": {
+      "type": "build-your-order",
+      "settings": {
+        "head": "Build Your Order",
+        "byo_img": "shopify:\/\/shop_images\/byo_img.png",
+        "byo_head": "One-time order",
+        "byo_content": "<p>Order what you want, when you want<\/p>"
+      }
+    },
+    "1656913643c069cd0d": {
+      "type": "meal-options",
+      "blocks": {
+        "495e905f-80c7-4373-a037-fae21c21b1c5": {
+          "type": "text",
+          "settings": {
+            "emo_img": "shopify:\/\/shop_images\/emo1.png",
+            "title": "bulk basics",
+            "text": "Your choice of proteins and sides in larger, family-style quantities.",
+            "label": "Bulk basics",
+            "link": "shopify:\/\/collections\/all"
+          }
+        },
+        "f1db9ad6-8cee-489f-9445-6b753405f7f6": {
+          "type": "text",
+          "settings": {
+            "emo_img": "shopify:\/\/shop_images\/emo2.png",
+            "title": "chef prepared meals",
+            "text": "Already-portioned meals, crafted by us.",
+            "label": "Prepped Meals",
+            "link": "shopify:\/\/collections\/all"
+          }
+        },
+        "0a82461b-6acb-43f9-88fc-91b6236770d0": {
+          "type": "text",
+          "settings": {
+            "emo_img": "shopify:\/\/shop_images\/emo3.png",
+            "title": "build your own meals",
+            "text": "Already-portioned meals, customized by you. Time to get creative.",
+            "label": "Build Your Meal",
+            "link": "shopify:\/\/collections\/all"
+          }
+        }
+      },
+      "block_order": [
+        "495e905f-80c7-4373-a037-fae21c21b1c5",
+        "f1db9ad6-8cee-489f-9445-6b753405f7f6",
+        "0a82461b-6acb-43f9-88fc-91b6236770d0"
+      ],
+      "settings": {
+        "head": "3 easy meal options",
+        "img": "shopify:\/\/shop_images\/emo.png"
+      }
+    },
+    "16569170236c7623d8": {
+      "type": "delivery-or-pickup",
+      "blocks": {
+        "2a00438d-b716-44f2-b84b-d1e0d17929dc": {
+          "type": "image",
+          "settings": {
+            "title": "Fedex shipping",
+            "content": "Nationwide shipping in a refrigerated cooler box."
+          }
+        },
+        "a9449eb3-d8db-40df-acac-9df4dfb7f41e": {
+          "type": "image",
+          "settings": {
+            "title": "Straight to door service",
+            "content": "Have your order sent to your front door through our home delivery service (for DFW based customers)."
+          }
+        },
+        "a6b5a832-80c5-4dd0-b88c-2cb90598254c": {
+          "type": "image",
+          "settings": {
+            "title": "Local pickup in DFW",
+            "content": "Choose a nearby location to grab your order (for DFW based customers)."
+          }
+        }
+      },
+      "block_order": [
+        "2a00438d-b716-44f2-b84b-d1e0d17929dc",
+        "a9449eb3-d8db-40df-acac-9df4dfb7f41e",
+        "a6b5a832-80c5-4dd0-b88c-2cb90598254c"
+      ],
+      "settings": {
+        "bg": "shopify:\/\/shop_images\/dop.png",
+        "img": "shopify:\/\/shop_images\/dop1.png",
+        "img_alignment": "right",
+        "head": "Select Delivery or pickup"
+      }
+    },
+    "1656919043a309b1b5": {
+      "type": "enjoy-food",
+      "blocks": {
+        "447de049-afaf-4010-bc0b-5b83d1ee2887": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/ef1.png",
+            "title": "Easy Heat + Eat",
+            "content": "Our gourmet chefs cook your food, and our drivers deliver it to you fresh and ready to be reheated and devoured!"
+          }
+        },
+        "535ac324-3f99-45b9-aa00-ca34e148a341": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/ef2.png",
+            "title": "Earn rewards",
+            "content": "Your commitment deserves rewards like free meals, free food, $ off discounts and exclusives."
+          }
+        },
+        "80fdabc1-233d-4ade-b8b2-57ea4ac63aec": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/ef3.png",
+            "title": "Refine your health with nutritional coaching",
+            "content": "Refine your goals and health with no room for failure alongside a friendly pro."
+          }
+        },
+        "cb677a99-567a-49df-9bec-b93d313f40d6": {
+          "type": "image",
+          "settings": {
+            "img": "shopify:\/\/shop_images\/ef4.png",
+            "title": "Our snacks are no joke",
+            "content": "Our snacks are no joke. Stay satisfied in between your PK meals without cheating your fitness goals."
+          }
+        }
+      },
+      "block_order": [
+        "447de049-afaf-4010-bc0b-5b83d1ee2887",
+        "535ac324-3f99-45b9-aa00-ca34e148a341",
+        "80fdabc1-233d-4ade-b8b2-57ea4ac63aec",
+        "cb677a99-567a-49df-9bec-b93d313f40d6"
+      ],
+      "settings": {
+        "head": "enjoy your delicious food."
+      }
+    },
+    "16569205760ae9c9ab": {
+      "type": "custom-text",
+      "settings": {
+        "text": "<p>We not only care about how you want to look on the outside but also how you want to feel on the inside. Because of our responsibly sourced, non-GMO, and high-quality ingredients, you’ll feel great after each bite. our fresh, seasonal vegetables are picked up daily. We give you the best so that you can be your best.<\/p>",
+        "head": "order from our 3 delicious meal options.",
+        "btn1_label": "Bulk Basics",
+        "btn1_link": "shopify:\/\/collections\/all",
+        "btn2_label": "Prepped Meals",
+        "btn2_link": "shopify:\/\/collections\/pre-fixed-meals",
+        "btn3_label": "Build Your Meal",
+        "btn3_link": "shopify:\/\/products\/custom-meal"
+      }
+    }
+  },
+  "order": [
+    "1657733685e2c473d9",
+    "1658877241243ecf04",
+    "16588776168f102cc4",
+    "165691208902562578",
+    "1656913643c069cd0d",
+    "16569170236c7623d8",
+    "1656919043a309b1b5",
+    "16569205760ae9c9ab"
+  ]
+}

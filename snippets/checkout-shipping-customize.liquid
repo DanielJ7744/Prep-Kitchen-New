@@ -1,0 +1,332 @@
+<style>
+  /* Hide the shipping method breadcrumb and previous step links. */
+  /*   .breadcrumb__item:nth-child(3),.step__footer__previous-link{display:none}[data-trekkie-id=change_shipping_method_link]{display:none}    */
+  .swal2-styled.swal2-confirm{background-color:#23d16a}.swal2-styled.swal2-confirm:focus{box-shadow:0 0 0 3px transparent}
+</style>
+<script src="{{ 'sweetalert2@11.js' | asset_url }}" defer="defer"></script>
+<script>
+  function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires="+d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  }
+
+  function checkCookie(cname) {
+      var user = getCookie(cname);
+      if (user != "") {
+          return true;
+      } else {
+          return false;
+      }
+  }
+</script>
+<script>
+      (($) => {
+          const homeZipCode = "{{-checkout.attributes["Home Delivery Zip"]-}}";
+          if(!Shopify.Checkout.isOrderStatusPage){
+
+              // validate home zip code start
+              const validateHomeZipCodeInit = () => {
+                  //setup before functions
+                  let typingTimer;                //timer identifier
+                  let doneTypingInterval = 1000;  //time in ms, 5 seconds for example
+                  let shippingZipCodeInput = document.getElementById("checkout_shipping_address_zip");
+
+                  if(!shippingZipCodeInput){
+                      return;
+                  }
+
+                  const _validateHomeZip = () => {
+                      let newZipCode = document.getElementById("checkout_shipping_address_zip") && document.getElementById("checkout_shipping_address_zip").value || "";
+
+                      if(newZipCode === "") return;
+                      document.getElementById("continue_button") && (
+                          document.getElementById("continue_button").removeAttribute("disabled"),
+                          document.getElementById("continue_button").removeAttribute("style")
+                      )
+                      if(Number(homeZipCode) !== Number(newZipCode)){
+                          Swal.fire({
+                              icon: 'info',
+                              title: 'Change in Zip Code',
+                              text: `This zip code is different than what you entered on our cart calendar page. Please use ${homeZipCode} or return to the cart page.`,
+                              footer: '<a href="/cart">Return to cart</a>'
+                          });
+                          document.getElementById("continue_button") && (
+                              document.getElementById("continue_button").setAttribute("disabled",true),
+                              document.getElementById("continue_button").setAttribute("style", "opacity: 0.7")
+                          )
+                          return;
+                      }
+                      Swal.fire({
+                          icon: 'success',
+                          title: 'Hurray!',
+                          text: `You’re eligible for home delivery.`,
+                          showConfirmButton: false,
+                          timer: 1500
+                      });
+                  }
+
+                  const validateHomeZipEventListener = () => {
+                      let shippingMethod = getCookie('shippingmethod');
+
+                      if (shippingMethod == 'home_delivery') {
+                          clearTimeout(typingTimer);
+                          typingTimer = setTimeout(_validateHomeZip, doneTypingInterval);
+                      }
+                  }
+
+                  ["keyup","keydown"].forEach(event => {
+                      shippingZipCodeInput.addEventListener(event,validateHomeZipEventListener);
+                  });
+
+              }
+              // validate home zip code end
+
+              // shipping method section event start
+              const shippingMethodEventListener = () => {
+                  $('.section--shipping-method').hide();
+                  $('.section--shipping-method .content-box__row').hide();
+                  $('.section--shipping-method .content-box__row input').prop('checked',false);
+
+                  if (Shopify.Checkout.step === 'shipping_method') {
+                      let continueToPaymentButton = document.getElementById("continue_button") || undefined;
+                      $('.step__sections .section:nth-child(1) .review-block:nth-child(3)').remove();
+  //                     continueToPaymentButton && (
+  //                         continueToPaymentButton.disabled = true
+  //                     );
+                      $('[data-trekkie-id="continue_to_payment_method_button"]').click(function(e){
+                          $('.section--shipping-method .section__content .notice.notice--error').remove();
+                          if($('[name="checkout[shipping_rate][id]"]:checked').length == 0 && $('.section--shipping-method .section__content .notice.notice--error').length == 0){
+                              e.preventDefault();
+                              e.stopPropagation();
+                              $('.section--shipping-method .section__content').prepend('<div role="alert" data-shipping-warning="" aria-atomic="true" aria-live="polite" class="notice notice--error" tabindex="-1"><svg class="icon-svg icon-svg--size-24 notice__icon" aria-hidden="true" focusable="false"> <use xlink:href="#error"><svg id="error" width="100%" height="100%"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-2c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-16c.552 0 1 .448 1 1v5c0 .552-.448 1-1 1s-1-.448-1-1V7c0-.552.448-1 1-1zm-1.5 10.5c0-.828.666-1.5 1.5-1.5.828 0 1.5.666 1.5 1.5 0 .828-.666 1.5-1.5 1.5-.828 0-1.5-.666-1.5-1.5z"></path></svg></svg></use> </svg><p class="notice__text">'+msg+'</p></div>');
+                              return false;
+                          }
+                          return true;
+                      });
+                  }
+              }
+              // shipping method section event end
+
+              // custom events based on delivery method start
+              const customEventByDeliveryMethod = (shippingMethod) => {
+                  const _customEvents = {
+                      "shipping":() => {
+                          if (Shopify.Checkout.step === 'shipping_method') {
+                              $('.step__sections .section:nth-child(1) .review-block:nth-child(3)').remove();
+                              let spanInterval = setInterval(function(){
+                                  if($('.section--shipping-method [data-shipping-method-label-title*="UPS"]') || $('.section--shipping-method [data-shipping-method-label-title*="FedEx"]')){
+                                      clearInterval(spanInterval);
+                                      $('.section--shipping-method [data-shipping-method-label-title*="UPS"]').parents('.content-box__row').show();
+                                      $('.section--shipping-method [data-shipping-method-label-title*="FedEx"]').parents('.content-box__row').show();
+                                      $('.section--shipping-method').show();
+                                      document.getElementById("continue_button") && (
+                                          document.getElementById("continue_button").disabled = false
+                                      )
+                                      //remain code
+                                  }
+                              }, 1000);
+                          }
+                      },
+                      "pickup":() => {
+                          let checkoutAttributes = JSON.parse('{{checkout.attributes | json}}');
+
+                          $(".breadcrumb .breadcrumb__text:contains('Shipping')").parent("li.breadcrumb__item").attr("style","display:none;");
+                          $(".breadcrumb .breadcrumb__link:contains('Shipping')").parent("li.breadcrumb__item").attr("style","display:none;");
+
+                          $('.step__footer .step__footer__previous-link').attr("href",'/cart');
+                          $('.step__sections .section:nth-child(1) .review-block:nth-child(2) .review-block__link a').attr("href",'/cart');
+                          $('.step__sections .section:nth-child(1) .review-block:nth-child(3) .review-block__link').attr("style",'display:none;');
+
+                          if(document.querySelector('[data-address-selector]')){
+                              document.querySelector('[data-address-selector]').parentNode.parentNode.style.display = 'none';
+                          }
+
+                          $('body').addClass('custom-checkout');
+
+                          $('.step__sections').find('#pickup-address-box').remove();
+                          $('.step__sections').find('#pickup-date').remove();
+
+                           // Hide header that confuses clients.
+                          $('form').attr('autocomplete','nope');
+                          $('[name="checkout[shipping_address][address1]"]').css('pointer-events','none').prop('readonly', true);
+                          $('[name="checkout[shipping_address][address2]"]').css('pointer-events','none').prop('readonly', true);
+                          $('[name="checkout[shipping_address][city]"]').css('pointer-events','none').prop('readonly', true);
+                          $('[name="checkout[shipping_address][country]"]').css('pointer-events','none').prop('readonly', true);
+                          $('[name="checkout[shipping_address][province]"]').css('pointer-events','none').prop('readonly', true);
+                          //$('[name="checkout[shipping_address][zip]"]').css('pointer-events','none').prop('readonly', true);
+
+                          $('[name="checkout[shipping_address][address1]"]').val(checkoutAttributes['Pickup-Location-Address-Line-1']);
+                          $('[name="checkout[shipping_address][address2]"]').val(checkoutAttributes['Pickup-Location-Address-Line-2']);
+                          $('[name="checkout[shipping_address][city]"]').val(checkoutAttributes['Pickup-Location-City']);
+                          $('[name="checkout[shipping_address][country]"]').val(checkoutAttributes['Pickup-Location-Country']);
+
+                          if(document.querySelector('select[name="checkout[shipping_address][province]"]')){
+                              let stateOptions = document.querySelector('select[name="checkout[shipping_address][province]"]').options;
+                              console.log(checkoutAttributes);
+                              let state = [];
+                              if(stateOptions.length > 0){
+                                  stateOptions = Array.prototype.slice.call(stateOptions);
+                                  state = stateOptions.filter((opt,index) => {
+                                      return opt.dataset.alternateValues === '["'+checkoutAttributes['Pickup-Location-Region']+'"]';
+                                  });
+                              }
+                              $('select[name="checkout[shipping_address][province]"]').val((state[0].value ? state[0].value : checkoutAttributes['Pickup-Location-Region']));
+                          }
+
+                          $('[name="checkout[shipping_address][zip]"]').val(checkoutAttributes['Pickup-Location-Postal-Code']);
+
+                          // when step is shipping method
+                          if (Shopify.Checkout.step === 'shipping_method') {
+                              $('#cover-spin').show(0);
+                              $('.step__sections .section:nth-child(1) .review-block:nth-child(2) .review-block__label').html('Pickup from');
+                              $('[data-step="shipping_method"] .step__sections .content-box__row--tight-spacing-vertical').append('<div id="pickup-date" role="row" class="review-block"><div class="review-block__inner"><div role="gridcell" class="review-block__label">Pickup Date</div><div role="gridcell" class="review-block__content"><address class="address address--tight">'+checkoutAttributes['Delivery Date']+'</address></div></div></div>');
+                              $('.step__sections .section:nth-child(1) .review-block:nth-child(3)').remove();
+                              let spanInterval = setInterval(function(){
+                                  if($('.section--shipping-method [data-shipping-method-label-title*="Store Pickup"]') && $("#checkout_shipping_rate_id_advanced_shipping_rules-free-shipping-0_00").prop("checked") === false){
+                                      clearInterval(spanInterval);
+                                      $('.section--shipping-method [data-shipping-method-label-title*="Store Pickup"]').parents('.content-box__row').show();
+                                      $('.section--shipping-method').show();
+                                      document.getElementById("continue_button") && (
+                                          document.getElementById("continue_button").disabled = false
+                                      )
+                                      //$('[data-shipping-method-label-title="Store Pickup"]').parent("label.radio__label").click();
+                                      $("#checkout_shipping_rate_id_advanced_shipping_rules-free-shipping-0_00").prop("checked", true);
+                                      setTimeout(() => {
+                                          $('[id="continue_button"]').click();
+                                      },1000);
+                                      //remain code
+                                  }
+                              }, 1000);
+                          }else{
+                              $('#cover-spin').hide(0);
+                          }
+
+                          // when step is payment method
+                          if (Shopify.Checkout.step === 'payment_method') {
+                              $('.step__sections .section:nth-child(1) .review-block:nth-child(2) .review-block__label').html('Pickup from');
+                              $('[data-step="payment_method"] .step__sections .content-box__row--tight-spacing-vertical').append('<div id="pickup-date" role="row" class="review-block"><div class="review-block__inner"><div role="gridcell" class="review-block__label">Pickup Date</div><div role="gridcell" class="review-block__content"><address class="address address--tight">'+checkoutAttributes['Delivery Date']+'</address></div></div></div>');
+                          }
+
+                          // when step is contact information
+                          if(Shopify.Checkout.step === 'contact_information'){
+                              $('<div id="pickup-address-box" class="section"><div class="content-box"><div role="grid" class="content-box__row content-box__row--tight-spacing-vertical"><div role="row" class="review-block"><div class="review-block__inner"><div role="gridcell" class="review-block__label">Pickup address</div><div role="gridcell" class="review-block__content"><address class="address address--tight">'+checkoutAttributes['Pickup-Location-Company']+'<br/>'+(checkoutAttributes['Pickup-Location-Address-Line-1'] != '' ? checkoutAttributes['Pickup-Location-Address-Line-1'] : '')+(checkoutAttributes['Pickup-Location-Address-Line-2']  ? ' '+checkoutAttributes['Pickup-Location-Address-Line-2'] : '')+(checkoutAttributes['Pickup-Location-City'] != '' ? ', '+checkoutAttributes['Pickup-Location-City'] : '')+(checkoutAttributes['Pickup-Location-Region'] != '' ? ' '+checkoutAttributes['Pickup-Location-Region'] : '')+(checkoutAttributes['Pickup-Location-Postal-Code'] != '' ? ' '+checkoutAttributes['Pickup-Location-Postal-Code'] : '')+(checkoutAttributes['Pickup-Location-Country'] != '' ? ', '+checkoutAttributes['Pickup-Location-Country'] : '')+'</address></div></div></div><div role="row" class="review-block"><div class="review-block__inner"><div role="gridcell" class="review-block__label">Delivery Date</div><div role="gridcell" class="review-block__content"><address class="address address--tight">'+checkoutAttributes['Delivery Date']+'</address></div></div></div></div></div></div>').insertAfter('.section.section--shipping-address');
+                          }
+
+                      },
+                      "home_delivery":() => {
+                          let checkoutAttributes = JSON.parse('{{checkout.attributes | json}}');
+                          $(".breadcrumb .breadcrumb__text:contains('Shipping')").parent("li.breadcrumb__item").attr("style","display:none;");
+                          $(".breadcrumb .breadcrumb__link:contains('Shipping')").parent("li.breadcrumb__item").attr("style","display:none;");
+
+                          $('.step__footer .step__footer__previous-link').attr("href",'/cart');
+                          $('.step__sections .section:nth-child(1) .review-block:nth-child(2) .review-block__link a').attr("href",'/cart');
+                          $('.step__sections .section:nth-child(1) .review-block:nth-child(3) .review-block__link').attr("style",'display:none;');
+
+                          if(document.querySelector('[data-address-selector]')){
+                              document.querySelector('[data-address-selector]').parentNode.parentNode.style.display = 'none';
+                          }
+                          $('.step__sections').find('#local-delivery-address-box').remove();
+                          $('.step__sections').find('#local-delivery-date').remove();
+
+                          $('form').attr('autocomplete','nope');
+                          //$('[name="checkout[shipping_address][zip]"]').css('pointer-events','none').prop('readonly', true);
+                          $('[name="checkout[shipping_address][zip]"]').val({{checkout.attributes["Home Delivery Zip"] | json}});
+
+                          // when step is shipping method
+                          if (Shopify.Checkout.step === 'shipping_method') {
+                              $('#cover-spin').show(0);
+                              $('.step__sections .section:nth-child(1) .review-block:nth-child(2) .review-block__label').html('Delivery to');
+                              $('.step__sections .section:nth-child(1) .review-block:nth-child(3)').remove();
+                              $('[data-step="shipping_method"] .step__sections .content-box__row--tight-spacing-vertical').append('<div id="local-delivery-date" role="row" class="review-block"><div class="review-block__inner"><div role="gridcell" class="review-block__label">Delivery Date</div><div role="gridcell" class="review-block__content"><address class="address address--tight">'+checkoutAttributes['Delivery Date']+'</address></div></div></div>');
+                              let spanInterval = setInterval(function(){
+                                  if($('.section--shipping-method [data-shipping-method-label-title*="Local Delivery"]')  && $("#checkout_shipping_rate_id_advanced_shipping_rules-flat-rate-10_00").prop("checked") === false){
+                                      clearInterval(spanInterval);
+                                      $('.section--shipping-method [data-shipping-method-label-title*="Local Delivery"]').parents('.content-box__row').show();
+                                      $('.section--shipping-method').show();
+                                      document.getElementById("continue_button") && (
+                                          document.getElementById("continue_button").disabled = false
+                                      )
+                                      //$('[data-shipping-method-label-title="Local Delivery"]').parent("label.radio__label").click();
+                                      $("#checkout_shipping_rate_id_advanced_shipping_rules-flat-rate-10_00").prop("checked",true);
+                                      setTimeout(() => {
+                                          $('[id="continue_button"]').click();
+                                      },1000);
+                                      //remain code
+                                  }
+                              }, 1000);
+                          }else{
+                              $('#cover-spin').hide(0);
+                          }
+                            // when step is contact information
+                          if(Shopify.Checkout.step === 'contact_information'){
+                              $('<div id="local-delivery-address-box" class="section"><div class="content-box"><div role="grid" class="content-box__row content-box__row--tight-spacing-vertical"><div role="row" class="review-block"><div class="review-block__inner"><div role="gridcell" class="review-block__label">Delivery Date</div><div role="gridcell" class="review-block__content"><address class="address address--tight">'+checkoutAttributes['Delivery Date']+'</address></div></div></div></div></div></div>').insertBefore('.section.section--shipping-address');
+                          }
+
+                          // when step is payment method
+                          if (Shopify.Checkout.step === 'payment_method') {
+                              $('.step__sections .section:nth-child(1) .review-block:nth-child(2) .review-block__label').html('Deliver to');
+                                  $('[data-step="payment_method"] .step__sections .content-box__row--tight-spacing-vertical').append('<div id="local-delivery-date" role="row" class="review-block"><div class="review-block__inner"><div role="gridcell" class="review-block__label">Delivery Date</div><div role="gridcell" class="review-block__content"><address class="address address--tight">'+checkoutAttributes['Delivery Date']+'</address></div></div></div>');
+
+                              var methodLabelSection = $('.review-block__label:contains("Method")');
+                              var methodDataSection = methodLabelSection.siblings('.review-block__content');
+                              if(checkoutAttributes['Home Delivery Type']!=undefined && checkoutAttributes['Home Delivery Type']=='DAYTIMEHD'){
+                                  methodDataSection.append('<br>Day Time Home Delivery');
+                              }else if(checkoutAttributes['Home Delivery Type']!=undefined && checkoutAttributes['Home Delivery Type']=='MORNINGHD'){
+                                  methodDataSection.append('<br>Early Morning Home Delivery');
+                              }
+                          }
+                      }
+                  };
+                  return _customEvents[shippingMethod] || undefined;
+              }
+              const customDeliveryMethodEventListener = () => {
+                  let shippingMethod = getCookie('shippingmethod');
+                  let _triggerCustomEvent = customEventByDeliveryMethod(shippingMethod);
+                  _triggerCustomEvent && _triggerCustomEvent();
+              }
+              // custom events based on delivery method end
+
+
+              const setupCheckoutEvents = () => {
+                  /*---------- Validate home zip code START ----*/
+                  validateHomeZipCodeInit();
+                  /*---------- Validate home zip code END ----*/
+
+                  /*---------- shipping method section code START ----*/
+                  shippingMethodEventListener();
+                  /*---------- shipping method section code END ----*/
+
+                  /*---------- custom delivery method section code START ----*/
+                  customDeliveryMethodEventListener();
+                  /*---------- custom delivery method section code END ----*/
+              }
+
+              // initiate page events
+              const checkoutEvents = ["page:load","page:change"];
+              for (let index = 0; index < checkoutEvents.length; index++) {
+                  const checkoutEvent = checkoutEvents[index];
+                  document.addEventListener(checkoutEvent,() => {
+
+                      setupCheckoutEvents();
+                  });
+              }
+          }
+      })(Checkout.$);
+</script>

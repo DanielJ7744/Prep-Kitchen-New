@@ -1,0 +1,197 @@
+#slider-food .tns-outer {
+	position: relative;
+}
+#slider-food .tns-nav button {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 1px;
+	text-indent: -999px;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0);
+	border: 1px solid #fff;
+	border-radius: 10px;
+}
+#slider-food .tns-nav .tns-nav-active {
+	width: 12px;
+	height: 12px;
+	margin: 0;
+	background-color: #fff;
+}
+#slider-food .tns-nav {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	z-index: 15;
+	width: 60%;
+	padding-left: 0;
+	margin-left: -30%;
+	text-align: center;
+	list-style: none;
+}
+@media screen and (min-width: 768px) {
+	#slider-food .tns-nav {
+		bottom: 20px;
+	}
+}
+.heading-wrapper--recommended-products {
+	display: block !important;
+	text-align: left !important;
+}
+.recomendedproductslider {
+	border: 0px solid #ddd;
+}
+h1.product_name.title,
+options-selection .selector-wrapper label {
+	color: #23d16a !important;
+	font-family: rubikmedium;
+}
+.purchase-details__quantity.product-quantity-box.quantity-box--box .label {
+	text-align: left;
+	font-size: 18px;
+	line-height: 22px;
+	margin: 0 0 10px;
+	color: #23d16a;
+	font-family: rubikmedium;
+	letter-spacing: 0;
+	font-weight: 400;
+	padding: 0.2em 0em 0.3em !important;
+}
+.ajax-cart__cart-link {
+	font-size: 14px;
+	width: 100%;
+	transition: all 0.3s ease-in-out;
+	background-color: #23d16a;
+	border-radius: 28px;
+	text-transform: uppercase;
+	padding: 15px;
+	font-family: "rubikregular";
+	letter-spacing: 2px;
+	text-decoration: none;
+	color: #fff !important;
+}
+.ajax-cart__right-content {
+	flex-direction: unset !important;
+	width: 10%;
+	align-self: end !important;
+	padding-bottom: 5px;
+	margin-right: 15px;
+}
+
+/* Media Querys */
+@media screen and (min-width: 850px) {
+	.h_wrap {
+		max-height: 55px;
+		height: 55px;
+	}
+	.header__icons {
+		max-height: 46px;
+		height: 46px;
+	}
+}
+.wishcoll{
+  position: absolute !important;
+}
+
+
+
+a.header_account.header__link.action-area__link{
+      height: auto !important;
+}
+
+@media screen and (min-width:960px) and (max-width:1080px){
+ .text_section .content_wrapper p{
+       padding-right: 25px;
+ }
+  a.navbar-link.header__link{
+        padding: 1rem 0.55rem;
+    font-size: 17px !important;
+  }
+   .navbar-link:not(.is-arrowless) {
+    padding-right: 1.5em !important;
+}
+    .navbar-link:not(.is-arrowless):after{
+        right: 0em;
+  } .text_section .content_wrapper p{
+       padding-right: 25px;
+ }
+}
+@media screen and (min-width:768px) and (max-width:959px){
+   .text_section .content_wrapper p{
+       padding-right: 25px;
+ }
+  .navbar-link:not(.is-arrowless) {
+    padding-right: 1.5em  !important;
+}
+  .navbar-link:not(.is-arrowless):after{
+        right: 0em;
+  }
+}
+@media screen and (min-width:768px) and (max-width:1056px){
+   a.navbar-link.header__link{
+		 padding: 1rem 0.55rem;
+		   font-size: 12px !important;
+   }
+   #header a.navbar-link.header__link {
+	padding-right: 0;
+   }
+}
+@media screen and (max-width:767px){
+.icons_wrapper .icon1{
+    width: 21% !important;
+}
+  .icons_wrapper .icon1 h3{
+        font-size: 11px !important;
+  }
+  .stamped-summary-photos.stamped-summary-photos-container{
+        min-width: 270px !important;
+  }
+}
+
+
+/* Cart drawer */
+.ajax-cart__content-main.not-ios-device {
+	height: 100%;
+}
+.ajax-cart__content-main {
+	display: block;
+}
+@media screen and (min-width:768px){ 
+	.ajax-cart__list {
+		max-height: 100%;
+	}
+}
+@media screen and (max-width:767px){ 
+	.ajax-cart__list {
+		height: 100%;
+		padding-bottom: 220px;
+	}
+	.cart-main-container {
+		height: 88vh;
+	}
+	.ajax-cart__details-wrapper {
+		height: 19vh;
+		padding-bottom: 50px;
+	}
+	.ajax-cart__form {
+		/* height: 100vh; */
+	}
+}
+
+
+/* Header */
+@media screen and (max-width: 799px) {
+	body #shopify-section-header-classic{
+		height: 49px;
+	}
+	body.collection #shopify-section-header-classic, 
+	body.collection-all #shopify-section-header-classic, 
+	body.product #shopify-section-header-classic{
+		height: 77px;
+	}
+}
+
+/* Prevent body scroll when cart open */
+body.locked {
+	position: fixed;
+}

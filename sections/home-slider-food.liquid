@@ -1,0 +1,232 @@
+{% assign check_any_blck = 0 %}
+
+{% assign left_side = 0 %}
+{% assign right_side = 0 %}
+
+{% if section.blocks.size > 0 %}
+{% for block in section.blocks %}
+{% case block.type %}
+
+{% when 'left-img-slider' %}
+{% if block.settings.left_img != blank %}
+{% assign check_any_blck = 1 %}
+{% assign left_side = 1 %}
+{% endif %}
+
+{% when 'food-qualities' %}
+{% if block.settings.qua_title != blank or block.settings.qua_img != blank %}
+{% assign check_any_blck = 1 %}
+{% assign right_side = 1 %}
+{% endif %}
+
+{% when 'meal-btns' %}
+{% if block.settings.meal_btn_link != blank and block.settings.meal_btn_txt != blank %}
+{% assign check_any_blck = 1 %}
+{% assign right_side = 1 %}
+{% endif %}
+
+{% endcase %}
+{% endfor %}
+{% endif %}
+
+{% if section.settings.qual_heading != blank or section.settings.qual_content != blank or section.settings.meal_title != blank %}
+{% assign check_any_blck = 1 %}
+{% assign right_side = 1 %}
+{% endif %}
+
+{% if check_any_blck == 1 %}
+<div class="slider_product" data-aos="slide-up">
+  <div class="container">
+    <div class="row">
+      {% if left_side == 1 %}
+      <div class="col-sm-5 col-xs-12">
+        <div id="slider-food" class="slider-food">
+
+          <div class="slider-food-inner" role="listbox">
+            {% assign slide_img_cnt = 0 %}
+            {% for block in section.blocks %}
+            {% case block.type %}
+            {% when 'left-img-slider' %}
+            {% if block.settings.left_img != blank %}
+            <div class="item{% if slide_img_cnt == 0 %} active{% endif %}">
+              <img src="{{block.settings.left_img | img_url: 'master'}}" alt="">
+            </div>
+            {% assign slide_img_cnt = slide_img_cnt | plus: 1 %}
+            {% endif %}
+            {% endcase %}
+            {% endfor %}
+
+          </div>
+          
+        </div>
+      </div>
+      {% endif %}
+
+      {% if right_side == 1 %}
+      <div class="col-sm-7 col-xs-12">
+        <div class="making_delivery_convenient___simple_">
+          {% if section.settings.qual_heading != blank %}
+          <h2>{{section.settings.qual_heading}}</h2>
+          {% endif %}
+
+          <div class="H-icons-block">
+            {% for block in section.blocks %}
+            {% case block.type %}
+            {% when 'food-qualities' %}
+            {% if block.settings.qua_title != blank or block.settings.qua_img != blank %}
+            <div class="H-icons">
+              <div class="icon_slide_div">
+                {% if block.settings.qua_img != blank %}
+                <img src="{{block.settings.qua_img | img_url: 'master'}}" alt="">
+                {% endif %}
+              </div>
+              {% if block.settings.qua_title != blank %}
+              <p>{{block.settings.qua_title}}</p>
+              {% endif %}
+            </div>
+            {% endif %}
+            {% endcase %}
+            {% endfor %}
+          </div>
+
+          {% if section.settings.qual_content != blank or section.settings.meal_title != blank %}
+          <div class="content">
+            {% if section.settings.qual_content != blank %}
+            <p>
+              {{section.settings.qual_content}}
+            </p>
+            {% endif %}
+
+            {% if section.settings.meal_title != blank %}
+            <p class="green_text">{{section.settings.meal_title}}</p>
+            {% endif %}
+          </div>
+          {% endif %}
+
+          <div id="group_26">
+            {% for block in section.blocks %}
+            {% case block.type %}
+            {% when 'meal-btns' %}
+            {% if block.settings.meal_btn_link != blank and block.settings.meal_btn_txt != blank %}
+            <a  class="btn btn-green" href="{{block.settings.meal_btn_link}}">
+              {{block.settings.meal_btn_txt}}
+            </a>
+            {% endif %}
+            {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<style>
+.making_delivery_convenient___simple_ h2{font-size:40px;line-height:42px;margin:0 0 23px;text-align:left;letter-spacing:0;text-transform:none;font-weight:400;font-family:'rubikmedium';color:#464646}
+.making_delivery_convenient___simple_ .H-icons-block{overflow:hidden;margin-top:0}
+@media only screen and (min-width:200px) and (max-width:767px) {
+.carousel-control.left img,.carousel-control.right img{margin-top:125px}
+.making_delivery_convenient___simple_ h2{font-size:25px;line-height:30px;margin:0 0 23px;text-align:center}
+.making_delivery_convenient___simple_ .H-icons-block .H-icons{width:21%;margin:0 5px}
+.making_delivery_convenient___simple_ .H-icons-block .H-icons p{padding:0;font-size:11px;line-height:17px}
+.making_delivery_convenient___simple_ .content{font-size:14px;text-align:center;line-height:24px;margin:29px auto 0}
+.making_delivery_convenient___simple_ .content .green_text{color:#23D16A;margin:1.25em 0;line-height:24px;font-size:14px}
+.making_delivery_convenient___simple_ #group_26{width:100%;margin:auto;text-align:center}
+#group_26 .btn{text-transform:initial;font-size:14px;font-family:'rubikregular';padding:7px 30px;margin:0 0 14px}
+#group_26 .btn:last-child{margin:0 0 14px}
+}
+@media only screen and (min-width:768px) and (max-width:991px) {
+.making_delivery_convenient___simple_ h2{font-size:32px;line-height:38px}
+.carousel-control.left img,.carousel-control.right img{margin-top:145px}
+.making_delivery_convenient___simple_ .H-icons-block .H-icons{width:17%}
+.icon_slide_div{height:72px}
+#group_26 .btn{text-transform:initial;font-size:14px;font-family:'rubikregular';padding:7px 30px;margin:0 10px 0 0}
+#group_26 .btn:last-child{margin:14px 0 0}
+}
+@media only screen and (min-width:992px) and (max-width:1199px) {
+.making_delivery_convenient___simple_ h2{font-size:35px;line-height:39px;margin:0 0 23px}
+.making_delivery_convenient___simple_ .H-icons-block .H-icons{width:19%}
+#group_26 .btn{font-size:16px;padding:8px 29px}
+.carousel-control.left img,.carousel-control.right img{margin-top:245px}
+}
+</style>
+
+
+{% schema %}
+{
+  "name": "Home Food Quality",
+  "settings": [
+      {
+        "type": "html",
+        "id": "qual_heading",
+        "label": "Title"
+      },
+      {
+        "type": "html",
+        "id": "qual_content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "meal_title",
+        "label": "Buttons Title",
+        "default": "Order from our 3 delicious meal options."
+      }
+  ],
+  "blocks": [
+    {
+      "type": "left-img-slider",
+      "name": "Slide image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "left_img",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "type": "food-qualities",
+      "name": "Quality",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "qua_img",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "qua_title",
+          "label": "Title"
+        }
+      ]
+    },
+    {
+      "type": "meal-btns",
+      "name": "Button",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "meal_btn_txt",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "meal_btn_link",
+          "label": "Button Link"
+        }
+    ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Food Quality",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

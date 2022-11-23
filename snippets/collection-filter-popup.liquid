@@ -1,0 +1,378 @@
+<div class="shop_left">
+  <div class="">
+    <h5><img src="{{ 'filter_b.svg' | asset_url }}" title="" alt="">Filters</h5>
+
+    <div class="category_div">
+      {% assign current_tags = current_tags | downcase %}
+      {% for tag in collection.all_tags %}
+      {% comment %}
+      	{% if tag contains 'Balanced' %}
+        <div class="tabin">          
+          <div class="cat_list listcol">
+            <input {% if current_tags contains 'balanced' %}checked{% endif %} type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tag | handle }}" id="{{ tag | handle }}">
+            <label for="{{ tag |handle }}" class="cat_tx">{{ tag }}</label>
+          </div>          
+        </div> 
+      	{% endif %} 
+      {% endcomment %}
+      	{% if tag contains 'Low Carb' %}
+        <div class="tabin">          
+          <div class="cat_list listcol">
+            <input {% if current_tags contains 'low-carb' %}checked{% endif %} type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tag | handle }}" id="{{ tag | handle }}">
+            <label for="{{ tag |handle }}" class="cat_tx">{{ tag }}</label>
+          </div>          
+        </div>
+      	{% endif %}
+      	{% if tag contains 'Dairy Free' %}
+        <div class="tabin">          
+          <div class="cat_list listcol">
+            <input {% if current_tags contains 'dairy-free' %}checked{% endif %} type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tag | handle }}" id="{{ tag | handle }}">
+            <label for="{{ tag |handle }}" class="cat_tx">{{ tag }}</label>
+          </div>          
+        </div>
+      	{% endif %}
+      	{% if tag contains 'Gluten Free' %}
+        <div class="tabin">          
+          <div class="cat_list listcol">
+            <input {% if current_tags contains 'gluten-free' %}checked{% endif %} type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tag | handle }}" id="{{ tag | handle }}">
+            <label for="{{ tag |handle }}" class="cat_tx">{{ tag }}</label>
+          </div>          
+        </div>
+      	{% endif %}
+      	{% if tag contains 'High Protein' %}
+        <div class="tabin">          
+          <div class="cat_list listcol">
+            <input {% if current_tags contains 'high-protein' %}checked{% endif %} type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tag | handle }}" id="{{ tag | handle }}">
+            <label for="{{ tag |handle }}" class="cat_tx">{{ tag }}</label>
+          </div>          
+        </div>
+      	{% endif %}
+      	{% if tag contains 'High Carb' %}
+        <div class="tabin">          
+          <div class="cat_list listcol">
+            <input {% if current_tags contains 'high-carb' %}checked{% endif %} type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tag | handle }}" id="{{ tag | handle }}">
+            <label for="{{ tag |handle }}" class="cat_tx">{{ tag }}</label>
+          </div>          
+        </div>
+      	{% endif %}
+      	{% if tag contains 'keto friendly' %}
+        <div class="tabin">          
+          <div class="cat_list listcol">
+            <input {% if current_tags contains 'keto-friendly' %}checked{% endif %} type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tag | handle }}" id="{{ tag | handle }}">
+            <label for="{{ tag |handle }}" class="cat_tx">{{ tag }}</label>
+          </div>          
+        </div>
+      	{% endif %}
+      	{% if tag contains 'Paleo' %}
+        <div class="tabin">          
+          <div class="cat_list listcol">
+            <input {% if current_tags contains 'paleo' %}checked{% endif %} type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tag | handle }}" id="{{ tag | handle }}">
+            <label for="{{ tag |handle }}" class="cat_tx">{{ tag }}</label>
+          </div>          
+        </div>
+      	{% endif %}
+      	{% if tag contains 'Pescatarian' %}
+        <div class="tabin">          
+          <div class="cat_list listcol">
+            <input {% if current_tags contains 'pescatarian' %}checked{% endif %} type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tag | handle }}" id="{{ tag | handle }}">
+            <label for="{{ tag |handle }}" class="cat_tx">{{ tag }}</label>
+          </div>          
+        </div>
+      	{% endif %}
+      	{% if tag contains 'Vegetarian' %}
+        <div class="tabin">          
+          <div class="cat_list listcol">
+            <input {% if current_tags contains 'vegetarian' %}checked{% endif %} type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tag | handle }}" id="{{ tag | handle }}">
+            <label for="{{ tag |handle }}" class="cat_tx">{{ tag }}</label>
+          </div>          
+        </div>
+      	{% endif %}
+      	{% if tag contains 'Vegan' %}
+        <div class="tabin">          
+          <div class="cat_list listcol">
+            <input {% if current_tags contains 'vegan' %}checked{% endif %} type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tag | handle }}" id="{{ tag | handle }}">
+            <label for="{{ tag |handle }}" class="cat_tx">{{ tag }}</label>
+          </div>          
+        </div>
+      	{% endif %}      
+      {% endfor %}
+      
+      {% comment %}
+      
+      {% assign c = 0 %} 
+      {% for t in collection.all_tags %}
+      {% capture cat %}{{ cat }}{% capture temp_cat %}{% if t contains '_' %}{% assign cat_grp = t | split: '_' %}{{ cat_grp.first | downcase }}{% endif %}{% endcapture %}{% unless cat contains temp_cat %}{% if t contains '_' %}{% assign new_cat_grp = t | split: '_' %}{{ new_cat_grp.first | downcase }}{% endif %}{% unless forloop.last %}+{% endunless %}{% assign c = c | plus: 1 %}{% endunless %}{% endcapture %}
+      {% endfor %}
+
+      {% assign cat = cat | sort_natural | join:'+'   %}
+      {% assign cat_array = cat | split: '+' %}
+
+      {% assign current_tags = current_tags | downcase %}
+
+      {% assign s = 0 %} 
+      {% for i in cat_array %}
+      {% unless i == '' or i == 'flat' or i == 'category' or i == 'material' or i == 'fat' or i == 'cal' or i == 'carb' or i == 'pro' or i == 'convrate' %}
+      <div id="shp_catdiv{{forloop.index}}" class="shp_catdiv {% if forloop.last %}shp_last{% endif %} f{{ i | handle }}">
+        <!--<h3 onclick="showdss({{s}})">{{ i }} <span><i id="filter{{s}}" class="fa fa-angle-down"></i></span></h3> -->
+        <div id="tabs{{s}}" class="tabin {% if i == 'color' %}tabcolo{% endif %}">
+          {% for t in collection.all_tags %}
+
+          {% assign tt = t | downcase %}
+
+          {% if tt contains i %}
+
+          {% assign ttss = tt | split: '_' %}
+
+          {% for word in ttss %}
+          {% if forloop.first == true %}
+          {% assign wor = word %}
+          {% break %}
+          {% endif %}
+          {% endfor %}
+
+          {% if wor == i %}                        
+          {% unless t == 'Shop by gender' %}
+          {% if current_tags contains tt %}        
+          {% if tt contains 'color_' %}
+          <div class="cat_list ">
+            <input type="checkbox" name="col-filter" class="coll-filter hide" id="{{ tt | handleize }}" value="{{ tt | handleize }}" checked>
+            <label for="{{ tt | handleize }}" class="cat_tx {{ tt | handleize }}">
+              {% assign tts = tt | remove: i %}
+
+              {{ tts | remove: '_' }}  
+            </label>          
+            <style>
+              .cat_tx.{{ tt | handleize }}:hover:before { color:#FFF }
+              .cat_list input:checked + .cat_tx.{{ tt | handleize }}:before { color:#FFF;box-shadow: 0px 0px 5px #000; }
+              .cat_tx.{{ tt | handleize }}:before { background: {{ tt | remove:'color_' }}; 
+            </style>
+          </div>
+          {% else %}
+          <div class="cat_list listcol">
+            <input type="checkbox" name="col-filter" class="coll-filter hide" id="{{ tt | handleize }}" value="{{ tt | handleize }}" checked>
+            <label for="{{ tt | handleize }}" class="cat_tx {{ tt | handleize }}">            
+              {% assign tts = tt | remove: i %}
+
+              {{ tts | remove: '_' }}          
+            </label>
+          </div>
+          {% endif %}
+          {% else %}
+          {% if tt contains 'color_' %}
+          <div class="cat_list">
+            <input type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tt | handleize }}" id="{{ tt | handleize }}">
+            <label for="{{ tt | handleize }}" class="cat_tx {{ tt | handleize }}">{{ tt | remove:'color_' }}</label>
+            <style>
+              .cat_list input:checked + .cat_tx.{{ tt | handleize }}:before { color:#FFF; border:1px solid #000;padding:3px; }
+              .cat_tx.{{ tt | handleize }}:before { background: {{ tt | remove:'color_' }};}            
+            </style>
+          </div>
+          {% else %}
+          <div class="cat_list listcol">
+            <input type="checkbox" name="col-filter" class="coll-filter hide" value="{{ tt | handleize }}" id="{{ tt | handleize }}">
+            <label for="{{ tt | handleize }}" class="cat_tx {{ tt | handleize }}">    
+              {% assign tts = tt | remove: i %}
+
+              {{ tts | remove: '_' }}  
+            </label>
+          </div>
+          {% endif %}
+          {% endif %}
+          {% endunless %}
+          {% endif %}
+
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>     
+
+      {% endunless %}
+      {% assign s = s | plus: 1 %}
+      {% endfor %}
+      
+      {% endcomment %}
+      
+      <div class="clearfix"></div>
+
+      <div class="close_me visible-xs" onclick="shop_side(2)"></div>
+    </div>
+  </div>
+  <div class="collection-filters__actions">
+    <button onclick="collectionfilter(1)" class="btn">Apply</button>
+    <button onclick="collectionfilter(2)" class="btn btn_clear">Clear</button>
+  </div>
+</div>
+
+<style>  
+  .black_filter .shop_left {position: absolute;z-index:9; right: 50px;top: 41px;padding: 20px 20px;background:#fff;display:none;box-shadow: 0 0 12px rgba(0,0,0,.2), 0 0 0.5px rgba(0,0,0,.5);max-width: 197px;margin: 0 0 0 auto;}
+  .black_filter .shop_left h5{font-size:14px;line-height:17px;color:#464646;font-weight: normal; font-family: 'rubikregular';text-transform: capitalize;    display: flex;align-items: center;border-bottom: 2px solid #F5F5F5;padding:0 0 5px;margin: 0 0 17px;}
+  .black_filter .shop_left h5 img{margin-right:10px;}
+  .black_filter .category_div{padding-bottom: 10px;}
+  .black_filter #shp_catdiv1{ display:none;}
+  .black_filter .tabin {flex-direction: column;display: grid;grid-auto-flow: column;column-gap: 10px;grid-template-rows: repeat(10,auto);}
+  .black_filter .shop_left1 .times{display:none}
+  .black_filter .shop_left1 h2{font-size:18px;font-weight:400;color:#000;position:relative;text-transform:capitalize;padding:15px 0 24PX;letter-spacing:0;margin:0;border-bottom:1px solid #e0e0e0}
+  .black_filter .shop_left1 h2 span{position:absolute;right:0}
+  .black_filter .category_div ul{margin:0}
+  .black_filter .category_div ul li{color:#786d6d;font-size:14px;font-weight:300;background:#f6f5f2;padding:13px 26px;border-bottom:1px solid #dddcd9}
+  .black_filter .category_div>ul>li>span:after{content:'\002B';color:#000;font-weight:700;float:right;margin-left:5px;right:14px;position:absolute;top:14px}
+  .black_filter .category_div h3{text-transform: capitalize;margin:0;margin-bottom: 30px; font-size: 16px;position:relative;width:100%;padding:0;}
+  .black_filter .category_div h3 span {display:none}
+  .black_filter .category_div li{margin-bottom:5px;text-transform:capitalize;font-size:14px;color:#000}
+  .black_filter .category_div li a:hover{color:#000}
+  .black_filter .shp_catdiv.shp_last {border:0px}
+  .black_filter .shp_catdiv h3 span{float:right}
+  .black_filter .shp_catdiv h3 span i{font-size:16px;color:#000}
+  .black_filter .cat_list{margin-bottom:0;padding:0px 0 15px}
+  .black_filter .cat_list.selected{color:#000}
+  .black_filter .cat_list a{font-size:16px;text-decoration:none;color:#000}
+  .black_filter .cat_tx{font-size: 14px;line-height:17px;color: #464646;font-weight:normal;font-family:'rubikregular';position:relative;text-transform:capitalize;padding-top:0;margin-left:0;padding-left:34px;word-break:break-word;}
+  .black_filter .cat_tx:before{content:''!important;width:16px;height:16px;display:block;background:#fff;float:left;border-radius: 5px !important;position:absolute;top:0 !important;left:0;border: 2px solid #4B4B4B;}
+  .black_filter .cat_tx:hover,.cat_tx:active{color:#000;transition:.3s ease-in-out}
+  .black_filter .listcol .cat_tx:hover:before{background-color:#ccc;} 
+  .black_filter .cat_tx:hover:before{transition:.3s ease-in-out}
+  .black_filter .item_list{margin-top:20px}
+  .black_filter .listcol .cat_tx{padding-left:25px;}
+  .black_filter .cat_list input:checked + .cat_tx:after { content: '';  display: block;  position: absolute; background:#2c2c2c;}
+  .black_filter .listcol.cat_list input:checked + .cat_tx:before{background-color:#2c2c2c;}
+  .black_filter .shp_catdiv  {width:100%;}
+  .black_filter .collection-filters__actions .btn{margin:0 0 10px;    padding: 6px 10px;background: #23D16A;border-radius: 33px;color:#fff;min-width:100%;font-size:16px;line-height:19px;font-weight:normal;font-family:'rubikregular';text-transform:capitalize}
+  .black_filter .collection-filters__actions .btn_clear{background: #EBEBEB;color: #464646;}
+  .black_filter .collection-filters__actions .btn:focus{outline:none;} 
+  @media only screen and (min-width:200px) and (max-width:767px) {
+    .black_filter .category_div {padding-bottom: 20px;display: block;}
+    .black_filter .shop_left {padding: 25px 20px;left: 0;}
+    .black_filter .category_div h3 {margin-bottom: 18px;border-bottom: 1px #dfdfdf solid;padding-bottom: 10px;}
+    .black_filter .category_div h3 span {display:block}
+    .black_filter .shp_catdiv {padding-right: 0;}
+    .black_filter .shop_left {right: 20px;}
+  }
+  @media only screen and (min-width:768px) and (max-width:991px) {
+  }
+</style>
+
+<input type="hidden" id="staglist">
+
+<script type="text/javascript">
+  function showdss(para) {  
+    $('#tabs'+para).slideToggle('1000');
+    if($('#filter'+para).hasClass('fa-angle-down')) {
+      $('#filter'+para).removeClass('fa-angle-down');
+      $('#filter'+para).addClass('fa-angle-up');
+    } else {
+      $('#filter'+para).addClass('fa-angle-down');
+      $('#filter'+para).removeClass('fa-angle-up');
+    }
+  }
+
+  function togglefilter() {
+    $('.template-collection .shop_left1').slideToggle();
+  }
+
+  $(document).ready(function() {
+    if($(window).width() <= 767 ) {
+      $('.template-collection .shop_left1').insertAfter('.filters-toolbar-wrapper');
+    }
+  });
+
+  $(document).ready(function() {
+    $('.fcolor').insertBefore('.close_me');	
+    /*$('#shp_catdiv5').insertAfter('#shp_catdiv2');	
+    $('#shp_catdiv4').insertBefore('#shp_catdiv3');*/
+  });
+  
+  function collectionfilter(para) {
+    if(para == 1) {
+      
+      var collFilters = jQuery('.coll-filter');
+
+      var newTags = [];
+      collFilters.each(function() {
+        if ($(this).is(":checked")) {
+          newTags.push(jQuery(this).val());           
+        }
+      });
+      
+      $('#staglist').val(newTags);
+
+      if($('#staglist').val()) {
+        $('.collrep').hide();
+        $('.grid--uniform .medium-up--one-quarter:nth-child(4n+1)').css({'clear':'none'});
+        
+        var tagf = $('#staglist').val().replace(',', ".");
+        
+        $('.'+tagf).show();
+      } else {
+        $('.collection_div').show();
+        $('.collrep').show();
+        $('.grid--uniform .medium-up--one-quarter:nth-child(4n+1)').css({'clear':'none'});
+      }
+      
+      /*
+      if (newTags.length) {
+        var tagf = newTags.replace(',', ".");
+        
+        //$('.collection_div').hide();
+        $('.collrep').hide();
+        $('.grid--uniform .medium-up--one-quarter:nth-child(4n+1)').css({'clear':'none'});
+
+        for(var i=0; i<=newTags.length; i++) {        
+          $('.'+newTags[i]).show();
+        }
+      } else {
+        $('.collection_div').show();
+        $('.collrep').show();
+        $('.grid--uniform .medium-up--one-quarter:nth-child(4n+1)').css({'clear':'none'});
+      }
+      */
+      show_category()
+    } else {
+      $('.collection_div').show();
+      $('.collrep').show();
+      $('.grid--uniform .medium-up--one-quarter:nth-child(4n+1)').css({'clear':'none'});
+      $('.coll-filter').attr('checked', false);
+      show_category()
+    }
+
+    $('html, body').animate({
+      scrollTop: $("#header").offset().top
+    }, 1000);
+    
+    setTimeout(function() {
+      $('.diatry-notification').fadeIn();
+      
+      setTimeout(function() {
+        $('.diatry-notification').fadeOut();
+      },2000);
+    },1000);
+    
+  }
+</script>
+
+{% comment %}
+<script>
+  function collectionfilter() {
+    var collFilters = jQuery('.coll-filter');
+
+    var newTags = [];
+    collFilters.each(function() {
+      if ($(this).is(":checked")) {
+        newTags.push(jQuery(this).val());
+      }
+    });
+    if (newTags.length) {
+      var query = newTags.join('+');
+      window.location.href = jQuery('{{ 'tag' | link_to_tag: 'tag' }}').attr('href').replace('tag', query);
+                                    }
+                                    else {
+                                    {% if collection.handle %}
+                                    window.location.href = '/collections/{{ collection.handle }}';
+                                    {% elsif collection.products.first.type == collection.title %}
+                                    window.location.href = '{{ collection.title | url_for_type }}';
+                                    {% elsif collection.products.first.vendor == collection.title %}
+                                    window.location.href = '{{ collection.title | url_for_vendor }}';
+                                    {% endif %}
+                                    }            
+                                    }
+</script>
+{% endcomment %}

@@ -1,0 +1,207 @@
+<style>
+  .three_columns_wrapper-{{ section.id }} {
+    {% if section.settings.bg != blank %} 
+    background: url({{ section.settings.bg | img_url: '1296x' }});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    {% else %}
+    background: #fff;
+    {% endif %}
+    margin-top: 52px;
+  }
+
+  .three_columns_inner {
+    max-width: 1330px;
+    margin: 0 auto;
+    padding: 93px 15px 105px;
+  }
+
+  .three_cols_header {
+    margin: 0 0 65px;
+  }
+
+  .three_cols_header h2 {
+    font-size: 40px;
+    line-height: 42px;
+    margin: 0 0 11px;
+    text-align: center;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    font-weight: 400;
+    font-family: 'rubikmedium';
+    color: #23D16A;
+  }
+  .three_cols_header p {
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0;
+    text-align: center;
+    color: #FFF;
+    font-family: 'rubikregular';
+    font-weight: 400;
+  }
+
+  .three_cols_content_wrapper {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 16px;
+  }
+
+  .option_block {
+    position: relative;
+  }
+
+  .option_head {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    text-align: center;
+  }
+
+  .option_head h2 {
+    margin: 0;
+    font-size: 32px;
+    line-height: 42px;
+    text-align: center;
+    color: #FFF;
+    font-family: 'rubikmedium';
+    font-weight: 400;
+  }
+  
+  .option_content h2 {
+    text-transform: initial;
+    margin: 21px 0 0;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFF;
+    font-family: 'rubikregular';
+    font-weight: 400;
+}
+  
+  @media screen and (max-width: 767px) {
+    .three_columns_wrapper-{{ section.id }} { height: auto; }
+    .three_columns_inner { padding: 30px 15px 30px; }
+    
+    .three_cols_header { margin-bottom: 42px; }
+    
+    .three_cols_header h2 { margin: 0 0 6px; font-size: 25px; line-height: 29px; }
+    
+    .three_cols_header p { font-size: 16px; line-height: 19px; }
+    
+    .option_head { top: 45%; }
+    
+    .option_head h2 { font-size: 18px; line-height: 18px; }
+    
+    .option_content h2 { margin: 14px 0 0; font-size: 14px; line-height: 16px; }
+  }
+  
+  @media screen and (max-width: 640px) {
+    .option_head { top: 37%; } 
+    
+    .option_head h2 { font-size: 14px; }
+    
+    .option_content h2 { font-size: 12px; }
+  }
+</style>
+
+<div class="three_columns_wrapper-{{ section.id }}">
+  <div class="three_columns_inner">
+    {% if section.settings.head != blank %} 
+    <div class="three_cols_header">
+      <h2>{{ section.settings.head }}</h2>      
+      {% if section.settings.subhead != blank %}
+      <p>{{ section.settings.subhead }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="three_cols_content_wrapper">
+      {% for block in section.blocks %}
+      <div class="option_block">
+        {% if block.settings.img != blank %}
+        <img src="{{ block.settings.img | img_url: '1296x' }}" />
+        {% endif %}
+
+        {% if block.settings.option_head != blank %}
+        <div class="option_head">
+          <h2>{{ block.settings.option_head }}</h2>
+        </div>
+        {% endif %}
+
+        {% if block.settings.option_content != blank %}
+        <div class="option_content">
+          <h2>{{ block.settings.option_content }}</h2>
+        </div>
+        {% endif %}
+
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Three Columns Section",
+"tag": "section",
+"class": "three_columns_section",
+"max_blocks" : 3,
+"settings": [
+{
+"type" : "image_picker",
+"id" : "bg",
+"label" : "Background Image"
+},
+{
+"type" : "text",
+"id" : "head",
+"label" : "Heading"
+},
+{
+"type" : "textarea",
+"id" : "subhead",
+"label" : "Sub Heading"
+}
+],
+"blocks": [
+{
+"name" : "Delivery Option",
+"type" : "image",
+"settings" : [
+{
+"type" : "image_picker",
+"id" : "img",
+"label" : "Select Image"
+},
+{
+"type" : "text",
+"id" : "option_head",
+"label" : "Heading"
+},
+{
+"type" : "textarea",
+"id" : "option_content",
+"label" : "Content"
+}
+]
+}
+],
+"presets": [
+{
+"name" : "Three Columns Section",
+"category" : "Image"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

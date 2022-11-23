@@ -1,0 +1,514 @@
+<style>
+  .faq_search_wrapper {
+    padding: 40px 0 32px;
+  }
+
+  .faq_search_wrapper form {
+    max-width: 750px;
+    margin: 0 auto;
+    flex: 1 1 100%;
+    position: relative;
+    max-width: 410px;
+    border: 1px solid transparent;
+  }
+
+  .faq_search_wrapper .search-bar__input {
+    padding: 10px 18px;
+    padding-right: 45px;
+    width: 100%;
+    min-height: 47px;
+    border-radius: 24px;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #E8E8E8;
+  }
+
+  .faq_search_wrapper .search-bar__input:focus-visible {
+    outline: none;
+  }
+
+  .predictive-search-wrapper {
+    transition-property: opacity,visibility;
+    transition-duration: .1s;
+    transition-timing-function: ease-in-out;
+    z-index: 1000;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: -1px;
+    border: 1px solid #cccccc;
+    background-color: #fff;
+    overflow-y: auto;
+    display: none;
+  }
+  
+  .faq_search_wrapper button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    background: transparent;
+    border: none;
+}
+
+  .faq_head h2 {
+    font-size: 40px;
+    line-height: 47px;
+    margin: 0 0 33px;
+    text-align: center;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    font-weight: normal;
+    font-family: 'rubikmedium';
+    color: #2c2c2c;
+  }
+
+  .faq_head p {
+    font-size: 18px;
+    line-height: 28px;
+    max-width: 830px;
+    margin: 0 auto 0px;
+    text-align: center;
+    letter-spacing: 0;
+    font-weight: normal;
+    font-family: 'rubikregular';
+    color: #2c2c2c;
+  }
+
+  .faq_about, .faq_delivery, .faq_services, .faq_contact {
+    margin: 45px 0 0;
+  }
+
+  .faq_contact {
+    padding: 50px 0;
+  }
+
+  .faq_about h3, .faq_delivery h3, .faq_services h3, .faq_contact h3 {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 0 0 20px;
+    text-align: left;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    font-weight: normal;
+    font-family: 'rubikmedium';
+    color: #23D16A;
+  }
+
+  .faq_wrapper {
+    margin-bottom: 11px;
+  }
+
+  .faq_question {
+    background: #E8E8E8;
+    padding: 17px 24px;
+    color: #333;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .faq_question h2 {
+    font-size: 16px;
+    font-family: 'rubikmedium';
+    line-height: 22px;
+  }
+
+  .faq_question span {
+    font-size: 12px;
+  }
+
+  .faq_answer {
+    padding: 23px 24px 25px;
+    color: #2c2c2c;
+    display: none;
+  }
+
+  .faq_answer p {
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'rubikregular';
+    margin-bottom: 10px;
+  }
+
+  .faq_answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq_contact_max {
+    max-width: 400px;
+  }
+
+  .faq_contact_max .form-group {
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  .faq_contact_max input, .faq_contact_max textarea {
+    width: 100%;
+    border: 1px solid #2C2C2C;
+    border-radius: 15px;
+    font-weight: normal;
+    font-family: 'rubikregular';
+    color: #2c2c2c;
+    height: 50px;
+  }
+
+  .faq_contact_max input::placeholder, .faq_contact_max textarea::placeholder {
+    opacity: 1;
+    color: #A7A7A7;
+    font-weight: normal;
+    font-family: 'rubikregular';
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .faq_contact_max textarea {
+    height: 219px;
+    resize: none;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+  .faq_contact_max .btn {
+    border: none;
+    background: #23D16A;
+    color: #fff;
+    border-radius: 24px;
+    min-width: 161px;
+    height: 44px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: normal;
+    font-family: 'rubikregular';
+    width: auto;
+  }
+
+  @media only screen and (min-width: 750px) {
+    .predictive-search-wrapper { max-height: 80vh; }
+
+    input, textarea { padding: 10px 18px; }
+
+  }
+
+  @media only screen and (min-width: 200px) and (max-width: 767px) {
+    .faq_search_wrapper { padding: 28px 0 25px; }
+    
+    .search-form { padding-top: 0; }
+    
+    .faq_search_wrapper .search-bar__input { min-height: 35px; padding: 8px 45px 8px 15px; }
+    
+    .search-bar__submit img { position: relative; top: -2px; }
+    
+    .faq_head h2 { font-size: 20px; line-height: 24px; margin: 0 0 17px; }
+    
+    .faq_head p { font-size: 14px; line-height: 21px; }
+    
+    .faq_about, .faq_delivery, .faq_services, .faq_contact { margin: 31px 0 0; }
+    
+    .faq_about h3, .faq_delivery h3, .faq_services h3, .faq_contact h3 { font-size: 20px; line-height: 24px; margin: 0 0 16px; }
+    
+    .faq_question h2 { font-size: 12px; font-family: 'rubikmedium'; line-height: 19px; color: #2c2c2c; }
+    
+    .faq_answer p { font-size: 14px; }
+    
+    .faq_contact_max input, .faq_contact_max textarea { padding: 8px 15px; }
+  }
+</style>
+
+<div class="faq_wrapper">
+  <div class="page-width">
+    <div class="faq_inner">
+      <div class="faq_search_wrapper">
+        <form class="search-form search-bar__form" action="{{ routes.search_url }}" method="get" role="search">
+          <div class="search-form__input-wrapper">
+            <input
+                   type="text"
+                   name="q"
+                   role="combobox"
+                   aria-autocomplete="list"
+                   aria-owns="predictive-search-results"
+                   aria-expanded="false"
+                   aria-label="{{ 'general.search.placeholder' | t }}"
+                   aria-haspopup="listbox"
+                   class="search-form__input search-bar__input"
+                   data-predictive-search-drawer-input
+                   />
+            <input type="hidden" name="options[prefix]" value="last" aria-hidden="true" />
+            <div class="predictive-search-wrapper predictive-search-wrapper--drawer" data-predictive-search-mount="drawer"></div>
+          </div>
+
+          <button class="search-bar__submit search-form__submit"
+                  type="submit"
+                  data-search-form-submit>
+            <img src="{{ 'd_search.svg' | asset_url }}" title="" alt="">
+          </button>
+        </form>
+      </div>
+
+      <div class="faq_head">
+        {% if section.settings.head != blank %}        
+        <h2>{{ section.settings.head }}</h2>
+        {% endif %}
+
+        {% if section.settings.subhead != blank %}
+        {{ section.settings.subhead }}
+        {% endif %}
+      </div>
+
+      <div class="faq_main_inner">
+        <div class="faq_about">
+          {% if section.settings.about_head != blank %}
+          <h3>{{ section.settings.about_head }}</h3>
+          {% endif %}
+
+          <div class="about_accordion">
+            {% for block in section.blocks %}
+            {% case block.type %}
+            {% when 'first-block' %}
+            <div class="faq_wrapper">
+              <div class="faq_question">
+                <h2>{{ block.settings.question }}</h2>
+                <span class="fa fa-plus"></span>
+              </div>
+              <div class="faq_answer">
+                {{ block.settings.answer }}
+              </div>
+            </div>
+            {% endcase %}            
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="faq_services">
+          {% if section.settings.services_head != blank %}
+          <h3>{{ section.settings.services_head }}</h3>
+          {% endif %}
+
+          <div class="services_accordion">
+            {% for block in section.blocks %}
+            {% case block.type %}
+            {% when 'second-block' %}
+            <div class="faq_wrapper">
+              <div class="faq_question">
+                <h2>{{ block.settings.question }}</h2>
+                <span class="fa fa-plus"></span>
+              </div>
+              <div class="faq_answer">
+                {{ block.settings.answer }}
+              </div>
+            </div>
+            {% endcase %}            
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="faq_delivery">
+          {% if section.settings.delivery_head != blank %}
+          <h3>{{ section.settings.delivery_head }}</h3>
+          {% endif %}
+
+          <div class="delivery_accordion">
+            {% for block in section.blocks %}
+            {% case block.type %}
+            {% when 'third-block' %}
+            <div class="faq_wrapper">
+              <div class="faq_question">
+                <h2>{{ block.settings.question }}</h2>
+                <span class="fa fa-plus"></span>
+              </div>
+              <div class="faq_answer">
+                {{ block.settings.answer }}
+              </div>
+            </div>
+            {% endcase %}            
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="faq_contact">
+          {% if section.settings.contact_head != blank %}
+          <h3>{{ section.settings.contact_head }}</h3>
+          {% endif %}
+
+          <div class="contact_form_wrapper">
+            {%- assign formId = 'ContactForm' -%}
+            {% form 'contact', id: formId %}
+            {% include 'form-status', form: form, form_id: formId %}
+            <div class="faq_contact_max">
+              <div class="form-group">
+                <input type="text" id="{{ formId }}-name" placeholder="Full Name" name="contact[{{ 'contact.form.name' | t }}]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+              </div>
+              <div class="form-group">
+                <input
+                       type="email"
+                       id="{{ formId }}-email" placeholder="Email"
+                       name="contact[email]"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                       aria-required="true"
+                       {%- if form.errors contains 'email' -%}
+                       class="input--error"
+                       aria-invalid="true"
+                       aria-describedby="{{ formId }}-email-error"
+                       {%- endif -%}
+                       >
+                {%- if form.errors contains 'email' -%}
+                <span id="{{ formId}}-email-error" class="input-error-message">
+                  <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+                  {% include 'icon-error' %}
+                  <span>{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+                </span>
+                {%- endif -%}
+              </div>      
+              <div class="form-group">
+                <textarea rows="10" placeholder="Question" id="{{ formId }}-message" name="contact[{{ 'contact.form.message' | t }}]">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+              </div>
+              <div class="form-group text-right">
+                <input type="submit" class="btn" value="Submit">
+              </div>
+            </div>
+            {% endform %} 
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.faq_question').map(function(){
+    $(this).click(function(){
+      $(this).siblings('.faq_answer').slideToggle().parent().siblings().children('.faq_answer').slideUp().parent().parent().parent().siblings().children().children().children('.faq_answer').slideUp();
+
+      $(this).parent().siblings().children('.faq_question').children('span').removeClass('fa-minus').addClass('fa-plus');
+
+      $(this).parent().parent().parent().siblings().children().children().children('.faq_question').children('span').removeClass('fa-minus').addClass('fa-plus');
+
+      if($(this).children('span').hasClass('fa-plus')) {
+        $(this).children('span').removeClass('fa-plus').addClass('fa-minus');
+      } else {
+        $(this).children('span').addClass('fa-plus').removeClass('fa-minus');
+      }
+    })
+  })
+</script>
+
+{% schema %}
+{
+"name": "FAQS",
+"tag": "section",
+"class": "faqs_section",
+"settings": [
+{
+"type" : "text",
+"id" : "head",
+"label" : "Section Title"
+},
+{
+"type" : "richtext",
+"id" : "subhead",
+"label" : "Sub Title"
+},
+{
+"type" : "header",
+"content" : "About Heading"
+},
+{
+"type" : "text",
+"id" : "about_head",
+"label" : "Heading"
+},
+{
+"type" : "header",
+"content" : "Services Heading"
+},
+{
+"type" : "text",
+"id" : "services_head",
+"label" : "Heading"
+},
+{
+"type" : "header",
+"content" : "Delivery Heading"
+},
+{
+"type" : "text",
+"id" : "delivery_head",
+"label" : "Heading"
+},
+{
+"type" : "header",
+"content" : "Contact Heading"
+},
+{
+"type" : "text",
+"id" : "contact_head",
+"label" : "Heading"
+}
+],
+"blocks": [
+{
+"name" : "First Block",
+"type" : "first-block",
+"settings" : [
+{
+"type" : "textarea",
+"id" : "question",
+"label" : "Question"
+},
+{
+"type" : "richtext",
+"id" : "answer",
+"label" : "Answer"
+}
+]
+},
+{
+"name" : "Second Block",
+"type" : "second-block",
+"settings" : [
+{
+"type" : "textarea",
+"id" : "question",
+"label" : "Question"
+},
+{
+"type" : "richtext",
+"id" : "answer",
+"label" : "Answer"
+}
+]
+},
+{
+"name" : "Third Block",
+"type" : "third-block",
+"settings" : [
+{
+"type" : "textarea",
+"id" : "question",
+"label" : "Question"
+},
+{
+"type" : "richtext",
+"id" : "answer",
+"label" : "Answer"
+}
+]
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

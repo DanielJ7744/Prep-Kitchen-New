@@ -1,0 +1,248 @@
+<style>
+    /* Account details page */
+    .account-details__section .heading-wrapper--account-details {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      color: #2c2c2c;
+    }
+    .account-details__section .heading-divider {
+      display: none!important;
+    }
+    .account-details__title {
+      font-size: 36px;
+      font-family: 'rubikregular';
+      color: #2c2c2c;
+      text-align: center;
+    }
+    .account-details__logout {
+      text-align: center;
+      width: 100%;
+      margin-bottom: 55px;
+    }
+    .account-details__logout a {
+      font-size: 16px;
+      font-family: 'rubikregular';
+      color: #2c2c2c;
+    }
+    .account-details__section .alert {
+      color: #3c763d;
+      background-color: #dff0d8;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      width:100%
+    }
+    .account-details__section .account-main {
+        padding-right: 30px;
+    }
+    .account-details__section .account-main  td, .account-details__section .account-main  th {
+        border: unset;
+        padding: 10px 8px;
+    }
+    .account-details__section .account-main  th {
+        font-family:"Helvetica Neue","Helvetica","Arial",sans-serif;
+    }
+    .account-details__section .account-main  td {
+        font-family: rubikregular;
+        vertical-align: middle;
+    }
+    .account-details__subtitle {
+        font-size: 30px;
+    }
+    .account-details__name  a{
+        color: #2c2c2c;
+        font-size: 16px;
+    }
+    .account-sidebar__address {
+        color: #2c2c2c;
+        font-size: 16px;
+    }
+    .ws-re-order__button {
+        display: block;
+        cursor: pointer;
+    }
+
+    .account-details__section .subtitle {
+        font-size: 24px;
+        font-family: 'rubikregular';
+        margin-bottom: 10px;
+    }
+    .ws-order-name__container--order {
+        display: flex;
+        gap: 8px;
+    }
+    .ws-order-name__container--order  .subtitle {
+        margin-bottom: 0;
+        margin-top: 10px;
+    }
+    .account-details__section--order p {
+        margin-bottom: 0!important;
+    }
+
+
+    .Rise-account-page-button, .c-button--secondary, .c-button--secondary-a a {
+        background: #23d16a;
+        color: #fff;
+        border-radius: 25px;
+        padding: 10px;
+        margin: 0;
+        border: transparent;
+        display: block;
+        width: fit-content;
+        text-align: center;
+        text-decoration: unset;
+    }
+    .Rise-account-page-button:hover, .c-button--secondary:hover, .c-button--secondary-a a:hover {
+        color: #2c2c2c;
+        text-decoration: unset;
+    }
+    .account-details__view-address, .Rise-account-page-button {
+        margin-top: 10px;
+    }
+    .c-button--secondary-a a {
+        width: auto;
+    }
+    
+    .ws-re-order__button {
+        max-width: 45px;
+    }
+
+    #order-details {
+        border: 1px solid #ebebeb;
+        margin: 0;
+    }
+    #order-details.table>thead>tr>th {
+        border-bottom: 1px solid #2c2c2c;
+    }
+    #order-details td, #order-details th {
+        padding: 20px 14px;
+        border: unset;
+        border-bottom: 1px solid #ebebeb;
+        font-size: 16px;
+        color: #2c2c2c;
+    }
+    #order-details th {
+        text-transform: uppercase;
+    }
+    #order-details a {
+        color: #2c2c2c;
+        text-decoration: underline;
+    }
+    .mb-1 {
+        margin-bottom: 10px;
+    }
+    .mt-1 {
+        margin-top: 10px;
+    }
+    #order-details tbody tr:last-child td {
+        border-bottom: unset;
+    }
+    #order-details td.border-dark {
+        border-bottom: 1px solid #2c2c2c;
+        border-top: 1px solid #2c2c2c;
+    }
+
+    .order-details__main {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 30px;
+    }
+    .order-details__main::before, .order-details__main::after{
+        display: none;
+    }
+
+    @media only screen and (max-width: 798px) {
+        .account-details__section .heading-wrapper--account-details {
+            margin-top: 80px;
+        }
+        #order-details tbody tr:last-child td, #order-details tbody tr {
+            border-bottom: 1px solid #ebebeb;
+        }
+        .c-button--secondary-a a {
+            max-width: 150px;
+            float: right;
+        }
+        .ws-re-order__button {
+            float: right;
+        }
+        .ws-re-order__container, .c-button--secondary-a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #order-details, #order-details tbody td, #order-details tbody th {
+            border: unset!important;
+        }
+        /* table * {
+            display: contents;
+        }
+        table {
+            display: flex;
+            flex-direction:column;
+        }
+        th, td {
+            display:block;
+            text-align:center;
+        }
+        tr > *:nth-child(1) { order:1;}
+        tr > *:nth-child(2) { order:2;}
+        tr > *:nth-child(3) { order:3;}
+        tr > *:nth-child(4) { order:4;}
+        tr > *:nth-child(5) { order:5;}
+        tr > *:nth-child(6) { order:6;}
+        tr > *:nth-child(7) { order:7;}
+        tr > *:nth-child(8) { order:8;} */
+
+
+        .order-details__main {
+            grid-template-columns: 1fr;
+        }
+        .account-details__section .account-main {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+
+        .responsive-table thead {
+            display: none;
+        }
+
+        .responsive-table th, .responsive-table td {
+            float: left;
+            clear: left;
+            width: 100%;
+            text-align: right;
+            padding: 27.5px;
+            border: 0;
+            margin: 0;
+        }
+        .responsive-table th::before, .responsive-table td::before {
+            content: attr(data-label);
+            float: left;
+            text-align: center;
+            font-size: 12px;
+            padding-right: 10px;
+            font-weight: normal;
+        }
+        .responsive-table__row + .responsive-table__row, tfoot >
+        .responsive-table__row:first-child {
+            position: relative;
+            margin-top: 10px;
+            padding-top: 55px;
+        }
+        .responsive-table__row + .responsive-table__row::after, tfoot >
+        .responsive-table__row:first-child::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 27.5px;
+            right: 27.5px;
+            border-bottom: 1px solid #ebebeb;
+        }
+
+
+    }
+  </style>

@@ -1,0 +1,167 @@
+<style>
+  .custom_text_wrapper-{{ section.id }} {
+    padding: 75px 0 80px;
+  }
+
+  .custom_text_inner p {
+    font-size: 20px;
+    line-height: 30px;
+    margin: 0 0 30px;
+    font-family: 'rubikregular';
+    font-weight: normal;
+    color: #2c2c2c;
+    text-align: center;
+  }
+
+  .custom_text_inner h3 {
+    font-size: 25px;
+    line-height: 30px;
+    margin: 0 0 50px;
+    font-family: 'rubikmedium';
+    font-weight: normal;
+    color: #23D16A;
+    text-align: center;
+  }
+
+  .ct_btn_wrapper {
+    text-align: center; 
+  }
+
+  .ct_btn_wrapper a {
+    display: inline-block;
+    background: #23d16a;
+    color: #fff;
+    font-size: 18px;
+    font-family: 'rubikregular';
+    padding: 8px 34px;
+    border-radius: 25px;
+    font-weight: 400;
+    min-width: 150px;
+    border: 1px solid transparent;
+    line-height: 1.42857143;
+    transition: all .3s;
+    margin-right: 11px;
+  }
+
+  .ct_btn_wrapper a:hover {
+    box-shadow: 1px 1px 9px #ccc;
+    text-decoration: none;
+  }
+  
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .custom_text_inner p { font-size: 19px; }
+  }
+  
+  @media only screen and (min-width: 200px) and (max-width: 767px) {
+    .custom_text_wrapper-{{ section.id }} { padding: 20px 0 40px; }
+    
+    .custom_text_inner { max-width: 320px; margin: auto; }
+    
+    .custom_text_inner p { font-size: 16px; line-height: 23px; margin: 0 0 25px; }
+    
+    .custom_text_inner h3 { font-size: 16px; line-height: 23px; margin: 0 0 30px; }
+    
+    .ct_btn_wrapper a { margin-right: 0; margin-bottom: 22px; }
+  }
+</style>
+
+<div class="custom_text_wrapper-{{ section.id }}">
+  <div class="page-width">
+    <div class="custom_text_inner">
+      {% if section.settings.text != blank %}
+      {{ section.settings.text }}
+      {% endif %}
+
+      {% if section.settings.head != blank %}
+      <h3>{{ section.settings.head }}</h3>
+      {% endif %}
+
+      {% if section.settings.btn1_link != blank %}
+      <div class="ct_btn_wrapper">
+        <a href="{{ section.settings.btn1_link }}">{{ section.settings.btn1_label }}</a>
+        {% if section.settings.btn2_link != blank %}
+        <a href="{{ section.settings.btn2_link }}">{{ section.settings.btn2_label }}</a>
+        {% endif %}
+        {% if section.settings.btn3_link != blank %}
+        <a href="{{ section.settings.btn3_link }}">{{ section.settings.btn3_label }}</a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+"name": "Custom Text",
+"tag": "section",
+"class": "custom_text_section",
+"settings": [
+{
+"type" : "richtext",
+"id" : "text",
+"label" : "Text"
+},
+{
+"type" : "textarea",
+"id" : "head",
+"label" : "Heading"
+},
+{
+"type" : "header",
+"content" : "Button 01"
+},
+{
+"type" : "text",
+"id" : "btn1_label",
+"label" : "Button Label"
+},
+{
+"type" : "url",
+"id" : "btn1_link",
+"label" : "Button Link"
+},
+{
+"type" : "header",
+"content" : "Button 02"
+},
+{
+"type" : "text",
+"id" : "btn2_label",
+"label" : "Button Label"
+},
+{
+"type" : "url",
+"id" : "btn2_link",
+"label" : "Button Link"
+},
+{
+"type" : "header",
+"content" : "Button 03"
+},
+{
+"type" : "text",
+"id" : "btn3_label",
+"label" : "Button Label"
+},
+{
+"type" : "url",
+"id" : "btn3_link",
+"label" : "Button Link"
+}
+],
+"presets": [
+{
+"name" : "Custom Text",
+"category" : "Image"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

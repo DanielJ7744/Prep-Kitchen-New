@@ -1,0 +1,104 @@
+{
+  "sections": {
+    "16575322300148ae1c": {
+      "type": "how-it-works-header",
+      "settings": {
+        "bg": "shopify:\/\/shop_images\/pk-green-1-01.png",
+        "head": "Contact"
+      }
+    },
+    "main": {
+      "type": "page-content__main",
+      "disabled": true,
+      "settings": {
+        "show_heading": false,
+        "heading_alignment": "left",
+        "width": "standard",
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "contact": {
+      "type": "index__contact-form",
+      "blocks": {
+        "0943eae7-73e7-413a-ab5b-fd6a3f2d77a0": {
+          "type": "paragraph",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Use this field to display text of any kind, such as standard reply times for inquiries.<\/p>"
+          }
+        },
+        "819ccdac-5c74-43bc-b47b-4b11cc82382a": {
+          "type": "textfield",
+          "settings": {
+            "label": "Name",
+            "required": true
+          }
+        },
+        "a8554837-a77c-4c87-8398-15cb200375c5": {
+          "type": "email",
+          "settings": {
+            "label": "Email"
+          }
+        },
+        "16b4c41e-ab88-4f3f-90fe-29bf2a1a09f5": {
+          "type": "textfield",
+          "settings": {
+            "label": "Phone Number",
+            "required": false
+          }
+        },
+        "40afe607-3921-427f-95d1-d5b0b53765f5": {
+          "type": "textfield",
+          "settings": {
+            "label": "Topic",
+            "required": true
+          }
+        },
+        "433fc484-88c1-4ec8-8a8d-fc063586f91e": {
+          "type": "textarea",
+          "settings": {
+            "label": "Message",
+            "required": true
+          }
+        }
+      },
+      "block_order": [
+        "0943eae7-73e7-413a-ab5b-fd6a3f2d77a0",
+        "819ccdac-5c74-43bc-b47b-4b11cc82382a",
+        "a8554837-a77c-4c87-8398-15cb200375c5",
+        "16b4c41e-ab88-4f3f-90fe-29bf2a1a09f5",
+        "40afe607-3921-427f-95d1-d5b0b53765f5",
+        "433fc484-88c1-4ec8-8a8d-fc063586f91e"
+      ],
+      "settings": {
+        "title": "",
+        "content_text": "",
+        "social_enable": false,
+        "text_alignment": "center",
+        "background": "#ffffff",
+        "text_color": "#000000",
+        "form_position": "left",
+        "width": "standard",
+        "padding_top": 55,
+        "padding_bottom": 40,
+        "animation": "none",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "16573161895a8d0a33": {
+      "type": "updated_contect",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "16575322300148ae1c",
+    "main",
+    "contact",
+    "16573161895a8d0a33"
+  ]
+}

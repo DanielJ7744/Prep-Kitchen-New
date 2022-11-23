@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "165889334860534c87": {
+      "type": "how-it-works-header",
+      "settings": {
+        "bg": "shopify:\/\/shop_images\/pk-green-1_1000x_optimized.jpg",
+        "head": "you’re not alone, <br> take your health to the next level."
+      }
+    },
+    "nutrition_coaching_section": {
+      "type": "nutrition_coaching_section",
+      "settings": {
+        "heading": "what’s included?",
+        "content": "Our highly trained and educated certified nutritionist will design a custom meal plan geared specifically towards your current situation and your future goals. you will get bi-weekly updates and a complete list of exactly what items you need to order for each week. this plan is designed to guide and teach you how to develop a lifestyle of sustainable nutrition",
+        "author_name": "meet joe.",
+        "author_speciality": "certified nutritionist.",
+        "author_img": "shopify:\/\/shop_images\/name.png",
+        "author_description": "Joe Shaw serves as a mentor, coach, and nutritionist for a broad range of lifestyle and fitness clientele. His company, Fit by J, LLC, was formed to guide others toward a healthier and sustainable lifestyle approach to nutrition. He specializes in helping his clientele reach their goals, while enhancing and improving their quality of life. \n<br><br>With over 8 years of in-person and online coaching experience, Joe has obtained the Cooper Institute’s Nutrition for Health and Fitness Certification. He is an MSAN candidate (Master’s of Science in Applied Nutrition) from the University of New England. He also has a Marketing degree from the McCombs School of Business at the University of Texas at Austin. Besides coaching, researching, competing, training and fitness modeling, Joe has over six years of experience in the technology and mobile application sector for start-ups.\n<br><br>Joe’s future goals include writing a sustainable nutrition and fitness e-book with science-based nutritional recommendations that help guide individuals to make lasting progress. Joe is a nationally qualified National Physique Committee athlete. His personal aspirations include competing for the first time in the Men’s Physique category in the NFF Naturally Fit Federation.",
+        "heading_3": "choose your coaching plan commitment."
+      }
+    }
+  },
+  "order": [
+    "165889334860534c87",
+    "nutrition_coaching_section"
+  ]
+}

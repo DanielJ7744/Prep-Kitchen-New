@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "1657700029caf5b54b": {
+      "type": "how-it-works-header",
+      "settings": {
+        "bg": "shopify:\/\/shop_images\/pk-green-1-01.png",
+        "head": "you’re not alone, take<br>your health to the next level."
+      }
+    },
+    "main": {
+      "type": "page-content__main",
+      "settings": {
+        "show_heading": false,
+        "heading_alignment": "left",
+        "width": "standard",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "16577001687e07cc37": {
+      "type": "nutrition_coaching_section",
+      "settings": {
+        "nutri_head": "what's included?",
+        "nutri_text": "<p>Our highly trained and educated certified nutritionist will design a custom meal plan geared specifically towards your current situation and your future goals. you will get bi-weekly updates and a complete list of exactly what items you need to order for each week. this plan is designed to guide and teach you how to develop a lifestyle of sustainable nutrition<\/p>"
+      }
+    }
+  },
+  "order": [
+    "1657700029caf5b54b",
+    "main",
+    "16577001687e07cc37"
+  ]
+}

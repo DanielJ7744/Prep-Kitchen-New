@@ -1,0 +1,213 @@
+<style>
+  .custom_footer_wrapper {
+    background: {{ section.settings.bg }};
+  }
+
+  .footer_head h2 {
+    color: #23d16a;
+    font-weight: 400;
+    font-size: 20px;
+    font-family: rubikmedium;
+    margin-top: 38px;
+    margin-bottom: 20px;
+  }
+
+  .custom_footer_inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .footer_menu_wrapper ul li a, .footer_text_wrapper p a {
+    font-size: 16px;
+    font-family: rubikregular;
+    color: #464646!important;
+  }
+
+  .footer_menu_wrapper ul li a:hover {
+    text-decoration: none;
+    color: #23d16a!important;
+  }
+
+  .footer_text_wrapper p:last-child a {
+    color: #23d16a !important;
+  }
+
+  .block-1, .block-2, .block-3 {
+    width: 22%;
+  }
+
+  .block-4 {
+    width: 33.33%;
+  }
+
+  #insta-feed, .instafeed-shopify {
+    margin-top: 0 !important;
+  }
+
+  .footer_social_wrapper span.fa {
+    font-size: 24px;
+    margin: 0 15px 0 0;
+    color: #2c2c2c;
+  }
+  
+  .copyright_wrapper {
+    background: #2C2C2C;
+    color: #fff;
+    padding: 24px 15px;
+    margin-top: 35px;
+    text-align: center;
+}
+  
+  .copyright_inner p {
+    text-transform: capitalize!important;
+    font-family: 'rubikmedium';
+    font-size: 16px;
+}
+  
+  @media screen and (max-width: 767px) {
+    .custom_footer_inner { display: grid; grid-template-columns: 1fr; }
+    
+    .block-1, .block-2, .block-3, .block-4 { width: 100%; }
+    
+    .footer_menu_wrapper ul li a, .footer_text_wrapper p a { font-size: 14px; }
+    
+    .copyright_wrapper { padding: 18px 15px; margin-top: 35px; }
+    
+    .copyright_wrapper p { font-size: 14px; line-height: 20px; }
+  }
+</style>
+
+<div class="custom_footer_wrapper">
+  <div class="page-width">
+    <div class="custom_footer_inner">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'menu' %}
+      <div class="footer_block footer_menu block-{{ forloop.index }}">
+        {% if block.settings.head != blank %}
+        <div class="footer_head"><h2>{{ block.settings.head }}</h2></div>
+        {% endif %}
+
+        {% if block.settings.menu != blank %}
+        <div class="footer_menu_wrapper">
+          <ul>
+            {% for link in block.settings.menu.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>     
+      {% when 'text' %}
+      <div class="footer_block footer_text block-{{ forloop.index }}">
+        {% if block.settings.head != blank %}
+        <div class="footer_head"><h2>{{ block.settings.head }}</h2></div>
+        {% endif %}
+
+        <div class="footer_text_wrapper">
+          {% if block.settings.text != blank %}
+          {{ block.settings.text }}
+          {% endif %}
+        </div>
+      </div>
+      {% when 'social-icons' %}
+      <div class="footer_block footer_social block-{{ forloop.index }}">
+        {% if block.settings.head != blank %}
+        <div class="footer_head"><h2>{{ block.settings.head }}</h2></div>
+        {% endif %}
+
+        <div class="footer_social_wrapper">
+          {% render 'social-icons' %}
+        </div>
+      </div>
+      {% endcase %}
+      {% endfor %}
+    </div>    
+  </div>
+  
+  <div class="copyright_wrapper">
+    <div class="page-width">
+      <div class="copyright_inner">
+        {% if section.settings.copyright_text != blank %}   
+        <p>{{ section.settings.copyright_text }}</p>
+        {% else %}
+        <p>Copyright &copy; {{ 'now' | date: '%Y' }} - {{ shop.name | link_to: routes.root_url }} - All Rights Reserved. </p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="page-width">
+      <p>Site by <a href="https://www.digitalpeaks.net" target="_blank" rel="noopener noreferrer">Digital Peaks</a></p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Footer",
+"class": "custom_footer",
+"settings": [
+{
+"type" : "color",
+"id" : "bg",
+"label" : "Footer Background"
+},
+{
+"type" : "textarea",
+"id" : "copyright_text",
+"label" : "Copyright Text"
+}
+],
+"blocks": [
+{
+"name" : "Menu",
+"type" : "menu",
+"settings" : [
+{
+"type" : "text",
+"id" : "head",
+"label" : "Heading"
+},
+{
+"type" : "link_list",
+"id" : "menu",
+"label" : "Select Menu"
+}
+]
+},
+{
+"name" : "Text",
+"type" : "text",
+"settings" : [
+{
+"type" : "text",
+"id" : "head",
+"label" : "Heading"
+},
+{
+"type" : "textarea",
+"id" : "text",
+"label" : "Text"
+}
+]
+},
+{
+"name" : "Social Icons",
+"type" : "social-icons",
+"settings" : [
+{
+"type" : "text",
+"id" : "head",
+"label" : "Heading"
+}
+]
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

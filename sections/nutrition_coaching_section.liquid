@@ -1,0 +1,179 @@
+<div class="coaching_heading">
+  <div class="container">
+    <h4> {{ section.settings.heading }}</h4>
+    <div class="coaching_content">
+      <p>{{ section.settings.content }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="meet_section" data-aos="slide-up">
+  <div class="container">
+    <div class="meet_upper">
+      <div class="meet_inner">
+        <div class="meet_inner_text">
+          <h2>{{ section.settings.author_name }}</h2>
+          <h5>{{ section.settings.author_speciality }}</h5>
+          <p>{{ section.settings.author_description }}</p>
+        </div>
+      </div>
+      <div class="meet_inner">
+        <div class="meet_inner_img">
+          <img src="{{ section.settings.author_img | img_url : 'master' }}" title="" alt="">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="coaching_plan">
+  <div class="container">
+    <h3>{{ section.settings.heading_3 }}</h3>
+
+    <div class="plan_upper">      
+      {% for product in collections.meal-plans.products %} 
+      {%- if product.metafields.inventory.ShappifyHidden == 'true' -%}{%- continue -%}{%- endif -%}
+
+      <div class="plan_upper_inner">
+        <div class="plan_upper_inner_img">
+          <a href="{{ product.url }}">
+          <img src="{{ product.featured_image.src | img_url : 'grande' }}" alt="" width="100%">
+          </a>
+        </div>
+        <div>
+          <h5><a href="{{ product.url }}">{{ product.title }}</a></h5>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+  </div>
+</div>
+
+<style>
+    .banner__wrapper.is-medium .image-element__wrap {
+    height: 30vh;
+}
+  .coaching_heading .container{
+  justify-content: center;
+  }
+  .coaching_heading {margin: 69px 0 103px;}
+  .coaching_heading h4{font-size:40px;line-height:47px;margin:0 0 33px;text-align:center;letter-spacing:0;text-transform: lowercase;font-weight: normal;font-family: 'rubikmedium';color:#2c2c2c;}
+
+  .coaching_content p{font-size:18px;line-height:28px;max-width:910px;margin:0 auto 0px;text-align:center;letter-spacing:0;font-weight: normal;font-family: 'rubikregular';color:#2c2c2c;}
+  .meet_upper{display:flex;flex-wrap:wrap;}
+
+  .meet_inner:first-child{width:55%;}
+  .meet_inner:last-child{width:45%;padding-left:55px;}
+  .meet_inner_text h2{margin:0 0 2px;font-size:40px;line-height:47px;color: #23D16A;font-weight: normal;font-family: 'rubikmedium';}
+  .meet_inner_text h5{margin:0 0 25px;font-size:20px;line-height:24px;color: #23D16A;font-weight: normal;font-family: 'rubikregular';}
+  .meet_inner_text p{margin:0 0 25px;font-size:16px;line-height:24px;color: #464646;font-weight: normal;font-family: 'rubikregular';}
+  .meet_inner_img {margin-top:96px;}
+
+  .coaching_plan{margin:102px 0 0;}
+  .coaching_plan h3{font-size:30px;line-height:38px;margin:0 0 35px;text-align:center;letter-spacing:0;text-transform: lowercase;font-weight: normal;font-family: 'rubikmedium';color:#23D16A;}
+  
+  .plan_upper{display:flex;flex-wrap:wrap;justify-content:center;margin:0 -25px;}
+  .plan_upper_inner{width:33.33%;padding:0 25px;margin:0 0 58px;}
+  
+  .plan_upper_inner h5{margin:10px 0 0;font-size:18px;line-height:22px;color: #464646;font-weight: normal;font-family: 'rubikmedium';text-align:center;} 
+  
+  @media only screen and (min-width:200px) and (max-width:767px){
+    .coaching_heading {
+    margin: 30px 0 40px;
+}
+    .coaching_heading h4 {
+    font-size: 24px;
+    line-height: 29px;
+      margin: 0 0 18px;}
+      .meet_inner:first-child{width:100%;}
+  .meet_inner:last-child{width:100%;padding-left:0;}
+    .coaching_content p {
+    font-size: 14px;
+      line-height: 24px;}
+    .meet_inner_text h2 {
+    margin: 0 0 2px;
+    font-size: 30px;
+        line-height: 38px;}
+    .meet_inner_text h5 {
+    margin: 0 0 18px;
+    font-size: 16px;
+      line-height: 24px;}
+    .meet_inner_text p {
+    margin: 0 0 25px;
+    font-size: 14px;
+      line-height: 24px;}
+    .meet_inner_img {
+    margin-top: 0;
+}
+    .coaching_plan {
+    margin: 40px 0 0;
+}
+    .coaching_plan h3 {
+    font-size: 18px;
+    line-height: 27px;
+      margin: 0 0 20px;}
+    .plan_upper_inner {
+    width: 33.33%;
+    padding: 0 5px;
+    margin: 0 0 20px;
+}
+    .plan_upper {
+    margin: 0 -5px;
+}
+    
+.plan_upper_inner h5 {
+    margin: 10px 0 0;
+    font-size: 14px;
+  line-height: 22px;}
+  }
+
+  
+</style>
+
+  {% schema %}
+  {
+  "name": "nutrition coaching page",
+  "settings": [
+  {
+  "type": "text",
+  "id": "heading",
+  "label":"Heading"
+  },
+  {
+  "type": "html",
+  "id": "content",
+  "label":"Page content"
+  },
+  {
+  "type": "text",
+  "id": "author_name",
+  "label": "Author_name"
+  },
+  {
+  "type": "text",
+  "id": "author_speciality",
+  "label":"Author speciality"
+  },
+  {
+  "type": "image_picker",
+  "id": "author_img",
+  "label":"Page content"
+  },
+
+  {
+  "type": "html",
+  "id": "author_description",
+  "label":"Author Description"
+  },
+
+  {
+  "type": "text",
+  "id": "heading_3",
+  "label":"Heading three"
+  }
+
+  ]
+
+  }
+  {% endschema %}

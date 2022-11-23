@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "main": {
+      "type": "index__rewards",
+      "settings": {}
+    },
+    "165716411542965d9f": {
+      "type": "apps",
+      "blocks": {
+        "c22c45ce-62e3-4906-a1d0-463306df5454": {
+          "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/rewards-module-app-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+          "settings": {
+            "instance_placeholder_id": "33485"
+          }
+        }
+      },
+      "block_order": [
+        "c22c45ce-62e3-4906-a1d0-463306df5454"
+      ],
+      "settings": {
+        "width": "wide",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "165716411542965d9f"
+  ]
+}

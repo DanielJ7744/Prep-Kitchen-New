@@ -1,0 +1,289 @@
+@font-face {
+	font-family: "rubikblack";
+	src: url("rubik-black-webfont.woff2") format("woff2"), url("rubik-black-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "rubikblack_italic";
+	src: url("rubik-blackitalic-webfont.woff2") format("woff2"), url("rubik-blackitalic-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "rubikbold";
+	src: url("rubik-bold-webfont.woff2") format("woff2"), url("rubik-bold-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "rubikbold_italic";
+	src: url("rubik-bolditalic-webfont.woff2") format("woff2"), url("rubik-bolditalic-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "rubikitalic";
+	src: url("rubik-italic-webfont.woff2") format("woff2"), url("rubik-italic-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "rubiklight";
+	src: url("rubik-light-webfont.woff2") format("woff2"), url("rubik-light-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "rubiklight_italic";
+	src: url("rubik-lightitalic-webfont.woff2") format("woff2"), url("rubik-lightitalic-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "rubikmedium";
+	src: url("rubik-medium-webfont.woff2") format("woff2"), url("rubik-medium-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "rubikmedium_italic";
+	src: url("rubik-mediumitalic-webfont.woff2") format("woff2"), url("rubik-mediumitalic-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "rubikregular";
+	src: url("rubik-regular-webfont.woff2") format("woff2"), url("rubik-regular-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* CUSTOM CSS START */
+
+html {
+	padding-bottom: 0 !important;
+}
+
+.page-width {
+	/* max-width: 1360px; */
+	max-width: 1600px;
+	width: 100%;
+	margin: auto;
+	padding: 0 15px;
+}
+
+div#col-main {
+	margin-left: 20%;
+	margin-right: 20%;
+	min-height: 300px;
+	margin-bottom: 55px;
+}
+
+h2#store-locator-title {
+	font-size: 30px;
+	font-family: "rubikregular";
+	margin: 20px 0 10px 0;
+}
+
+.header_html {
+	margin-bottom: 10px;
+}
+
+/* STORE LOCATOR PAGE CSS START */
+
+#col-main .search_bar {
+	background: none repeat scroll 0 0 #f5f5f5;
+	border: 1px solid #eee;
+	padding: 10px 20px;
+	margin-bottom: 15px;
+}
+
+#col-main .search_bar .main_search_bar {
+	width: 42%;
+	float: left;
+}
+
+#col-main .search_bar .main_search_bar .main_search_label {
+	display: inline-block;
+	vertical-align: middle;
+	color: #464646;
+	font-family: "rubikregular";
+	font-size: 16px;
+}
+
+#col-main .search_bar .main_search_bar input[type="text"] {
+	width: 45%;
+	-webkit-appearance: none;
+	outline: none !important;
+	padding: 0 12px !important;
+	font-weight: 400;
+	vertical-align: top;
+	background-color: #fff;
+	-webkit-filter: none;
+	filter: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	display: block;
+	height: 36px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #adb3b8;
+	background-image: none;
+	border: 1px solid #f4f4f4;
+	border-radius: 4px !important;
+	-webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+	transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+}
+
+#col-main .search_bar .search_within_distance {
+	float: left;
+	text-align: right;
+	color: #464646;
+}
+
+label.distance_label,
+label.search_limit_label {
+	font-family: "rubikregular";
+	font-size: 16px;
+	line-height: 24px;
+	color: #464646;
+}
+
+select#within_distance,
+select#limit {
+	padding-top: 10px;
+	padding-left: 18px;
+	padding-bottom: 10px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-position: right center;
+	background-image: url(//cdn.shopify.com/s/files/1/2464/8943/t/84/assets/ico-select.svg?v=2900367…);
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	line-height: 1.2;
+	text-indent: 0.01px;
+	text-overflow: "";
+	cursor: pointer;
+	/* padding: 8px 28px 8px 15px; */
+	border: 1px solid #cccccc;
+	background-color: #fff;
+	color: #000;
+	max-width: 100%;
+	line-height: 1.2;
+	border-radius: 2px;
+	padding-right: 28px;
+}
+
+#col-main .addresses ul li a span {
+	color: #333;
+	line-height: 23px;
+	margin-top: 10px;
+	font-size: 16px;
+	letter-spacing: 0;
+	font-weight: 400;
+}
+
+#col-main .addresses ul li a .name {
+	font-family: "rubikregular";
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 23px;
+	margin-top: 10px;
+	color: #42b270;
+}
+
+/* STORE LOCATOR PAGE CSS END */
+
+@media (max-width: 1220px) {
+	div#col-main {
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+}
+
+@media (max-width: 800px) {
+	.main_search_label {
+		width: auto;
+		margin-right: 10px;
+		padding-top: 7px;
+	}
+}
+
+@media (max-width: 575px) {
+	#col-main .search_bar .main_search_bar {
+		width: 100%;
+		float: none;
+		margin-bottom: 10px;
+	}
+
+	#col-main .search_bar .main_search_bar input {
+		width: 100% !important;
+	}
+
+	#col-main .search_bar .main_search_bar .main_search_label,
+	label.distance_label,
+	label.search_limit_label {
+		font-size: 13.8px;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.page-width {
+		width: 750px;
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.page-width {
+		width: 970px;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.page-width {
+		width: 100%;
+		max-width: 1170px;
+	}
+	.page-width {
+		width: 100%;
+		max-width: 1600px;
+	}
+}
+
+@media screen and (min-width: 1800px) {
+	.page-width {
+		width: 100%;
+		max-width: 1360px;
+	}
+	.page-width {
+		width: 100%;
+		max-width: 1600px;
+	}
+}
+
+@media screen and (max-width: 798px) {
+	h2#store-locator-title {
+		margin-top: 120px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.index {
+		display: block !important;
+	}
+}
+
+/* CUSTOM CSS END */

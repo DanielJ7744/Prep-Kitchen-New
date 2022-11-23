@@ -1,0 +1,89 @@
+<script type="text/javascript">
+    var noOpt= 0;
+    $('#custom-error-msg').hide();
+    BOLD.options.app.on('option_changed', function(obj){
+      
+      if(obj.data.option_key.indexOf('dd_') > -1){
+  //       console.log($('[name="properties[Protein]"]').val(),$('[name="properties[Carb]"]').val(),$('[name="properties[Veggie]"]').val());
+        if($('[name="properties[Protein]"]').val() == 'No Protein' && $('[name="properties[Carb]"]').val() == 'No Carb' && $('[name="properties[Veggie]"]').val() == 'No Veggie'){
+          noOpt= 1
+        }else{
+          noOpt= 0
+        }
+        
+        if(noOpt > 0){
+          $('#custom-error-msg').show();
+          $('.addtocart.bold_clone').css('display', 'none');
+        }else{
+          $('#custom-error-msg').hide();
+          $('.addtocart.bold_clone').css('display', 'block');
+        }
+      }
+      
+      if(obj.data.option_key.indexOf('sw_') > -1){
+        
+        $('.'+obj.data.option_key).each(function(){
+           var parentLbl = $(this).parents('label');
+           var title = parentLbl.find('.bold_option_swatch_title .bold_option_value_title').html();
+            parentLbl.find('.bold_option_value_swatch span').html(isNaN(title) ? title : title+'<sub>oz</sub>');
+            if(isNaN(title)){
+              parentLbl.find('.bold_option_value_swatch').css('width',(title == 'No Carb' ?'70px':'85px' ));
+            }
+        });
+        
+        var currentVal = obj.data.option.getValue();
+        if(obj.data.option.helpText == 'Protein'){
+          var protine = $.trim(obj.data.option.internalName.replace('OZ',''));
+          if($('#calorie-info').length > 0){
+            $('#calorie-info').val('');
+          }
+          if(protine != '' && currentVal != '' && !isNaN(currentVal)){
+            var customMeal = customMealsJson[protine];
+            customMeal.item = protine;
+            customMeal.oz=currentVal;				                        
+            caloriesInfo['protine'] = [];
+            caloriesInfo['protine'].push(customMeal);
+            generate_table();
+          }else{
+            caloriesInfo['protine'] = [];
+            generate_table();
+          }
+        }else if(obj.data.option.helpText == 'Carb'){
+          var carb = $.trim(obj.data.option.internalName.replace('OZ',''));
+          if($('#calorie-info').length > 0){
+            $('#calorie-info').val('');
+          }
+          if(carb != '' && currentVal != '' && !isNaN(currentVal)){
+            var customMeal = customMealsJson[carb];
+            customMeal.item = carb;
+            customMeal.oz=currentVal;				                        				                        
+            caloriesInfo['carb'] = [];
+            caloriesInfo['carb'].push(customMeal);
+            generate_table();
+          }else{
+            caloriesInfo['carb'] = [];
+            generate_table();
+          }
+        }else if(obj.data.option.helpText == 'Veggie'){
+          
+          var veggie = $.trim(obj.data.option.internalName.replace('OZ',''));
+          if($('#calorie-info').length > 0){
+            $('#calorie-info').val('');
+          }
+          if(veggie != '' && currentVal != '' && !isNaN(currentVal)){
+            var customMeal = customMealsJson[veggie];
+            customMeal.item = veggie;
+            customMeal.oz=currentVal;				                        
+            caloriesInfo['veggie'] = [];
+            caloriesInfo['veggie'].push(customMeal);
+            generate_table();
+          }else{
+            caloriesInfo['veggie'] = [];
+            generate_table();
+          }
+        }
+      }
+    });
+    
+  
+  </script>

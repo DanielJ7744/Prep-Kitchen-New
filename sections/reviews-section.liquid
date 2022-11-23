@@ -1,0 +1,81 @@
+<style>
+  .reviews_inner {
+    padding-top: 82px;
+  }
+
+  .reviews_head h2 {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 0 0 8px;
+    text-align: left;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    font-weight: 400;
+    font-family: 'rubikmedium';
+    color: #2c2c2c;
+    border-bottom: 2px solid #E8E8E8;
+    padding-bottom: 8px;
+  }
+
+  div.stamped-container[data-widget-style], div[data-widget-style] div.stamped-container {
+    max-width: 100%;
+    margin: 0!important;
+    border: none!important;
+    padding: 0!important;
+  }
+
+  @media screen and (max-width: 767px) {
+    .reviews_inner { padding-top: 43px; }
+
+    .reviews_head h2 { font-size: 20px; line-height: 28px; margin: 0 0 8px; }
+  }
+</style>
+
+<div class="reviews_wrapper-{{ section.id 	}}">
+  <div class="page-width">
+    <div class="reviews_inner">
+      {% if section.settings.head != blank %}
+      <div class="reviews_head"><h2>{{ section.settings.head }}</h2></div>
+      {% endif %}
+
+      <div id="stamped-main-widget"   
+           data-widget-style="standard" 
+           data-product-id="{{ product.id }}"   
+           data-name="{{ product.title | escape }}"   
+           data-url="{{ shop.url }}{{ product.url }}"   
+           data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" 
+           data-description="{{ product.description | escape }}"   
+           data-product-sku="{{product.handle}}"
+           data-product-type="{{product.type}}">   
+        {{ product.metafields.stamped.reviews }}   
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Reviews",
+"tag": "section",
+"class": "reviews_section",
+"settings": [
+{
+"type" : "text",
+"id" : "head",
+"label" : "Heading"
+}
+],
+"presets": [
+{
+"name" : "Reviews",
+"category" : "Image"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

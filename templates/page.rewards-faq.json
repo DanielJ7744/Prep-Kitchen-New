@@ -1,0 +1,168 @@
+{
+  "sections": {
+    "16588934055aee1256": {
+      "type": "how-it-works-header",
+      "settings": {
+        "bg": "shopify:\/\/shop_images\/pk-green-1_1000x_optimized.jpg",
+        "head": "You have questions. <br> We have answers."
+      }
+    },
+    "1657160010be8e6284": {
+      "type": "reward_faqs",
+      "blocks": {
+        "60e048ed-104f-4c56-887e-cfafde0481c6": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "WHAT IS PK REWARDS?",
+            "faq-description": "PK’s rewards program, giving you the opportunity to $ off discounts, free food items, access exclusives, and more! As a member, you’ll earn points for every purchase, for referring new people to PK, and engaging with our brand through other platforms. Once you earn enough points to unlock rewards discounts, points can be redeemed for dollars off at check out! Best of all, it's completely free to join!"
+          }
+        },
+        "7f53419c-0310-45cf-af89-e1fe9689d483": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "HOW DO I BECOME A PK REWARDS MEMBER?",
+            "faq-description": "Joining PK Rewards is simple! Sign up with your email through the Rewards page. Once you've signed up, you'll have full access to our tiered rewards. Each time you come back, make sure you log in to track your progress, your transaction history and to redeem offers with your points."
+          }
+        },
+        "27afdde6-d140-49a7-8b7f-829ec501a63e": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "CAN I GET POINTS RETROACTIVELY FOR PURCHASES (FOR PAST PURCHASES)?",
+            "faq-description": "We launched our loyalty program on October 28th, 2019 and are unable to retroactively provide points for anything purchased before this time."
+          }
+        },
+        "5f9e636f-1fb9-45ac-bf9b-51f2c1ded76f": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "WHAT'S THE FASTEST WAY FOR ME TO EARN REWARDS?",
+            "faq-description": "The fastest way to earn is to refer your friends! When you give your friends 20% off their first PK order (of $50+), you will receive $20 in Prep Bucks (aka 660 points) for each successful referral."
+          }
+        },
+        "5b9084a9-da63-4378-a433-243cea1c3794": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "HOW DO I EARN POINTS?",
+            "faq-description": "Every $ Spent = Points Earned.We like to reward you for shopping. For every $1 you spend with Dallas Prep Kitchen, you’ll receive 1 point toward future purchases or discounts at checkout! Points will be earned on each dollar you spend, excluding all shipping fees and taxes (rounded down to the nearest dollar). You can also earn points through few other ways listed on our rewards page. Referring your friends that are new to PK is the fastest way to earn points! Please allow 48 hours for your points to appear on your Account page. You can earn points even when purchasing E-Gift Cards, however, you will not earn points when redeeming an E-Gift Card. Points can only be earned on products purchased on our website (http:\/\/www.theprepkitchen.com)."
+          }
+        },
+        "29d275b0-3be7-46a4-b28d-d68134fd17f6": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "HOW DO I REDEEM POINTS?",
+            "faq-description": "You can redeem your points at Checkout for a discount! Once logged in and ready to check out, go to the Checkout page and choose your desired discount from the dropdown. Select and click \"Apply.\" Discounts are not eligible on any shipping fees and taxes."
+          }
+        },
+        "ca4f5df7-18b2-4357-a211-392d116199f5": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "DO MY POINTS EXPIRE?",
+            "faq-description": "Nope! The points you accrue are yours forever -- they don’t expire!"
+          }
+        },
+        "d775a017-219c-4980-a084-9bbc4a336d4d": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "CAN I USE MY POINTS AND A DISCOUNT AT THE SAME TIME?",
+            "faq-description": "You cannot combine points and discount codes in the same order. However, the points don't expire so you can use the rewards on a different purchase!"
+          }
+        },
+        "4e1b34f2-99b7-4c91-8bfc-4a7374387afb": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "HOW DO I CHECK MY POINTS BALANCE?",
+            "faq-description": "Once logged in, you can check your points balance on the PK Rewards page."
+          }
+        },
+        "92234d05-d84b-4cbf-8da6-c394a072938f": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "I CAN’T LOG INTO MY ACCOUNT! WHAT DO I DO?",
+            "faq-description": "No problem! Click “Forgot Password?” to reset your password. From there, you’ll need to verify your email address and we’ll lead you through the process to get you back into your account. If you’re having any further issues, please email us at info@theprepkitchen.com and we’ll get you sorted!."
+          }
+        },
+        "9c7ee2bd-811a-47ac-b326-7753bfb543c3": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "I HAVE ENOUGH POINTS! WHY CAN'T I REDEEM MY POINTS?",
+            "faq-description": "First, make sure you're signed in to your account prior to checking out. If after signing in, the drop-down is still empty -- please clear your browser's cache and cookies. After you do so, please sign back into your account. The drop-down menu to redeem your items will be under your cart on the \"Customer Information\" page. That’s the page after the calendar during checkout. Please allow a few moments to load."
+          }
+        },
+        "dc3e145f-6635-4aa1-899a-143cd5b81325": {
+          "type": "first-block",
+          "settings": {
+            "faq-title": "CAN I TRANSFER OR MERGE MY POINTS BETWEEN TWO SEPARATE ACCOUNTS?",
+            "faq-description": "While you can accrue points on 2+ separate accounts (depending on which account you’re logged in with), you cannot transfer or merge points. It’s best to just use one main account for rewards purposes. Just sign-in to account with the same email each time."
+          }
+        },
+        "d0d91fdd-9050-45f8-97cb-226eb327def7": {
+          "type": "second-block",
+          "settings": {
+            "faq-title-one": "HOW DO I REFER A FRIEND?",
+            "faq-description-one": "Go to the PK Rewards Page, Login and you will see options to Refer your friends via email, text and Fb etc. You will also be able to refer them on a popup that appears after you checkout each time."
+          }
+        },
+        "1b9594dc-9fd8-48ad-a155-6677e58afd4e": {
+          "type": "second-block",
+          "settings": {
+            "faq-title-one": "I WAS REFERRED BY A FRIEND, WHY CAN’T I USE THEIR REFERRAL LINK (OR I GET AN INELIGIBLE MESSAGE INSTEAD OF A COUPON CODE)?",
+            "faq-description-one": "This referral offer only applies to new customers. If you have purchased with us before you do not qualify for the offer."
+          }
+        },
+        "7ee07060-d72f-43d1-b3c4-82481fa972bc": {
+          "type": "second-block",
+          "settings": {
+            "faq-title-one": "I REFERRED A FRIEND BUT I DON’T SEE MY REWARDS\/POINTS?",
+            "faq-description-one": "Your friend (the person you referred), has to make a qualifying purchase before the reward shows up in your account. If your friend is not eligible or it's not their first time purchasing, they will not receive the discount and you will not earn a reward."
+          }
+        },
+        "bf47f5cb-42b4-4b18-9a5e-456bc13e5309": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "WHAT DO THE TIERS MEAN?",
+            "faq-description-two": "PK Rewards are separated into three tiers – Bronze, Silver, and Gold. Tier status is based on your points earned during the calendar year (January 1st to December 31st) and your cumulative points earned amount will move you through the three statuses for more rewards and benefits! Your tier status will reset at the beginning of every calendar year but your points will remain in your account unless you redeem them. The cumulative spend amount includes all orders made on our website excluding E-Gift Card redemptions.When you enter a tier, you have the remainder of the current year and then the full following calendar year in that status. For example, if I earn Silver status today, I'll remain Silver for the rest of 2021 and all of 2022."
+          }
+        },
+        "88685036-4c60-4f62-9e45-fb4d812c3bc8": {
+          "type": "third-block",
+          "settings": {
+            "faq-title-two": "HOW DO I KNOW WHAT TIER I AM IN?",
+            "faq-description-two": "Once logged in, you can check your tier on the PK Rewards page. You can find it labeled as Rewards on the website’s navigation bar buttons."
+          }
+        }
+      },
+      "block_order": [
+        "60e048ed-104f-4c56-887e-cfafde0481c6",
+        "7f53419c-0310-45cf-af89-e1fe9689d483",
+        "27afdde6-d140-49a7-8b7f-829ec501a63e",
+        "5f9e636f-1fb9-45ac-bf9b-51f2c1ded76f",
+        "5b9084a9-da63-4378-a433-243cea1c3794",
+        "29d275b0-3be7-46a4-b28d-d68134fd17f6",
+        "ca4f5df7-18b2-4357-a211-392d116199f5",
+        "d775a017-219c-4980-a084-9bbc4a336d4d",
+        "4e1b34f2-99b7-4c91-8bfc-4a7374387afb",
+        "92234d05-d84b-4cbf-8da6-c394a072938f",
+        "9c7ee2bd-811a-47ac-b326-7753bfb543c3",
+        "dc3e145f-6635-4aa1-899a-143cd5b81325",
+        "d0d91fdd-9050-45f8-97cb-226eb327def7",
+        "1b9594dc-9fd8-48ad-a155-6677e58afd4e",
+        "7ee07060-d72f-43d1-b3c4-82481fa972bc",
+        "bf47f5cb-42b4-4b18-9a5e-456bc13e5309",
+        "88685036-4c60-4f62-9e45-fb4d812c3bc8"
+      ],
+      "settings": {
+        "head_title": "You have rewards questions. <br> We have answers.",
+        "life-title": "You have questions.<br> We have answers.",
+        "life-heading": "helping you live a vibrant life.",
+        "life-content": "You have a lot of questions. After all, this is your food and wellbeing we are talking about. Take a look below for a list of answers to common questions we get from customers.",
+        "panel-title": "about pk rewards.",
+        "panel-title-two": "about refferals.",
+        "panel-title-third": "about vip tiers.",
+        "question-title": "can’t find the question you’re looking for?"
+      }
+    }
+  },
+  "order": [
+    "16588934055aee1256",
+    "1657160010be8e6284"
+  ]
+}

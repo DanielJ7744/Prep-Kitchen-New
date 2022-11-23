@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0"
+    >
+    <meta name="referrer" content="origin">
+
+    <title>{{ page_title }}</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+
+    {{ checkout_scripts }}
+
+    <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/uMhW4IIrcch9hPR6WwWLbg" async></script>
+
+    <style>
+      {% if checkout.attributes['Delivery Type'] == 'pickup' %}
+       [data-trekkie-id="change_shipping_address_link"], .section.section--shipping-address [data-address-field="address1"],
+       .section.section--shipping-address [data-address-field="address2"], .section.section--shipping-address [data-address-field="city"],
+       .section.section--shipping-address [data-address-field="country"], .section.section--shipping-address [data-address-field="province"],
+       .section.section--shipping-address [data-address-field="zip"], .section--shipping-address .section__header,[data-address-selector]{
+          display:none;
+        }
+      {% endif %}
+      /*[data-alternative-payments] .dynamic-checkout__buttons [data-testid="grid-cell"]:nth-child(2){
+          display:none;
+      }*/
+    </style>
+  </head>
+  <body>
+    {{ skip_to_content_link }}
+    <div class="yotpo-widget-instance" data-yotpo-instance-id="32076"></div>
+    <div class="banner" data-header>
+      <div class="wrap">
+        {{ content_for_logo }}
+      </div>
+    </div>
+
+    {{ order_summary_toggle }}
+
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="main" role="main">
+          <div class="main__header">
+            {{ content_for_logo }}
+            {{ breadcrumb }}
+          </div>
+          <div class="main__content">
+            {{ alternative_payment_methods }}
+            {{ content_for_layout }}
+          </div>
+          <div class="main__footer">
+            {{ content_for_footer }}
+          </div>
+        </div>
+        <div class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{ tracking_code }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    {%- include 'checkout-shipping-customize' -%}
+
+    <script>
+      $().ready(function(){
+      //$(".logo__image").attr("src","https://cdn.shopify.com/s/files/1/2464/8943/files/DPK-Logo-TypeFace_5b1d3aee-b3c3-47db-b46e-1de3d96a6356.png");
+      });
+    </script>
+  </body>
+</html>
+{% if order.created_at %}
+  {{ 'swell-rewards.js' | asset_url | script_tag }}
+  {{ 'swell-rewards.scss.css' | asset_url | stylesheet_tag }}
+  {% include 'swell-thank-you-popup' %}
+{% else %}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <!-- {% include 'swell-checkout-redemption' %} -->
+{% endif %}
