@@ -784,6 +784,7 @@ div#store-front-cart-delivery-pickup {
 
   .quantity-wrapper.quantity-style--box.is-medium .quantity-element { 
     height: 33px !important; 
+    min-width: unset;
   }
 
   button#checkout { 
@@ -818,12 +819,34 @@ div#store-front-cart-delivery-pickup {
 .cart-header__continue {
 	text-decoration: underline;
 }
+.cart__form--secondary  .cart__quantity-warning {
+  display: none!important;
+}
 .cart__form--secondary .quantity-wrapper {
-  display: block!important;
-  width: 60px;
+  /* display: block!important; */
+  border-radius: 3px;
+  width: 120px;
+  border-color: #aaa;
 }
 .cart__form--secondary .quantity-wrapper .minus-control, .cart__form--secondary .quantity-wrapper .plus-control {
-  display: none;
+  /* display: none; */
+}
+.cart__form--secondary .quantity-wrapper .plus-control {
+  margin-left: -1px;
+  border-left: 1px solid #aaa;
+}
+.cart__form--secondary .quantity-wrapper .minus-control {
+  margin-right: -1px;
+  border-right: 1px solid #aaa;
+}
+.cart__form--secondary .quantity-plus.button, .cart__form--secondary .quantity-minus.button {
+  background-color: #fff;
+}
+.cart__form--secondary .quantity-plus.button .icon, .cart__form--secondary .quantity-minus.button .icon{
+  fill: #363636;
+}
+.cart__form--secondary .quantity-plus.button:hover, .cart__form--secondary .quantity-minus.button:hover {
+  background-color: #23d16a;
 }
 .cart__form--secondary .cart__card {
   position: relative;
