@@ -31,6 +31,10 @@
     {% if product.tags contains 'custom_meal'%}
       <input type="hidden" name="properties[_meal-type]" value="custom">
       <input type="hidden" name="properties[_calorie-info]" value="" id="calorie-info">
+    {% elsif product.tags contains 'Prefixed'%}
+      <input type="hidden" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
+      <input type="hidden" name="properties[_meal-type]" value="prefixed"/>
+      {% render 'prefixed-meals' with product %}
     {% elsif product.tags contains 'lifestyle_meal' or product.tags contains 'breakfast_meal' %}
       <input type="hidden" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
       <input type="hidden" name="properties[_meal-type]" value="lifestyle_breakfast"/>

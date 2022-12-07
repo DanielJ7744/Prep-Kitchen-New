@@ -36,9 +36,8 @@
             console.log({
               itemsFormatted
             });
-    			
             // Add the items with the proper format to the cart
-            this.addItemsToCart(itemsFormatted);  			
+            this.addItemsToCart(itemsFormatted);
           } catch (error) {
             console.log(`[WS] WSFunctions.accountPage.getOrderItems :: ${error}`);
           }
@@ -224,11 +223,21 @@
                 id: item.variant_id
               };
               if (item.properties) {
+                // Modified by WSDEV-221128-MM - Remove _shippingMethod property
+                if (item.properties.hasOwnProperty("_shippingMethod")) {
+                  delete item.properties._shippingMethod;
+                }
+                // End of Modified by WSDEV-221128-MM - Remove _shippingMethod property
                 data.properties = item.properties;
               }
               formattedItems.push(data);
             });
             itemsPO.forEach(item => {
+              // Modified by WSDEV-221128-MM - Remove _shippingMethod property
+              if (item.properties.hasOwnProperty("_shippingMethod")) {
+                delete item.properties._shippingMethod;
+              }
+              // End of Modified by WSDEV-221128-MM - Remove _shippingMethod property
               formattedItems.push({
                 quantity: item.quantity,
                 id: item.variant_id,

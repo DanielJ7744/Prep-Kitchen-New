@@ -100,7 +100,7 @@
         "btn1_label": "Bulk Basics",
         "btn1_link": "shopify:\/\/collections\/all",
         "btn2_label": "Prepped Meals",
-        "btn2_link": "https:\/\/theprepkitchen.com\/collections\/all?meals=pre-fixed-meals",
+        "btn2_link": "https:\/\/theprepkitchen.com\/collections\/all#pre-fixed-meals",
         "btn3_label": "Build Your Meal",
         "btn3_link": "shopify:\/\/products\/custom-meal"
       }

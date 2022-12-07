@@ -14,7 +14,9 @@
     {%- unless settings.mobile_drawer_background == false -%}
 
       .mobile-menu{
-        background-image: url(https://cdn.shopify.com/s/files/1/2464/8943/t/98/assets/pk-green-1-01.svg);
+        background-image: url(https://cdn.shopify.com/s/files/1/2464/8943/files/mobile-menu-drawer-background.svg?v=1669244388);
+        background-repeat: no-repeat;
+        background-size: cover;
       }
       {%- endunless -%}
 
@@ -66,8 +68,7 @@
     <div class="mobile-logo">
       {% if settings.logo_mobile != blank %}
         <a class="mobile-header__logo header__link primary-logo" href="{{ routes.root_url }}" title="{{ shop.name }}">
-          {%
-            render 'image-element',
+          {% render 'image-element',
             image: settings.logo_mobile,
             alt: settings.logo_mobile.alt,
             additional_classes: 'primary-logo'
@@ -75,8 +76,7 @@
         </a>
       {% elsif section.settings.logo != blank %}
         <a class="mobile-header__logo header__link primary-logo" href="{{ routes.root_url }}" title="{{ shop.name }}">
-          {%
-            render 'image-element',
+          {% render 'image-element',
             image: section.settings.logo,
             alt: section.settings.logo.alt,
             additional_classes: 'primary-logo'
@@ -92,11 +92,7 @@
       {% if settings.show_search_icon_mobile %}
         {% comment %} Search icon {% endcomment %}
         <a class="header__link action-area__link" data-show-search-trigger>
-          {%
-            render 'icon',
-            name: 'search',
-            icon_class: 'header__icon'
-          %}
+          {% render 'icon', name: 'search', icon_class: 'header__icon' %}
           <span class="icon-caption">{{ 'general.search.title' | t | escape }}</span>
         </a>
       {% endif %}
@@ -104,25 +100,16 @@
       {% comment %}Wishlist icon {% endcomment %}
       <a class="action-area__link header_wishlist" href="/apps/iwish"><span class="fa fa-heart"></span></a>
 
-
       {% if shop.customer_accounts_enabled %}
         {% if customer %}
-        <a href="{{ routes.account_url }}" class="mobile-header__account">
-          {%
-            render 'icon',
-            name: 'avatar',
-            icon_class: 'header__icon'
-          %}
-          <img class="mobile-header__account--tick" src="{{ 'tick.png' | asset_url }}" title="" alt="">
-        </a>
+          <a href="{{ routes.account_url }}" class="mobile-header__account">
+            {% render 'icon', name: 'avatar', icon_class: 'header__icon' %}
+            <img class="mobile-header__account--tick" src="{{ 'tick.png' | asset_url }}" title="" alt="">
+          </a>
         {% else %}
-        <a href="{{ routes.account_login_url }}" class="mobile-header__account">
-          {%
-            render 'icon',
-            name: 'avatar',
-            icon_class: 'header__icon'
-          %}
-        </a>
+          <a href="{{ routes.account_login_url }}" class="mobile-header__account">
+            {% render 'icon', name: 'avatar', icon_class: 'header__icon' %}
+          </a>
         {% endif %}
       {% endif %}
 
@@ -138,11 +125,7 @@
           {% endif %}
         >
           <span class="header-cart__icon header-cart__icon--mobile">
-            {%
-              render 'icon',
-              name: settings.cart_icon,
-              icon_class: 'header__icon'
-            %}
+            {% render 'icon', name: settings.cart_icon, icon_class: 'header__icon' %}
             <span class="c_count header-cart__count header-cart__count--badge badge" data-bind="itemCount">
               {% comment %}
                 {{ cart.item_count }}
@@ -171,8 +154,7 @@
     <div class="mobile-logo__outer">
       {% if settings.logo_mobile != blank %}
         <a class="mobile-header__logo header__link primary-logo" href="{{ routes.root_url }}" title="{{ shop.name }}">
-          {%
-            render 'image-element',
+          {% render 'image-element',
             image: settings.logo_mobile,
             alt: settings.logo_mobile.alt,
             additional_classes: 'primary-logo'

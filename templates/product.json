@@ -45,6 +45,7 @@
         },
         "share": {
           "type": "share",
+          "disabled": true,
           "settings": {}
         }
       },
