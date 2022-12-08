@@ -1,0 +1,20 @@
+<div class="product-icons">
+    {% for tag in product.tags %}
+    {% if tag contains 'icon__' %}
+        {%- assign iconName = tag | remove: 'icon__' | replace: " ", "-" | downcase | prepend: "icon-" | append: ".svg" -%}
+        <img src="{{ iconName | asset_url }}" title="" alt="">
+    {% endif %}
+    {% endfor %}
+</div>
+
+<style>
+    .product-icons {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+    .product-icons img {
+        width: 70px;
+    }
+</style>
