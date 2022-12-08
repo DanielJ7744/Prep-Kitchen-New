@@ -37,6 +37,12 @@
           "type": "description",
           "settings": {}
         },
+        "7c5f835b-49a9-437f-8666-6bb262c42f04": {
+          "type": "icons",
+          "settings": {
+            "icon_list": "Plant Based, Gluten Free, Dairy Free, Nut Free, Low Sodium, Low Carb, Low Fat, Low Cal, Keto Friendly, Shellfish Free, Paleo, Pescatarian, Vegan, High Carb, High Protein, Fish Free"
+          }
+        },
         "form": {
           "type": "form",
           "settings": {
@@ -53,6 +59,7 @@
         "title",
         "price",
         "description",
+        "7c5f835b-49a9-437f-8666-6bb262c42f04",
         "form",
         "share"
       ],
