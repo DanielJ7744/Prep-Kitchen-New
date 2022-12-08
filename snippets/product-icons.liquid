@@ -1,6 +1,7 @@
 <div class="product-icons">
+    {% assign iconList = block.settings.icon_list %}
     {% for tag in product.tags %}
-    {% if tag contains 'icon__' %}
+    {% if iconList contains tag %}
         {%- assign iconName = tag | remove: 'icon__' | replace: " ", "-" | downcase | prepend: "icon-" | append: ".svg" -%}
         <img src="{{ iconName | asset_url }}" title="" alt="">
     {% endif %}
