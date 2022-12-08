@@ -263,6 +263,27 @@
               <path fill="none" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
             </svg>
           </button>
+
+          {% if product.title contains "E-Gift card" %}
+            <style> 
+              .button--add-to-cart {display: none !important}
+              .gwbutton {
+                color: #fff;
+                background-color: #23d16a;
+                font-size: 1rem;
+                border-radius: 10px;
+                text-align: center;
+                padding: 12px;
+                cursor: pointer;
+                transition: background .2s ease-in-out;
+              }
+              .gwbutton:hover {
+                background-color: #1da756;
+              }
+            </style>
+            <div style="display:none" class="gwbutton">Send as a Gift</div>
+          {%endif%}
+
           {% if show_payment_button %}
             {{ form | payment_button }}
           {% endif %}
