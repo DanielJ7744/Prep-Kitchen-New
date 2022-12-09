@@ -124,7 +124,6 @@
 				dataType: "json",
 				success: function (cart) {
 					window.PXUTheme.jsAjaxCart.updateView();
-					location. reload()
 				},
 				error: function (XMLHttpRequest, textStatus) {
 					var response = eval("(" + XMLHttpRequest.responseText + ")");
@@ -140,7 +139,6 @@
 				dataType: "json",
 				success: function (cart) {
 					window.PXUTheme.jsAjaxCart.updateView();
-					location. reload()
 				},
 				error: function (XMLHttpRequest, textStatus) {
 					/* error code */

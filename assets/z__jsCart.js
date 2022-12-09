@@ -44,7 +44,6 @@ window.PXUTheme.jsCart = {
         if (typeof window.PXUTheme.jsAjaxCart !== 'undefined') {
           window.PXUTheme.jsAjaxCart.updateView();
         }
-        location. reload()
       },
       error: function (XMLHttpRequest, textStatus) {
         var response = eval('(' + XMLHttpRequest.responseText + ')');
