@@ -53,6 +53,10 @@
           "type": "share",
           "disabled": true,
           "settings": {}
+        },
+        "7b93bc4e-e2c5-409b-bfd0-57fc37de79c7": {
+          "type": "custom_accordion",
+          "settings": {}
         }
       },
       "block_order": [
@@ -61,7 +65,8 @@
         "description",
         "7c5f835b-49a9-437f-8666-6bb262c42f04",
         "form",
-        "share"
+        "share",
+        "7b93bc4e-e2c5-409b-bfd0-57fc37de79c7"
       ],
       "settings": {
         "product_images_position": "left",

@@ -12333,11 +12333,16 @@ endif
       .thumbnail-sticker {
         display: flex;
         width: 100%;
-        padding: 5px 10px;
+        /* padding: 5px 10px; */
+        padding: 5px 10px 5px 3px;
         text-align: center;
       }
+      .thumbnail-sticker svg{
+        width: 50px;
+
+      }
       .thumbnail-sticker.sale-sticker, .thumbnail-sticker.sold-out-sticker {
-        background-color: {{ sale_sticker_color }};
+        /* background-color: {{ sale_sticker_color }}; */
         color: {{ sale_sticker_color_text }};
       }
       .thumbnail-sticker.new-sticker {
@@ -13982,6 +13987,7 @@ endif
       }
       .header__menu-items {
         align-content: center;
+        height: 100% !important;
       }
       .header__menu-toggle,
       .header__icons--sticky {
@@ -14508,6 +14514,7 @@ endif
 
       .vertical-alignment-center .header__item {
         align-items: center;
+        height: 100%;
       }
       .vertical-alignment-top .header__item {
         align-items: flex-start;
@@ -15318,6 +15325,7 @@ endif
         display: flex;
         align-items: center;
         height: 100%;
+        height: 50px;
         position: relative;
         z-index: 10;
       }
@@ -16254,7 +16262,7 @@ assign search_overlay_bg_color = settings.dropdown_background | color_modify: 'a
         margin: 0;
         padding: 10px 20px 0;
         position: relative;
-        min-height: 70vh;
+        min-height: 5vh;
         width: 100%;
       }
       .mobile-search input#q {
@@ -18421,7 +18429,7 @@ assign search_overlay_bg_color = settings.dropdown_background | color_modify: 'a
           line-height: 17px;
         }
         .black_filter .black_filter_inner1 ul {
-          justify-content: flex-start!important;
+          /* justify-content: flex-start!important; */
         }
       }
 

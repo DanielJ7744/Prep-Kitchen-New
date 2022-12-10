@@ -1,7 +1,7 @@
 {% comment %}
-----------------
-Optional values
-context: <string>
+  ----------------
+  Optional values
+  context: <string>
 {% endcomment %}
 
 {% comment %} Check if product is on sale {% endcomment %}
@@ -10,24 +10,29 @@ context: <string>
 {% endif %}
 
 {% comment %} Check if sticker holder should be displayed {% endcomment %}
-{% if collection_handles contains 'best-seller' or
-      collection_handles contains 'coming-soon' or
-      collection_handles contains 'new' or
-      collection_handles contains 'pre-order' or
-      collection_handles contains 'staff-pick' or
-      product_on_sale %}
-  <div class="heeeeellll
-              sticker-holder
-              sticker-shape-{{ settings.sticker_shape }}
-              sticker-position-{{ settings.sticker_position }}">
+{% if collection_handles contains 'best-seller'
+  or collection_handles contains 'coming-soon'
+  or collection_handles contains 'new'
+  or collection_handles contains 'pre-order'
+  or collection_handles contains 'bogo'
+  or collection_handles contains 'bundle'
+  or collection_handles contains 'promo'
+  or product_on_sale
+%}
+  <div
+    class="
+      heeeeellll
+      sticker-holder
+      sticker-shape-{{ settings.sticker_shape }}
+      sticker-position-{{ settings.sticker_position }}
+    "
+  >
     <div class="sticker-holder__content sticker-holder__content--{{ context }}">
-
       {% if collection_handles contains 'best-seller' %}
         <div class="best-seller-sticker thumbnail-sticker sticker-{{i}}">
           <span class="sticker-text">{{ 'collections.general.best_seller' | t }}</span>
         </div>
       {% endif %}
-
 
       {% if collection_handles contains 'coming-soon' %}
         <div class="coming-soon-sticker thumbnail-sticker sticker-{{i}}">
@@ -35,10 +40,10 @@ context: <string>
         </div>
       {% endif %}
 
-
       {% if collection_handles contains 'new' %}
         <div class="new-sticker thumbnail-sticker sticker-{{i}}">
-          <span class="sticker-text">{{ 'collections.general.new' | t }}</span>
+          {% comment %} <span class="sticker-text">{{ 'collections.general.new' | t }}</span> {% endcomment %}
+          {% render 'icon-new' %}
         </div>
       {% endif %}
 
@@ -50,7 +55,8 @@ context: <string>
 
       {% if product.available and product_on_sale %}
         <div class="sale-sticker thumbnail-sticker sticker-{{i}}">
-          <span class="sticker-text">{{ 'collections.general.sale' | t }}</span>
+          {% comment %} <span class="sticker-text">{{ 'collections.general.sale' | t }}</span> {% endcomment %}
+          {% render 'icon-sale' %}
         </div>
       {% endif %}
 
@@ -63,6 +69,21 @@ context: <string>
       {% if collection_handles contains 'staff-pick' %}
         <div class="staff-pick-sticker thumbnail-sticker sticker-{{i}}">
           <span class="sticker-text">{{ 'collections.general.staff_pick' | t }}</span>
+        </div>
+      {% endif %}
+      {% if collection_handles contains 'bogo' %}
+        <div class="staff-pick-sticker thumbnail-sticker sticker-{{i}}">
+          {% render 'icon-bogo' %}
+        </div>
+      {% endif %}
+      {% if collection_handles contains 'bundle' %}
+        <div class="staff-pick-sticker thumbnail-sticker sticker-{{i}}">
+          {% render 'icon-bundle' %}
+        </div>
+      {% endif %}
+      {% if collection_handles contains 'promo' %}
+        <div class="staff-pick-sticker thumbnail-sticker sticker-{{i}}">
+          {% render 'icon-promo' %}
         </div>
       {% endif %}
     </div>
