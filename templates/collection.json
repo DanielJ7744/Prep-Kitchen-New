@@ -7,8 +7,52 @@
         "head": "{{ collection.title }}"
       }
     },
+    "c1a36809-d5bb-40fe-ab05-1d144241416f": {
+      "type": "collection__main",
+      "blocks": {
+        "704081e0-d34f-4adb-9087-0b47851ad30a": {
+          "type": "collection_block",
+          "settings": {
+            "show_promo_banner": false,
+            "image_darken": true,
+            "promo_title": "Special sale on now!",
+            "promo_text": "<p>Description of promotion with lots of details.<\/p>",
+            "banner_height": "medium",
+            "collection_title": "",
+            "collection_block": "{{ collection }}"
+          }
+        }
+      },
+      "block_order": [
+        "704081e0-d34f-4adb-9087-0b47851ad30a"
+      ],
+      "settings": {
+        "collection_breadcrumb": false,
+        "collection_tags": false,
+        "collection_sort": false,
+        "show_sidebar": false,
+        "sidebar_position": "left",
+        "show_promo_banner": false,
+        "image_darken": true,
+        "promo_title": "Special sale on now!",
+        "promo_text": "<p>Description of promotion with lots of details.<\/p>",
+        "banner_height": "medium",
+        "align_height": false,
+        "collection_height": 200,
+        "products_per_row": 4,
+        "mobile_products_per_row": "1",
+        "pagination_limit": 50,
+        "pagination_type": "infinite_scroll",
+        "width": "standard",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
     "165721837358916033": {
       "type": "collection__mainV2",
+      "disabled": true,
       "blocks": {
         "558192e9-ced0-4d1e-b5be-5348c40cdb76": {
           "type": "collection_block",
@@ -42,6 +86,7 @@
   },
   "order": [
     "16588619761d0dec65",
+    "c1a36809-d5bb-40fe-ab05-1d144241416f",
     "165721837358916033"
   ]
 }

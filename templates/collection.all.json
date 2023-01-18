@@ -28,32 +28,6 @@
     "1657165983eb94e22e": {
       "type": "collection__mainV2",
       "blocks": {
-        "f16a2a99-ac4c-4d8f-81e6-e3a0bf82cf6b": {
-          "type": "collection_block",
-          "settings": {
-            "show_promo_banner": false,
-            "image": "shopify:\/\/shop_images\/dop1.png",
-            "image_darken": true,
-            "promo_title": "Bulk Basics banner",
-            "promo_text": "<p>Description of bulk basicspromotion with lots of details.<\/p>",
-            "banner_height": "medium",
-            "collection_title": "Bulk Basics",
-            "collection_block": "food"
-          }
-        },
-        "17522d75-46d7-4dad-8311-d6f316544402": {
-          "type": "collection_block",
-          "settings": {
-            "show_promo_banner": false,
-            "image": "shopify:\/\/shop_images\/123.png",
-            "image_darken": true,
-            "promo_title": "Meal Basics Banner",
-            "promo_text": "<p>Description of meal basics promotion with lots of details.<\/p>",
-            "banner_height": "medium",
-            "collection_title": "Meal Basics",
-            "collection_block": "pre-fixed-meals"
-          }
-        },
         "87f19a9b-0c49-4bd6-877c-95983fc714cd": {
           "type": "collection_block",
           "settings": {
@@ -76,6 +50,44 @@
             "banner_height": "medium",
             "collection_title": "Chef inspired",
             "collection_block": "lifestyle-meals"
+          }
+        },
+        "17522d75-46d7-4dad-8311-d6f316544402": {
+          "type": "collection_block",
+          "settings": {
+            "show_promo_banner": false,
+            "image": "shopify:\/\/shop_images\/123.png",
+            "image_darken": true,
+            "promo_title": "Meal Basics Banner",
+            "promo_text": "<p>Description of meal basics promotion with lots of details.<\/p>",
+            "banner_height": "medium",
+            "collection_title": "Meal Basics",
+            "collection_block": "pre-fixed-meals"
+          }
+        },
+        "f16a2a99-ac4c-4d8f-81e6-e3a0bf82cf6b": {
+          "type": "collection_block",
+          "settings": {
+            "show_promo_banner": false,
+            "image": "shopify:\/\/shop_images\/dop1.png",
+            "image_darken": true,
+            "promo_title": "Bulk Basics banner",
+            "promo_text": "<p>Description of bulk basicspromotion with lots of details.<\/p>",
+            "banner_height": "medium",
+            "collection_title": "Bulk Basics",
+            "collection_block": "food"
+          }
+        },
+        "fddd2ff8-66be-4788-8fdb-4490987d062d": {
+          "type": "collection_block",
+          "settings": {
+            "show_promo_banner": false,
+            "image_darken": true,
+            "promo_title": "Special sale on now!",
+            "promo_text": "<p>Description of promotion with lots of details.<\/p>",
+            "banner_height": "medium",
+            "collection_title": "Soups & Salads",
+            "collection_block": "soups-salads"
           }
         },
         "3f6bdb32-5b9e-430e-bc3a-d5e9152155e3": {
@@ -113,29 +125,17 @@
             "collection_title": "Smart Snacks",
             "collection_block": "smart-snacks"
           }
-        },
-        "fddd2ff8-66be-4788-8fdb-4490987d062d": {
-          "type": "collection_block",
-          "settings": {
-            "show_promo_banner": false,
-            "image_darken": true,
-            "promo_title": "Special sale on now!",
-            "promo_text": "<p>Description of promotion with lots of details.<\/p>",
-            "banner_height": "medium",
-            "collection_title": "Soups & Salads",
-            "collection_block": "soups-salads"
-          }
         }
       },
       "block_order": [
-        "f16a2a99-ac4c-4d8f-81e6-e3a0bf82cf6b",
-        "17522d75-46d7-4dad-8311-d6f316544402",
         "87f19a9b-0c49-4bd6-877c-95983fc714cd",
         "89dc35b1-3553-4859-a388-0e83a20a7932",
+        "17522d75-46d7-4dad-8311-d6f316544402",
+        "f16a2a99-ac4c-4d8f-81e6-e3a0bf82cf6b",
+        "fddd2ff8-66be-4788-8fdb-4490987d062d",
         "3f6bdb32-5b9e-430e-bc3a-d5e9152155e3",
         "281f5d75-ec52-402c-8fa3-0f1da472eb27",
-        "53651db9-a808-4159-966e-8bb51f298ebe",
-        "fddd2ff8-66be-4788-8fdb-4490987d062d"
+        "53651db9-a808-4159-966e-8bb51f298ebe"
       ],
       "settings": {
         "heading": "ordering gourmet food made easy. super easy.",

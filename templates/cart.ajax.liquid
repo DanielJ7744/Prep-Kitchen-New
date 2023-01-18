@@ -316,16 +316,19 @@
       </button>
       <a class="ajax-cart__cart-link" href="{{ routes.cart_url }}" >{{ 'layout.general.go_to_cart' | t }}</a>
       {% else %}
-      <a href="{{ routes.cart_url }}" class="ajax-cart__button button--add-to-cart button">
-        {% if settings.show_lock_icon %}
-        {%
-                render 'icon',
-        name: 'lock'
-        %}
-        {% endif %}
-        {% comment %}{{ 'layout.general.go_to_cart' | t }} {% endcomment %}
-        Confirm Order
-      </a>
+      {% unless cart.item_count < 1 %}
+        <a href="{{ routes.cart_url }}" class="ajax-cart__button button--add-to-cart button" style="display: inline-flex !important;">
+          {% if settings.show_lock_icon %}
+          {%
+                  render 'icon',
+          name: 'lock'
+          %}
+          {% endif %}
+          {% comment %}{{ 'layout.general.go_to_cart' | t }} {% endcomment %}
+          Confirm Order
+        </a>
+      {% endunless %}
+      
       {% endif %}
     </div>
 

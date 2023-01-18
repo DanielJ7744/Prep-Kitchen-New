@@ -233,6 +233,7 @@ body.locked {
 	.product_quantity_div input.product-form__input--quantity {
 		height: 30px !important;
 		width: 33.333% !important;
+		touch-action: manipulation;
 	}
 	ul.variant_ul li {
 		height: 30px !important;

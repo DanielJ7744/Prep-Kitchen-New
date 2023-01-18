@@ -21,6 +21,7 @@
     },
     "16577001687e07cc37": {
       "type": "nutrition_coaching_section",
+      "disabled": true,
       "settings": {
         "heading": "",
         "content": "",

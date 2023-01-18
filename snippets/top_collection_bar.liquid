@@ -6,7 +6,7 @@
     }
     .header_container {
       max-width: 1900px;
-      padding: 8px 15px;
+      padding: 4px 15px;
       margin: 0 auto;
     }
     .black_filter .black_filter_upper {
@@ -20,16 +20,12 @@
       }
     }
     .black_filter .black_filter_inner1  {
-      flex: 1 1 20rem;
+      flex: 1 1 75%;
     }
+
     .black_filter .black_filter_inner1 ul {
       display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .black_filter .black_filter_inner1 ul {
-      display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
       gap: 10px;
     }
@@ -98,7 +94,8 @@
     }
     @media screen and (max-width: 800px){
       .black_filter .black_filter_inner2 {
-        flex: 1 1 15rem;
+        flex: 1 1 25%;
+        min-width: 150px;
       }
       .black_filter .black_filter_inner2 h5 a {
         font-size: 16px;
