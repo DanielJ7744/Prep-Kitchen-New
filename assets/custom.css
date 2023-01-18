@@ -190,7 +190,7 @@ a.header_account.header__link.action-area__link {
 
 /* Prevent body scroll when cart open */
 body.locked {
-	position: fixed;
+	/* position: fixed; */
 }
 
 /* Mobile Header */

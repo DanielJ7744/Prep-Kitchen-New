@@ -108,13 +108,29 @@
 			this.ajaxCartDrawer.addClass("is-visible");
 			$(".ajax-cart__overlay").addClass("is-visible");
 			//lock screen behind cart
-			$("body").addClass("locked");
+			// $("body").addClass("locked");
+
+			// Get scroll top and set position of fixed
+			document.body.style.top = `-${window.scrollY}px`;
+			document.body.style.position = 'fixed';
 		},
 		hideDrawer: function () {
 			if (this.cart_action != "drawer") return false;
 			this.ajaxCartDrawer.removeClass("is-visible");
 			$(".ajax-cart__overlay").removeClass("is-visible");
-			$("body").removeClass("locked");
+			// $("body").removeClass("locked");
+
+			// Re scroll back when cart drawer is hidden
+			const scrollY = document.body.style.top;
+			const scrollYNum = parseInt(scrollY || '0') * -1;
+			document.body.style.position = '';
+			document.body.style.top = '';
+			window.scrollBy(0, scrollYNum);
+			if (scrollYNum > 0) {
+				document.getElementById('header').style.position = 'fixed';
+				document.getElementById('header').style.top = 0;
+				document.getElementById('header').style.bottom = '';
+			}
 		},
 		removeFromCart: function (lineID, callback) {
 			$.ajax({
