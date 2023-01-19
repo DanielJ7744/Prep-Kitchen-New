@@ -25,6 +25,10 @@
     justify-content: center;
   }
 
+  .product_image .image-element__wrap {
+    height: 100%;
+  }
+
   .product_image a {
     width: 100%;
     height: 100%;
@@ -114,9 +118,23 @@
       <div class="product_block">
         <div class="product_image">
           {% if block.settings.pro_img != blank %}
-          <a href="{{ product.url }}"><img src="{{ block.settings.pro_img | img_url: '1296x' }}" /></a>
+            <a href="{{ product.url }}">
+              {%
+                render 'image-element',
+                image: block.settings.pro_img,
+                alt: block.settings.pro_img.alt,
+                stretch_width: true
+              %}
+            </a>
           {% else %}
-          <a href="{{ product.url }}"><img src="{{ product.featured_image | img_url: '1296x' }}" /></a>
+            <a href="{{ product.url }}">
+              {%
+                render 'image-element',
+                image: product.featured_image,
+                alt: product.featured_image.alt,
+                stretch_width: true
+              %}
+            </a>
           {% endif %}
         </div>
         <div class="product_info">

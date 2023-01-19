@@ -67,7 +67,7 @@
           {% if item.product.media %}
           {% if item.product.featured_media.preview_image %}
           <a href="{{ item.url }}">
-            <img src="{{ item.image | img_url: '320x' }}" alt="{{ item.title | escape }}" />
+            <img class="lazyload lazyload--fade-in" data-src="{{ item.image | img_url: '320x' }}" alt="{{ item.title | escape }}" />
           </a>
           {% endif %}
           {% else %}

@@ -49,6 +49,10 @@
     color: #2c2c2c;
   }
 
+  .service_img {
+    width: 100px;
+  }
+
   @media only screen and (min-width: 768px) and (max-width: 991px) {
     .services_header h2 { font-size: 32px; line-height: 35px; margin: 0 0 30px; }
     
@@ -92,7 +96,12 @@
       <div class="service_block">
         <div class="service_img">
           {% if block.settings.img != blank %}
-          <img src="{{ block.settings.img | img_url: '102x' }}" />
+            {%
+              render 'image-element',
+              image: block.settings.img,
+              alt: block.settings.img.alt,
+              stretch_width: true
+            %}
           {% endif %}
         </div>
         <div class="service_text">

@@ -42,6 +42,9 @@
     align-items: flex-end;
     justify-content: center;
   }
+  .s_img_wrapper img {
+    width: 84px;
+  }
 
   .icon1 h3 {  
     padding: 0;
@@ -142,12 +145,12 @@
       <div class="slider_section swiper">
         <div class="slider_inner swiper-wrapper">
           {% for block in section.blocks %}
-          <img class="swiper-slide" src="{{ block.settings.img | img_url: '550x' }}" />
+          <img class="swiper-slide lazyload lazyload--fade-in" data-src="{{ block.settings.img | img_url: '550x' }}" />
           {% endfor %}
         </div>
         <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"><img src="{{ 'la.png' | asset_img_url: '23x39' }}"/></div>
-        <div class="swiper-button-next"><img src="{{ 'ra.png' | asset_img_url: '23x39' }}"/></div>
+        <div class="swiper-button-prev"><img class="lazyload lazyload--fade-in"  data-src="{{ 'la.png' | asset_img_url: '23x39' }}"/></div>
+        <div class="swiper-button-next"><img class="lazyload lazyload--fade-in"  data-src="{{ 'ra.png' | asset_img_url: '23x39' }}"/></div>
       </div>
       <div class="text_section">
         {% if section.settings.head != blank %}
@@ -158,7 +161,12 @@
           {% if section.settings.icon1_img != blank %}
           <div class="icon1">
             <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon1_img | img_url: '84x' }}"/>
+              {%
+                render 'image-element',
+                image: section.settings.icon1_img,
+                alt: section.settings.icon1_img.alt,
+                stretch_width: true
+              %}
             </div>
             {% if section.settings.icon1_head != blank %}
             <h3>{{ section.settings.icon1_head }}</h3>
@@ -169,7 +177,12 @@
           {% if section.settings.icon2_img != blank %}
           <div class="icon1">
             <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon2_img | img_url: '84x' }}"/>
+              {%
+                render 'image-element',
+                image: section.settings.icon2_img,
+                alt: section.settings.icon2_img.alt,
+                stretch_width: true
+              %}
             </div>
             {% if section.settings.icon2_head != blank %}
             <h3>{{ section.settings.icon2_head }}</h3>
@@ -180,7 +193,12 @@
           {% if section.settings.icon3_img != blank %}
           <div class="icon1">
             <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon3_img | img_url: '84x' }}"/>
+              {%
+                render 'image-element',
+                image: section.settings.icon3_img,
+                alt: section.settings.icon3_img.alt,
+                stretch_width: true
+              %}
             </div>
             {% if section.settings.icon3_head != blank %}
             <h3>{{ section.settings.icon3_head }}</h3>
@@ -191,7 +209,12 @@
           {% if section.settings.icon4_img != blank %}
           <div class="icon1">
             <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon4_img | img_url: '84x' }}"/>
+              {%
+                render 'image-element',
+                image: section.settings.icon4_img,
+                alt: section.settings.icon4_img.alt,
+                stretch_width: true
+              %}
             </div>
             {% if section.settings.icon4_head != blank %}
             <h3>{{ section.settings.icon4_head }}</h3>
@@ -236,7 +259,12 @@
           {% if section.settings.icon1_img != blank %}
           <div class="icon1">
             <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon1_img | img_url: '84x' }}"/>
+              {%
+                render 'image-element',
+                image: section.settings.icon1_img,
+                alt: section.settings.icon1_img.alt,
+                stretch_width: true
+              %}
             </div>
             {% if section.settings.icon1_head != blank %}
             <h3>{{ section.settings.icon1_head }}</h3>
@@ -247,7 +275,12 @@
           {% if section.settings.icon2_img != blank %}
           <div class="icon1">
             <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon2_img | img_url: '84x' }}"/>
+              {%
+                render 'image-element',
+                image: section.settings.icon2_img,
+                alt: section.settings.icon2_img.alt,
+                stretch_width: true
+              %}
             </div>
             {% if section.settings.icon2_head != blank %}
             <h3>{{ section.settings.icon2_head }}</h3>
@@ -258,7 +291,12 @@
           {% if section.settings.icon3_img != blank %}
           <div class="icon1">
             <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon3_img | img_url: '84x' }}"/>
+              {%
+                render 'image-element',
+                image: section.settings.icon3_img,
+                alt: section.settings.icon3_img.alt,
+                stretch_width: true
+              %}
             </div>
             {% if section.settings.icon3_head != blank %}
             <h3>{{ section.settings.icon3_head }}</h3>
@@ -269,7 +307,12 @@
           {% if section.settings.icon4_img != blank %}
           <div class="icon1">
             <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon4_img | img_url: '84x' }}"/>
+              {%
+                render 'image-element',
+                image: section.settings.icon4_img,
+                alt: section.settings.icon4_img.alt,
+                stretch_width: true
+              %}
             </div>
             {% if section.settings.icon4_head != blank %}
             <h3>{{ section.settings.icon4_head }}</h3>

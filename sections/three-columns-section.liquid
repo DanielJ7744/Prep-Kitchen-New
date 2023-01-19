@@ -53,6 +53,9 @@
   .option_block {
     position: relative;
   }
+  .option_block img {
+    width: 520px;
+  }
 
   .option_head {
     position: absolute;
@@ -124,7 +127,12 @@
       {% for block in section.blocks %}
       <div class="option_block">
         {% if block.settings.img != blank %}
-        <img src="{{ block.settings.img | img_url: '520x' }}" />
+          {%
+            render 'image-element',
+            image: block.settings.img,
+            alt: block.settings.img.alt,
+            stretch_width: true
+          %}
         {% endif %}
 
         {% if block.settings.option_head != blank %}
