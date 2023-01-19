@@ -8,7 +8,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="{{ settings.shop_bg_color }}">
     <link rel="canonical" href="{{ canonical_url }}">
-    
+
+    {% comment %} PreLoad banner image {% endcomment %}
+    {% capture homepage_hero_html %}
+    {% section 'main-banner' %}
+    {% endcapture %}
+    {% assign hero_parts = homepage_hero_html | split: '***' %}
+    {{ hero_parts[1] }}
+    {% comment %} PreLoad banner image end {% endcomment %}
 
     {%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%}{%- endif -%}
     <title>{%- if template.name == "index" -%}{{ page_title }}{%- else -%}{{ page_title }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags }}{%- endif -%}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}{% endif %}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}{% endif %}</title>
@@ -260,7 +267,8 @@
     {%- endif -%}
 
     {% if template == 'index' %}
-    {% section 'main-banner' %}
+      {{ hero_parts[0] }}
+      {{ hero_parts[2] }}
     {% endif %}
 
 
