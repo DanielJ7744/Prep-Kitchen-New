@@ -73,7 +73,7 @@
           {% else %}
           {% if item.image %}
           <a href="{{ item.url }}">
-            <img src="{{ item | img_url: '320x' }}" alt="{{ item.title | escape }}" />
+            <img class="lazyload lazyload--fade-in" data-src="{{ item | img_url: '320x' }}" alt="{{ item.title | escape }}" />
           </a>
           {% endif %}
           {% endif %}
@@ -199,7 +199,7 @@
       <div class="ajax-cart__right-content media-right">
         <a class="ajax-cart__delete" data-ajax-cart-delete data-cart-item-key="{{ item.key }}" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}" >
           <button class="close" aria-label="close">
-            <img src="{{ 'trash.png' | asset_img_url: '128x' }}"/> 
+            <img class="lazyload lazyload--fade-in" data-src="{{ 'trash.png' | asset_img_url: '128x' }}"/> 
           </button>
         </a>
       </div>

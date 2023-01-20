@@ -4,7 +4,7 @@
     <div class="accoding_class">
       <h3 class="" onclick="show_upsell(1)" id="uq1">
         Would you like to try our recommendations?
-        <span> <img src="{{ 'arrowup.png' | asset_url }}" alt="" title=""> </span>
+        <span> <img class="lazyload lazyload--fade-in" data-src="{{ 'arrowup.png' | asset_url }}" alt="" title=""> </span>
       </h3>
 
       <div class="cart_product_inner" style="display:block;">
@@ -258,8 +258,8 @@
           </div>          
           
           <!-- If we need navigation buttons -->
-          <div class="swiper-button-prev"><img src="{{ 'left-arrow.png' | asset_img_url: '512x' }}" /></div>
-          <div class="swiper-button-next"><img src="{{ 'right-arrow.png' | asset_img_url: '512x' }}" /></div>
+          <div class="swiper-button-prev"><img class="lazyload lazyload--fade-in" data-src="{{ 'left-arrow.png' | asset_img_url: '512x' }}" /></div>
+          <div class="swiper-button-next"><img class="lazyload lazyload--fade-in" data-src="{{ 'right-arrow.png' | asset_img_url: '512x' }}" /></div>
 
         </div>
         {% endif %}

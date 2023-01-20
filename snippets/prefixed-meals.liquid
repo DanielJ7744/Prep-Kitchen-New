@@ -11,7 +11,7 @@
                         {% for cproduct in mcollection.products %}
                             <div>
                             <input id="item-{{ forloop.index }}" readonly type="hidden" class="prefixitem" name="properties[_item-{{ forloop.index }}]" value="{{ cproduct.selected_or_first_available_variant.id  }}" data-qty="1" />
-                            {%- if cproduct.featured_image != blank -%}<label for="item-{{ forloop.index }}"><img src="{{ cproduct.featured_image | img_url:"original" }}" />&nbsp;&nbsp;&nbsp;{{ cproduct.title  }}</label>{%-endif-%}
+                            {%- if cproduct.featured_image != blank -%}<label for="item-{{ forloop.index }}"><img class="lazyload lazyload--fade-in" data-src="{{ cproduct.featured_image | img_url:"original" }}" />&nbsp;&nbsp;&nbsp;{{ cproduct.title  }}</label>{%-endif-%}
                             </div>
                         {% endfor %}
                     {% endif %}	

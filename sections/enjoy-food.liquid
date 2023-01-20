@@ -84,7 +84,7 @@
       <div class="ef_block">
         <div class="ef_img">
           {% if block.settings.img != blank %}        
-          <img src="{{ block.settings.img | img_url: '98x' }}" />
+          <img class="lazyload lazyload--fade-in" data-src="{{ block.settings.img | img_url: '98x' }}" />
           {% endif %}
         </div>
         <div class="ef_text">

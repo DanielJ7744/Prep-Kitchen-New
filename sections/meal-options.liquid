@@ -117,7 +117,7 @@
     <div class="easy_meal_options_inner">
       <div class="emo_left">
         {% if section.settings.img != blank %}
-          <img src="{{ section.settings.img | img_url: '1296x' }}">
+          <img class="lazyload lazyload--fade-in" data-src="{{ section.settings.img | img_url: '1296x' }}">
         {% endif %}
       </div>
       <div class="emo_right">
@@ -125,7 +125,7 @@
           <div class="emo_block">
             <div class="emo_block_img">
               {% if block.settings.emo_img != blank %}
-                <img src="{{ block.settings.emo_img | img_url: '500x' }}">
+                <img class="lazyload lazyload--fade-in" data-src="{{ block.settings.emo_img | img_url: '500x' }}">
               {% endif %}
             </div>
             <div class="emo_block_text">

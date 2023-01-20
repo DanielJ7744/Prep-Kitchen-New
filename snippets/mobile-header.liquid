@@ -104,7 +104,7 @@
         {% if customer %}
           <a href="{{ routes.account_url }}" class="mobile-header__account">
             {% render 'icon', name: 'avatar', icon_class: 'header__icon' %}
-            <img class="mobile-header__account--tick" src="{{ 'tick.png' | asset_url }}" title="" alt="">
+            <img class="mobile-header__account--tick lazyload lazyload--fade-in" data-src="{{ 'tick.png' | asset_url }}" title="" alt="">
           </a>
         {% else %}
           <a href="{{ routes.account_login_url }}" class="mobile-header__account">

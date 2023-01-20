@@ -78,7 +78,7 @@ id: id
       <div class="left-view-wrapper">
         <div class="view-image-container">
           {% for item in cart.items  limit: 3 %}
-            <img loading="lazy" src="{{ item.image | image_url: height: 50 }}" width="50" height="50"  alt="">
+            <img class="lazyload lazyload--fade-in" data-src="{{ item.image | image_url: height: 50 }}" width="50" height="50"  alt="">
           {% endfor %}
         
         </div>

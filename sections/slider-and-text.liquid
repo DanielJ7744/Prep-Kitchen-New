@@ -354,8 +354,8 @@
           {% endfor %}
         </div>
         <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"><img src="{{ 'la.png' | asset_img_url: '23x39'  }}" /></div>
-        <div class="swiper-button-next"><img src="{{ 'ra.png' | asset_img_url: '23x39'  }}" /></div>
+        <div class="swiper-button-prev"><img class="lazyload lazyload--fade-in" data-src="{{ 'la.png' | asset_img_url: '23x39'  }}" /></div>
+        <div class="swiper-button-next"><img class="lazyload lazyload--fade-in" data-src="{{ 'ra.png' | asset_img_url: '23x39'  }}" /></div>
       </div>      
       {% endif %}
     </div>    

@@ -74,7 +74,7 @@
 
               <tr class="{% cycle 'odd', 'even' %} {% if order.cancelled %}cancelled_order{% endif %}">
                   <td data-label="Re-Order" data-id="{{ order.name }}" class="ws-re-order__container" data-label="Cart Reorder">
-                    <img class="ws-re-order__button" src="{{ 'icon.png' | asset_url }}" alt="Re-Order">
+                    <img class="ws-re-order__button lazyload lazyload--fade-in" data-src="{{ 'icon.png' | asset_url }}" alt="Re-Order">
                   </td>
                   <td data-label="{{ 'customer.orders.order_number' | t }}" class="c-button--secondary-a">{{ order.name | link_to: order.customer_url }}</td>
                   <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: "month_day_year" }}</td>
