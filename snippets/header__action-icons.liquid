@@ -55,7 +55,7 @@
             class: 'icon is-left'
             %}{% endcomment %}
             <button type="submit" class="desktop-search-action">
-              <img class="d_search" src="{{ 'd_search.svg' | asset_url }}"/>
+              <img class="d_search" src="{{ 'd_search.svg' | asset_url }}" alt="Search"/>
             </button>
           </div>
         </div>
@@ -110,7 +110,7 @@
           %}
         {% endcomment %}
         <span class="header-cart__icon--desktop">
-          <img src="{{ 'd_cart.svg' | asset_url }}"/>
+          <img src="{{ 'd_cart.svg' | asset_url }}" alt="Cart"/>
           <span class="c_count header-cart__count header-cart__count--badge badge" data-bind="itemCount">
           {% comment %}
             {{ cart.item_count }}

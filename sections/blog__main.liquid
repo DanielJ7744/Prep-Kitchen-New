@@ -379,7 +379,8 @@
         <div class="first_article_img">
           <a href="{{ article.url }}">
             {% render 'image-render',
-                image: article.image
+                image: article.image,
+                alt: article.title
             %}
           </a>
         </div>

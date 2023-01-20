@@ -125,7 +125,7 @@ margin: 0 auto;
 
       <div class="action_btns">
         <div class="hamburger" onclick="showHeight({{ index }}{{ i }});">
-          <img class="lazyload lazyload--fade-in" data-src="{{ 'menu_g.png' | asset_img_url: '24x25'  }}"/>
+          <img class="lazyload lazyload--fade-in" data-src="{{ 'menu_g.png' | asset_img_url: '24x25'  }}" alt="Show detail" />
         </div>
         <div class="plus">
           <form class="plus_form" method="post" action="/cart/add" onclick="alnimagfun{{ product.variants.first.id }}()">            
@@ -152,7 +152,7 @@ margin: 0 auto;
             <input type="hidden" name="quantity" value="1" />
             <input type="hidden" name="id" value="{{ product.variants.first.id }}"/>
             <button type="submit" data-label="Add to cart" class="action_button button--add-to-cart ajax-submit button--add-to-cart__flying" data-add-to-cart-trigger>
-              <img class="lazyload lazyload--fade-in" data-src="{{ 'plus_g.png' | asset_img_url: '24x25' }}"/>
+              <img class="lazyload lazyload--fade-in" data-src="{{ 'plus_g.png' | asset_img_url: '24x25' }}" alt="Add to cart" />
             </button>            
           </form> 
           {% comment %}}
@@ -173,7 +173,7 @@ margin: 0 auto;
           {% endif %}
           {% endfor %}
           <div class="cross_w" onclick="removeHeight({{ index }}{{ i }})">
-            <img onclick="hide_detail({{ a }}{{ s }})" class="lazyload lazyload--fade-in" data-src="{{ 'cross_w.png' | asset_img_url: '12x' }}" alt="">
+            <img onclick="hide_detail({{ a }}{{ s }})" class="lazyload lazyload--fade-in" data-src="{{ 'cross_w.png' | asset_img_url: '12x' }}" alt="Hide Detail">
           </div>
         </h5>
 

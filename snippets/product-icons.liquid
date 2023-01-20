@@ -3,7 +3,7 @@
     {% for tag in product.tags %}
     {% if iconList contains tag %}
         {%- assign iconName = tag | remove: 'icon__' | replace: " ", "-" | downcase | prepend: "icon-" | append: ".svg" -%}
-        <img class="lazyload lazyload--fade-in" data-src="{{ iconName | asset_url }}" title="" alt="">
+        <img class="lazyload lazyload--fade-in" data-src="{{ iconName | asset_url }}" title="" alt="{{ tag | remove: 'icon__' }}">
     {% endif %}
     {% endfor %}
 </div>

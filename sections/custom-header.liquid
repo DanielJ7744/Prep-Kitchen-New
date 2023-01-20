@@ -425,7 +425,7 @@
                     </div>
 
                     <button class="search-bar__submit search-form__submit" type="submit" data-search-form-submit>
-                      <img class="lazyload lazyload--fade-in" data-src="{{ 'd_search.svg' | asset_url }}" title="" alt="">
+                      <img class="lazyload lazyload--fade-in" data-src="{{ 'd_search.svg' | asset_url }}" title="" alt="Search">
                     </button>
                   </form>
                 </div>
@@ -463,7 +463,7 @@
                     {%- endfor -%}
                     {{- bold_options_hybrid_item_count -}}
                   </span>
-                  <img class="lazyload lazyload--fade-in" data-src="{{ 'd_cart.svg' | asset_url }}" title="" alt="">
+                  <img class="lazyload lazyload--fade-in" data-src="{{ 'd_cart.svg' | asset_url }}" title="" alt="Cart">
                 </div>
                 <div
                   {% if settings.show_cart_drawer == true and template != 'cart' %}
@@ -479,13 +479,13 @@
                   {% if customer %}
                     <div class="user-icon">
                       <a href="{{ routes.account_url }}">
-                        <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" alt="" title="">
+                        <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" alt="User" title="">
                       </a>
                     </div>
                   {% else %}
                     <div class="user-icon">
                       <a href="{{ routes.account_login_url }}">
-                        <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" alt="" title="">
+                        <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" alt="Account" title="">
                       </a>
                     </div>
                   {% endif %}
@@ -543,20 +543,20 @@
                       {% if customer %}
                         <div class="user-icon">
                           <a href="{{ routes.account_url }}">
-                            <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" title="" alt="">
+                            <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" title="" alt="User">
 
                             <img
                               style="position: absolute;bottom: -7px;width: 15px;right: 2px;"
                               src="{{ 'tick.png' | asset_url }}"
                               title=""
-                              alt=""
+                              alt="Tick"
                             >
                           </a>
                         </div>
                       {% else %}
                         <div class="user-icon">
                           <a href="{{ routes.account_login_url }}">
-                            <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" title="" alt="">
+                            <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" title="" alt="Account">
                           </a>
                         </div>
                       {% endif %}
@@ -581,7 +581,7 @@
                         {%- endfor -%}
                         {{- bold_options_hybrid_item_count -}}
                       </span>
-                      <img class="lazyload lazyload--fade-in" data-src="{{ 'd_cart.svg' | asset_url }}" title="" alt="">
+                      <img class="lazyload lazyload--fade-in" data-src="{{ 'd_cart.svg' | asset_url }}" title="" alt="Cart">
                     </div>
                   </div>
                 </div>

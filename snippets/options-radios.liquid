@@ -86,7 +86,7 @@
                 {% assign swatch = images[image_name] %}
               {% endif %}
 
-              <img class="swatch__image {% if swatch == empty %}swatch__image--empty{% endif %} lazyload lazyload--fade-in" data-src="{{ swatch | img_url: '50x' }}" alt="">
+              <img class="swatch__image {% if swatch == empty %}swatch__image--empty{% endif %} lazyload lazyload--fade-in" data-src="{{ swatch | img_url: '50x' }}" alt="Swatch">
 
               <span class="crossed-out" aria-label="{{ 'products.product.sold_out' | t }}" alt="{{ 'products.product.sold_out' | t }}"></span>
             </label>

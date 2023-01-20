@@ -67,7 +67,7 @@
       <div class="byo_wrapper">
         {% if section.settings.byo_img != blank %}
         <div class="byo_img">
-          <img class="lazyload lazyload--fade-in" data-src="{{ section.settings.byo_img | img_url: '187x' }}"/>
+          <img class="lazyload lazyload--fade-in" data-src="{{ section.settings.byo_img | img_url: '187x' }}" alt="{{ section.settings.byo_head }}" />
         </div>
         {% if section.settings.byo_head != blank %}
         <h3>{{ section.settings.byo_head }}</h3>

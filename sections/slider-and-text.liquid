@@ -145,12 +145,12 @@
       <div class="slider_section swiper">
         <div class="slider_inner swiper-wrapper">
           {% for block in section.blocks %}
-          <img class="swiper-slide lazyload lazyload--fade-in" data-src="{{ block.settings.img | img_url: '550x' }}" />
+          <img class="swiper-slide lazyload lazyload--fade-in" data-src="{{ block.settings.img | img_url: '550x' }}" alt="{{ block.settings.img.alt }}" />
           {% endfor %}
         </div>
         <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"><img class="lazyload lazyload--fade-in"  data-src="{{ 'la.png' | asset_img_url: '23x39' }}"/></div>
-        <div class="swiper-button-next"><img class="lazyload lazyload--fade-in"  data-src="{{ 'ra.png' | asset_img_url: '23x39' }}"/></div>
+        <div class="swiper-button-prev"><img class="lazyload lazyload--fade-in"  data-src="{{ 'la.png' | asset_img_url: '23x39' }}" alt="Prev" /></div>
+        <div class="swiper-button-next"><img class="lazyload lazyload--fade-in"  data-src="{{ 'ra.png' | asset_img_url: '23x39' }}" alt="Next" /></div>
       </div>
       <div class="text_section">
         {% if section.settings.head != blank %}
@@ -164,7 +164,7 @@
               {%
                 render 'image-element',
                 image: section.settings.icon1_img,
-                alt: section.settings.icon1_img.alt,
+                alt: section.settings.icon1_head,
                 stretch_width: true
               %}
             </div>
@@ -180,7 +180,7 @@
               {%
                 render 'image-element',
                 image: section.settings.icon2_img,
-                alt: section.settings.icon2_img.alt,
+                alt: section.settings.icon2_head,
                 stretch_width: true
               %}
             </div>
@@ -196,7 +196,7 @@
               {%
                 render 'image-element',
                 image: section.settings.icon3_img,
-                alt: section.settings.icon3_img.alt,
+                alt: section.settings.icon3_head,
                 stretch_width: true
               %}
             </div>
@@ -212,7 +212,7 @@
               {%
                 render 'image-element',
                 image: section.settings.icon4_img,
-                alt: section.settings.icon4_img.alt,
+                alt: section.settings.icon4_head,
                 stretch_width: true
               %}
             </div>
@@ -262,7 +262,7 @@
               {%
                 render 'image-element',
                 image: section.settings.icon1_img,
-                alt: section.settings.icon1_img.alt,
+                alt: section.settings.icon1_head,
                 stretch_width: true
               %}
             </div>
@@ -278,7 +278,7 @@
               {%
                 render 'image-element',
                 image: section.settings.icon2_img,
-                alt: section.settings.icon2_img.alt,
+                alt: section.settings.icon2_head,
                 stretch_width: true
               %}
             </div>
@@ -294,7 +294,7 @@
               {%
                 render 'image-element',
                 image: section.settings.icon3_img,
-                alt: section.settings.icon3_img.alt,
+                alt: section.settings.icon3_head,
                 stretch_width: true
               %}
             </div>
@@ -310,7 +310,7 @@
               {%
                 render 'image-element',
                 image: section.settings.icon4_img,
-                alt: section.settings.icon4_img.alt,
+                alt: section.settings.icon4_head,
                 stretch_width: true
               %}
             </div>
@@ -350,12 +350,12 @@
       <div class="slider_section swiper">
         <div class="slider_inner swiper-wrapper">
           {% for block in section.blocks %}
-          <img class="swiper-slide" src="{{ block.settings.img | img_url: '1296x' }}" />
+          <img class="swiper-slide" src="{{ block.settings.img | img_url: '1296x' }}" alt="{{ block.settings.img.alt }}" />
           {% endfor %}
         </div>
         <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"><img class="lazyload lazyload--fade-in" data-src="{{ 'la.png' | asset_img_url: '23x39'  }}" /></div>
-        <div class="swiper-button-next"><img class="lazyload lazyload--fade-in" data-src="{{ 'ra.png' | asset_img_url: '23x39'  }}" /></div>
+        <div class="swiper-button-prev"><img class="lazyload lazyload--fade-in" data-src="{{ 'la.png' | asset_img_url: '23x39'  }}" alt="Prev" /></div>
+        <div class="swiper-button-next"><img class="lazyload lazyload--fade-in" data-src="{{ 'ra.png' | asset_img_url: '23x39'  }}" alt="Next" /></div>
       </div>      
       {% endif %}
     </div>    

@@ -8,7 +8,7 @@
             
             <a href="{{ product.url}}" title="">    
               {% if product.featured_image.src != blank %}
-              <img class="lazyload lazyload--fade-in" data-src="{{ product.featured_image.src | img_url: 'grande'}}" alt="">
+              <img class="lazyload lazyload--fade-in" data-src="{{ product.featured_image.src | img_url: 'grande'}}" alt="{{ product.title }}">
               {% else %}
               <div class="onboard">
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -18,8 +18,8 @@
           </div>
           {% if product.type != "Gift Card"%}
           <div class="click_div custom_prop_event">
-            <div class="click_inner"><img onclick="show_detail({{ a }}{{ s }})" class="lazyload lazyload--fade-in" data-src="{{ 'menu_g.png' | asset_url }}" alt=""></div>
-            <div class="click_inner plus_g"><img class="myc lazyload lazyload--fade-in" onclick="addthistocart({{ product.variants.first.id }},{{ product.variants.first.id }},1)" data-src="{{ 'plus_g.png' | asset_url }}" alt="">
+            <div class="click_inner"><img onclick="show_detail({{ a }}{{ s }})" class="lazyload lazyload--fade-in" data-src="{{ 'menu_g.png' | asset_url }}" alt="Show detail"></div>
+            <div class="click_inner plus_g"><img class="myc lazyload lazyload--fade-in" onclick="addthistocart({{ product.variants.first.id }},{{ product.variants.first.id }},1)" data-src="{{ 'plus_g.png' | asset_url }}" alt="Add to cart">
               <div class="hover_green">
                 {% for tag in product.tags %}
                 {% if tag contains 'per_' %}
@@ -65,7 +65,7 @@
                   {% endif %}
                   {% endfor %}
                   <div class="cross_w">
-                    <img onclick="hide_detail({{ a }}{{ s }})" class="lazyload lazyload--fade-in" data-src="{{ 'cross_w.png' | asset_url }}" alt="">
+                    <img onclick="hide_detail({{ a }}{{ s }})" class="lazyload lazyload--fade-in" data-src="{{ 'cross_w.png' | asset_url }}" alt="Hide detail">
                   </div>
                 </h5>
 
@@ -174,7 +174,7 @@
         <div class="pdp_img_div">
           {% if product.featured_image.src != blank %}
           <a href="{{ product.url}}" title="">
-            <img class="lazyload lazyload--fade-in" data-src="{{ product.featured_image.src | img_url: '300x' }}" alt="">
+            <img class="lazyload lazyload--fade-in" data-src="{{ product.featured_image.src | img_url: '300x' }}" alt="{{ product.title }}">
           </a>
           {% else %}
           <div class="onboard">

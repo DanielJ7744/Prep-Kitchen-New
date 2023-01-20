@@ -88,7 +88,8 @@
     <div class="dp_img_section">
       {% if section.settings.img != blank %}
         {% render 'image-render',
-          image: section.settings.img
+          image: section.settings.img,
+          alt: section.settings.head
         %}
       {% endif %}
     </div>
@@ -126,7 +127,8 @@
     <div class="dp_img_section">
       {% if section.settings.img != blank %}
         {% render 'image-render',
-          image: section.settings.img
+          image: section.settings.img,
+          alt: section.settings.head
         %}
       {% endif %}
     </div>

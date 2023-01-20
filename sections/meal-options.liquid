@@ -118,7 +118,8 @@
       <div class="emo_left">
         {% if section.settings.img != blank %}
           {% render 'image-render',
-              image: section.settings.img 
+              image: section.settings.img,
+              alt: section.settings.head
           %}
         {% endif %}
       </div>
@@ -127,7 +128,7 @@
           <div class="emo_block">
             <div class="emo_block_img">
               {% if block.settings.emo_img != blank %}
-                <img class="lazyload lazyload--fade-in" data-src="{{ block.settings.emo_img | img_url: '100x' }}">
+                <img class="lazyload lazyload--fade-in" data-src="{{ block.settings.emo_img | img_url: '100x' }}" alt="{{ block.settings.title }}">
               {% endif %}
             </div>
             <div class="emo_block_text">

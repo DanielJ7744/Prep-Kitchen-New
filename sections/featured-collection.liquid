@@ -122,7 +122,7 @@
               {%
                 render 'image-element',
                 image: block.settings.pro_img,
-                alt: block.settings.pro_img.alt,
+                alt: product.title,
                 stretch_width: true
               %}
             </a>
@@ -131,7 +131,7 @@
               {%
                 render 'image-element',
                 image: product.featured_image,
-                alt: product.featured_image.alt,
+                alt: product.title,
                 stretch_width: true
               %}
             </a>
