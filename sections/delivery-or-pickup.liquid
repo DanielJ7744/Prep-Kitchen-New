@@ -87,7 +87,9 @@
     {% if section.settings.img_alignment == 'left' %}
     <div class="dp_img_section">
       {% if section.settings.img != blank %}
-      <img class="lazyload lazyload--fade-in" data-src="{{ section.settings.img | img_url: '1296x' }}"/>
+        {% render 'image-render',
+          image: section.settings.img
+        %}
       {% endif %}
     </div>
     <div class="dp_text_section">           
@@ -123,7 +125,9 @@
     </div>
     <div class="dp_img_section">
       {% if section.settings.img != blank %}
-      <img class="lazyload lazyload--fade-in" data-src="{{ section.settings.img | img_url: '1296x' }}"/>
+        {% render 'image-render',
+          image: section.settings.img
+        %}
       {% endif %}
     </div>
     {% endif %}

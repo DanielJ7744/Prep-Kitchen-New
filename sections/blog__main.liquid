@@ -377,7 +377,11 @@
         {% for article in blog.articles limit: 1 %}
         {% if article.image %}
         <div class="first_article_img">
-          <a href="{{ article.url }}"><img class="lazyload lazyload--fade-in" data-src="{{ article.image | img_url: '1296x' }}" /></a>
+          <a href="{{ article.url }}">
+            {% render 'image-render',
+                image: article.image
+            %}
+          </a>
         </div>
         {% else %}
         <div class="onboard">
