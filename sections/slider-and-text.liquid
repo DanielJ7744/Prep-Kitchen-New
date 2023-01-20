@@ -101,13 +101,22 @@
     text-decoration: none;
   }
 
-  .swiper-wrapper {
-    margin-bottom: 70px;
+  .slider_text_inner .slider_section {
+    padding-bottom: 60px;
   }
-  
-  .swiper-button-next, .swiper-button-prev { top: 90%; }
-  
-  .swiper-button-prev:after, .swiper-button-next:after { content: ''; }
+
+  .flickity-slider-text-slider .flickity-button svg {
+    fill: #23d16a;
+  }
+  .flickity-slider-text-slider .flickity-button {
+    background: unset;
+  }
+   .flickity-slider-text-slider .flickity-prev-next-button {
+    top: 100%;
+    width: 60px;
+    height: 60px;
+    transform: translateY(0);
+  }
   
   
   @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -142,15 +151,12 @@
   <div class="page-width">
     <div class="slider_text_inner">
       {% if section.settings.slider_alignment == 'left' %}
-      <div class="slider_section swiper">
-        <div class="slider_inner swiper-wrapper">
+      <div class="slider_section">
+        <div class="slider_inner flickity-slider-text-slider">
           {% for block in section.blocks %}
-          <img class="swiper-slide lazyload lazyload--fade-in" data-src="{{ block.settings.img | img_url: '550x' }}" alt="{{ block.settings.img.alt }}" />
+          <img class="lazyload lazyload--fade-in" data-src="{{ block.settings.img | img_url: '550x' }}" alt="{{ block.settings.img.alt }}" />
           {% endfor %}
         </div>
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"><img class="lazyload lazyload--fade-in"  data-src="{{ 'la.png' | asset_img_url: '23x39' }}" alt="Prev" /></div>
-        <div class="swiper-button-next"><img class="lazyload lazyload--fade-in"  data-src="{{ 'ra.png' | asset_img_url: '23x39' }}" alt="Next" /></div>
       </div>
       <div class="text_section">
         {% if section.settings.head != blank %}
@@ -347,35 +353,26 @@
           </div>
         </div>
       </div>
-      <div class="slider_section swiper">
-        <div class="slider_inner swiper-wrapper">
+      <div class="slider_section">
+        <div class="slider_inner flickity-slider-text-slider">
           {% for block in section.blocks %}
-          <img class="swiper-slide" src="{{ block.settings.img | img_url: '1296x' }}" alt="{{ block.settings.img.alt }}" />
+          <img class="lazyload lazyload--fade-in" data-src="{{ block.settings.img | img_url: '550x' }}" alt="{{ block.settings.img.alt }}" />
           {% endfor %}
         </div>
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"><img class="lazyload lazyload--fade-in" data-src="{{ 'la.png' | asset_img_url: '23x39'  }}" alt="Prev" /></div>
-        <div class="swiper-button-next"><img class="lazyload lazyload--fade-in" data-src="{{ 'ra.png' | asset_img_url: '23x39'  }}" alt="Next" /></div>
-      </div>      
+      </div>   
       {% endif %}
     </div>    
   </div>
 </div>
 
 <script>
-  var swiper = new Swiper(".swiper", {
-    cssMode: true,
-    slidesPerView: 1,
-    autoplay: {
-      delay: 3000
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-
-    mousewheel: true,
-    keyboard: true,
+  $( document ).ready(function() {
+      jQuery('.flickity-slider-text-slider').flickity({
+        cellAlign: 'left',
+        pageDots: false,
+        autoPlay: true,
+        contain: true
+      });
   });
 </script>
 
