@@ -247,7 +247,13 @@ margin: 0 auto;
             </ul>        
           </div>
           {% endunless %}
-          <h6 class="pro_price price_{{ index }}{{ i }}">{{ product.price | money }}</h6>
+          <h6 class="pro_price price_{{ index }}{{ i }}">
+            {%
+              render 'product-price-widget',
+              product: product,
+              collection_handles: collection_handles
+            %}
+          </h6>
 
           <input name="id" type="hidden" value="{{ product.variants.first.id }}" id="val_{{ index }}{{ i }}"/>
 
