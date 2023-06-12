@@ -1,0 +1,17 @@
+.banner__content.bannerV2 {
+	position: absolute;
+	width: 50%;
+	top: 50%;
+	left: 0%;
+	transform: translate(0%, -50%);
+	margin: auto;
+	z-index: 3;
+	width: 100%;
+}
+.banner__content.bannerV2 .banner__text {
+	margin: 0 0 0 30px;
+}
+
+.banner__content.bannerV2 .banner__heading {
+	text-align: start;
+}

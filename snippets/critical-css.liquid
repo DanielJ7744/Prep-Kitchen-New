@@ -1,0 +1,25 @@
+{% if template contains 'undefined' %}
+  {% render 'critical-css-list-collections' %}
+
+	{% elsif template contains 'collection' %}
+  {% render 'critical-css-collection' %}
+
+	{% elsif template contains 'article' %}
+  {% render 'critical-css-article' %}
+
+  {% elsif template contains 'blog' %}
+	{% render 'critical-css-blog' %}
+
+	{% elsif template contains 'page' %}
+  {% render 'critical-css-page' %}
+
+	{% elsif template contains 'product' %}
+  {% render 'critical-css-product' %}
+
+	{% elsif template contains 'search' %}
+  {% render 'critical-css-search' %}
+
+	{% else %}
+  {% render 'critical-css-index' %}
+
+	{% endif %}

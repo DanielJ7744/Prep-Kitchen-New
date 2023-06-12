@@ -16,6 +16,11 @@
 
 {% comment %} Section specific CSS {% endcomment %}
 {% style %}
+
+  
+  /*select[name="properties[Protein]"] option[value="GROUND TURKEY"] {
+      display: none;
+  }*/
   #shopify-section-{{ id }} {
     padding-top: {{ padding_top }}px;
     padding-bottom: {{ padding_bottom }}px;
@@ -42,6 +47,20 @@
           id: section.id
   %}
 {% endstyle %}
+<script>
+  /*let spanIntervalSelect = setInterval(function(){
+    let selectProtine = document.querySelector('select[name="properties[Protein]"]');
+  	if(selectProtine){    
+  		clearInterval(spanIntervalSelect);
+  		// Get the option you want to hide
+        let optionToHide = selectProtine.querySelector('option[value="GROUND TURKEY"]');
+        // Hide the option using JavaScript
+        if (optionToHide) {
+          optionToHide.hidden = true;
+        }
+  	}
+  }, 1e3);*/
+  </script>
 <style>
   #stamped-main-widget{
   width:100%;

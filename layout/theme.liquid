@@ -2,7 +2,18 @@
 <!doctype html>
 <html class="no-js no-touch" lang="{{ shop.locale }}">
   <head> 
-    <meta charset="utf-8">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-598HNXC7LL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-598HNXC7LL');
+</script>
+  
+    <meta charset='utf-8'>
+  {% render 'critical-css' %}
     <meta http-equiv="cleartype" content="on">
     <meta name="robots" content="index,follow">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -27,12 +38,15 @@
     <link rel="dns-prefetch" href="https://ajax.googleapis.com">
 
     <!--  Tinyslider JS and CSS  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css" as="style" media="none" onload="this.onload=null;this.media='all'">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" as="style" media="none" onload="this.onload=null;this.media='all'">
 
     {% if settings.enable_shopify_review_comments %}
     <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
+    {% endif %}
+    {% if settings.enable_shopify_review_comments %}
+    <link rel="preconnect" href="https://productreviews.shopifycdn.com">
     {% endif %}
 
     <!-- Preconnects -->
@@ -41,28 +55,24 @@
     <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
     <link rel="preconnect" href="https://ajax.googleapis.com">
 
-    {% if settings.enable_shopify_review_comments %}
-    <link rel="preconnect" href="https://productreviews.shopifycdn.com">
-    {% endif %}
 
     <!-- Preloads -->
     <!-- Preload CSS -->
     <link rel="preload" href="{{ 'fancybox.css' | asset_url }}" as="style">
     <link rel="preload" href="{{ 'styles.css' | asset_url }}" as="style">
     <link rel="preload" href="{{ 'fontsFace.css' | asset_url }}" as="style">
-    {{ 'style.css' | asset_url | stylesheet_tag }}
-    {{ 'fontsFace.css' | asset_url | stylesheet_tag }}  
+    <link rel="stylesheet" href="{{ 'style.css' | asset_url }}" as="style" media="none" onload="this.onload=null;this.media='all'">
+    <link rel="stylesheet" href="{{ 'fontsFace.css' | asset_url }}" as="style" media="none" onload="this.onload=null;this.media='all'">  
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" media="none" onload="this.onload=null;this.media='all'">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" as="style" media="none" onload="this.onload=null;this.media='all'">
 
 
     <!-- Preload JS -->
-<!--     <link rel="preload" href="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" as="script"> -->
     <link rel="preload" href="{{ 'vendors.js' | asset_url }}" as="script">
     <link rel="preload" href="{{ 'utilities.js' | asset_url }}" as="script">
     <link rel="preload" href="{{ 'app.js' | asset_url }}" as="script">
-
+    <link rel="preload" href="https://code.jquery.com/jquery-3.6.0.min.js" as="script">
     {% if settings.enable_shipping_calculator and template.name == 'cart' %}
     <link rel="preload" href="{{ 'shopify_common.js' | shopify_asset_url }}" as="script">
     <link rel="preload" href="{{ 'api.jquery.js' | shopify_asset_url }}" as="script">
@@ -80,9 +90,9 @@
     {% endif %}
 
     <!-- CSS for Flex -->
-    <link rel="stylesheet" href="{{ 'fancybox.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'fancybox.css' | asset_url }}" as="style" media="none" onload="this.onload=null;this.media='all'">
+    <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}" as="style" media="none" onload="this.onload=null;this.media='all'">
+    <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}" as="style" media="none" onload="this.onload=null;this.media='all'">
 
     {% comment %}Inject theme-object begin{% endcomment %}
     <script>
@@ -97,7 +107,6 @@
       {% render 'js-variables' %}
     </script>
 
-    <!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script> -->
     <script src="{{ 'vendors.js' | asset_url }}" defer></script>
     <script src="{{ 'utilities.js' | asset_url }}" defer></script>
     <script src="{{ 'app.js' | asset_url }}" defer></script>
@@ -107,7 +116,6 @@
     <script type="text/javascript" src="/services/javascripts/currencies.js"></script>
     <script src="{{ 'currencyConversion.js' | asset_url }}" defer></script>
     {%- endif -%}
-
 
 
     {%- if settings.enable_shipping_calculator and template.name == "cart" -%}
@@ -128,8 +136,8 @@
     {% endif %}
 
 
-    {{ 'bold.css' | asset_url | stylesheet_tag }}
-    {{ 'store-pickup.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="{{ 'bold.css' | asset_url }}" as="style" media="none" onload="this.onload=null;this.media='all'">
+    <link rel="stylesheet" href="{{ 'store-pickup.css' | asset_url }}" as="style" media="none" onload="this.onload=null;this.media='all'">
     {%- render 'bold-options-hybrid' -%}
     {%- render 'bold-common' -%}
     {%- comment -%} Nik - 03082021 START {%- endcomment -%}
@@ -186,16 +194,22 @@
     {{ "shopify_common.js" | shopify_asset_url | script_tag }}
     {{ "customer_area.js"  | shopify_asset_url | script_tag }}
     {% endif %}
-    <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/uMhW4IIrcch9hPR6WwWLbg" async></script>
+    <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/uMhW4IIrcch9hPR6WwWLbg" defer></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     {% comment %} Smooth scroll in collection page {% endcomment %}
     {{ 'smoothScroll-ES5.js' | asset_url | script_tag }}
+    {% if content_for_header contains 'fastbundle.co' %}
+      {% render 'fast_bundle_service' %}
+    {% endif %}
 
-{% if content_for_header contains 'fastbundle.co' %}
-    {% render 'fast_bundle_service' %}
-{% endif %}
+  <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/uMhW4IIrcch9hPR6WwWLbg" async></script>
+
+  <!-- ReSci start (Inserted on: 2021-07-26 21:51:45 UTC) -->
+  {% render 'resci-main.v1.liquid' %}
+  <!-- ReSci end -->
+
 
 </head>
 
@@ -377,8 +391,14 @@
 
    
 
-  <!--Gorgias Chat Widget Start--><script id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=6604"></script>
-<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
+  
+<!--Gorgias Chat Widget Start-->
+<script id="gorgias-chat-widget-install-v3" 
+    src="https://config.gorgias.chat/bundle-loader/01GYCBZHH5KE6T2Q9D1VW608NF?source=shopify1click">
+</script>
+<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});
+</script>
+<!--Gorgias Chat Widget End-->
 </body>
 </html>
 {% endcapture %}

@@ -1,169 +1,193 @@
 {% if section.settings.upsell %}
-<div class="cart_product_main_upper">
-  <div class="cart_product_main">
-    <div class="accoding_class">
-      <h3 class="" onclick="show_upsell(1)" id="uq1">
-        Would you like to try our recommendations?
-        <span> <img class="lazyload lazyload--fade-in" data-src="{{ 'arrowup.png' | asset_url }}" alt="Fold" title=""> </span>
-      </h3>
+  <div class="cart_product_main_upper">
+    <div class="cart_product_main">
+      <div class="accoding_class">
+        <h3 class="" onclick="show_upsell(1)" id="uq1">
+          Would you like to try our recommendations?
+          <span>
+            <img class="lazyload lazyload--fade-in" data-src="{{ 'arrowup.png' | asset_url }}" alt="Fold" title="">
+          </span>
+        </h3>
 
-      <div class="cart_product_inner" style="display:block;">
-        {% capture item_name %}
+        <div class="cart_product_inner" style="display:block;">
+          {% capture item_name %}
           {% for item in cartItems -%}
             {{- item.product.handle -}}
           {%- endfor %}
         {% endcapture %}
 
-        {% assign checkproduct = false %}
+          {% assign checkproduct = false %}
 
-        {% if checkproduct == false %}
-        {%- assign collection = section.settings.select_collection -%}
+          {% if checkproduct == false %}
+            {%- assign collection = section.settings.select_collection -%}
 
-        <div class="best_seller_slider">
-          <div class="flickity-cart-upsell">
-            {% for product in collection.products limit: 20 %}
-            <div class="seller_div">
-              <div class="seller_img_product2">
-                <a href="{{ product.url }}" title="">
-                  {%- assign img_url = product | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                  <img
-                    src="{{ product | img_url: '200x' }}"
-                    alt="{{ product.title | escape }}"
-                  >
-                </a>
-              </div>
-              <div class="text_seller3" id="pro-{{ product.id }}">
-                <h2>
-                  <a href="{{ product.url }}">{{ product.title  | truncate: 25 }}</a>
-                </h2>
-                <h5>
-                  <span class="cart_product_main_upper--sale">{{ product.compare_at_price | money }}</span>
-                  {{ product.price | money }}
-                </h5>
+            <div class="best_seller_slider">
+              <div class="flickity-cart-upsell">
+                {% for product in collection.products limit: 20 %}
+                  <div class="seller_div">
+                    <div class="seller_img_product2">
+                      <a href="{{ product.url }}" title="">
+                        {%- assign img_url = product | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                        <img
+                          src="{{ product | img_url: '200x' }}"
+                          alt="{{ product.title | escape }}"
+                        >
+                      </a>
+                    </div>
+                    <div class="text_seller3" id="pro-{{ product.id }}">
+                      <h2>
+                        <a href="{{ product.url }}">{{ product.title | truncate: 25 }}</a>
+                      </h2>
+                      <h5>
+                        <span class="cart_product_main_upper--sale">{{ product.compare_at_price | money }}</span>
+                        {{ product.price | money }}
+                      </h5>
 
-                <div class="shop_all2">
-                  {%- if product.tags contains 'Prefixed' -%}
-                    <input type="hidden" class="lifestyle" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
-                    <input type="hidden" class="meal" name="properties[_meal-type]" value="prefixed"/>
-                  
-                    {%- assign mcollection = collections[product.handle] -%}
-                    {%- if mcollection.all_products_count > 0 -%}   
-                        {%- for cproduct in mcollection.products -%}
-                              <input id="item-{{ forloop.index }}" readonly type="hidden" class="prefixitem" name="properties[_item-{{ forloop.index }}]" value="{{ cproduct.selected_or_first_available_variant.id  }}" data-qty="1" />
-                        {%- endfor -%}
-                    {%- endif -%}	
-                  {%- elsif product.tags contains 'lifestyle_meal' or product.tags contains 'breakfast_meal' -%}
-                    <input type="hidden" class="lifestyle" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
-                    <input type="hidden" class="meal" name="properties[_meal-type]" value="lifestyle_breakfast"/>
-                  {%- endif -%}
-              
-                  <a
-                     onclick="addUpsellPro({{ product.id }},{{ product.selected_or_first_available_variant.id }})"
-                     href="javascript:void(0)"
-                     class="cbtn"
-                     >Add</a
-                    >
-                </div>
+                      <div class="shop_all2">
+                        {%- if product.tags contains 'Prefixed' -%}
+                          <input
+                            type="hidden"
+                            class="lifestyle"
+                            name="properties[_lifestyleinfo]"
+                            value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"
+                          >
+                          <input type="hidden" class="meal" name="properties[_meal-type]" value="prefixed">
+
+                          {%- assign mcollection = collections[product.handle] -%}
+                          {%- if mcollection.all_products_count > 0 -%}
+                            {%- for cproduct in mcollection.products -%}
+                              <input
+                                id="item-{{ forloop.index }}"
+                                readonly
+                                type="hidden"
+                                class="prefixitem"
+                                name="properties[_item-{{ forloop.index }}]"
+                                value="{{ cproduct.selected_or_first_available_variant.id  }}"
+                                data-qty="1"
+                              >
+                            {%- endfor -%}
+                          {%- endif -%}
+                        {%- elsif product.tags contains 'lifestyle_meal' or product.tags contains 'breakfast_meal' -%}
+                          <input
+                            type="hidden"
+                            class="lifestyle"
+                            name="properties[_lifestyleinfo]"
+                            value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"
+                          >
+                          <input type="hidden" class="meal" name="properties[_meal-type]" value="lifestyle_breakfast">
+                        {%- endif -%}
+
+                        <a
+                          onclick="addUpsellPro({{ product.id }},{{ product.selected_or_first_available_variant.id }})"
+                          href="javascript:void(0)"
+                          class="cbtn"
+                          >Add</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
             </div>
-            {% endfor %}
-          </div>          
+          {% endif %}
         </div>
-
-        {% endif %}
-
       </div>
     </div>
   </div>
-</div>
 
-<style>
-  .flickity-cart-upsell {
-    display: none;
-  }
-  .flickity-cart-upsell.flickity-enabled {
-    display: block;
-  }
-  .flickity-cart-upsell .seller_div {
-    width: 25%;
-  }
-  .flickity-cart-upsell .flickity-prev-next-button {
-    top: calc(100% + 20px);
-  }
-  .flickity-cart-upsell .flickity-prev-next-button.previous {
-    left: 50%;
-    transform: translate(calc(-50% - 30px), 0);
-  }
-  .flickity-cart-upsell .flickity-prev-next-button.next {
-    right: 50%;
-    transform: translate(calc(50% + 30px), 0);
-  }
-  .flickity-cart-upsell .flickity-button {
-    background: unset;
-  }
-  @media only screen and (max-width: 700px) {
+  <style>
+    .flickity-cart-upsell {
+      display: none;
+    }
+    .flickity-cart-upsell.flickity-enabled {
+      display: block;
+    }
     .flickity-cart-upsell .seller_div {
-      width: 33.3333%;
+      width: 25%;
     }
-  }
-  @media only screen and (max-width: 500px) {
-    .flickity-cart-upsell .seller_div {
-      width: 50%;
+    .flickity-cart-upsell .flickity-prev-next-button {
+      top: calc(100% + 20px);
     }
-  }
-  @media only screen and (max-width: 100px) {
-    .flickity-cart-upsell .seller_div {
-      width: 100%;
+    .flickity-cart-upsell .flickity-prev-next-button.previous {
+      left: 50%;
+      transform: translate(calc(-50% - 30px), 0);
     }
-  }
-</style>
-
-<script>
-  function show_upsell(para) {
-    $('.cart_product_inner').slideToggle('medium');
-    if($('#uq'+para ).hasClass('slide_active')){
-      $('#uq'+para ).removeClass('slide_active');
-    } else {
-      $('#uq'+para ).addClass('slide_active');
+    .flickity-cart-upsell .flickity-prev-next-button.next {
+      right: 50%;
+      transform: translate(calc(50% + 30px), 0);
     }
-  }
-
-  function addUpsellPro(PID,VID) {
-    var cdata=[];
-
-    cdata.push({
-      id: VID,
-      quantity: 1,
-      properties: {
-        '_lifestyleinfo': $('#pro-'+PID).find('.lifestyle').val(),
-        '_meal-type': $('#pro-'+PID).find('.meal').val()
+    .flickity-cart-upsell .flickity-button {
+      background: unset;
+    }
+    @media only screen and (max-width: 700px) {
+      .flickity-cart-upsell .seller_div {
+        width: 33.3333%;
       }
-    });
-
-    $.ajax({
-      type: 'POST',
-      url: '/cart/add.js',
-      async: false,
-      cache: false,
-      dataType: 'json',
-      data: cdata[0],
-      error: function(a,b){
-        console.log(a);
-        console.log(b);
-      },
-      success: function(cdata){
-        $('#pro-'+PID).find('.cbtn').text('Added');
-        window.location = '/cart';
+    }
+    @media only screen and (max-width: 500px) {
+      .flickity-cart-upsell .seller_div {
+        width: 100%;
       }
-    });
-  }
+    }
+    @media only screen and (max-width: 100px) {
+      .flickity-cart-upsell .seller_div {
+        width: 100%;
+      }
+    }
+  </style>
 
-  $( document ).ready(function() {
+  <script>
+    function show_upsell(para) {
+      $('.cart_product_inner').slideToggle('medium');
+      if ($('#uq' + para).hasClass('slide_active')) {
+        $('#uq' + para).removeClass('slide_active');
+      } else {
+        $('#uq' + para).addClass('slide_active');
+      }
+    }
+
+    function addUpsellPro(PID, VID) {
+      var cdata = [];
+
+      cdata.push({
+        id: VID,
+        quantity: 1,
+        properties: {
+          _lifestyleinfo: $('#pro-' + PID)
+            .find('.lifestyle')
+            .val(),
+          '_meal-type': $('#pro-' + PID)
+            .find('.meal')
+            .val(),
+        },
+      });
+
+      $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        async: false,
+        cache: false,
+        dataType: 'json',
+        data: cdata[0],
+        error: function (a, b) {
+          console.log(a);
+          console.log(b);
+        },
+        success: function (cdata) {
+          $('#pro-' + PID)
+            .find('.cbtn')
+            .text('Added');
+          window.location = '/cart';
+        },
+      });
+    }
+
+    $(document).ready(function () {
       jQuery('.flickity-cart-upsell').flickity({
         cellAlign: 'left',
         pageDots: false,
-        contain: true
+        contain: true,
       });
-  });
-</script>
+    });
+  </script>
 {% endif %}

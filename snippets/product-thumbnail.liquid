@@ -1,47 +1,48 @@
 {% if related_products == true %}
-{% assign hover_enabled = block.settings.show_related_products_title_on_hover %}
+  {% assign hover_enabled = block.settings.show_related_products_title_on_hover %}
 {% else %}
-{% assign hover_enabled = settings.thumbnail_hover_enabled %}
+  {% assign hover_enabled = settings.thumbnail_hover_enabled %}
 {% endif %}
 
 {% if type == 'block' %}
-{% assign object = block %}
+  {% assign object = block %}
 {% else %}
-{% assign object = section %}
+  {% assign object = section %}
 {% endif %}
 
 {% assign secondaryImage = product.media[1] %}
 
 {% assign collection_handles = product.collections | map: 'handle' %}
 {% if product.featured_media.preview_image.alt contains 'youtube' or image.alt contains 'vimeo' %}
-{% assign alt_text = product.title %}
+  {% assign alt_text = product.title %}
 {% else %}
-{% assign alt_text = product.featured_media.preview_image.alt %}
+  {% assign alt_text = product.featured_media.preview_image.alt %}
 {% endif %}
 
 {% if type == 'block' %}
-{% assign image_crop = block.settings.image_crop %}
+  {% assign image_crop = block.settings.image_crop %}
 {% else %}
-{% assign image_crop = section.settings.image_crop %}
+  {% assign image_crop = section.settings.image_crop %}
 {% endif %}
 
 {% if align_height == true %}
-{% style %}
-.product-{{ product.id }}.thumbnail .image__container img,
-.product-{{ product.id }}.thumbnail .product-thumbnail__video .plyr {
-max-width: 100%;
-width: {{ height }}px;
-margin: 0 auto;
-}
+  {% style %}
+    .product-{{ product.id }}.thumbnail .image__container img,
+    .product-{{ product.id }}.thumbnail .product-thumbnail__video .plyr {
+    max-width: 100%;
+    width: {{ height }}px;
+    margin: 0 auto;
+    }
 
-.shopify-model-viewer-ui model-viewer {
---progress-bar-height: 2px;
---progress-bar-color: {{ settings.regular_color }};
-}
-{% endstyle %}
+    .shopify-model-viewer-ui model-viewer {
+    --progress-bar-height: 2px;
+    --progress-bar-color: {{ settings.regular_color }};
+    }
+  {% endstyle %}
 {% endif %}
 
-<div class="
+<div
+  class="
             {%
     render 'column-width',
             value: products_per_row
@@ -68,319 +69,390 @@ margin: 0 auto;
             product__thumbnail
             product__grid-item
             thumbnail__hover-overlay--{{ hover_enabled }}
-            has-padding-bottom collrep {% for tag in product.tags %}{{ tag | handle }} {% endfor %}"
-     {% if section.settings.pagination_type != 'basic_pagination' %}
-     data-load-more--grid-item
-     {% endif %}>
+            has-padding-bottom collrep {% for tag in product.tags %}{{ tag | handle }} {% endfor %}
+  "
+  {% if section.settings.pagination_type != 'basic_pagination' %}
+    data-load-more--grid-item
+  {% endif %}
+>
   <div class="product-wrap">
-
     <div class="product-image__wrapper">
+      {% if settings.stickers_enabled %}
+        {% render 'product-thumbnail__sticker',
+          product: product,
+          context: 'product',
+          collection_handles: collection_handles,
+          class_names: 'thumbnail-sticker__col-desktop'
+        %}
+      {% endif %}
       <div class="image__container product__imageContainer">
         <a href="{{ product.url | within: collection }}">
-          {% if settings.stickers_enabled %}
-          {%
-            render 'product-thumbnail__sticker',
-            product: product,
-            context: 'product',
-            collection_handles: collection_handles
-          %}
-          {% endif %}
-
           {% comment %} Primary image {% endcomment %}
-          {%
-            render 'image-element',
+          {% render 'image-element',
             image: product.featured_media.preview_image,
             alt: alt_text,
             object_fit: align_height,
-            max_height: height
+            max_height: height,
+            index: index
           %}
 
           {% comment %} Secondary image {% endcomment %}
           {% if product.media[1] != blank and settings.show_secondary_image == true %}
-          {% if product.media[1].media_type == 'external_video' %}
-          <div class="product-thumbnail__video secondary swap--visible video-on-hover">
-            <div data-youtube-video>
-              {{ product.media[1] | external_video_tag }}
-            </div>
-          </div>
-          {% elsif product.media[1].media_type == 'video' %}
-          <div class="product-thumbnail__video secondary swap--visible video-on-hover" data-html5-video>
-            {{ product.media[1] | video_tag: controls: false }}
-          </div>
-          {% else %}
-          {%
-            render 'image-element',
-            image: product.media[1],
-            alt: alt_text,
-            object_fit: align_height,
-            max_height: height,
-            additional_classes: 'secondary swap--visible'
-          %}
-          {% endif %}
+            {% if product.media[1].media_type == 'external_video' %}
+              <div class="product-thumbnail__video secondary swap--visible video-on-hover">
+                <div data-youtube-video>
+                  {{ product.media[1] | external_video_tag }}
+                </div>
+              </div>
+            {% elsif product.media[1].media_type == 'video' %}
+              <div class="product-thumbnail__video secondary swap--visible video-on-hover" data-html5-video>
+                {{ product.media[1] | video_tag: controls: false }}
+              </div>
+            {% else %}
+              {% render 'image-element',
+                image: product.media[1],
+                alt: alt_text,
+                object_fit: align_height,
+                max_height: height,
+                additional_classes: 'secondary swap--visible'
+              %}
+            {% endif %}
           {% endif %}
         </a>
       </div>
 
-      <div class="wishcoll">{% render 'iwish_v2' with 'iwishCollection', product:product %}</div>
+      <div class="wishcoll">{% render 'iwish_v2' with 'iwishCollection', product: product %}</div>
 
       <div class="action_btns">
         <div class="hamburger" onclick="showHeight({{ index }}{{ i }});">
-          <img class="lazyload lazyload--fade-in" data-src="{{ 'menu_g.png' | asset_img_url: '24x25'  }}" alt="Show detail" />
+          <img
+            class="lazyload lazyload--fade-in"
+            data-src="{{ 'menu_g.png' | asset_img_url: '24x25'  }}"
+            src="{{ 'menu_g.png' | asset_img_url: '24x25'  }}"
+            alt="Show detail"
+          >
         </div>
         <div class="plus">
-          <form class="plus_form" method="post" action="/cart/add" onclick="alnimagfun{{ product.variants.first.id }}()">            
+          <form
+            class="plus_form"
+            method="post"
+            action="/cart/add"
+            data-productid="{{ product.id }}"
+            onclick="alnimagfun{{ product.variants.first.id }}()"
+          >
             {% if product.tags contains 'Prefixed' %}
               {%- comment -%}
-              <input type="hidden" name="properties[Meal Contains]" value="{{ product.metafields['meal']['prefixed']}}"/>
-              {% endcomment %}
-              <input type="hidden" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
-              <input type="hidden" name="properties[_meal-type]" value="prefixed"/>
-            
-              {% assign mcollection = collections[product.handle] %}          
-              {% assign pcount = mcollection.all_products_count | plus:1 %}
-            
-              {% if pcount > 0 %}   
+                <input type="hidden" name="properties[Meal Contains]" value="{{ product.metafields['meal']['prefixed']}}"/>
+              {%- endcomment -%}
+              <input
+                type="hidden"
+                name="properties[_lifestyleinfo]"
+                value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"
+              >
+              <input type="hidden" name="properties[_meal-type]" value="prefixed">
+
+              {% assign mcollection = collections[product.handle] %}
+              {% assign pcount = mcollection.all_products_count | plus: 1 %}
+
+              {% if pcount > 0 %}
                 {% for cproduct in mcollection.products %}
-                  <input id="item-{{ forloop.index }}" readonly type="hidden" class="prefixitem" name="properties[_item-{{ forloop.index }}]" value="{{ cproduct.selected_or_first_available_variant.id  }}" data-qty="1" />
+                  <input
+                    id="item-{{ forloop.index }}"
+                    readonly
+                    type="hidden"
+                    class="prefixitem"
+                    name="properties[_item-{{ forloop.index }}]"
+                    value="{{ cproduct.selected_or_first_available_variant.id  }}"
+                    data-qty="1"
+                  >
                 {% endfor %}
-              {% endif %}	
+              {% endif %}
             {% elsif product.tags contains 'lifestyle_meal' or product.tags contains 'breakfast_meal' %}
-              <input type="hidden" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
-              <input type="hidden" name="properties[_meal-type]" value="lifestyle_breakfast"/>
+              <input
+                type="hidden"
+                name="properties[_lifestyleinfo]"
+                value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"
+              >
+              <input type="hidden" name="properties[_meal-type]" value="lifestyle_breakfast">
             {% endif %}
-            
-            <input type="hidden" name="quantity" value="1" />
-            <input type="hidden" name="id" value="{{ product.variants.first.id }}"/>
-            <button type="submit" data-label="Add to cart" class="action_button button--add-to-cart ajax-submit button--add-to-cart__flying" data-add-to-cart-trigger>
-              <img class="lazyload lazyload--fade-in" data-src="{{ 'plus_g.png' | asset_img_url: '24x25' }}" alt="Add to cart" />
-            </button>            
-          </form> 
-          {% comment %}}
-              <div id="animatedimage{{ product.variants.first.id }}" class="anima_img">
-                <img src="{{ product.featured_image | img_url:'master' }}">
-    		  </div>
-           {% endcomment %}
+
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="id" data-productid="{{ product.id }}" value="{{ product.variants.first.id }}">
+            <button
+              type="submit"
+              data-label="Add to cart"
+              class="action_button button--add-to-cart ajax-submit button--add-to-cart__flying"
+              data-add-to-cart-trigger
+            >
+              <img
+                class="lazyload lazyload--fade-in"
+                data-src="{{ 'plus_g.png' | asset_img_url: '24x25' }}"
+                src="{{ 'plus_g.png' | asset_img_url: '24x25' }}"
+                alt="Add to cart"
+              >
+            </button>
+          </form>
+          {% comment %}
+            }
+                  <div id="animatedimage{{ product.variants.first.id }}" class="anima_img">
+                    <img src="{{ product.featured_image | img_url:'master' }}">
+            </div>
+          {% endcomment %}
         </div>
       </div>
 
       <div class="h_click_wrapper hc_wrapper{{ index }}{{ i }}">
+        {% if settings.stickers_enabled %}
+          {% render 'product-thumbnail__sticker',
+            product: product,
+            context: 'product',
+            collection_handles: collection_handles,
+            class_names: 'thumbnail-sticker__col-mobile'
+          %}
+        {% endif %}
         <a class="mob_pro_title">{{ product.title }}</a>
         <h5>
           {% for tag in product.tags %}
-          {% if tag contains 'per_' %}
-          Per {{ tag | remove:'per_' }}
-          {% break %}
-          {% endif %}
+            {% if tag contains 'per_' %}
+              Per {{ tag | remove: 'per_' }}
+              {% break %}
+            {% endif %}
           {% endfor %}
           <div class="cross_w" onclick="removeHeight({{ index }}{{ i }})">
-            <img onclick="hide_detail({{ a }}{{ s }})" class="lazyload lazyload--fade-in" data-src="{{ 'cross_w.png' | asset_img_url: '12x' }}" alt="Hide Detail">
+            <img
+              onclick="hide_detail({{ a }}{{ s }})"
+              class="lazyload lazyload--fade-in"
+              data-src="{{ 'cross_w.png' | asset_img_url: '12x' }}"
+              alt="Hide Detail"
+            >
           </div>
         </h5>
 
-        <ul class="tag_ul" >
+        <ul class="tag_ul">
           {% for tag in product.tags %}
-          {% if tag contains 'pro_' %}
-          <li><span>Pro</span> {{ tag | remove:'pro_' }}</li>
-          {% break %}
-          {% endif %}
+            {% if tag contains 'pro_' %}
+              <li><span>Pro</span> {{ tag | remove: 'pro_' }}</li>
+              {% break %}
+            {% endif %}
           {% endfor %}
           {% for tag in product.tags %}
-          {% if tag contains 'fat_' %}
-          <li><span>Fat</span>{{ tag | remove:'fat_' }}</li>
-          {% break %}
-          {% endif %}
+            {% if tag contains 'fat_' %}
+              <li><span>Fat</span>{{ tag | remove: 'fat_' }}</li>
+              {% break %}
+            {% endif %}
           {% endfor %}
           {% for tag in product.tags %}
-          {% if tag contains 'carb_' %}
-          <li><span>Carbs</span>{{ tag | remove:'carb_' }}</li>
-          {% break %}
-          {% endif %}
+            {% if tag contains 'carb_' %}
+              <li><span>Carbs</span>{{ tag | remove: 'carb_' }}</li>
+              {% break %}
+            {% endif %}
           {% endfor %}
           {% for tag in product.tags %}
-          {% if tag contains 'cal_' %}
-          <li><span>Cal</span>{{ tag | remove:'cal_' }}</li>
-          {% break %}
-          {% endif %}
-          {% endfor %}    
+            {% if tag contains 'cal_' %}
+              <li><span>Cal</span>{{ tag | remove: 'cal_' }}</li>
+              {% break %}
+            {% endif %}
+          {% endfor %}
         </ul>
 
-        <form method="post" action="/cart/add" id="form-{{ index }}{{ i }}" class="coll_a2c_btn">               
+        <form
+          method="post"
+          action="/cart/add"
+          data-productid="{{ product.id }}"
+          id="form-{{ index }}{{ i }}"
+          class="coll_a2c_btn"
+        >
           {% if product.tags contains 'Prefixed' %}
             {%- comment -%}
-            <input type="hidden" name="properties[Meal Contains]" value="{{ product.metafields['meal']['prefixed']}}"/>
-            {% endcomment %}
-            <input type="hidden" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
-            <input type="hidden" name="properties[_meal-type]" value="prefixed"/>
-          
-            {% assign mcollection = collections[product.handle] %}          
-            {% assign pcount = mcollection.all_products_count | plus:1 %}
-          
-            {% if pcount > 0 %}   
+              <input type="hidden" name="properties[Meal Contains]" value="{{ product.metafields['meal']['prefixed']}}"/>
+            {%- endcomment -%}
+            <input
+              type="hidden"
+              name="properties[_lifestyleinfo]"
+              value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"
+            >
+            <input type="hidden" name="properties[_meal-type]" value="prefixed">
+
+            {% assign mcollection = collections[product.handle] %}
+            {% assign pcount = mcollection.all_products_count | plus: 1 %}
+
+            {% if pcount > 0 %}
               {% for cproduct in mcollection.products %}
-                <input id="item-{{ forloop.index }}" readonly type="hidden" class="prefixitem" name="properties[_item-{{ forloop.index }}]" value="{{ cproduct.selected_or_first_available_variant.id  }}" data-qty="1" />
+                <input
+                  id="item-{{ forloop.index }}"
+                  readonly
+                  type="hidden"
+                  class="prefixitem"
+                  name="properties[_item-{{ forloop.index }}]"
+                  value="{{ cproduct.selected_or_first_available_variant.id  }}"
+                  data-qty="1"
+                >
               {% endfor %}
-            {% endif %}	
+            {% endif %}
           {% elsif product.tags contains 'lifestyle_meal' or product.tags contains 'breakfast_meal' %}
-            <input type="hidden" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
-            <input type="hidden" name="properties[_meal-type]" value="lifestyle_breakfast"/>
+            <input
+              type="hidden"
+              name="properties[_lifestyleinfo]"
+              value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"
+            >
+            <input type="hidden" name="properties[_meal-type]" value="lifestyle_breakfast">
           {% endif %}
 
           {% unless product.handle contains 'gift' %}
-          <div class="quantity_variant">
-            <div class="product_quantity_div">
-              <input class="minus" type="button" value="-" onclick="minus({{ index }}{{ i }})">
-              <input type="number" name="quantity" value="1" min="1" pattern="[0-9]*" class="q_{{ index }}{{ i }} product-form__input product-form__input--quantity" data-quantity-input="">
-              <input class="plus" type="button" value="+" onclick="plus({{ index }}{{ i }})">                  
-              <div class="clearfix"></div>
-            </div>
+            <div class="quantity_variant">
+              <div class="product_quantity_div">
+                <input class="minus" type="button" value="-" onclick="minus({{ index }}{{ i }})">
+                <input
+                  type="number"
+                  name="quantity"
+                  value="1"
+                  min="1"
+                  pattern="[0-9]*"
+                  class="q_{{ index }}{{ i }} product-form__input product-form__input--quantity"
+                  data-quantity-input=""
+                >
+                <input class="plus" type="button" value="+" onclick="plus({{ index }}{{ i }})">
+                <div class="clearfix"></div>
+              </div>
 
-            <ul class="variant_ul">
-              {% for variant in product.variants %}
-              {% unless product.has_only_default_variant %}
-              {% if variant.available %}
-              <li onclick="setvar({{ index }}{{ i }}, {{ variant.id }}, '{{ variant.price | money }}', {{ product.id }})" {% if variant == product.selected_or_first_available_variant %} class="var_selected" {% endif %} id="d{{ variant.id }}">
-                {{ variant.title }}
-              </li>
-              {% endif %}
-              {% endunless %}
-              {% endfor %}
-            </ul>        
-          </div>
+              <ul class="variant_ul">
+                {% for variant in product.variants %}
+                  {% unless product.has_only_default_variant %}
+                    {% if variant.available %}
+                      <li
+                        onclick="setvar({{ index }}{{ i }}, {{ variant.id }}, '{{ variant.price | money }}', {{ product.id }})"
+                        {% if variant == product.selected_or_first_available_variant %}
+                          class="var_selected"
+                        {% endif %}
+                        id="d{{ variant.id }}"
+                      >
+                        {{ variant.title }}
+                      </li>
+                    {% endif %}
+                  {% endunless %}
+                {% endfor %}
+              </ul>
+            </div>
           {% endunless %}
           <h6 class="pro_price price_{{ index }}{{ i }}">
-            {%
-              render 'product-price-widget',
-              product: product,
-              collection_handles: collection_handles
-            %}
+            {% render 'product-price-widget', product: product, collection_handles: collection_handles %}
           </h6>
 
-          <input name="id" type="hidden" value="{{ product.variants.first.id }}" id="val_{{ index }}{{ i }}"/>
+          <input
+            name="id"
+            data-productid="{{ product.id }}"
+            type="hidden"
+            value="{{ product.variants.first.id }}"
+            id="val_{{ index }}{{ i }}"
+          >
 
-          <button 
+          <button
             onclick=" alnimagfun{{ product.variants.first.id }}(); addtoCart({{ index }}{{ i }})"
             type="submit"
             id="btn_{{ index }}{{ i }}"
             data-label="Add to cart"
-            class="action_button button--add-to-cart ajax-submit button--add-to-cart__flying" data-add-to-cart-trigger>
+            class="action_button button--add-to-cart ajax-submit button--add-to-cart__flying"
+            data-add-to-cart-trigger
+          >
             Add To Cart
           </button>
         </form>
       </div>
 
       {% if hover_enabled or settings.enable_quickshop %}
-      <div class="thumbnail-overlay__container">
-        <a class="hidden-product-link" href="{{ product.url | within: collection }}">{{ product.title | escape }}</a>
+        <div class="thumbnail-overlay__container">
+          <a class="hidden-product-link" href="{{ product.url | within: collection }}">{{ product.title | escape }}</a>
 
-        {% if hover_enabled %}
-        <div class="quick-shop__info animated fadeInDown">
-          <div class="thumbnail-overlay">
-            <div class="info text-align-center">
-              {% if settings.display_vendor %}
-              <span class="product-thumbnail__vendor">{{ product.vendor }}</span>
-              {% endif %}
+          {% if hover_enabled %}
+            <div class="quick-shop__info animated fadeInDown">
+              <div class="thumbnail-overlay">
+                <div class="info text-align-center">
+                  {% if settings.display_vendor %}
+                    <span class="product-thumbnail__vendor">{{ product.vendor }}</span>
+                  {% endif %}
 
-              <p class="product-thumbnail__title">{{ product.title | escape }}</p>
+                  <p class="product-thumbnail__title">{{ product.title | escape }}</p>
 
-              {% if collection_handles contains 'coming-soon' %}
-              <span>{{ 'collections.general.coming_soon' | t }}</span>
-              {% else %}
-              <span class="product-thumbnail__price price {% if product.compare_at_price_max > product.price_min %}sale{% endif %}">
-                {% if product.price_varies %}
-                <small><em>{{ 'products.general.from' | t }}</em></small>
-                {% endif %}
-                {% if product.price_min > 0 %}
-                <span class="money">
-                  {%
-                    render 'price-element',
-                    price: product.price_min
-                  %}
-                </span>
-                {% else %}
-                {{ settings.free_price_text }}
-                {% endif %}
-                {%- assign variant = product.selected_or_first_available_variant -%}
-                {% if product.compare_at_price_max > product.price_min %}
-                <span class="product-thumbnail__was-price compare-at-price">
-                  <span class="money">
-                    {%
-                      render 'price-element',
-                      price: product.compare_at_price_max
-                    %}
-                  </span>
-                </span>
-                {% endif %}
-              </span>
-              {% if settings.select_first_available_variant %}
-              {%- assign variant_for_unit_price = product.variants | sort: 'price' | first -%}
-              {%
-                render 'unit-price',
-                item: variant_for_unit_price,
-                class: 'product-thumbnail__unit-price'
-              %}
-              {% endif %}
-              {% endif %}
+                  {% if collection_handles contains 'coming-soon' %}
+                    <span>{{ 'collections.general.coming_soon' | t }}</span>
+                  {% else %}
+                    <span class="product-thumbnail__price price {% if product.compare_at_price_max > product.price_min %}sale{% endif %}">
+                      {% if product.price_varies %}
+                        <small
+                          ><em>{{ 'products.general.from' | t }}</em></small
+                        >
+                      {% endif %}
+                      {% if product.price_min > 0 %}
+                        <span class="money">
+                          {% render 'price-element', price: product.price_min %}
+                        </span>
+                      {% else %}
+                        {{ settings.free_price_text }}
+                      {% endif %}
+                      {%- assign variant = product.selected_or_first_available_variant -%}
+                      {% if product.compare_at_price_max > product.price_min %}
+                        <span class="product-thumbnail__was-price compare-at-price">
+                          <span class="money">
+                            {% render 'price-element', price: product.compare_at_price_max %}
+                          </span>
+                        </span>
+                      {% endif %}
+                    </span>
+                    {% if settings.select_first_available_variant %}
+                      {%- assign variant_for_unit_price = product.variants | sort: 'price' | first -%}
+                      {% render 'unit-price', item: variant_for_unit_price, class: 'product-thumbnail__unit-price' %}
+                    {% endif %}
+                  {% endif %}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        {% endif %}
-
-        {% if settings.enable_quickshop %}
-        {%
-          render 'product-thumbnail__quick-shop-button',
-          product: product
-        %}
-        {% endif %}
-
-        {% if hover_enabled %}
-          {% if settings.enable_shopify_collection_badges %}
-            <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
           {% endif %}
-        {% endif %}
 
-      </div>
+          {% if settings.enable_quickshop %}
+            {% render 'product-thumbnail__quick-shop-button', product: product %}
+          {% endif %}
+
+          {% if hover_enabled %}
+            {% if settings.enable_shopify_collection_badges %}
+              <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+            {% endif %}
+          {% endif %}
+        </div>
       {% endif %}
-
     </div>
 
     <div class="thumbnail__caption text-align-{{ settings.thumbnail_text_alignment }}">
-      {%
-        render 'product-thumbnail__product-info',
-        product: product,
-        collection_handles: collection_handles
-      %}
+      {% render 'product-thumbnail__product-info', product: product, collection_handles: collection_handles %}
     </div>
   </div>
 
-  {%
-    render 'product-thumbnail__swatch',
-    product: product
-  %}
+  {% render 'product-thumbnail__swatch', product: product %}
 
   {% if hover_enabled == false %}
-  {% if settings.enable_shopify_collection_badges %}
-  <div class="product-thumbnail__review-stars is-flex is-justify-{{ settings.thumbnail_text_alignment }}">
-    <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
-  </div>
-  {% endif %}
+    {% if settings.enable_shopify_collection_badges %}
+      <div class="product-thumbnail__review-stars is-flex is-justify-{{ settings.thumbnail_text_alignment }}">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </div>
+    {% endif %}
   {% endif %}
 </div>
 
 <script>
-  function showHeight(num){
-    var hc_wrapper = document.querySelector('.hc_wrapper'+num);
+  function showHeight(num) {
+    var hc_wrapper = document.querySelector('.hc_wrapper' + num);
+    console.log(hc_wrapper, 'wrapper');
     hc_wrapper.classList.add('f_height');
+    console.log(hc_wrapper, 'wrapper');
   }
 
-  function removeHeight(num){
-    var hc_wrapper = document.querySelector('.hc_wrapper'+num);
+  function removeHeight(num) {
+    var hc_wrapper = document.querySelector('.hc_wrapper' + num);
     hc_wrapper.classList.remove('f_height');
   }
 
-
   function plus(num) {
     var plus = document.querySelector('input.plus');
-    var quantity = document.querySelector('.q_'+num);
+    var quantity = document.querySelector('.q_' + num);
     var value = quantity.getAttribute('value');
     value++;
     quantity.setAttribute('value', value);
@@ -388,67 +460,33 @@ margin: 0 auto;
 
   function minus(num) {
     var minus = document.querySelector('input.minus');
-    var quantity = document.querySelector('.q_'+num);
+    var quantity = document.querySelector('.q_' + num);
     var value = quantity.getAttribute('value');
-    if(value > 1){
-      value--;      
-      quantity.setAttribute('value',value);
+    if (value > 1) {
+      value--;
+      quantity.setAttribute('value', value);
     }
   }
 
-  function setvar(id,vid,price,pid) {
-
-    let current = document.querySelector('#d'+vid);
+  function setvar(id, vid, price, pid) {
+    let current = document.querySelector('#d' + vid);
     let nextSibling = current.nextElementSibling;
     let previousSibling = current.previousElementSibling;
-    let currentPrice = document.querySelector('.price_'+id);
-    let name = document.querySelector('#val_'+id);
+    let currentPrice = document.querySelector('.price_' + id);
+    let name = document.querySelector('#val_' + id);
 
-    if(nextSibling != null) {
+    if (nextSibling != null) {
       current.classList.add('var_selected');
       nextSibling.classList.remove('var_selected');
       currentPrice.innerHTML = price;
-      name.setAttribute('value',vid);
+      name.setAttribute('value', vid);
     }
 
-    if(previousSibling != null) {
+    if (previousSibling != null) {
       current.classList.add('var_selected');
       previousSibling.classList.remove('var_selected');
       currentPrice.innerHTML = price;
-      name.setAttribute('value',vid);
-    }    
-
+      name.setAttribute('value', vid);
+    }
   }
 </script>
-<!-- <script>
-  function alnimagfun{{ product.variants.first.id }}() {
-        
-       document.getElementById(`animatedimage{{ product.variants.first.id }}`).classList.add('beforinimimg');
-                document.getElementById(`animatedimage{{ product.variants.first.id }}`).style.cssText = `
-                position: fixed;
-                top: 40px;
-    width: 30px;
-    right: 8.4%;
-left:auto;
-    transition: top 3s, right 3s, width 3s;
-
-                `;
-
- setTimeout(myGreetings{{ product.variants.first.id }}, 3000)
-
-};
-  function myGreetings{{ product.variants.first.id }}() {
-    console.log('{{ product.variants.first.id }}');
-    document.getElementById(`animatedimage{{ product.variants.first.id }}`).style.cssText = `
-                position: absolute ;
-                visibility: hidden;
-                opacity: 0;
-                top: auto;
-    width: 200px;
-    right: auto;
-bottom:33px;
-left: 10%;
-`;
-};
-
-</script> -->

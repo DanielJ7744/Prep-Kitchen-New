@@ -91,7 +91,7 @@
           "type": "second-block",
           "settings": {
             "question": "I SEE YOU OFFER ONE-TIME ORDERS.  WILL YOU OFFER SUBSCRIPTIONS IN THE FUTURE?",
-            "answer": "<p>One-Time Orders: Order as much or as little as you want- when you want.<\/p><p> (Coming Soon) By setting up PK Quick Checkout, you can store your preferred payment method for a speedy checkout in the future. <\/p><p>(COMING SOON) Subscriptions- Stayed tuned as this will be added in a few months!  <\/p>"
+            "answer": "<p>One-Time Orders: Order as much or as little as you want- when you want.<\/p><p>(COMING SOON) Subscriptions- Stayed tuned as this will be added in a few months!  <\/p>"
           }
         },
         "45304bb7-4963-46f8-84ff-0854d41bef32": {
@@ -234,6 +234,13 @@
             "question": "WHAT SHOULD I DO WITH MY SHIPPING BOX AFTER MY DELIVERY?",
             "answer": "<p>Sustainability is something we’re passionate about, so we’d love it if you could recycle our packaging after use! The trays are delivered in insulated cardboard boxes with ice packs to keep them at safe temperatures. The box can be recycled along with the plastic container and lid. Our ice packs are water-soluble – they can be cut open and poured into a sink, and the plastic casing can be recycled. The box liner \/ padding is recyclable depending on your location.<\/p>"
           }
+        },
+        "4120a56a-9a6b-48a6-8eb4-6a14440b1b54": {
+          "type": "first-block",
+          "settings": {
+            "question": "SUBSTITUTIONS",
+            "answer": "<p>Our meals are recipe-based by batches so we can't do substitutions on meals.  <\/p><p>Regarding No oil, No seasoning or seasoning variations, this can be done for bulk menu items. We can do some limited configurations such as either no seasonings, no sodium seasoning, or plain (no seasoning and no cooking oil). The total fat content is included in the items description for all our items.For your question, you would write  \"<strong>no oil<\/strong>\" or “<strong>no seasoning<\/strong>” in the order notes section of our checkout.This can be requested on bulk items but not meals, as meals are recipe-based by batches.<\/p><p>Although many menu items are made with gluten-free ingredients, we are not a gluten-free facility. We cannot ensure that cross-contamination will never occur. Our production facility has processes in place to minimize cross-contamination, however, we cannot guarantee that cross-contamination will not occur. If you have any allergies please check dietary filters and contact our team if you have any questions.<\/p>"
+          }
         }
       },
       "block_order": [
@@ -268,7 +275,8 @@
         "0a7d194b-437f-4f2a-becb-95578abd96b3",
         "7da02071-e588-4bad-8ba8-2545d3126f26",
         "a6e2c059-2aa9-43a3-9c62-f01fc0dcad49",
-        "41324789-4b15-4867-b244-c4d10877f5b6"
+        "41324789-4b15-4867-b244-c4d10877f5b6",
+        "4120a56a-9a6b-48a6-8eb4-6a14440b1b54"
       ],
       "settings": {
         "head": "helping you live a vibrant life.",

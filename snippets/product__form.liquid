@@ -24,7 +24,7 @@
   {% endif %}
   data-product-id="{{ product.id }}"
 >
-  {% form 'product', product %}
+  {% form 'product', product, data-productid: product.id %}
     <div style="display: none;" data-shop-pay-installments-template>{{ form | payment_terms }}</div>
 
     {%- comment -%} nik 03082021 START {%- endcomment -%}
@@ -103,7 +103,7 @@
       {% if product.has_only_default_variant %}
         <input
           class="variant-selection__variants variant-selection__variants--default"
-          name="id"
+          name="id" data-productid="{{ product.id }}"
           type="hidden"
           value="{{ product.variants.first.id }}"
           data-variants
@@ -118,7 +118,7 @@
         </noscript>
         <select
           class="variant-selection__variants"
-          name="id"
+          name="id" data-productid="{{ product.id }}"
           style="display: none"
           data-variants
         >

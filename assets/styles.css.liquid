@@ -6142,6 +6142,10 @@ width: -webkit-max-content;
 width: max-content;
 margin: 0 auto;
 }
+.header-cart__icon .header-cart__icon--desktop {
+width: 26px;
+height: 26px;
+}
 
 .badge {
 height: 1rem;
@@ -7172,7 +7176,7 @@ width: 100%;
 opacity: 0;
 transition: opacity 0s !important, transform 0.3s ease-in-out;
 }
-.transition--appear.lazyloaded {
+.transition--appear {
 opacity: 1;
 }
 {%- elsif settings.image_loading_style == 'fade-in' -%}
@@ -7180,7 +7184,7 @@ opacity: 1;
 opacity: 0;
 transition: opacity 0.3s ease-in;
 }
-.transition--fade-in.lazyloaded {
+.transition--fade-in {
 opacity: 1;
 }
 {%- elsif settings.image_loading_style == 'blur-up' -%}
@@ -7570,27 +7574,27 @@ text-decoration: underline;
 }
 
 .tag--sale:not(body) {
-background-color: {{ sale_sticker_color }};
+/* background-color: {{ sale_sticker_color }}; */
 color: {{ sale_sticker_color_text }};
 }
 
 .tag--new:not(body) {
-background-color: {{ new_sticker_color }};
+/* background-color: {{ new_sticker_color }}; */
 color: {{ new_sticker_color_text }};
 }
 
 .tag--best-seller:not(body) {
-background-color: {{ bestseller_sticker_color }};
+/* background-color: {{ bestseller_sticker_color }}; */
 color: {{ bestseller_sticker_color_text }};
 }
 
 .tag--coming-soon:not(body) {
-background-color: {{ comingsoon_sticker_color }};
+/* background-color: {{ comingsoon_sticker_color }}; */
 color: {{ comingsoon_sticker_color_text }};
 }
 
 .tag--staff-pick:not(body) {
-background-color: {{ staffpick_sticker_color }};
+/* background-color: {{ staffpick_sticker_color }}; */
 color: {{ staffpick_sticker_color_text }};
 }
 
@@ -11970,6 +11974,7 @@ endif
         border: 1px solid #ddd;
         padding-bottom: 3rem;
         height: 260px;
+        overflow:hidden;
       }
       .thumbnail {
         border: none !important;
@@ -12358,7 +12363,7 @@ endif
         color: {{ comingsoon_sticker_color_text }};
       }
       .thumbnail-sticker.staff-pick-sticker {
-        background-color: {{ staffpick_sticker_color }};
+        /* background-color: {{ staffpick_sticker_color }}; */
         color: {{ staffpick_sticker_color_text }};
       }
       .thumbnail-sticker.pre-order-sticker {
@@ -18363,6 +18368,7 @@ assign search_overlay_bg_color = settings.dropdown_background | color_modify: 'a
       }
       .product-image__wrapper .image__container { 
         width: 100%;
+        
       }
       .product-image__wrapper .image__container .image-element__wrap{ 
         width: 100%!important;
@@ -18651,6 +18657,8 @@ assign search_overlay_bg_color = settings.dropdown_background | color_modify: 'a
 }
 .desktop-search-action  {
   right: 0;
+  width: 26px;
+  height: 26px;
 }
 .mobile-search-action  {
   left: 0;

@@ -157,21 +157,21 @@
           "type": "product",
           "settings": {
             "product": "ground-turkey-jasmine-rice-green-beans",
-            "pro_img": "shopify:\/\/shop_images\/pro-1-prep-kitchen.jpg"
+            "pro_img": "shopify:\/\/shop_images\/ground-turkey-jasmine-rice-and-green-beans.jpg"
           }
         },
         "d26a5df4-6046-4f50-b4fb-8595de36822a": {
           "type": "product",
           "settings": {
             "product": "shrimp",
-            "pro_img": "shopify:\/\/shop_images\/pro-2-prep-kitchen.jpg"
+            "pro_img": "shopify:\/\/shop_images\/pk-grilled-shrimp.jpg"
           }
         },
         "04b524ff-945c-48e4-910f-34936637ba85": {
           "type": "product",
           "settings": {
             "product": "cod-brown-rice-asparagus",
-            "pro_img": "shopify:\/\/shop_images\/pro-3-prep-kitchen.jpg"
+            "pro_img": "shopify:\/\/shop_images\/cod-brown-rice-asparagus.jpg"
           }
         }
       },

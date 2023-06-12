@@ -425,7 +425,12 @@
                     </div>
 
                     <button class="search-bar__submit search-form__submit" type="submit" data-search-form-submit>
-                      <img class="lazyload lazyload--fade-in" data-src="{{ 'd_search.svg' | asset_url }}" title="" alt="Search">
+                      <img
+                        class="lazyload lazyload--fade-in"
+                        data-src="{{ 'd_search.svg' | asset_url }}"
+                        title=""
+                        alt="Search"
+                      >
                     </button>
                   </form>
                 </div>
@@ -479,13 +484,23 @@
                   {% if customer %}
                     <div class="user-icon">
                       <a href="{{ routes.account_url }}">
-                        <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" alt="User" title="">
+                        <img
+                          class="lazyload lazyload--fade-in"
+                          data-src="{{ 'user_icon.png' | asset_url }}"
+                          alt="User"
+                          title=""
+                        >
                       </a>
                     </div>
                   {% else %}
                     <div class="user-icon">
                       <a href="{{ routes.account_login_url }}">
-                        <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" alt="Account" title="">
+                        <img
+                          class="lazyload lazyload--fade-in"
+                          data-src="{{ 'user_icon.png' | asset_url }}"
+                          alt="Account"
+                          title=""
+                        >
                       </a>
                     </div>
                   {% endif %}
@@ -543,7 +558,12 @@
                       {% if customer %}
                         <div class="user-icon">
                           <a href="{{ routes.account_url }}">
-                            <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" title="" alt="User">
+                            <img
+                              class="lazyload lazyload--fade-in"
+                              data-src="{{ 'user_icon.png' | asset_url }}"
+                              title=""
+                              alt="User"
+                            >
 
                             <img
                               style="position: absolute;bottom: -7px;width: 15px;right: 2px;"
@@ -556,7 +576,12 @@
                       {% else %}
                         <div class="user-icon">
                           <a href="{{ routes.account_login_url }}">
-                            <img class="lazyload lazyload--fade-in" data-src="{{ 'user_icon.png' | asset_url }}" title="" alt="Account">
+                            <img
+                              class="lazyload lazyload--fade-in"
+                              data-src="{{ 'user_icon.png' | asset_url }}"
+                              title=""
+                              alt="Account"
+                            >
                           </a>
                         </div>
                       {% endif %}
@@ -581,7 +606,12 @@
                         {%- endfor -%}
                         {{- bold_options_hybrid_item_count -}}
                       </span>
-                      <img class="lazyload lazyload--fade-in" data-src="{{ 'd_cart.svg' | asset_url }}" title="" alt="Cart">
+                      <img
+                        class="lazyload lazyload--fade-in"
+                        data-src="{{ 'd_cart.svg' | asset_url }}"
+                        title=""
+                        alt="Cart"
+                      >
                     </div>
                   </div>
                 </div>
@@ -614,7 +644,11 @@
     {% if section.settings.logo %}
       <a href="/" class="">
         {% capture logo_alt %}{{ section.settings.logo.alt | default: shop.name }}{% endcapture %}
-        <img class="lazyload lazyload--fade-in" data-src="{{section.settings.logo | img_url: 'master'}}" alt="{{logo_alt | escape}}">
+        <img
+          class="lazyload lazyload--fade-in"
+          data-src="{{section.settings.logo | img_url: 'master'}}"
+          alt="{{logo_alt | escape}}"
+        >
       </a>
     {% else %}
       <a class="" href="/">{{ shop.name }}</a>
@@ -757,14 +791,14 @@
       "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
     {% endif %}
     "sameAs": [
-      {{ settings.social_twitter_link | json }},
-      {{ settings.social_facebook_link | json }},
-      {{ settings.social_pinterest_link | json }},
-      {{ settings.social_instagram_link | json }},
-      {{ settings.social_tumblr_link | json }},
-      {{ settings.social_snapchat_link | json }},
-      {{ settings.social_youtube_link | json }},
-      {{ settings.social_vimeo_link | json }}
+      {{ settings.twitter_link | json }},
+      {{ settings.facebook_link | json }},
+      {{ settings.pinterest_link | json }},
+      {{ settings.instagram_link | json }},
+      {{ settings.tumblr_link | json }},
+      {{ settings.snapchat_link | json }},
+      {{ settings.youtube_link | json }},
+      {{ settings.vimeo_link | json }}
     ],
     "url": {{ shop.url | append: page.url | json }}
   }

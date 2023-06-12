@@ -2,11 +2,29 @@
   "sections": {
     "banner": {
       "type": "banner",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "image_darken": true,
+        "subtitle": "Subheading",
+        "width": "wide",
+        "banner_height": "medium",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
     },
     "main": {
       "type": "404__main",
-      "settings": {}
+      "settings": {
+        "not_found_text": "",
+        "display_search_field": true,
+        "width": "standard",
+        "padding_top": 80,
+        "padding_bottom": 40,
+        "css_class": "",
+        "custom_css": ""
+      }
     }
   },
   "order": [

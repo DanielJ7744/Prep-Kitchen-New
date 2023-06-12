@@ -336,7 +336,13 @@
       <div class="coll_filters">
         <h5>
           <a href="javascript:void(0)" onclick="show_category()"
-            ><img class="lazyload lazyload--fade-in" data-src="{{ 'filter_g.svg' | asset_url }}" title="" alt="Dietary Filters"> Dietary Filters</a
+            ><img
+              class="lazyload lazyload--fade-in"
+              data-src="{{ 'filter_g.svg' | asset_url }}"
+              title=""
+              alt="Dietary Filters"
+            >
+            Dietary Filters</a
           >
         </h5>
       </div>
@@ -383,6 +389,7 @@
 
           <div class="pro_wrapper">
             {% for product in collection.products %}
+              <p style="display: none">test: {{ forloop.index }}</p>
               {% render 'product-thumbnail-cus',
                 product: product,
                 limit: section.settings.pagination_limit,
@@ -392,7 +399,8 @@
                 height: section.settings.collection_height,
                 collection_group_thumb: collection_group_thumb,
                 collection_group_mobile: collection_group_mobile,
-                related_products: related_items
+                related_products: related_items,
+                loopindex: forloop.index
               %}
             {% endfor %}
           </div>
@@ -421,6 +429,57 @@
 
     $('body, html').animate({ scrollTop: pos }, 1000);
   });
+</script>
+<script>
+  function showHeight(num) {
+    var hc_wrapper = document.querySelector('.hc_wrapper' + num);
+    hc_wrapper.classList.add('f_height');
+  }
+
+  function removeHeight(num) {
+    var hc_wrapper = document.querySelector('.hc_wrapper' + num);
+    hc_wrapper.classList.remove('f_height');
+  }
+
+  function plus(num) {
+    var plus = document.querySelector('input.plus');
+    var quantity = document.querySelector('.q_' + num);
+    var value = quantity.getAttribute('value');
+    value++;
+    quantity.setAttribute('value', value);
+  }
+
+  function minus(num) {
+    var minus = document.querySelector('input.minus');
+    var quantity = document.querySelector('.q_' + num);
+    var value = quantity.getAttribute('value');
+    if (value > 1) {
+      value--;
+      quantity.setAttribute('value', value);
+    }
+  }
+
+  function setvar(id, vid, price, pid) {
+    let current = document.querySelector('#d' + vid);
+    let nextSibling = current.nextElementSibling;
+    let previousSibling = current.previousElementSibling;
+    let currentPrice = document.querySelector('.price_' + id);
+    let name = document.querySelector('#val_' + id);
+
+    if (nextSibling != null) {
+      current.classList.add('var_selected');
+      nextSibling.classList.remove('var_selected');
+      currentPrice.innerHTML = price;
+      name.setAttribute('value', vid);
+    }
+
+    if (previousSibling != null) {
+      current.classList.add('var_selected');
+      previousSibling.classList.remove('var_selected');
+      currentPrice.innerHTML = price;
+      name.setAttribute('value', vid);
+    }
+  }
 </script>
 
 {% schema %}

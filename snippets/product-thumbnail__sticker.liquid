@@ -9,9 +9,16 @@
   {% assign product_on_sale = true %}
 {% endif %}
 
+{% assign collection_handles = collection_handles | append: '' %}
+{% assign productTags = product.tags | join: ', ' %}
+{% if productTags contains 'new' or productTags contains 'NEW' %}
+  {% assign newProduct = true %}
+{% endif %}
+
 {% comment %} Check if sticker holder should be displayed {% endcomment %}
 {% if collection_handles contains 'best-seller'
   or collection_handles contains 'coming-soon'
+  or newProduct == true
   or collection_handles contains 'new'
   or collection_handles contains 'pre-order'
   or collection_handles contains 'bogo'
@@ -21,67 +28,64 @@
 %}
   <div
     class="
-      heeeeellll
       sticker-holder
       sticker-shape-{{ settings.sticker_shape }}
       sticker-position-{{ settings.sticker_position }}
+      {{ class_names }}
     "
   >
     <div class="sticker-holder__content sticker-holder__content--{{ context }}">
-      {% if collection_handles contains 'best-seller' %}
-        <div class="best-seller-sticker thumbnail-sticker sticker-{{i}}">
-          <span class="sticker-text">{{ 'collections.general.best_seller' | t }}</span>
-        </div>
-      {% endif %}
-
-      {% if collection_handles contains 'coming-soon' %}
-        <div class="coming-soon-sticker thumbnail-sticker sticker-{{i}}">
-          <span class="sticker-text">{{ 'collections.general.coming_soon' | t }}</span>
-        </div>
-      {% endif %}
-
-      {% if collection_handles contains 'new' %}
-        <div class="new-sticker thumbnail-sticker sticker-{{i}}">
-          {% comment %} <span class="sticker-text">{{ 'collections.general.new' | t }}</span> {% endcomment %}
-          {% render 'icon-new' %}
-        </div>
-      {% endif %}
-
-      {% if collection_handles contains 'pre-order' %}
-        <div class="pre-order-sticker thumbnail-sticker sticker-{{i}}">
-          <span class="sticker-text">{{ 'collections.general.pre_order' | t }}</span>
-        </div>
-      {% endif %}
-
       {% if product.available and product_on_sale %}
         <div class="sale-sticker thumbnail-sticker sticker-{{i}}">
-          {% comment %} <span class="sticker-text">{{ 'collections.general.sale' | t }}</span> {% endcomment %}
           {% render 'icon-sale' %}
         </div>
       {% endif %}
 
-      {% unless product.available %}
+      {% if product.available == false %}
         <div class="sold-out-sticker thumbnail-sticker sticker-{{i}}">
           <span class="sticker-text">{{ 'collections.general.sold_out' | t }}</span>
         </div>
-      {% endunless %}
 
-      {% if collection_handles contains 'staff-pick' %}
+      {% elsif newProduct == true %}
+        <div class="new-sticker thumbnail-sticker sticker-{{i}}">
+          {% render 'icon-new' %}
+        </div>
+      {% elsif collection_handles contains 'new' %}
+        <div class="new-sticker thumbnail-sticker sticker-{{i}}">
+          {% render 'icon-new' %}
+        </div>
+
+      {% elsif collection_handles contains 'best-seller' %}
+        <div class="best-seller-sticker thumbnail-sticker sticker-{{i}}">
+          <span class="sticker-text">{{ 'collections.general.best_seller' | t }}</span>
+        </div>
+
+      {% elsif collection_handles contains 'coming-soon' %}
+        <div class="coming-soon-sticker thumbnail-sticker sticker-{{i}}">
+          <span class="sticker-text">{{ 'collections.general.coming_soon' | t }}</span>
+        </div>
+
+      {% elsif collection_handles contains 'pre-order' %}
+        <div class="pre-order-sticker thumbnail-sticker sticker-{{i}}">
+          <span class="sticker-text">{{ 'collections.general.pre_order' | t }}</span>
+        </div>
+
+      {% elsif collection_handles contains 'staff-pick' %}
         <div class="staff-pick-sticker thumbnail-sticker sticker-{{i}}">
           <span class="sticker-text">{{ 'collections.general.staff_pick' | t }}</span>
         </div>
-      {% endif %}
-      {% if collection_handles contains 'bogo' %}
+
+      {% elsif collection_handles contains 'bogo' %}
         <div class="staff-pick-sticker thumbnail-sticker sticker-{{i}}">
           {% render 'icon-bogo' %}
         </div>
-      {% endif %}
-      {% if collection_handles contains 'bundle' %}
+
+      {% elsif collection_handles contains 'bundle' %}
         <div class="staff-pick-sticker thumbnail-sticker sticker-{{i}}">
           {% render 'icon-bundle' %}
         </div>
-      {% endif %}
-      {% if collection_handles contains 'promo' %}
+
+      {% elsif collection_handles contains 'promo' %}
         <div class="staff-pick-sticker thumbnail-sticker sticker-{{i}}">
           {% render 'icon-promo' %}
         </div>
