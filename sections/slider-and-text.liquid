@@ -4,6 +4,12 @@
     grid-template-columns: 40% 60%;
     gap: 30px;
     align-items: flex-start;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .slider_text_inner .content_wrapper {
+    max-width: unset;
   }
 
   .text_section h2 {
@@ -36,8 +42,11 @@
     align-items: flex-end;
     justify-content: center;
   }
+  .s_img_wrapper img {
+    width: 84px;
+  }
 
-  .icon1 h3 {  
+  .icon1 h3 {
     padding: 0;
     line-height: normal;
     color: #2c2c2c;
@@ -45,7 +54,7 @@
     margin: 0;
     font-size: 16px;
     text-transform: lowercase;
-  }  
+  }
 
   .content_wrapper {
     margin-top: 29px;
@@ -83,7 +92,7 @@
     min-width: 150px;
     border: 1px solid transparent;
     line-height: 1.42857143;
-    transition: all .3s;
+    transition: all 0.3s;
     margin-right: 11px;
   }
 
@@ -92,40 +101,86 @@
     text-decoration: none;
   }
 
-  .swiper-wrapper {
-    margin-bottom: 70px;
+  .slider_text_inner .slider_section {
+    padding-bottom: 60px;
   }
-  
-  .swiper-button-next, .swiper-button-prev { top: 90%; }
-  
-  .swiper-button-prev:after, .swiper-button-next:after { content: ''; }
-  
-  
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .text_section h2 { font-size: 32px; line-height: 38px; }
 
-    .mo_btns a:last-child { margin-top: 14px; }
+  .flickity-slider-text-slider .flickity-button svg {
+    fill: #23d16a;
+  }
+  .flickity-slider-text-slider .flickity-button {
+    background: unset;
+  }
+  .flickity-slider-text-slider .flickity-prev-next-button {
+    top: 100%;
+    width: 60px;
+    height: 60px;
+    transform: translateY(0);
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .text_section h2 {
+      font-size: 32px;
+      line-height: 38px;
+    }
+
+    .mo_btns a:last-child {
+      margin-top: 14px;
+    }
   }
 
   @media screen and (max-width: 767px) {
-    .slider_text_inner { display: block; }
+    .slider_text_inner {
+      display: block;
+    }
 
-    .text_section h2 { font-size: 25px; line-height: 30px; margin: -30px 0 23px; text-align: center; }
+    .text_section h2 {
+      font-size: 25px;
+      line-height: 30px;
+      margin: -30px 0 23px;
+      text-align: center;
+    }
 
-    .icons_wrapper { justify-content: space-around; align-items: flex-start; }
+    .icons_wrapper {
+      justify-content: space-around;
+      align-items: flex-start;
+    }
 
-    .icon1 h3 { padding: 0; font-size: 14px; line-height: 17px; }
+    .icon1 h3 {
+      padding: 0;
+      font-size: 14px;
+      line-height: 17px;
+    }
 
-    .content_wrapper { text-align: center; margin: 29px auto 0; }
+    .content_wrapper {
+      text-align: center;
+      margin: 29px auto 0;
+    }
 
-    .content_wrapper p { font-size: 14px; line-height: 24px; }
+    .content_wrapper p {
+      font-size: 14px;
+      line-height: 24px;
+    }
 
-    .meal_options_section h3 { color: #23D16A; margin: 1.25em 0; line-height: 24px; font-size: 14px; text-align: center; }
+    .meal_options_section h3 {
+      color: #23d16a;
+      margin: 1.25em 0;
+      line-height: 24px;
+      font-size: 14px;
+      text-align: center;
+    }
 
-    .mo_btns { text-align: center; }
+    .mo_btns {
+      text-align: center;
+    }
 
-    .mo_btns a { text-transform: initial; font-size: 14px; font-family: 'rubikregular'; padding: 7px 30px; margin: 0 0 14px; }
-
+    .mo_btns a {
+      text-transform: initial;
+      font-size: 14px;
+      font-family: 'rubikregular';
+      padding: 7px 30px;
+      margin: 0 0 14px;
+    }
   }
 </style>
 
@@ -133,358 +188,386 @@
   <div class="page-width">
     <div class="slider_text_inner">
       {% if section.settings.slider_alignment == 'left' %}
-      <div class="slider_section swiper">
-        <div class="slider_inner swiper-wrapper">
-          {% for block in section.blocks %}
-          <img class="swiper-slide" src="{{ block.settings.img | img_url: '1296x' }}" />
-          {% endfor %}
-        </div>
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"><img src="{{ 'la.png' | asset_img_url: '23x39' }}"/></div>
-        <div class="swiper-button-next"><img src="{{ 'ra.png' | asset_img_url: '23x39' }}"/></div>
-      </div>
-      <div class="text_section">
-        {% if section.settings.head != blank %}
-        <h2>{{ section.settings.head }}</h2>
-        {% endif %}
-
-        <div class="icons_wrapper">
-          {% if section.settings.icon1_img != blank %}
-          <div class="icon1">
-            <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon1_img | img_url: '84x' }}"/>
-            </div>
-            {% if section.settings.icon1_head != blank %}
-            <h3>{{ section.settings.icon1_head }}</h3>
-            {% endif %}
-          </div>
-          {% endif %}
-
-          {% if section.settings.icon2_img != blank %}
-          <div class="icon1">
-            <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon2_img | img_url: '84x' }}"/>
-            </div>
-            {% if section.settings.icon2_head != blank %}
-            <h3>{{ section.settings.icon2_head }}</h3>
-            {% endif %}
-          </div>
-          {% endif %}
-
-          {% if section.settings.icon3_img != blank %}
-          <div class="icon1">
-            <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon3_img | img_url: '84x' }}"/>
-            </div>
-            {% if section.settings.icon3_head != blank %}
-            <h3>{{ section.settings.icon3_head }}</h3>
-            {% endif %}
-          </div>
-          {% endif %}
-
-          {% if section.settings.icon4_img != blank %}
-          <div class="icon1">
-            <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon4_img | img_url: '84x' }}"/>
-            </div>
-            {% if section.settings.icon4_head != blank %}
-            <h3>{{ section.settings.icon4_head }}</h3>
-            {% endif %}
-          </div>
-          {% endif %}
-        </div>
-
-        {% if section.settings.content != blank %}
-        <div class="content_wrapper">
-          {{ section.settings.content }}
-        </div>
-        {% endif %}
-
-        <div class="meal_options_section">
-          {% if section.settings.meal_options_head != blank %}          
-          <h3>{{ section.settings.meal_options_head }}</h3>
-          {% endif %}
-          <div class="mo_btns">
-            {% if section.settings.btn1_link != blank %}
-            <a href="{{ section.settings.btn1_link }}">{{ section.settings.btn1_label }}</a>
-            {% endif %}
-
-            {% if section.settings.btn2_link != blank %}
-            <a href="{{ section.settings.btn2_link }}">{{ section.settings.btn2_label }}</a>
-            {% endif %}
-
-            {% if section.settings.btn3_link != blank %}
-            <a href="{{ section.settings.btn3_link }}">{{ section.settings.btn3_label }}</a>
-            {% endif %}
+        <div class="slider_section">
+          <div class="slider_inner flickity-slider-text-slider">
+            {% for block in section.blocks %}
+              <img
+                class="lazyload lazyload--fade-in"
+                data-src="{{ block.settings.img | img_url: '550x' }}"
+                src="{{ block.settings.img | img_url: '550x' }}"
+                alt="{{ block.settings.img.alt }}"
+              >
+            {% endfor %}
           </div>
         </div>
+        <div class="text_section">
+          {% if section.settings.head != blank %}
+            <h2>{{ section.settings.head }}</h2>
+          {% endif %}
 
-      </div>
+          <div class="icons_wrapper">
+            {% if section.settings.icon1_img != blank %}
+              <div class="icon1">
+                <div class="s_img_wrapper">
+                  {% render 'image-element',
+                    image: section.settings.icon1_img,
+                    alt: section.settings.icon1_head,
+                    stretch_width: true
+                  %}
+                </div>
+                {% if section.settings.icon1_head != blank %}
+                  <h3>{{ section.settings.icon1_head }}</h3>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if section.settings.icon2_img != blank %}
+              <div class="icon1">
+                <div class="s_img_wrapper">
+                  {% render 'image-element',
+                    image: section.settings.icon2_img,
+                    alt: section.settings.icon2_head,
+                    stretch_width: true
+                  %}
+                </div>
+                {% if section.settings.icon2_head != blank %}
+                  <h3>{{ section.settings.icon2_head }}</h3>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if section.settings.icon3_img != blank %}
+              <div class="icon1">
+                <div class="s_img_wrapper">
+                  {% render 'image-element',
+                    image: section.settings.icon3_img,
+                    alt: section.settings.icon3_head,
+                    stretch_width: true
+                  %}
+                </div>
+                {% if section.settings.icon3_head != blank %}
+                  <h3>{{ section.settings.icon3_head }}</h3>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if section.settings.icon4_img != blank %}
+              <div class="icon1">
+                <div class="s_img_wrapper">
+                  {% render 'image-element',
+                    image: section.settings.icon4_img,
+                    alt: section.settings.icon4_head,
+                    stretch_width: true
+                  %}
+                </div>
+                {% if section.settings.icon4_head != blank %}
+                  <h3>{{ section.settings.icon4_head }}</h3>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if section.settings.content != blank %}
+            <div class="content_wrapper">
+              {{ section.settings.content }}
+            </div>
+          {% endif %}
+
+          <div class="meal_options_section">
+            {% if section.settings.meal_options_head != blank %}
+              <h3>{{ section.settings.meal_options_head }}</h3>
+            {% endif %}
+            <div class="mo_btns">
+              {% if section.settings.btn1_link != blank %}
+                <a href="{{ section.settings.btn1_link }}">{{ section.settings.btn1_label }}</a>
+              {% endif %}
+
+              {% if section.settings.btn2_link != blank %}
+                <a href="{{ section.settings.btn2_link }}">{{ section.settings.btn2_label }}</a>
+              {% endif %}
+
+              {% if section.settings.btn3_link != blank %}
+                <a href="{{ section.settings.btn3_link }}">{{ section.settings.btn3_label }}</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
       {% else %}
-      <div class="text_section">
-        {% if section.settings.head != blank %}
-        <h2>{{ section.settings.head }}</h2>
-        {% endif %}
+        <div class="text_section">
+          {% if section.settings.head != blank %}
+            <h2>{{ section.settings.head }}</h2>
+          {% endif %}
 
-        <div class="icons_wrapper">
-          {% if section.settings.icon1_img != blank %}
-          <div class="icon1">
-            <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon1_img | img_url: '84x' }}"/>
+          <div class="icons_wrapper">
+            {% if section.settings.icon1_img != blank %}
+              <div class="icon1">
+                <div class="s_img_wrapper">
+                  {% render 'image-element',
+                    image: section.settings.icon1_img,
+                    alt: section.settings.icon1_head,
+                    stretch_width: true
+                  %}
+                </div>
+                {% if section.settings.icon1_head != blank %}
+                  <h3>{{ section.settings.icon1_head }}</h3>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if section.settings.icon2_img != blank %}
+              <div class="icon1">
+                <div class="s_img_wrapper">
+                  {% render 'image-element',
+                    image: section.settings.icon2_img,
+                    alt: section.settings.icon2_head,
+                    stretch_width: true
+                  %}
+                </div>
+                {% if section.settings.icon2_head != blank %}
+                  <h3>{{ section.settings.icon2_head }}</h3>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if section.settings.icon3_img != blank %}
+              <div class="icon1">
+                <div class="s_img_wrapper">
+                  {% render 'image-element',
+                    image: section.settings.icon3_img,
+                    alt: section.settings.icon3_head,
+                    stretch_width: true
+                  %}
+                </div>
+                {% if section.settings.icon3_head != blank %}
+                  <h3>{{ section.settings.icon3_head }}</h3>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if section.settings.icon4_img != blank %}
+              <div class="icon1">
+                <div class="s_img_wrapper">
+                  {% render 'image-element',
+                    image: section.settings.icon4_img,
+                    alt: section.settings.icon4_head,
+                    stretch_width: true
+                  %}
+                </div>
+                {% if section.settings.icon4_head != blank %}
+                  <h3>{{ section.settings.icon4_head }}</h3>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if section.settings.content != blank %}
+            <div class="content_wrapper">
+              {{ section.settings.content }}
             </div>
-            {% if section.settings.icon1_head != blank %}
-            <h3>{{ section.settings.icon1_head }}</h3>
-            {% endif %}
-          </div>
           {% endif %}
 
-          {% if section.settings.icon2_img != blank %}
-          <div class="icon1">
-            <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon2_img | img_url: '84x' }}"/>
+          <div class="meal_options_section">
+            {% if section.settings.meal_options_head != blank %}
+              <h3>{{ section.settings.meal_options_head }}</h3>
+            {% endif %}
+
+            <div class="mo_btns">
+              {% if section.settings.btn1_link != blank %}
+                <a href="{{ section.settings.btn1_link }}">{{ section.settings.btn1_label }}</a>
+              {% endif %}
+
+              {% if section.settings.btn2_link != blank %}
+                <a href="{{ section.settings.btn2_link }}">{{ section.settings.btn2_label }}</a>
+              {% endif %}
+
+              {% if section.settings.btn3_link != blank %}
+                <a href="{{ section.settings.btn3_link }}">{{ section.settings.btn3_label }}</a>
+              {% endif %}
             </div>
-            {% if section.settings.icon2_head != blank %}
-            <h3>{{ section.settings.icon2_head }}</h3>
-            {% endif %}
-          </div>
-          {% endif %}
-
-          {% if section.settings.icon3_img != blank %}
-          <div class="icon1">
-            <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon3_img | img_url: '84x' }}"/>
-            </div>
-            {% if section.settings.icon3_head != blank %}
-            <h3>{{ section.settings.icon3_head }}</h3>
-            {% endif %}
-          </div>
-          {% endif %}
-
-          {% if section.settings.icon4_img != blank %}
-          <div class="icon1">
-            <div class="s_img_wrapper">
-              <img src="{{ section.settings.icon4_img | img_url: '84x' }}"/>
-            </div>
-            {% if section.settings.icon4_head != blank %}
-            <h3>{{ section.settings.icon4_head }}</h3>
-            {% endif %}
-          </div>
-          {% endif %}
-        </div>
-
-        {% if section.settings.content != blank %}
-        <div class="content_wrapper">
-          {{ section.settings.content }}
-        </div>
-        {% endif %}
-
-        <div class="meal_options_section">
-          {% if section.settings.meal_options_head != blank %}          
-          <h3>{{ section.settings.meal_options_head }}</h3>
-          {% endif %}
-
-          <div class="mo_btns">
-            {% if section.settings.btn1_link != blank %}
-            <a href="{{ section.settings.btn1_link }}">{{ section.settings.btn1_label }}</a>
-            {% endif %}
-
-            {% if section.settings.btn2_link != blank %}
-            <a href="{{ section.settings.btn2_link }}">{{ section.settings.btn2_label }}</a>
-            {% endif %}
-
-            {% if section.settings.btn3_link != blank %}
-            <a href="{{ section.settings.btn3_link }}">{{ section.settings.btn3_label }}</a>
-            {% endif %}
           </div>
         </div>
-      </div>
-      <div class="slider_section swiper">
-        <div class="slider_inner swiper-wrapper">
-          {% for block in section.blocks %}
-          <img class="swiper-slide" src="{{ block.settings.img | img_url: '1296x' }}" />
-          {% endfor %}
+        <div class="slider_section">
+          <div class="slider_inner flickity-slider-text-slider">
+            {% for block in section.blocks %}
+              <img
+                class="lazyload lazyload--fade-in"
+                data-src="{{ block.settings.img | img_url: '550x' }}"
+                alt="{{ block.settings.img.alt }}"
+              >
+            {% endfor %}
+          </div>
         </div>
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"><img src="{{ 'la.png' | asset_img_url: '23x39'  }}" /></div>
-        <div class="swiper-button-next"><img src="{{ 'ra.png' | asset_img_url: '23x39'  }}" /></div>
-      </div>      
       {% endif %}
-    </div>    
+    </div>
   </div>
 </div>
 
 <script>
-  var swiper = new Swiper(".swiper", {
-    cssMode: true,
-    slidesPerView: 1,
-    autoplay: {
-      delay: 3000
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-
-    mousewheel: true,
-    keyboard: true,
+  $(document).ready(function () {
+    jQuery('.flickity-slider-text-slider').flickity({
+      cellAlign: 'left',
+      pageDots: false,
+      autoPlay: true,
+      contain: true,
+    });
   });
 </script>
 
 {% schema %}
 {
-"name": "Slider + Text",
-"tag": "section",
-"class": "slider-text-section",
-"settings": [
-{
-"type" : "select",
-"id" : "slider_alignment",
-"label" : "Slider Alignment",
-"options" : [
-{
-"value" : "left",
-"label" : "Left"
-},
-{
-"value" : "right",
-"label" : "Right"
-}
-],	
-"default" : "left"
-},
-{
-"type": "text",
-"id" : "head",
-"label" : "Heading"
-},
-{
-"type" : "header",
-"content" : "Icons Section"
-},
-{
-"type" : "header",
-"content" : "Icon 01"
-},
-{
-"type" : "image_picker",
-"id" : "icon1_img",
-"label" : "Select Image"
-},
-{
-"type" : "text",
-"id" : "icon1_head",
-"label" : "Heading"
-},
-{
-"type" : "header",
-"content" : "Icon 02"
-},
-{
-"type" : "image_picker",
-"id" : "icon2_img",
-"label" : "Select Image"
-},
-{
-"type" : "text",
-"id" : "icon2_head",
-"label" : "Heading"
-},
-{
-"type" : "header",
-"content" : "Icon 03"
-},
-{
-"type" : "image_picker",
-"id" : "icon3_img",
-"label" : "Select Image"
-},
-{
-"type" : "text",
-"id" : "icon3_head",
-"label" : "Heading"
-},
-{
-"type" : "header",
-"content" : "Icon 04"
-},
-{
-"type" : "image_picker",
-"id" : "icon4_img",
-"label" : "Select Image"
-},
-{
-"type" : "text",
-"id" : "icon4_head",
-"label" : "Heading"
-},
-{
-"type" : "header",
-"content" : "Content Section"
-},
-{
-"type" : "richtext",
-"id" : "content",
-"label" : "Content"
-},
-{
-"type" : "header",
-"content" : "Meal Options Section"
-},
-{
-"type" : "textarea",
-"id" : "meal_options_head",
-"label" : "Heading"
-},
-{
-"type" : "text",
-"id" : "btn1_label",
-"label" : "Button 01 Label"
-},
-{
-"type" : "url",
-"id" : "btn1_link",
-"label" : "Button 01 Link"
-},
-{
-"type" : "text",
-"id" : "btn2_label",
-"label" : "Button 02 Label"
-},
-{
-"type" : "url",
-"id" : "btn2_link",
-"label" : "Button 02 Link"
-},
-{
-"type" : "text",
-"id" : "btn3_label",
-"label" : "Button 03 Label"
-},
-{
-"type" : "url",
-"id" : "btn3_link",
-"label" : "Button 03 Link"
-}
-],
-"blocks":[
-{
-"name" : "Image",
-"type" : "image",
-"settings" : [
-{
-"type" : "image_picker",
-"id" : "img",
-"label" : "Select Image"
-}
-] 
-}
-],
-"presets": [
-{
-"name" : "Slider + Text",
-"category" : "Image" 
-}
-]
+  "name": "Slider + Text",
+  "tag": "section",
+  "class": "slider-text-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "slider_alignment",
+      "label": "Slider Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "head",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Icons Section"
+    },
+    {
+      "type": "header",
+      "content": "Icon 01"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon1_img",
+      "label": "Select Image"
+    },
+    {
+      "type": "text",
+      "id": "icon1_head",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Icon 02"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon2_img",
+      "label": "Select Image"
+    },
+    {
+      "type": "text",
+      "id": "icon2_head",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Icon 03"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon3_img",
+      "label": "Select Image"
+    },
+    {
+      "type": "text",
+      "id": "icon3_head",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Icon 04"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon4_img",
+      "label": "Select Image"
+    },
+    {
+      "type": "text",
+      "id": "icon4_head",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Content Section"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "header",
+      "content": "Meal Options Section"
+    },
+    {
+      "type": "textarea",
+      "id": "meal_options_head",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "btn1_label",
+      "label": "Button 01 Label"
+    },
+    {
+      "type": "url",
+      "id": "btn1_link",
+      "label": "Button 01 Link"
+    },
+    {
+      "type": "text",
+      "id": "btn2_label",
+      "label": "Button 02 Label"
+    },
+    {
+      "type": "url",
+      "id": "btn2_link",
+      "label": "Button 02 Link"
+    },
+    {
+      "type": "text",
+      "id": "btn3_label",
+      "label": "Button 03 Label"
+    },
+    {
+      "type": "url",
+      "id": "btn3_link",
+      "label": "Button 03 Link"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Image",
+      "type": "image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "img",
+          "label": "Select Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slider + Text",
+      "category": "Image"
+    }
+  ]
 }
 {% endschema %}
 

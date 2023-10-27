@@ -19,7 +19,7 @@
       </div>
       <div class="meet_inner">
         <div class="meet_inner_img">
-          <img src="{{ section.settings.author_img | img_url : 'master' }}" title="" alt="">          
+          <img class="lazyload lazyload--fade-in" data-src="{{ section.settings.author_img | img_url : 'master' }}" title="" alt="{{ section.settings.author_img.alt }}">          
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
       <div class="plan_upper_inner">
         <div class="plan_upper_inner_img">
           <a href="{{ product.url }}">
-          <img src="{{ product.featured_image.src | img_url : 'grande' }}" alt="" width="100%">
+          <img class="lazyload lazyload--fade-in" data-src="{{ product.featured_image.src | img_url : '400x' }}" alt="{{ product.title }}" width="100%">
           </a>
         </div>
         <div>

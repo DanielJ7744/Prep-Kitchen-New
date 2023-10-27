@@ -1,0 +1,21 @@
+<div class="product-icons">
+    {% assign iconList = block.settings.icon_list %}
+    {% for tag in product.tags %}
+    {% if iconList contains tag %}
+        {%- assign iconName = tag | remove: 'icon__' | replace: " ", "-" | downcase | prepend: "icon-" | append: ".svg" -%}
+        <img class="lazyload lazyload--fade-in" data-src="{{ iconName | asset_url }}" title="" alt="{{ tag | remove: 'icon__' }}">
+    {% endif %}
+    {% endfor %}
+</div>
+
+<style>
+    .product-icons {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+    .product-icons img {
+        width: 70px;
+    }
+</style>

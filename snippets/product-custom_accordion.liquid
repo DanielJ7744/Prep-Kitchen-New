@@ -1,0 +1,91 @@
+<div class="product-custom-fields">
+    {% if product.metafields.custom_fields["details-accordion"] != blank %}
+        <button class="accordion"><span class="fa fa-plus" aria-hidden="true"></span>Details</button>
+        <div class="panel">
+            <div class="panel-inner">
+                {{ product.metafields.custom_fields["details-accordion"] }}
+            </div>
+        </div>
+    {% endif %}
+    {% if product.metafields.custom_fields["ingredients-accordion"] != blank %}
+        <button class="accordion"><span class="fa fa-plus" aria-hidden="true"></span>Ingredients</button>
+        <div class="panel">
+            <div class="panel-inner">
+                {{ product.metafields.custom_fields["ingredients-accordion"] }}
+            </div>
+        </div>
+    {% endif %}
+    {% if product.metafields.custom_fields["instructions-accordion"] != blank %}
+        <button class="accordion"><span class="fa fa-plus" aria-hidden="true"></span>Instructions</button>
+        <div class="panel">
+            <div class="panel-inner">
+                <ul style="list-style: none; margin: 0; padding: 0;">
+                    {{ product.metafields.custom_fields["instructions-accordion"] }}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+    {% if product.metafields.custom_fields["nutrition-accordion"] != blank %}
+        <button class="accordion"><span class="fa fa-plus" aria-hidden="true"></span>Nutrition</button>
+        <div class="panel">
+            <div class="panel-inner">
+                {{ product.metafields.custom_fields["nutrition-accordion"] }}
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+.product-custom-fields {
+    margin-top: 20px;
+}
+.product-custom-fields .accordion {
+  color: #444;
+  cursor: pointer;
+  padding: 12px 0;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+  transition: 0.4s;
+  color: #23d16a;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+.product-custom-fields .accordion .fa-plus {
+    padding-right: 10px;
+}
+.product-custom-fields .panel {
+  padding: 0 10px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  font-size: 18px;
+  border: unset;
+  margin-bottom: 0;
+}
+.product-custom-fields .panel p {
+    margin-bottom: 10px;
+}
+.product-custom-fields .panel-inner {
+    padding: 10px 0;
+}
+</style>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>

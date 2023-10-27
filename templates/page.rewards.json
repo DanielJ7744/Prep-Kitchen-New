@@ -1,5 +1,13 @@
 {
   "sections": {
+    "1a9469ef-ee3c-4fed-aa84-8eb3a0fea0ad": {
+      "type": "how-it-works-header",
+      "disabled": true,
+      "settings": {
+        "bg": "shopify:\/\/shop_images\/pk-green-1_1000x_optimized.jpg",
+        "head": "PK Rewards"
+      }
+    },
     "main": {
       "type": "index__rewards",
       "settings": {}
@@ -7,7 +15,7 @@
     "165716411542965d9f": {
       "type": "apps",
       "blocks": {
-        "c22c45ce-62e3-4906-a1d0-463306df5454": {
+        "f22c1be8-d36a-4cfa-aad0-922a9fa346e3": {
           "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/rewards-module-app-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
           "settings": {
             "instance_placeholder_id": "33485"
@@ -15,7 +23,7 @@
         }
       },
       "block_order": [
-        "c22c45ce-62e3-4906-a1d0-463306df5454"
+        "f22c1be8-d36a-4cfa-aad0-922a9fa346e3"
       ],
       "settings": {
         "width": "wide",
@@ -27,6 +35,7 @@
     }
   },
   "order": [
+    "1a9469ef-ee3c-4fed-aa84-8eb3a0fea0ad",
     "main",
     "165716411542965d9f"
   ]

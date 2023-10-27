@@ -106,7 +106,7 @@
     <div class="ws-order-name__container--order">
       <h3 class="subtitle">{{ 'customer.order.title' | t: name: order.name }}</h3>
       <div class="ws-re-order__button-container" data-id="{{ order.name }}">
-        <img class="ws-re-order__button" src="{{ 'icon.png' | asset_url }}" alt="Re-Order">
+        <img class="ws-re-order__button lazyload lazyload--fade-in" data-src="{{ 'icon.png' | asset_url }}" alt="Re-Order">
       </div>
     </div>
     

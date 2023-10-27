@@ -1,382 +1,193 @@
 {% if section.settings.upsell %}
-<div class="cart_product_main_upper">
-  <div class="cart_product_main">
-    <div class="accoding_class">
-      <h3 class="" onclick="show_upsell(1)" id="uq1">
-        Would you like to try our recommendations?
-        <span> <img src="{{ 'arrowup.png' | asset_url }}" alt="" title=""> </span>
-      </h3>
+  <div class="cart_product_main_upper">
+    <div class="cart_product_main">
+      <div class="accoding_class">
+        <h3 class="" onclick="show_upsell(1)" id="uq1">
+          Would you like to try our recommendations?
+          <span>
+            <img class="lazyload lazyload--fade-in" data-src="{{ 'arrowup.png' | asset_url }}" alt="Fold" title="">
+          </span>
+        </h3>
 
-      <div class="cart_product_inner" style="display:block;">
-        {% capture item_name %}
-        {% for item in cartItems -%}
-        {{- item.product.handle -}}
-        {%- endfor %}
-          {% endcapture %}
+        <div class="cart_product_inner" style="display:block;">
+          {% capture item_name %}
+          {% for item in cartItems -%}
+            {{- item.product.handle -}}
+          {%- endfor %}
+        {% endcapture %}
 
-        {% assign checkproduct = false %}
+          {% assign checkproduct = false %}
 
-        {% comment %}
-        {% for block in blocks %}
-        {% assign proname = block.settings.cart_product_name | handle %}
+          {% if checkproduct == false %}
+            {%- assign collection = section.settings.select_collection -%}
 
-        {% if item_name contains proname %}
-        {% assign checkproduct = true %}
-        <div class="best_seller_slider swiper">
-          <div class="swiper-wrapper"></div>
-          {% if block.settings.product1 != blank %}
-          {%- assign product1 = block.product -%}
-          <div class="seller_div">
-            <div class="seller_img_product2">
-              <a href="{{ product1.url }}" title="">
-                {%- assign img_url1 = product1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                <img
-                     class="lazyload lazypreload"
-                     src="{{ product1 | img_url: 'grande' }}"
-                     alt="{{ product1.alt | escape }}"
-                     >
-              </a>
-            </div>
-            <div class="text_seller3">
-              <h2>
-                <a href="{{ product1.url }}">{{ product1.title  | truncate:25 }}</a>
-              </h2>
-              <h5>
-                {{ product1.price | money }}
-                <span>{{ product1.compare_at_price | money }}</span>
-              </h5>
+            <div class="best_seller_slider">
+              <div class="flickity-cart-upsell">
+                {% for product in collection.products limit: 20 %}
+                  <div class="seller_div">
+                    <div class="seller_img_product2">
+                      <a href="{{ product.url }}" title="">
+                        {%- assign img_url = product | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                        <img
+                          src="{{ product | img_url: '200x' }}"
+                          alt="{{ product.title | escape }}"
+                        >
+                      </a>
+                    </div>
+                    <div class="text_seller3" id="pro-{{ product.id }}">
+                      <h2>
+                        <a href="{{ product.url }}">{{ product.title | truncate: 25 }}</a>
+                      </h2>
+                      <h5>
+                        <span class="cart_product_main_upper--sale">{{ product.compare_at_price | money }}</span>
+                        {{ product.price | money }}
+                      </h5>
 
-              <div class="shop_all2">
-                <a
-                   id="pro-{{ product1.id }}"
-                   onclick="addUpsellPro({{ product1.id }},{{ product1.selected_or_first_available_variant.id }})"
-                   href="javascript:void(0)"
-                   class=""
-                   >Add</a
-                  >
+                      <div class="shop_all2">
+                        {%- if product.tags contains 'Prefixed' -%}
+                          <input
+                            type="hidden"
+                            class="lifestyle"
+                            name="properties[_lifestyleinfo]"
+                            value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"
+                          >
+                          <input type="hidden" class="meal" name="properties[_meal-type]" value="prefixed">
+
+                          {%- assign mcollection = collections[product.handle] -%}
+                          {%- if mcollection.all_products_count > 0 -%}
+                            {%- for cproduct in mcollection.products -%}
+                              <input
+                                id="item-{{ forloop.index }}"
+                                readonly
+                                type="hidden"
+                                class="prefixitem"
+                                name="properties[_item-{{ forloop.index }}]"
+                                value="{{ cproduct.selected_or_first_available_variant.id  }}"
+                                data-qty="1"
+                              >
+                            {%- endfor -%}
+                          {%- endif -%}
+                        {%- elsif product.tags contains 'lifestyle_meal' or product.tags contains 'breakfast_meal' -%}
+                          <input
+                            type="hidden"
+                            class="lifestyle"
+                            name="properties[_lifestyleinfo]"
+                            value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"
+                          >
+                          <input type="hidden" class="meal" name="properties[_meal-type]" value="lifestyle_breakfast">
+                        {%- endif -%}
+
+                        <a
+                          onclick="addUpsellPro({{ product.id }},{{ product.selected_or_first_available_variant.id }})"
+                          href="javascript:void(0)"
+                          class="cbtn"
+                          >Add</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
             </div>
-          </div>
-          {% endif %}
-
-          {% if block.settings.product2 != blank %}
-          {%- assign product2 = all_products[block.settings.product2] -%}
-          <div class="seller_div">
-            <div class="seller_img_product2">
-              <a href="{{ product2.url }}" title="">
-                {%- assign img_url2 = product2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                <img
-                     class="lazyload lazypreload"
-                     src="{{ product2 | img_url: 'grande' }}"
-                     alt="{{ product2.alt | escape }}"
-                     >
-              </a>
-            </div>
-            <div class="text_seller3">
-              <h2>
-                <a href="{{ product2.url }}">{{ product2.title  | truncate:25 }}</a>
-              </h2>
-              <h5>
-                {{ product2.price | money }}
-                <span>{{ product2.compare_at_price | money }}</span>
-              </h5>
-
-              <div class="shop_all2">
-                <a
-                   id="pro-{{ product2.id }}"
-                   onclick="addUpsellPro({{ product2.id }},{{ product2.selected_or_first_available_variant.id }})"
-                   href="javascript:void(0)"
-                   class=""
-                   >Add</a
-                  >
-              </div>
-            </div>
-          </div>
-          {% endif %}
-
-          {% if block.settings.product3 != blank %}
-          {%- assign product3 = all_products[block.settings.product3] -%}
-          <div class="seller_div">
-            <div class="seller_img_product2">
-              <a href="{{ product3.url }}" title="">
-                {%- assign img_url3 = product3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                <img
-                     class="lazyload lazypreload"
-                     src="{{ product3 | img_url: 'grande' }}"
-                     alt="{{ product3.alt | escape }}"
-                     >
-              </a>
-            </div>
-            <div class="text_seller3">
-              <h2>
-                <a href="{{ product3.url }}">{{ product3.title  | truncate:25 }}</a>
-              </h2>
-              <h5>
-                {{ product3.price | money }}
-                <span>{{ product3.compare_at_price | money }}</span>
-              </h5>
-
-              <div class="shop_all2">
-                <a
-                   id="pro-{{ product3.id }}"
-                   onclick="addUpsellPro({{ product3.id }},{{ product3.selected_or_first_available_variant.id }})"
-                   href="javascript:void(0)"
-                   class=""
-                   >Add</a
-                  >
-              </div>
-            </div>
-          </div>
-          {% endif %}
-
-          {% if block.settings.product4 != blank %}
-          {%- assign product4 = all_products[block.settings.product4] -%}
-          <div class="seller_div">
-            <div class="seller_img_product2">
-              <a href="{{ product4.url }}" title="">
-                {%- assign img_url4 = product4 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                <img
-                     class="lazyload lazypreload"
-                     src="{{ product4 | img_url: 'grande' }}"
-                     alt="{{ product4.alt | escape }}"
-                     >
-              </a>
-            </div>
-            <div class="text_seller3">
-              <h2>
-                <a href="{{ product4.url }}">{{ product4.title  | truncate:25 }}</a>
-              </h2>
-              <h5>
-                {{ product4.price | money }}
-                <span>{{ product4.compare_at_price | money }}</span>
-              </h5>
-
-              <div class="shop_all2">
-                <a
-                   id="pro-{{ product4.id }}"
-                   onclick="addUpsellPro({{ product4.id }},{{ product4.selected_or_first_available_variant.id }})"
-                   href="javascript:void(0)"
-                   class=""
-                   >Add</a
-                  >
-              </div>
-            </div>
-          </div>
-          {% endif %}
-
-          {% if block.settings.product5 != blank %}
-          {%- assign product5 = all_products[block.settings.product5] -%}
-          <div class="seller_div">
-            <div class="seller_img_product2">
-              <a href="{{ product5.url }}" title="">
-                {%- assign img_url5 = product5 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                <img
-                     class="lazyload lazypreload"
-                     src="{{ product5 | img_url: 'grande' }}"
-                     alt="{{ product5.alt | escape }}"
-                     >
-              </a>
-            </div>
-            <div class="text_seller3">
-              <h2>
-                <a href="{{ product5.url }}">{{ product5.title  | truncate:25 }}</a>
-              </h2>
-              <h5>
-                {{ product5.price | money }}
-                <span>{{ product5.compare_at_price | money }}</span>
-              </h5>
-
-              <div class="shop_all2">
-                <a
-                   id="pro-{{ product5.id }}"
-                   onclick="addUpsellPro({{ product5.id }},{{ product5.selected_or_first_available_variant.id }})"
-                   href="javascript:void(0)"
-                   class=""
-                   >Add</a
-                  >
-              </div>
-            </div>
-          </div>
           {% endif %}
         </div>
-        {% endif %}
-        {% endfor %}
-        
-        {% endcomment %}
-
-        {% if checkproduct == false %}
-        {%- assign collection = section.settings.select_collection -%}
-        <div class="best_seller_slider swiper mySwiper">
-          <div class="swiper-wrapper">
-            {% for product in collection.products limit: 20 %}
-            <div class="seller_div swiper-slide">
-              <div class="seller_img_product2">
-                <a href="{{ product.url }}" title="">
-                  {%- assign img_url = product | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                  <img
-                       class="lazyload lazypreload"
-                       src="{{ product | img_url: 'grande' }}"
-                       alt="{{ product.alt | escape }}"
-                       >
-                </a>
-              </div>
-              <div class="text_seller3" id="pro-{{ product.id }}">
-                <h2>
-                  <a href="{{ product.url }}">{{ product.title  | truncate: 25 }}</a>
-                </h2>
-                <h5>
-                  <span class="cart_product_main_upper--sale">{{ product.compare_at_price | money }}</span>
-                  {{ product.price | money }}
-                </h5>
-
-                <div class="shop_all2">
-                  {%- if product.tags contains 'Prefixed' -%}
-                    <input type="hidden" class="lifestyle" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
-                    <input type="hidden" class="meal" name="properties[_meal-type]" value="prefixed"/>
-                  
-                    {%- assign mcollection = collections[product.handle] -%}
-                    {%- if mcollection.all_products_count > 0 -%}   
-                        {%- for cproduct in mcollection.products -%}
-                              <input id="item-{{ forloop.index }}" readonly type="hidden" class="prefixitem" name="properties[_item-{{ forloop.index }}]" value="{{ cproduct.selected_or_first_available_variant.id  }}" data-qty="1" />
-                        {%- endfor -%}
-                    {%- endif -%}	
-                  {%- elsif product.tags contains 'lifestyle_meal' or product.tags contains 'breakfast_meal' -%}
-                    <input type="hidden" class="lifestyle" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
-                    <input type="hidden" class="meal" name="properties[_meal-type]" value="lifestyle_breakfast"/>
-                  {%- endif -%}
-              
-                  <a
-                     onclick="addUpsellPro({{ product.id }},{{ product.selected_or_first_available_variant.id }})"
-                     href="javascript:void(0)"
-                     class="cbtn"
-                     >Add</a
-                    >
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-          </div>          
-          
-          <!-- If we need navigation buttons -->
-          <div class="swiper-button-prev"><img src="{{ 'left-arrow.png' | asset_img_url: '512x' }}" /></div>
-          <div class="swiper-button-next"><img src="{{ 'right-arrow.png' | asset_img_url: '512x' }}" /></div>
-
-        </div>
-        {% endif %}
-
-<!--         <div class="arrow_div">
-          <div class="arr_div" id="prev_arr"><img src="{{ 'left-arrow.png' | asset_url }}" title="" alt=""></div>
-          <div class="arr_div" id="next_arr"><img src="{{ 'right-arrow.png' | asset_url }}" title="" alt=""></div>
-        </div> -->
       </div>
     </div>
   </div>
-</div>
 
-<script>
-  function show_upsell(para) {
-    $('.cart_product_inner').slideToggle('medium');
-    if($('#uq'+para ).hasClass('slide_active')){
-      $('#uq'+para ).removeClass('slide_active');
-    } else {
-      $('#uq'+para ).addClass('slide_active');
+  <style>
+    .flickity-cart-upsell {
+      display: none;
     }
-  }
-
-  function addUpsellPro(PID,VID) {
-    var cdata=[];
-
-    cdata.push({
-      id: VID,
-      quantity: 1,
-      properties: {
-        '_lifestyleinfo': $('#pro-'+PID).find('.lifestyle').val(),
-        '_meal-type': $('#pro-'+PID).find('.meal').val()
+    .flickity-cart-upsell.flickity-enabled {
+      display: block;
+    }
+    .flickity-cart-upsell .seller_div {
+      width: 25%;
+    }
+    .flickity-cart-upsell .flickity-prev-next-button {
+      top: calc(100% + 20px);
+    }
+    .flickity-cart-upsell .flickity-prev-next-button.previous {
+      left: 50%;
+      transform: translate(calc(-50% - 30px), 0);
+    }
+    .flickity-cart-upsell .flickity-prev-next-button.next {
+      right: 50%;
+      transform: translate(calc(50% + 30px), 0);
+    }
+    .flickity-cart-upsell .flickity-button {
+      background: unset;
+    }
+    @media only screen and (max-width: 700px) {
+      .flickity-cart-upsell .seller_div {
+        width: 33.3333%;
       }
+    }
+    @media only screen and (max-width: 500px) {
+      .flickity-cart-upsell .seller_div {
+        width: 100%;
+      }
+    }
+    @media only screen and (max-width: 100px) {
+      .flickity-cart-upsell .seller_div {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <script>
+    function show_upsell(para) {
+      $('.cart_product_inner').slideToggle('medium');
+      if ($('#uq' + para).hasClass('slide_active')) {
+        $('#uq' + para).removeClass('slide_active');
+      } else {
+        $('#uq' + para).addClass('slide_active');
+      }
+    }
+
+    function addUpsellPro(PID, VID) {
+      var cdata = [];
+
+      cdata.push({
+        id: VID,
+        quantity: 1,
+        properties: {
+          _lifestyleinfo: $('#pro-' + PID)
+            .find('.lifestyle')
+            .val(),
+          '_meal-type': $('#pro-' + PID)
+            .find('.meal')
+            .val(),
+        },
+      });
+
+      $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        async: false,
+        cache: false,
+        dataType: 'json',
+        data: cdata[0],
+        error: function (a, b) {
+          console.log(a);
+          console.log(b);
+        },
+        success: function (cdata) {
+          $('#pro-' + PID)
+            .find('.cbtn')
+            .text('Added');
+          window.location = '/cart';
+        },
+      });
+    }
+
+    $(document).ready(function () {
+      jQuery('.flickity-cart-upsell').flickity({
+        cellAlign: 'left',
+        pageDots: false,
+        contain: true,
+      });
     });
-
-    $.ajax({
-      type: 'POST',
-      url: '/cart/add.js',
-      async: false,
-      cache: false,
-      dataType: 'json',
-      data: cdata[0],
-      error: function(a,b){
-        console.log(a);
-        console.log(b);
-      },
-      success: function(cdata){
-        $('#pro-'+PID).find('.cbtn').text('Added');
-        window.location = '/cart';
-      }
-    });
-  }
-
-  var swiper = new Swiper(".mySwiper", {
-    cssMode: true,
-    slidesPerView: 4,
-    breakpoints: {
-      900: {
-        slidesPerView: 4
-      },
-      700: {
-        slidesPerView: 3
-      },
-      500: {
-        slidesPerView: 2
-      },
-      100: {
-        slidesPerView: 1
-      }
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-   
-    mousewheel: true,
-    keyboard: true,
-  });
-
-  //   $(document).ready(function() {
-  //     setTimeout(function() {
-  //       $('.best_seller_slider').slick({
-  //         dots: false,
-  //         infinite: true,
-  //         arrows:true,
-  //         prevArrow: '#prev_arr',
-  //         nextArrow: '#next_arr',
-  //         speed: 500,
-  //         slidesToShow: 4,
-  //         slidesToScroll: 4,
-  //         responsive: [{
-  //           breakpoint: 1199,
-  //           settings: {
-  //             slidesToShow: 4,
-  //             slidesToScroll: 4,
-  //           }
-  //         },{
-  //           breakpoint: 991,
-  //           settings: {
-  //             slidesToShow: 3,
-  //             slidesToScroll: 3
-  //           }
-  //         },{
-  //           breakpoint: 768,
-  //           settings: {
-  //             slidesToShow: 2,
-  //             slidesToScroll: 2
-  //           }
-  //         }, {
-  //           breakpoint: 480,
-  //           settings: {
-  //             slidesToShow: 1,
-  //             slidesToScroll: 1
-  //           }
-  //         }]
-  //       });
-  //     });
-  //   });
-</script>
+  </script>
 {% endif %}

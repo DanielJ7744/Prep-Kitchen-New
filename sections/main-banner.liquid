@@ -1,3 +1,34 @@
+***
+<link
+  rel="preload"
+  as="image"
+  href="
+    {%- if section.settings.img.width >= 165 -%}{{ section.settings.img | image_url: width: 165 }} 165w,{%- endif -%}
+    {%- if section.settings.img.width >= 360 -%}{{ section.settings.img | image_url: width: 360 }} 360w,{%- endif -%}
+    {%- if section.settings.img.width >= 535 -%}{{ section.settings.img | image_url: width: 535 }} 535w,{%- endif -%}
+    {%- if section.settings.img.width >= 750 -%}{{ section.settings.img | image_url: width: 750 }} 750w,{%- endif -%}
+    {%- if section.settings.img.width >= 1070 -%}{{ section.settings.img | image_url: width: 1070 }} 1070w,{%- endif -%}
+    {%- if section.settings.img.width >= 1500 -%}{{ section.settings.img | image_url: width: 1500 }} 1500w,{%- endif -%}
+    {{ section.settings.img | image_url }} {{ section.settings.img.width }}w
+  "
+  imagesizes="100vw"
+>
+<link
+  rel="preload"
+  as="image"
+  href="
+    {%- if section.settings.mob_img.width >= 165 -%}{{ section.settings.mob_img | image_url: width: 165 }} 165w,{%- endif -%}
+    {%- if section.settings.mob_img.width >= 360 -%}{{ section.settings.mob_img | image_url: width: 360 }} 360w,{%- endif -%}
+    {%- if section.settings.mob_img.width >= 535 -%}{{ section.settings.mob_img | image_url: width: 535 }} 535w,{%- endif -%}
+    {%- if section.settings.mob_img.width >= 750 -%}{{ section.settings.mob_img | image_url: width: 750 }} 750w,{%- endif -%}
+    {%- if section.settings.mob_img.width >= 1070 -%}{{ section.settings.mob_img | image_url: width: 1070 }} 1070w,{%- endif -%}
+    {%- if section.settings.mob_img.width >= 1500 -%}{{ section.settings.mob_img | image_url: width: 1500 }} 1500w,{%- endif -%}
+    {{ section.settings.mob_img | image_url }} {{ section.settings.mob_img.width }}w
+  "
+  imagesizes="100vw"
+>
+***
+
 <style>
   .main_banner_inner {
     position: relative;
@@ -17,7 +48,7 @@
     transform: translate(-20%);
   }
 
-  .banner_heading h3 {
+  .banner_heading--title {
     margin-bottom: 10px;
     font-size: 24px;
     line-height: 30px;
@@ -25,7 +56,7 @@
     color: #fff;
   }
 
-  .banner_heading h1 {
+  .banner_heading--text {
     font-size: 35px;
     line-height: 42px;
     margin-bottom: 26px;
@@ -107,9 +138,9 @@
   @media screen and (min-width: 1800px) {
     .banner_heading { max-width: 580px; bottom: 30%; }
 
-    .banner_heading h3 { margin-bottom: 16px; font-size: 30px; line-height: 36px; }
+    .banner_heading--title { margin-bottom: 16px; font-size: 30px; line-height: 36px; }
 
-    .banner_heading h1 { font-size: 50px; line-height: 56px; margin-bottom: 40px; }
+    .banner_heading--text { font-size: 50px; line-height: 56px; margin-bottom: 40px; }
 
     .banner_btns a { margin-left: 19px; min-width: 245px; font-size: 22px; line-height: 27px; padding: 10px 30px; }
 
@@ -127,9 +158,9 @@
     
     .banner_heading { position: absolute; max-width: 326px; bottom: 10% !important; left: 15%; transform: translate(-20%); }
 
-    .banner_heading h3 { margin-bottom: 10px; font-size: 18px; line-height: 22px; }
+    .banner_heading--title { margin-bottom: 10px; font-size: 18px; line-height: 22px; }
 
-    .banner_heading h1 { font-size: 28px; line-height: 34px; margin-bottom: 17px; }
+    .banner_heading--text { font-size: 28px; line-height: 34px; margin-bottom: 17px; }
 
     .banner_btns a { margin-left: 9px; min-width: 155px; padding: 10px 16px; }
 
@@ -152,17 +183,49 @@
 <div class="main_banner_wrapper-{{ section.id }}">
   <div class="main_banner_inner">
     {% if section.settings.img != blank %}    
-    <img class="desk_img" src="{{ section.settings.img | img_url: '1296x' }}" />
+      <img
+        class="desk_img"
+        srcset="
+          {%- if section.settings.img.width >= 165 -%}{{ section.settings.img | image_url: width: 165 }} 165w,{%- endif -%}
+          {%- if section.settings.img.width >= 360 -%}{{ section.settings.img | image_url: width: 360 }} 360w,{%- endif -%}
+          {%- if section.settings.img.width >= 535 -%}{{ section.settings.img | image_url: width: 535 }} 535w,{%- endif -%}
+          {%- if section.settings.img.width >= 750 -%}{{ section.settings.img | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if section.settings.img.width >= 1070 -%}{{ section.settings.img | image_url: width: 1070 }} 1070w,{%- endif -%}
+          {%- if section.settings.img.width >= 1500 -%}{{ section.settings.img | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {{ section.settings.img | image_url }} {{ section.settings.img.width }}w
+        "
+        src="{{ section.settings.img | image_url: width: 1296 }}"
+        sizes="100vw"
+        alt="{{ section.settings.subhead }}"
+        width="{{ section.settings.img.width }}"
+        height="{{ section.settings.img.height }}"
+      >
     {% endif %}
     {% if section.settings.mob_img != blank %}
-    <img class="mob_img" src="{{ section.settings.mob_img | img_url: '1296x' }}" />
+      <img
+        class="mob_img"
+        srcset="
+          {%- if section.settings.mob_img.width >= 165 -%}{{ section.settings.mob_img | image_url: width: 165 }} 165w,{%- endif -%}
+          {%- if section.settings.mob_img.width >= 360 -%}{{ section.settings.mob_img | image_url: width: 360 }} 360w,{%- endif -%}
+          {%- if section.settings.mob_img.width >= 535 -%}{{ section.settings.mob_img | image_url: width: 535 }} 535w,{%- endif -%}
+          {%- if section.settings.mob_img.width >= 750 -%}{{ section.settings.mob_img | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if section.settings.mob_img.width >= 1070 -%}{{ section.settings.mob_img | image_url: width: 1070 }} 1070w,{%- endif -%}
+          {%- if section.settings.mob_img.width >= 1500 -%}{{ section.settings.mob_img | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {{ section.settings.mob_img | image_url }} {{ section.settings.mob_img.width }}w
+        "
+        src="{{ section.settings.mob_img | image_url: width: 1296 }}"
+        sizes="100vw"
+        alt="{{ section.settings.subhead }}"
+        width="{{ section.settings.mob_img.width }}"
+        height="{{ section.settings.mob_img.height }}"
+      >
     {% endif %}
     <div class="banner_heading">
       {% if section.settings.subhead != blank %}
-      <h3>{{ section.settings.subhead }}</h3>
+      <h1 class="banner_heading--title">{{ section.settings.subhead }}</h1>
       {% endif %}
       {% if section.settings.head != blank %}
-      <h1>{{ section.settings.head }}</h1>
+      <p class="banner_heading--text">{{ section.settings.head }}</>
       {% endif %}
 
       {% if section.settings.link != blank %}

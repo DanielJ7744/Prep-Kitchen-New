@@ -1,0 +1,27 @@
+<div id="prefixed-container">
+{% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+        {% if block.type == 'prefixedmeal' %}
+            {%-assign mproduct = block.settings.prefix_prod|default:product.handle -%}
+                {%-assign mcollectionHandle = block.settings.prefix_coll|default:product.handle -%}
+            {%-if mcollectionHandle != blank -%}			
+                {%-assign mcollection = collections[mcollectionHandle] -%}
+                {% if mproduct == product.handle %}
+                    {% if mcollection.all_products_count > 0 %}   
+                        {% for cproduct in mcollection.products %}
+                            <div>
+                            <input id="item-{{ forloop.index }}" readonly type="hidden" class="prefixitem" name="properties[_item-{{ forloop.index }}]" value="{{ cproduct.selected_or_first_available_variant.id  }}" data-qty="1" />
+                            {%- if cproduct.featured_image != blank -%}<label for="item-{{ forloop.index }}"><img class="lazyload lazyload--fade-in" alt="{{ cproduct.title }}" data-src="{{ cproduct.featured_image | img_url:"original" }}" />&nbsp;&nbsp;&nbsp;{{ cproduct.title  }}</label>{%-endif-%}
+                            </div>
+                        {% endfor %}
+                    {% endif %}	
+                    {% break %}
+                {% endif %}
+                {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</div>
+<style type="text/css">
+    #prefixed-container input[type=hidden][id^=item-],.prefixed-container input[type=hidden][id^=item-]{display:none}#prefixed-container label,.prefixed-container label{border:1px solid #fff;display:block;position:relative;cursor:default}#prefixed-container label:before,.prefixed-container label:before{background-color:#fff;color:#fff;content:" ";display:block;border-radius:50%;border:1px solid grey;position:absolute;top:-5px;left:-5px;width:25px;height:25px;text-align:center;line-height:28px;transition-duration:.4s;transform:scale(0)}#prefixed-container label img,.prefixed-container label img{height:100px;width:100px;transition-duration:.2s;transform-origin:50% 50%}.product-price-and-shipping{display:block!important}.content_price{display:block!important}
+</style>

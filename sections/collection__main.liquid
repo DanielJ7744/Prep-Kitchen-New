@@ -1,5 +1,5 @@
 {% comment %}
-** Collection template with sidebar **
+  ** Collection template with sidebar **
 {% endcomment %}
 
 {% assign id = section.id %}
@@ -15,289 +15,305 @@
 {% comment %} CSS {% endcomment %}
 {% style %}
   #shopify-section-{{ id }} {
-    padding-top: {{ padding_top }}px;
-    padding-bottom: {{ padding_bottom }}px;
-    {% if width == 'wide' %}
-      width: 100%;
-    {% endif %}
+  padding-top: {{ padding_top }}px;
+  padding-bottom: {{ padding_bottom }}px;
+  {% if width == 'wide' %}
+  width: 100%;
+  {% endif %}
   }
 
   .sidebar-section {
-    {% if section.settings.sidebar_position == 'right' %}
-      order: 1;
-    {% endif %}
+  {% if section.settings.sidebar_position == 'right' %}
+  order: 1;
+  {% endif %}
   }
 
   {% if section.settings.collection_breadcrumb == false %}
-    .breadcrumb__container {
-      display: none;
-    }
+  .breadcrumb__container {
+  display: none;
+  }
   {% endif %}
 
   {% if section.settings.pagination_type != 'basic_pagination' %}
-    .breadcrumb__page-count {
-      display: none;
-    }
+  .breadcrumb__page-count {
+  display: none;
+  }
   {% endif %}
 
   {% if section.settings.collection_tags == false %}
-    .collection__tag-filter {
-      display: none;
-    }
+  .collection__tag-filter {
+  display: none;
+  }
   {% endif %}
 
   {% if section.settings.collection_sort == false %}
-    .collection__sort-by-filter {
-      display: none;
-    }
+  .collection__sort-by-filter {
+  display: none;
+  }
   {% endif %}
+  .container.collection_list_container{
+    width: unset;
+    padding: 0;
+    margin: 0;
+  }
+  .collection_block_section{
+    margin-top:30px;
+    scroll-margin-top: 180px;
+  }
+  .heading-container{
+    margin-left: calc(20px / 2);
+  }
+
+
+  h2.section_heading {
+      font-family: 'rubikmedium';
+      font-size: 40px;
+      color: #2c2c2c;
+      text-align: center;
+      margin-bottom: 55px;
+  }
+
+  .wishcoll {
+      position: unset;
+      top: 0.5rem;
+      left: 0.5rem;
+  }
+
+  a.iWishAddColl i {
+      color: #2c2c2c;
+  }
 
   {% render 'css-loop',
-          css: custom_css,
-          id: id
+            css: custom_css,
+  id: id
   %}
+
+  @media screen and (max-width: 1024px) {
+  h2.section_heading { font-size: 36px; }
+  }
+
+  @media screen and (max-width: 798px) {
+    .collection_block_section{
+      scroll-margin-top: 100px;
+      margin-top: -40px;
+      padding-top: 90px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+  h2.section_heading { font-size: 30px; }
+  }
+
+  @media screen and (max-width: 640px) {
+  h2.section_heading { font-size: 17px; }
+  }
 {% endstyle %}
 
-<section class="section
+<style>
+  .diatry-notification {
+    display: none;
+    margin: 20px auto 0;
+    max-width: 500px;
+    text-align: center;
+    position: sticky;
+    top: 150px;
+    z-index: 99;
+  }
+
+  @media screen and (max-width: 798px) {
+    .diatry-notification {
+      top: 70px;
+    }
+  }
+</style>
+
+<div class="alert alert-success diatry-notification">
+  <strong>Dietary Filters Applied!</strong>
+</div>
+{% if section.settings.heading != blank %}
+  <h2 class="section_heading">{{ section.settings.heading }}</h2>
+{% endif %}
+
+{% for block in section.blocks %}
+  {% if block.type == 'collection_block' %}
+    {% assign collection = collections[block.settings.collection_block] %}
+    <section
+      class="
+        section collection_block_section
         {{ css_class }}
-        is-width-{{ width }}"
-        {% if animation != "none" %}
-          data-scroll-class="{{ animation }}"
-        {% endif %}>
-  <div class="container {% if settings.heading_divider_style == 'long' %}has-heading-divider-below {% endif %}">
-    <div class="collection__breadcrumb two-fifths medium-down--one-whole column has-padding-bottom">
-      {% comment %} Collection breadcrumb {% endcomment %}
-      <div class="breadcrumb__container">
-        {% render 'breadcrumb', context: 'collection' %}
-      </div>
-    </div>
-    <div class="collection__spacer three-fifths column hide-when-banner-enabled"></div>
-    <div class="two-fifths medium-down--one-whole column has-no-side-gutter hide-when-banner-enabled">
-      {% comment %} Collection title {% endcomment %}
-      {% render 'heading',
-              title: collection.title,
-              heading_tag: 'h1',
-              context: 'collection',
-              text_alignment: 'left'
-      %}
-    </div>
-    <div class="collection__filters three-fifths medium-down--one-whole column">
-      {% comment %} Collection filters {% endcomment %}
-      {% render 'collection__filters' %}
-    </div>
-    {% if settings.heading_divider_width != 0 and settings.heading_divider_style == 'long' %}
-      <div class="heading-divider-below heading-wrapper one-whole column hide-when-banner-enabled">
-        <div class="heading-divider
-                    heading-divider--{{ settings.heading_divider_style }}"
-              {% if settings.heading_divider_animation != "none" %}
+        is-width-{{ width }}
+        collection-section
+      "
+      {% if animation != 'none' %}
+        data-scroll-class="{{ animation }}"
+      {% endif %}
+      id="{{ collection.handle }}"
+    >
+      <div class=" {% if settings.heading_divider_style == 'long' %}has-heading-divider-below {% endif %}">
+        <div class="heading-container two-fifths medium-down--one-whole column has-no-side-gutter hide-when-banner-enabled">
+          {% comment %} Collection title {% endcomment %}
+          {% render 'heading',
+            title: block.settings.collection_title,
+            heading_tag: 'h2',
+            context: 'collection',
+            text_alignment: 'left'
+          %}
+        </div>
+        {% if settings.heading_divider_width != 0 and settings.heading_divider_style == 'long' %}
+          <div class="heading-divider-below heading-wrapper one-whole column hide-when-banner-enabled">
+            <div
+              class="
+                heading-divider
+                heading-divider--{{ settings.heading_divider_style }}
+              "
+              {% if settings.heading_divider_animation != 'none' %}
                 data-scroll-class="{{ settings.heading_divider_animation }}"
-              {% endif %}>
-        </div>
-      </div>
-    {% endif %}
-  </div>
-
-  {% comment %} Collection description {% endcomment %}
-  {% if collection.description != blank %}
-    <div class="container">
-      <div class="one-whole column">
-        <div class="collection__description content has-padding-bottom">
-          {{ collection.description }}
-        </div>
-      </div>
-    </div>
-  {% endif %}
-
-  {% comment %} Collection sidebar and main content area {% endcomment %}
-  <div class="container collection__content">
-
-    {% if section.blocks.size > 0 and section.settings.show_sidebar %}
-      <aside class="sidebar-section
-                    one-fourth
-                    medium-down--one-whole
-                    column">
-
-        {% liquid
-          assign has_faceted_filtering_block = false
-          assign faceted_filtering_blocks_count = section.blocks | where: "type", "faceted_filtering" | size
-          if faceted_filtering_blocks_count > 0
-            assign has_faceted_filtering_block = true
-          endif
-          assign legacy_filter_block_types = 'tag_list,tag_filter,type_list,vendor_list' | split: ','
-        %}
-
-        {% for block in section.blocks %}
-          {% if block.type == 'faceted_filtering' %}
-            {% render 'sidebar__faceted-filter',
-                      block: block,
-                      collection: collection %}
-          {% else %}
-            {%- comment -%} Non-faceted filter blocks {%- endcomment -%}
-            <div id="shopify-section-{{ block.id }}"
-                class="sidebar__block
-                      block__{{ block.type | downcase | replace: '_', '-' }}
-                      has-padding-top
-                      has-padding-bottom
-                      {% if settings.toggle_sidebar %}sidebar-toggle-active{% endif %}
-                      {% if has_faceted_filtering_block and legacy_filter_block_types contains block.type %}is-hidden{% endif %}"
-                      {{ block.shopify_attributes }}>
-              {% if block.type == 'collection_list' %}
-                {% comment %} Tag list {% endcomment %}
-                {% render 'sidebar__collection-list', block: block %}
-
-              {% elsif block.type == 'featured_promo' %}
-                {% comment %} Featured promo {% endcomment %}
-                {% render 'sidebar__featured-promo',
-                        block: block,
-                        id: block.id
-                %}
-
-              {% elsif block.type == 'html' %}
-                {% comment %} Custom HTML {% endcomment %}
-                {% render 'sidebar__html', block: block %}
-
-              {% elsif block.type == 'menu' %}
-                {% comment %} Menu {% endcomment %}
-                {% render 'sidebar__menu', menu: block.settings.menu %}
-
-              {% elsif block.type == 'newsletter' %}
-                {% comment %} Newsletter {% endcomment %}
-                {% render 'sidebar__newsletter', block: block %}
-
-              {% elsif block.type == 'page' %}
-                {% comment %} Page {% endcomment %}
-                {% render 'sidebar__page', page: block.settings.page %}
-
-              {% elsif block.type == 'search' %}
-                {% comment %} Search {% endcomment %}
-                {% render 'sidebar__search',
-                        block: block,
-                        context: 'sidebar'
-                %}
-
-              {% elsif block.type == 'tag_filter' and has_faceted_filtering_block == false %}
-                {% comment %} Tag filter {% endcomment %}
-                {% render 'sidebar__tag-filter', block: block %}
-
-              {% elsif block.type == 'tag_list' and has_faceted_filtering_block == false %}
-                {% comment %} Tag list {% endcomment %}
-                {% render 'sidebar__tag-list', block: block %}
-
-              {% elsif block.type == 'text' %}
-                {% comment %} Text {% endcomment %}
-                {% render 'sidebar__text', block: block %}
-
-              {% elsif block.type == 'type_list' and has_faceted_filtering_block == false %}
-                {% comment %} Type list {% endcomment %}
-                {% render 'sidebar__type-list', block: block %}
-
-              {% elsif block.type == 'vendor_list' and has_faceted_filtering_block == false %}
-                {% comment %} Vendor list {% endcomment %}
-                {% render 'sidebar__vendor-list', block: block %}
-
               {% endif %}
-            </div>
-          {% endif %}
-        {% endfor %}
-      </aside>
-    {% endif %}
+            ></div>
+          </div>
+        {% endif %}
+      </div>
 
-    {% paginate collection.products by section.settings.pagination_limit %}
-
-    <div class="collection__main {% if section.blocks.size > 0 and section.settings.show_sidebar %}three-fourths medium-down--one-whole column equal-columns--outside-trim{% endif %}" data-collection-main>
-      {% if section.settings.show_promo_banner %}
-        <div class="collection-promo-banner container">
-          <div class="banner__wrapper
-                      one-whole
-                      column
-                      dark-overlay-{{ section.settings.image_darken }}
-                      is-{{ section.settings.banner_height }}
-                      has-margin-bottom">
-            {% if section.settings.image != blank %}
-              {% render 'image-element',
-                      image: section.settings.image,
-                      alt: section.settings.image.alt,
-                      stretch_width: true
-              %}
-            {% else %}
-              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-            {% endif %}
-            <div class="banner__content card-content">
-              <div class="banner__text text-align-center">
-                <h1 class="banner__heading title">{{ section.settings.promo_title }}</h1>
-                {% if section.settings.promo_text != blank %}
-                  <div class="banner__subheading subtitle">{{ section.settings.promo_text }}</div>
-                {% endif %}
-              </div>
+      {% comment %} Collection description {% endcomment %}
+      {% if block.settings.collection_block.description != blank %}
+        <div class="">
+          <div class="one-whole column">
+            <div class="collection__description content has-padding-bottom">
+              {{ block.settings.collection_block.description }}
             </div>
           </div>
         </div>
       {% endif %}
 
-      {% if collection.products.size == 0 %}
-        <div class="container container--no-products-in-collection text-align-center has-padding-bottom has-padding-top">
-          <div class="one-whole column">
-            <p>{{ 'collections.general.no_matches' | t }}</p>
-          </div>
-        </div>
-      {% else %}
-        <div class="collection-matrix__wrapper">
-          <div class="collection__loading-icon button is-loading is-loading--icon-only"></div>
-          <div class="container collection-matrix" {% if section.settings.pagination_type != 'basic_pagination' %}data-load-more--grid {% endif %}>
-            {%- assign products_per_row = section.settings.products_per_row -%}
-            {%- assign mobile_products_per_row = section.settings.mobile_products_per_row -%}
-            {% render 'product-loop',
-                    products: products,
+      {% comment %} Collection sidebar and main content area {% endcomment %}
+      <div class="collection__content">
+        {% paginate collection.products by section.settings.pagination_limit %}
+          <div
+            class="collection__main {% if section.blocks.size > 0 and section.settings.show_sidebar %}three-fourths medium-down--one-whole column equal-columns--outside-trim{% endif %}"
+            data-collection-main
+          >
+            {% if block.settings.show_promo_banner %}
+              <div class="collection-promo-banner">
+                <div
+                  class="
+                    banner__wrapper
+                    one-whole
+                    column
+                    dark-overlay-{{ block.settings.image_darken }}
+                    is-{{ block.settings.banner_height }}
+                    has-margin-bottom
+                  "
+                >
+                  {% if block.settings.image != blank %}
+                    {% render 'image-element',
+                      image: block.settings.image,
+                      alt: block.settings.image.alt,
+                      stretch_width: true
+                    %}
+                  {% else %}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+                  <div class="banner__content card-content">
+                    <div class="banner__text text-align-center">
+                      <h1 class="banner__heading title">{{ block.settings.promo_title }}</h1>
+                      {% if block.settings.promo_text != blank %}
+                        <div class="banner__subheading subtitle">{{ block.settings.promo_text }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if collection.products.size == 0 %}
+              <div class="container container--no-products-in-collection text-align-center has-padding-bottom has-padding-top">
+                <div class="one-whole column">
+                  <p>{{ 'collections.general.no_matches' | t }}</p>
+                </div>
+              </div>
+            {% else %}
+              <div class="collection-matrix__wrapper">
+                <div class="collection__loading-icon button is-loading is-loading--icon-only"></div>
+                <div
+                  style="position:unset;"
+                  class="container collection_list_container collection-matrix"
+                  {% if section.settings.pagination_type != 'basic_pagination' %}
+                    data-load-more--grid
+                  {% endif %}
+                >
+                  {%- assign products_per_row = section.settings.products_per_row -%}
+                  {%- assign mobile_products_per_row = section.settings.mobile_products_per_row -%}
+                  {% render 'product-loop',
+                    products: block.settings.collection_block.products,
+                    main_index: forloop.index,
                     products_per_row: products_per_row,
                     mobile_products_per_row: mobile_products_per_row,
                     limit: section.settings.pagination_limit,
                     align_height: section.settings.align_height,
                     height: section.settings.collection_height
-            %}
-          </div>
-        </div>
-      {% endif %}
-
-      <div class="container container--pagination">
-        <div class="one-whole column text-align-center">
-          {%- assign load_more_text = 'collections.general.pagination_button' | t -%}
-          {% render 'pagination',
+                  %}
+                </div>
+              </div>
+            {% endif %}
+            <div class="container container--pagination">
+              <div class="one-whole column text-align-center">
+                {%- assign load_more_text = 'collections.general.pagination_button' | t -%}
+                {% render 'pagination',
                   paginate: paginate,
                   pagination_type: section.settings.pagination_type,
                   load_more_text: load_more_text
-          %}
-        </div>
+                %}
+              </div>
+            </div>
+          </div>
+          {% comment %} JavaScript {% endcomment %}
+          <script
+            type="application/json"
+            data-section-id="{{ section.id }}"
+            data-section-data
+          >
+            {
+              "enable_filter": {{ section.settings.collection_tags | json }},
+              "enable_sorting": {{ section.settings.collection_sort | json }},
+              "enable_breadcrumb": {{ section.settings.collection_breadcrumb | json}},
+              "pagination_type": {{ section.settings.pagination_type | json }},
+              "number_of_pages": {{ paginate.pages | json }}
+            }
+          </script>
+        {% endpaginate %}
       </div>
-    </div>
-
-    {% comment %} JavaScript {% endcomment %}
-    <script
-      type="application/json"
-      data-section-id="{{ section.id }}"
-      data-section-data
-    >
-      {
-        "enable_filter": {{ section.settings.collection_tags | json }},
-        "enable_sorting": {{ section.settings.collection_sort | json }},
-        "enable_breadcrumb": {{ section.settings.collection_breadcrumb | json}},
-        "pagination_type": {{ section.settings.pagination_type | json }},
-        "number_of_pages": {{ paginate.pages | json }}
-      }
-    </script>
-
-    {% endpaginate %}
-  </div>
-</section>
-
+    </section>
+  {% endif %}
+{% endfor %}
+{% comment %} JavaScript {% endcomment %}
 
 {% render 'flying-cart-helper' %}
 
+<script
+  type="application/json"
+  data-section-id="{{ section.id }}"
+  data-section-data
+>
+  {
+    "enable_filter": {{ section.settings.collection_tags | json }},
+      "enable_sorting": {{ section.settings.collection_sort | json }},
+        "enable_breadcrumb": {{ section.settings.collection_breadcrumb | json}}
+  }
+</script>
+{% comment %}
+  <script>
+    var scroll = new SmoothScroll('.black_filter_inner1 a[href*="#"]:not([data-easing])', {
+      easing: 'Linear',
+      speed: 250
+    });
+  </script>
+{% endcomment %}
 
 <script data-theme-editor-load-script src="{{ 'z__jsSidebar.js' | asset_url }}"></script>
 <script src="{{ 'z__jsCollection.js' | asset_url }}"></script>
 {% schema %}
 {
-  "name": "Collection",
+  "name": "Collection Main",
   "class": "collection-main jsCollection jsSidebar",
   "settings": [
     {
@@ -532,6 +548,79 @@
     }
   ],
   "blocks": [
+    {
+      "type": "collection_block",
+      "name": "collection",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Promotional banner"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_promo_banner",
+          "label": "Show promotional banner",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1800 x 800px recommended"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_darken",
+          "label": "Darken banner image",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "promo_title",
+          "label": "Heading",
+          "default": "Special sale on now!"
+        },
+        {
+          "type": "richtext",
+          "id": "promo_text",
+          "label": "Text",
+          "default": "<p>Description of promotion with lots of details.</p>"
+        },
+        {
+          "type": "select",
+          "id": "banner_height",
+          "label": "Banner height",
+          "default": "medium",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "collection_title",
+          "label": "Collection Title",
+          "default": "collection title",
+          "info": "Collection title required"
+        },
+        {
+          "type": "collection",
+          "id": "collection_block",
+          "label": "Collection",
+          "info": "Select a collection"
+        }
+      ]
+    },
     {
       "type": "collection_list",
       "name": "Collection list",
@@ -780,19 +869,11 @@
       ]
     }
   ],
-  "default": {
-    "blocks": [
-      {
-        "type": "featured_promo"
-      },
-      {
-        "type": "menu"
-      },
-      {
-        "type": "text"
-      }
-    ]
-  }
+  "presets": [
+    {
+      "name": "collection Main",
+      "category": "Collection"
+    }
+  ]
 }
-
 {% endschema %}

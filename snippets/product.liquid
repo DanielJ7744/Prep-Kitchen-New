@@ -121,6 +121,10 @@
               {{ product.title }}
             {% endif %}
           </h1>
+        {%- elsif block.type == 'icons' -%}
+          {% render 'product-icons', block: block %}
+        {%- elsif block.type == 'custom_accordion' -%}
+          {% render 'product-custom_accordion', block: block %}
         {%- elsif block.type == 'size-chart' -%}
           {% comment %} Size chart {% endcomment %}
           {% for tag in product.tags %}

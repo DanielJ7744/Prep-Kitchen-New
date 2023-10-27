@@ -1,110 +1,133 @@
 <style>
-.black_filter {
-    background: #2C2C2C;
-    position: relative;
-}
-  .header_container {
-    max-width: 1900px;
-    padding: 0 15px;
-    margin: 0 auto;
-}
-  .black_filter .black_filter_upper {
-    position: relative;
-}
-  .black_filter .black_filter_inner1 ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-  .black_filter .black_filter_inner1 ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-  .black_filter .black_filter_inner1 ul li {
-    margin-right: 66px;
-    position: relative;
-    transition: all .3s ease-in-out;
-}
-  .black_filter .black_filter_inner1 ul li a {
-    color: #f5f5f5;
-    text-transform: capitalize;
-    font-size: 15px;
-    padding: 8px 0 7px;
-    font-family: rubikregular;
-    text-decoration: none;
-    display:block;
-}
-  .black_filter .black_filter_inner1 ul li a:hover {
-    color: #23d16a;
-    text-decoration: none;
-}
-  .site-nav__link:focus .site-nav__label, .site-nav__link:not([disabled]):hover .site-nav__label {
-    border-bottom-color: #2c2c2c;
-}
-  .black_filter .black_filter_inner2 {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 0;
-}
-  .black_filter .black_filter_inner2 h5 {
-    margin: 0;
-    color: #23d16a;
-    text-transform: capitalize;
-    font-family: rubikregular;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-  .black_filter .black_filter_inner2 h5 a {
-    color: #23d16a;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-  .black_filter .black_filter_inner2 h5 img {
-    margin-right: 13px;
-}
-  .banner--stick {
-    width: 100%;
-    left: 0;
-    position: fixed!important;
-    z-index: 1;
-        top: 100px;
-}
-  .black_filter {
-    background: #2C2C2C;
-}
-  .black_filter_inner1 h6 {
-    font-size: 16px;
-    margin: 0;
-    text-align: left;
-    color: #fff;
-    font-weight: 400;
-    font-family: rubikregular;
-    text-transform: capitalize;
-}
-  .mob_cat {
-    display: none;
-}
-  @media only screen and (min-width:768px) and (max-width:991px) {
-  .black_filter .black_filter_inner1 ul li{margin-right:19px}
-  }
-  @media only screen and (min-width:992px) and (max-width:1199px) {
-  .black_filter .black_filter_inner1 ul li{margin-right:40px}
-  }
-  @media screen and  (max-width: 767px){
-.hidden-xs {
-    display: none!important;
-}
-    .visible-xs {
-    display: block!important;
-}
-    .mob_cat ul {
-    display: block!important;
-}
-  }
+    .black_filter {
+        background: #2C2C2C;
+        position: relative;
+        height: 40px;
+    }
+      .header_container {
+        max-width: 1900px;
+        padding: 4px 15px;
+        margin: 0 auto;
+    }
+      .black_filter .black_filter_upper {
+        position: relative;
+        display:flex;
+        justify-content: space-between;
+        padding-top: 5px;
+    }
+    @media screen and (max-width: 800px){
+      .black_filter .black_filter_upper{
+        align-items: flex-start;
+      }
+    }
+  .black_filter_upper .black_filter_inner1{
+    flex: 2 1 80%;
+    }
+      .black_filter .black_filter_inner1 ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 30px;
+    }
+      .black_filter .black_filter_inner1 ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+      .black_filter .black_filter_inner1 ul li {
+        position: relative;
+        transition: all .3s ease-in-out;
+    }
+      .black_filter .black_filter_inner1 ul li a {
+        color: #f5f5f5;
+        text-transform: capitalize;
+        font-size: 15px;
+        padding: 8px 0 7px;
+        font-family: rubikregular;
+        text-decoration: none;
+        display:block;
+        font-size: 1.2vw;
+    }
+    @media screen and (min-width: 1700px){
+      .black_filter .black_filter_inner1 ul li a{
+        font-size: 20px;
+      }
+    }
+    @media screen and (max-width: 800px){
+      .black_filter .black_filter_inner1 ul li a{
+        font-size: 16px;
+      }
+    }
+      .black_filter .black_filter_inner1 ul li a:hover {
+        color: #23d16a;
+        text-decoration: none;
+    }
+      .site-nav__link:focus .site-nav__label, .site-nav__link:not([disabled]):hover .site-nav__label {
+        border-bottom-color: #2c2c2c;
+    }
+      .black_filter .black_filter_inner2 {
+        {% comment %} position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0; {% endcomment %}
+    }
+      .black_filter .black_filter_inner2 h5 {
+        margin: 0;
+        color: #23d16a;
+        text-transform: capitalize;
+        font-family: rubikregular;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+      .black_filter .black_filter_inner2 h5 a {
+        color: #23d16a;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+      .black_filter .black_filter_inner2 h5 img {
+        margin-right: 13px;
+    }
+      .banner--stick {
+        width: 100%;
+        left: 0;
+        position: fixed!important;
+        z-index: 1;
+            top: 100px;
+    }
+      .black_filter {
+        background: #2C2C2C;
+    }
+      .black_filter_inner1 h6 {
+        font-size: 16px;
+        margin: 0;
+        text-align: left;
+        color: #fff;
+        font-weight: 400;
+        font-family: rubikregular;
+        text-transform: capitalize;
+    }
+      .mob_cat {
+        display: none;
+    }
+      @media only screen and (min-width:768px) and (max-width:991px) {
+      {% comment %} .black_filter .black_filter_inner1 ul li{margin-right:19px} {% endcomment %}
+      }
+      @media only screen and (min-width:992px) and (max-width:1199px) {
+      {% comment %} .black_filter .black_filter_inner1 ul li{margin-right:40px} {% endcomment %}
+      }
+      @media screen and  (max-width: 767px){
+    .hidden-xs {
+        display: none!important;
+    }
+        .visible-xs {
+        display: block!important;
+    }
+        .mob_cat ul {
+        display: block!important;
+    }
+      }
 </style>
 
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
@@ -114,30 +137,40 @@
       <div class="black_filter_upper">
         <div class="black_filter_inner1">
           <ul class="hidden-xs">
-            {% for link in linklists.collection-menu.links %}
-            <li {% if link.active %} class="site-nav--active"{% endif %}>
-              <a href="#{{ link.url | handle | remove:'collections-' }}"
-                 class="site-nav__link site-nav__link--main{% if link.active %} site-nav__link--active{% endif %}"
-                 {% if link.current %} aria-current="page"{% endif %}
-                 >
-                <span class="site-nav__label">{{ link.title | escape }}</span>
-              </a>
+            {% for link in linklists['collection-menu'].links %}
+              <li
+                {% if link.active %}
+                  class="site-nav--active"
+                {% endif %}
+              >
+                <a
+                  href="#{{ link.url | handle | remove:'collections-' }}"
+                  class="site-nav__link site-nav__link--main{% if link.active %} site-nav__link--active{% endif %}"
+                  {% if link.current %}
+                    aria-current="page"
+                  {% endif %}
+                >
+                  <span class="site-nav__label">{{ link.title | escape }}</span>
+                </a>
 
-              {% if link.links != blank %}
-              <ul class="dropdown-menu">
-                {% for childlink in link.links %}
-                <li class="dropdown-item{% if link.links.size > 0 %} dropdown{% endif %}">
-                  <a href="{{ childlink.url }}"
-                     class="site-nav__link site-nav__child-link{% if forloop.last %} site-nav__link--last{% endif %}"
-                     {% if childlink.current %} aria-current="page"{% endif %}
-                     >
-                    {{ childlink.title | escape }}
-                  </a>
-                </li>
-                {% endfor %}
-              </ul>
-              {% endif %}
-            </li>
+                {% if link.links != blank %}
+                  <ul class="dropdown-menu">
+                    {% for childlink in link.links %}
+                      <li class="dropdown-item{% if link.links.size > 0 %} dropdown{% endif %}">
+                        <a
+                          href="{{ childlink.url }}"
+                          class="site-nav__link site-nav__child-link{% if forloop.last %} site-nav__link--last{% endif %}"
+                          {% if childlink.current %}
+                            aria-current="page"
+                          {% endif %}
+                        >
+                          {{ childlink.title | escape }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
             {% endfor %}
           </ul>
 
@@ -145,82 +178,89 @@
             <h6 onclick="mob_cat()">Menu Categories</h6>
             <div class="mob_cat">
               <ul>
-                {% for link in linklists.collection-menu.links %}
-                <li {% if link.active %} class="site-nav--active"{% endif %}>
-                  <a href="#{{ link.url | handle | remove:'collections-' }}"
-                     class="site-nav__link site-nav__link--main{% if link.active %} site-nav__link--active{% endif %}"
-                     {% if link.current %} aria-current="page"{% endif %}
-                     >
-                    <span class="site-nav__label">{{ link.title | escape }}</span>
-                  </a>
-                </li>
+                {% for link in linklists['collection-menu'].links %}
+                  <li
+                    {% if link.active %}
+                      class="site-nav--active"
+                    {% endif %}
+                  >
+                    <a
+                      href="#{{ link.url | handle | remove:'collections-' }}"
+                      class="site-nav__link site-nav__link--main{% if link.active %} site-nav__link--active{% endif %}"
+                      {% if link.current %}
+                        aria-current="page"
+                      {% endif %}
+                    >
+                      <span class="site-nav__label">{{ link.title | escape }}</span>
+                    </a>
+                  </li>
                 {% endfor %}
               </ul>
             </div>
           </div>
-
         </div>
         <div class="black_filter_inner2">
-          <h5><a href="javascript:void(0)" onclick="show_category()"><img src="{{ 'filter_g.svg' | asset_url }}" title="" alt=""> Dietary Filters</a></h5>
+          <h5>
+            <a href="javascript:void(0)" onclick="show_category()"
+              ><img class="lazyload lazyload--fade-in" data-src="{{ 'filter_g.svg' | asset_url }}" title="" alt="Dietary Filters"> Dietary Filters</a
+            >
+          </h5>
         </div>
       </div>
     </div>
     {% include 'collection_filter_popup' %}
   </div>
-  {% endif %}
-
+{% endif %}
 
 <script>
-  $(window).scroll(function() {        
-    if($(window).scrollTop() < 1) {
-      $(".black_filter").removeClass('banner--stick');  
-      $(".black_filter").addClass('banner--clone');
-      $(".black_filter").css({'top': 0});    
-    } else {             
-      $(".black_filter").addClass('banner--stick');
-      $(".black_filter").removeClass('banner--clone');
-      $(".black_filter").css({'top': $('#myHeader').height()});          
+  $(window).scroll(function () {
+    if ($(window).scrollTop() < 1) {
+      $('.black_filter').removeClass('banner--stick');
+      $('.black_filter').addClass('banner--clone');
+      $('.black_filter').css({ top: 0 });
+    } else {
+      $('.black_filter').addClass('banner--stick');
+      $('.black_filter').removeClass('banner--clone');
+      $('.black_filter').css({ top: $('#myHeader').height() });
     }
   });
 </script>
 
 <script>
-  function setvar(id,vid,vprice, pid) {
-    $('#dclick_green'+id+' .variant_ul li').removeClass('var_selected');
-    $('#mclick_green'+id+' .variant_ul li').removeClass('var_selected');
-    $('#d'+vid).addClass('var_selected');
-    $('#m'+vid).addClass('var_selected');
-    
-    $('#dprovar'+id).val(vid);
-    $('#mprovar'+id).val(vid);
-    
-    $('#dclick_green'+id+' h6').text(vprice);
-    $('#mclick_green'+id+' .pdp_text_div h6').text(vprice);
-    
-    $('#pd'+pid+' .iWishAddColl').attr('data-variant', vid);
+  function setvar(id, vid, vprice, pid) {
+    $('#dclick_green' + id + ' .variant_ul li').removeClass('var_selected');
+    $('#mclick_green' + id + ' .variant_ul li').removeClass('var_selected');
+    $('#d' + vid).addClass('var_selected');
+    $('#m' + vid).addClass('var_selected');
+
+    $('#dprovar' + id).val(vid);
+    $('#mprovar' + id).val(vid);
+
+    $('#dclick_green' + id + ' h6').text(vprice);
+    $('#mclick_green' + id + ' .pdp_text_div h6').text(vprice);
+
+    $('#pd' + pid + ' .iWishAddColl').attr('data-variant', vid);
   }
-  
-  function show_category(){
+
+  function show_category() {
     $('.shop_left').slideToggle();
-  } 
-  function mob_cat(){
-    $('.mob_cat').slideToggle('medium');    
-  }  
+  }
+  function mob_cat() {
+    $('.mob_cat').slideToggle('medium');
+  }
 </script>
 
-
 {% schema %}
-  {
-    "name": "Top Collection Bar",
-    "settings": [
-],
-      "presets": [
-          {
-              "name" : "Top Collection Bar",
-              "category" : "Top Collection Bar"
-          }
-      ]
-  }
+{
+  "name": "Top Collection Bar",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Top Collection Bar",
+      "category": "Top Collection Bar"
+    }
+  ]
+}
 {% endschema %}
 
 {% stylesheet %}

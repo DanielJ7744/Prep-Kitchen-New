@@ -344,7 +344,7 @@
           <div class="media">
             <div class="media-left">
               <figure class="image">
-                <img src="//1.gravatar.com/avatar/{{ article.user.email | md5 }}?s=160&r=G" alt="{{ article.author }}" />
+                <img class="lazyload lazyload--fade-in" data-src="//1.gravatar.com/avatar/{{ article.user.email | md5 }}?s=160&r=G" alt="{{ article.author }}" />
               </figure>
             </div>
             <div class="media-content">
@@ -394,7 +394,7 @@
               <div class="media">
                 <div class="media-left">
                   <figure class="image">
-                    <img src="//1.gravatar.com/avatar/{{ comment.email | md5 }}?s=160&r=G" alt="{{ comment.author }}" />
+                    <img class="lazyload lazyload--fade-in" data-src="//1.gravatar.com/avatar/{{ comment.email | md5 }}?s=160&r=G" alt="{{ comment.author }}" />
                   </figure>
                 </div>
                 <div class="media-content">

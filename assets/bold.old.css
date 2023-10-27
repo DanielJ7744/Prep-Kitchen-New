@@ -1,0 +1,38 @@
+.bold_option_title {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+.bold_option_element select {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 28px 8px 15px;
+  border-radius: 2px;
+  border: 1px solid #cccccc;
+  background-color: #fff;
+  font-weight: 400;
+}
+.bold_options.bold_options_loaded {
+    display: flex;
+    flex-direction: column;
+}
+.bold_option_set{
+    order: 2;
+}
+.bold_option_total{
+    order: 1;
+}
+.bold_option_total>div {
+    padding: 0px 0px 14px 0px !important;
+      text-align: left !important;
+    display: flex;
+    align-items: center;
+}
+.bold_option_total span {
+    color: #2c2c2c !important;
+    font-weight: 800;
+    line-height: 35px;
+    font-size: 25px;
+}

@@ -5,9 +5,18 @@
       <div class="mobile-menu__first-level has-no-submenu" data-mobile-menu-has-toggle="false">
         <input class="visuallyhidden submenu__input" type="checkbox" id="mobile-submenu-{{ link.title | handleize }}">
         <label class="submenu__label {% if link.url == 'http://' or link.url == '' or link.url == 'https://' or link.url == '#' %}has-no-link{% endif %}" for="mobile-submenu-{{ link.title | handleize }}">
-          <a class="mobile-menu__item {% if link.active %}is-active{% endif %}" href="{{ link.url }}" >
-            {{ link.title }}
-          </a>
+          {% if link.url contains "collections/all" %}
+            <a
+              class="mobile-menu__item mobile-menu__item--meals scrollOnClick {% if link.active %}is-active{% endif %}"
+              href="{{ link.url }}"
+              duration="2000" 
+              easing="smooth" 
+            >
+              {{ link.title }}
+            </a>
+          {% else %}
+            <a class="mobile-menu__item {% if link.active %}is-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+          {% endif %}
         </label>
       </div>
     {% else %}
@@ -29,7 +38,18 @@
           {% for sub_link in link.links %}
             <li class="mobile-menu__submenu-list-item">
               {% if sub_link.links == blank %}
-                <a class="mobile-menu__item" href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+                {% if sub_link.url contains "collections/all" %}
+                  <a 
+                  class="mobile-menu__item mobile-menu__item--meals scrollOnClick" 
+                  href="{{ sub_link.url }}"
+                  duration="2000" 
+                  easing="smooth" 
+                  >
+                  {{ sub_link.title }}
+                  </a>
+                {% else %}
+                  <a class="mobile-menu__item" href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+                {% endif %} 
               {% else %}
                 <div class="mobile-menu__second-level">
                   <input class="visuallyhidden submenu__input" type="checkbox" id="mobile-sub-submenu-{{ forloop.index }}-{{ currentIndex }}">
@@ -66,4 +86,23 @@
                 subLabel.classList.toggle('active')
             });
         }
+</script>
+
+
+<script>
+// This is hack to maintain mobile menu function in collection-all page
+  document.addEventListener("DOMContentLoaded", function(){
+    const currentUrl = window.location.href
+    if (currentUrl.includes('collections/all')) {
+      $('.mobile-menu__item--meals').each(function() {
+        var value = $(this).attr('href');
+        $(this).addClass('mobile-menu__item--meals-active')
+        $(this).attr('href', value.replace('https://theprepkitchen.com/collections/all',''));
+        $(this).attr('scrollTo', value.replace('https://theprepkitchen.com/collections/all#',''));
+      });
+    }
+    $( ".mobile-menu__item--meals-active" ).click(function() {
+      $('.mobile-menu__toggle-button').click();
+    });
+  });
 </script>

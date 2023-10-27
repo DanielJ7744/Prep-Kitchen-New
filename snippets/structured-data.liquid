@@ -4,7 +4,7 @@
 {% endcomment %}
 
 {% if template contains 'article' %}
-  {%- capture article_description  -%}
+  {%- capture article_description -%}
     {%- if article.excerpt != blank -%}
       {{ article.excerpt | strip_html }}
     {%- else -%}
@@ -69,16 +69,15 @@
   {% assign collection_url = collection.url %}
 {% endif %}
 
-{% if template.name == 'product' 
-    or template.name == 'list-collections' 
-    or template.name == 'collection' 
-    or template.name == 'blog' 
-    or template.name == 'article' 
-    or template.name == 'search' 
-    or template.name == 'cart' 
-    or template.name == 'page'
+{% if template.name == 'product'
+  or template.name == 'list-collections'
+  or template.name == 'collection'
+  or template.name == 'blog'
+  or template.name == 'article'
+  or template.name == 'search'
+  or template.name == 'cart'
+  or template.name == 'page'
 %}
-
   <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -310,39 +309,39 @@
   {% capture year_from_now %}{{ now[0] | plus: 1 }}-{{ now[1] }}-{{ now[2] | at_most: 28 }}{% endcapture %}
 
   <script type="application/ld+json">
-  {
-    "@context": "http://schema.org/",
-    "@type": "Product",
-    "name": {{ product_name | strip_newlines | json }},
-    "image": {{ product_image | img_url: '1024x1024' | prepend: 'https:' | json }},
-    {% if product.description != blank %}
-      "description": {{ product.description | json }},
-    {% endif %}
-    {% if product.vendor %}
-      "brand": {
-        "@type": "Thing",
-        "name": {{ product.vendor | json }}
-      },
-    {% endif %}
-    {% if selected_variant.sku != blank %}
-      "sku": {{ selected_variant.sku | json }},
-    {% endif %}
-    {% if selected_variant.barcode != blank %}
-      "mpn": {{ selected_variant.barcode | json }},
-    {% endif %}
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": {{ cart.currency.iso_code | json }},
-      "price": {{ selected_variant.price | divided_by: 100.0 | json }},
-      "availability": "http://schema.org/{% if selected_variant.available %}InStock{% else %}OutOfStock{% endif %}",
-      "url": "{{ shop.url }}{{ selected_variant.url }}",
-      "seller": {
-        "@type": "Organization",
-        "name": {{ shop.name | json }}
-      },
-      "priceValidUntil": {{ year_from_now | json }}
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": {{ product_name | strip_newlines | json }},
+      "image": {{ product_image | img_url: '1024x1024' | prepend: 'https:' | json }},
+      {% if product.description != blank %}
+        "description": {{ product.description | json }},
+      {% endif %}
+      {% if product.vendor %}
+        "brand": {
+          "@type": "Thing",
+          "name": {{ product.vendor | json }}
+        },
+      {% endif %}
+      {% if selected_variant.sku != blank %}
+        "sku": {{ selected_variant.sku | json }},
+      {% endif %}
+      {% if selected_variant.barcode != blank %}
+        "mpn": {{ selected_variant.barcode | json }},
+      {% endif %}
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "price": {{ selected_variant.price | divided_by: 100.0 | json }},
+        "availability": "http://schema.org/{% if selected_variant.available %}InStock{% else %}OutOfStock{% endif %}",
+        "url": "{{ shop.url }}{{ selected_variant.url }}",
+        "seller": {
+          "@type": "Organization",
+          "name": {{ shop.name | json }}
+        },
+        "priceValidUntil": {{ year_from_now | json }}
+      }
     }
-  }
   </script>
 {% endif %}
 
@@ -351,11 +350,35 @@
   https://developers.google.com/search/docs/data-types/sitename
 {% endcomment %}
 
+{% comment %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "{{ shop.name }}",
+      "url": "{{ shop.url }}"
+    }
+  </script>
+{% endcomment %}
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
-    "@type": "WebSite",
-    "name": "{{ shop.name }}",
-    "url": "{{ shop.url }}"
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if section.settings.logo %}
+      {% assign image_size = section.settings.logo.width | append:'x' %}
+      "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.twitter_link | json }},
+      {{ settings.facebook_link | json }},
+      {{ settings.pinterest_link | json }},
+      {{ settings.instagram_link | json }},
+      {{ settings.tumblr_link | json }},
+      {{ settings.snapchat_link | json }},
+      {{ settings.youtube_link | json }},
+      {{ settings.vimeo_link | json }}
+    ],
+    "url": {{ shop.url | append: page.url | json }}
   }
 </script>

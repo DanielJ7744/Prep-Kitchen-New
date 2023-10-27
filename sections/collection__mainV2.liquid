@@ -110,10 +110,20 @@
 {% endstyle %}
 
 <style>
-  .diatry-notification {display:none; margin: 20px auto 0;max-width: 500px;text-align: center; position: sticky;top: 150px;z-index: 99;}
-  
+  .diatry-notification {
+    display: none;
+    margin: 20px auto 0;
+    max-width: 500px;
+    text-align: center;
+    position: sticky;
+    top: 150px;
+    z-index: 99;
+  }
+
   @media screen and (max-width: 798px) {
-    .diatry-notification {top: 70px;}
+    .diatry-notification {
+      top: 70px;
+    }
   }
 </style>
 
@@ -125,7 +135,7 @@
 {% endif %}
 
 {% for block in section.blocks %}
-  {% if block.type == "collection_block" %}
+  {% if block.type == 'collection_block' %}
     {% assign collection = collections[block.settings.collection_block] %}
     <section
       class="
@@ -134,7 +144,7 @@
         is-width-{{ width }}
         collection-section
       "
-      {% if animation != "none" %}
+      {% if animation != 'none' %}
         data-scroll-class="{{ animation }}"
       {% endif %}
       id="{{ collection.handle }}"
@@ -142,10 +152,9 @@
       <div class=" {% if settings.heading_divider_style == 'long' %}has-heading-divider-below {% endif %}">
         <div class="heading-container two-fifths medium-down--one-whole column has-no-side-gutter hide-when-banner-enabled">
           {% comment %} Collection title {% endcomment %}
-          {%
-            render 'heading',
+          {% render 'heading',
             title: block.settings.collection_title,
-            heading_tag: 'h2',
+            heading_tag: 'h3',
             context: 'collection',
             text_alignment: 'left'
           %}
@@ -157,7 +166,7 @@
                 heading-divider
                 heading-divider--{{ settings.heading_divider_style }}
               "
-              {% if settings.heading_divider_animation != "none" %}
+              {% if settings.heading_divider_animation != 'none' %}
                 data-scroll-class="{{ settings.heading_divider_animation }}"
               {% endif %}
             ></div>
@@ -184,17 +193,18 @@
         >
           {% if block.settings.show_promo_banner %}
             <div class="collection-promo-banner">
-              <div class="
+              <div
+                class="
                   banner__wrapper
                   one-whole
                   column
                   dark-overlay-{{ block.settings.image_darken }}
                   is-{{ block.settings.banner_height }}
                   has-margin-bottom
-                ">
+                "
+              >
                 {% if block.settings.image != blank %}
-                  {%
-                    render 'image-element',
+                  {% render 'image-element',
                     image: block.settings.image,
                     alt: block.settings.image.alt,
                     stretch_width: true
@@ -232,8 +242,7 @@
               >
                 {%- assign products_per_row = section.settings.products_per_row -%}
                 {%- assign mobile_products_per_row = section.settings.mobile_products_per_row -%}
-                {%
-                  render 'product-loop',
+                {% render 'product-loop',
                   products: block.settings.collection_block.products,
                   main_index: forloop.index,
                   products_per_row: products_per_row,
@@ -266,12 +275,14 @@
   }
 </script>
 
-{% comment %} <script>
-  var scroll = new SmoothScroll('.black_filter_inner1 a[href*="#"]:not([data-easing])', {
-    easing: 'Linear',
-    speed: 250
-  });
-</script> {% endcomment %}
+{% comment %}
+  <script>
+    var scroll = new SmoothScroll('.black_filter_inner1 a[href*="#"]:not([data-easing])', {
+      easing: 'Linear',
+      speed: 250
+    });
+  </script>
+{% endcomment %}
 
 <script data-theme-editor-load-script src="{{ 'z__jsSidebar.js' | asset_url }}"></script>
 <script src="{{ 'z__jsCollection.js' | asset_url }}"></script>

@@ -67,13 +67,13 @@
           {% if item.product.media %}
           {% if item.product.featured_media.preview_image %}
           <a href="{{ item.url }}">
-            <img src="{{ item.image | img_url: '320x' }}" alt="{{ item.title | escape }}" />
+            <img class="lazyload lazyload--fade-in" data-src="{{ item.image | img_url: '100x' }}" alt="{{ item.title | escape }}" />
           </a>
           {% endif %}
           {% else %}
           {% if item.image %}
           <a href="{{ item.url }}">
-            <img src="{{ item | img_url: '320x' }}" alt="{{ item.title | escape }}" />
+            <img class="lazyload lazyload--fade-in" data-src="{{ item | img_url: '100x' }}" alt="{{ item.title | escape }}" />
           </a>
           {% endif %}
           {% endif %}
@@ -199,7 +199,7 @@
       <div class="ajax-cart__right-content media-right">
         <a class="ajax-cart__delete" data-ajax-cart-delete data-cart-item-key="{{ item.key }}" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}" >
           <button class="close" aria-label="close">
-            <img src="{{ 'trash.png' | asset_img_url: '128x' }}"/> 
+            <img class="lazyload lazyload--fade-in" data-src="{{ 'trash.png' | asset_img_url: '30x' }}" alt="Delete" /> 
           </button>
         </a>
       </div>
@@ -316,16 +316,19 @@
       </button>
       <a class="ajax-cart__cart-link" href="{{ routes.cart_url }}" >{{ 'layout.general.go_to_cart' | t }}</a>
       {% else %}
-      <a href="{{ routes.cart_url }}" class="ajax-cart__button button--add-to-cart button">
-        {% if settings.show_lock_icon %}
-        {%
-                render 'icon',
-        name: 'lock'
-        %}
-        {% endif %}
-        {% comment %}{{ 'layout.general.go_to_cart' | t }} {% endcomment %}
-        Confirm Order
-      </a>
+      {% unless cart.item_count < 1 %}
+        <a href="{{ routes.cart_url }}" class="ajax-cart__button button--add-to-cart button" style="display: inline-flex !important;">
+          {% if settings.show_lock_icon %}
+          {%
+                  render 'icon',
+          name: 'lock'
+          %}
+          {% endif %}
+          {% comment %}{{ 'layout.general.go_to_cart' | t }} {% endcomment %}
+          Confirm Order
+        </a>
+      {% endunless %}
+      
       {% endif %}
     </div>
 

@@ -7,10 +7,10 @@
           "type": "repeat",
           "settings": {
             "cart_product_name": "custom-meal",
-            "product1": "hummus",
-            "product2": "bacon-egg-cheese-sandwich",
-            "product3": "turkey-pesto-cream-cheese-sandwich",
-            "product4": "whipped-cream-cheese-coming-soon",
+            "product1": "copy-of-whole-grain-penne-pasta",
+            "product2": "pk-chicken-tenders",
+            "product3": "35-chicken-tenders-red-mash-brussels-sprouts",
+            "product4": "chicken-tenders-and-mac-meal",
             "product5": ""
           }
         },
@@ -31,6 +31,9 @@
         "4d26c383-4d6f-4435-bbc3-0eddfa13426d"
       ],
       "settings": {
+        "cart_heading": "Your cart",
+        "cart_continue_shopping": "Continue shopping",
+        "cart_continue_url": "",
         "display_product_quantity_cart": true,
         "display_savings": true,
         "cart_message": "",

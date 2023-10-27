@@ -117,6 +117,7 @@ p.ql-align-center{
   float: left;
   margin-right: 10px;
   margin-top: 5px;
+  appearance: auto;
 }
 #smoothie-job-content .smoothie-gdpr-container{
   margin-bottom: 10px;
@@ -138,6 +139,7 @@ p.ql-align-center{
 #smoothie-job-content .custom-field-label{
   clear: both;
 }
+
 
 
 
@@ -185,6 +187,8 @@ p.ql-align-center{
 {% assign career_amount_max = cd[11] %}
 {% assign career_show_salary = cd[12] %}
 {% endif %}
+
+
 
 {% assign career_period_text = "" %}
 {% if career_period != blank %}
@@ -240,8 +244,14 @@ p.ql-align-center{
      </a>
    </div>
 
-    <h1>{{ page.title }} <span class="job-apply" onclick="smoothScroll(document.getElementById('af'))">APPLY NOW</span></h1>
+   
+      {% if career_external_form_link %}
+      <h1>{{ page.title }} <span class="job-apply" onclick="location.href='{{ career_external_form_link }}';">APPLY NOW</span></h1>
+      {% else %}
+      <h1>{{ page.title }} <span class="job-apply" onclick="smoothScroll(document.getElementById('af'))">APPLY NOW</span></h1>
+      {% endif %}
     
+      
 
    <div class="details">
     {% if location != "" %}
@@ -310,11 +320,13 @@ p.ql-align-center{
       </span>
     </span>
     {% endif %}
-
-
   </div>
-   
+
+
+  <div class="smoothie-job-editor-content">
   {{ page.content }}
+  </div>
+  
    
   </div>
 

@@ -1,0 +1,180 @@
+<!-- ReSci start (Inserted on: 2023-03-29 17:04:25 UTC -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.10.0/js/md5.js"></script>
+<script type="text/javascript">
+  window._rsq = window._rsq || [];
+  window._rsq.push(['_setSiteId', '1422']); // Your unique ReSci ID
+  window._rsq.push(['_enableOnsite']);
+
+{% if customer %}
+  window._rsq.push(['_setUserId', '{{ customer.id }}']);
+  window._rsq.push(['_setUserEmail', '{{ customer.email }}']);
+{% endif %}
+
+/*** Item View Event ***/
+{% if template.name == 'product' and product %}
+  {% if product.first_available_variant.id %}
+    window._rsq.push(['_addItem', {'id': '{{product.first_available_variant.id}}'}]);
+  {% endif %}
+
+  {% if product.first_available_variant.id == '' %}
+   window._rsq.push(['_addItem', {'id': '{{product.id}}'}]);
+  {% endif %}
+{% endif %}
+
+/*** Cart View Event ***/
+{% if template.name == 'cart' %}
+  {% for item in cart.items %}
+   window._rsq.push(['_addItem', { 'id':'{{ item.id }}', 'name':"{{ item.title }}", 'price':'{{ item.price | money_without_currency }}' }]);
+  {% endfor %}
+  window._rsq.push(['_setAction', 'shopping_cart']);
+{% endif %}
+
+/*** Search View Event ***/
+{% if template.name == 'search' and search.performed %}  window._rsq.push(['_setAction', 'search']) ;
+ window._rsq.push(['_setParams', { 'term': '{{ search.terms }}'}]);
+{% endif %}
+
+window._rsq.push(['_track']);
+
+/*** Email Capture Event ***/
+window.addEventListener('DOMContentLoaded', function(_rsq){
+    document.getElementById("contact_form").addEventListener("submit", function(){
+        // update the param within getELementById to the ID name of the email capture form
+        var uEmail = document.getElementById('Email').value;
+        // update the param getELementById to the ID name of the email input
+        window._rsq.push(['_setUserEmail', uEmail]);
+        window._rsq.push(['_setUserProperties', { 'record_id': md5(uEmail.toLowerCase()),'email':uEmail, 'registration_source':'footer'}]); // (Optional) You can pass any ReSci standard user data point
+        window._rsq.push(['_setAction', 'email_entered']);
+        window._rsq.push(['_track']);
+    });
+});
+
+/*** AJAX Add to Cart - Individual ***/
+window.addEventListener('DOMContentLoaded', function(_rsq){
+    window.frames.document.getElementsByClassName('button ajax-submit action_button button--add-to-cart')[0].addEventListener("click", function(_rsq){
+        // update the getElementById param to the ID name of the add to cart button
+        window.setTimeout(_check_cart, 2000);
+    });
+});
+
+/*** AJAX Add to Cart - Gallery 
+window.addEventListener('DOMContentLoaded', function(_rsq){
+	if (document.getElementById('AddToCart--product-template')) {
+       document.getElementById('AddToCart--product-template').addEventListener("click", function(_rsq){
+        // update the getElementById param to the ID name of the add to cart button
+        window.setTimeout(_check_cart, 2000);
+    });
+  }                 
+});  
+
+/*** AJAX Cart View ***/
+window.addEventListener('DOMContentLoaded', function(_rsq){
+ window.frames.document.getElementsByClassName('header-cart__icon')[0].addEventListener("click", function(_rsq){
+ // update the getElementById param to the ID name of the show cart button or cart icon
+ _rs_ajax.updateCart();
+ });
+});
+
+/*** AJAX Update to Cart 
+window.addEventListener('DOMContentLoaded', function(_rsq){
+  if ( document.getElementsByClassName('ajax-cart ajax-cart--drawert') ){
+     document.getElementsByClassName('ajax-cart ajax-cart--drawer')[0].addEventListener('click', event => {   
+       console.log(event.target)
+          if ( (event.target.className === 'control minus-control') ||
+               (event.target.className === 'quantity-minus quantity-element button is-inverse') ||
+               (event.target.className === 'control plus-control') ||
+               (event.target.className === 'quantity-plus quantity-element button is-inverse') ||
+               (event.target.className == 'quantity-wrapper field has-addons quantity-style--box is-medium') ||
+               (event.target.className == 'close')) {                          
+                  window.setTimeout(_check_cart, 2000);
+          }      
+     });
+  }
+}); 
+
+  /*** AJAX Update Cart ***/
+function addUpdateFunction() {
+    document.querySelector('.ajax-cart__form').addEventListener('click', event => {  
+      console.log(event.target)
+        if (event.target.matches('.quantity-minus.quantity-element.button.is-inverse') || 
+            event.target.closest('control.minus-control') || 
+            event.target.closest('.control.plus-control') || 
+            event.target.matches('.quantity-plus.quantity-element.button.is-inverse') || 
+            event.target.closest('.ajax-cart__delete')) {
+            window.setTimeout(_check_cart, 2000);
+        } 
+   });
+}
+function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
+  var startTimeInMs = Date.now();
+  (function loopSearch() {
+    if (document.querySelector(selector) != null) {
+      callback();
+      return;
+    }
+    else {
+      setTimeout(function () {
+        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+          return;
+        loopSearch();
+      }, checkFrequencyInMs);
+    }
+  })();
+}
+waitForElementToDisplay(".ajax-cart__form",addUpdateFunction,1000,9000);  
+
+/*** FUNCTION FOR AJAX TRACKING ***/
+var _rs_ajax = {};
+_rs_ajax.updateCart = function() { //This is required for ajax cart views
+    var request = new XMLHttpRequest();
+    request.open('GET', '/cart.js', true);
+    request.onload = function() {
+        if (request.status >= 200 && request.status < 400) { // Success!
+            var cart = JSON.parse(request.responseText);
+            for(var i=0; i<cart.items.length; i++) {
+                var cartItem = cart.items[i];
+                var price = cartItem.price / 100;
+                _rsq.push(['_addItem', { 'id':cartItem.id.toString(), 'name':cartItem.title.toString(),'price':price.toFixed(2).toString() }]);
+            }
+            _rsq.push(['_setAction', 'shopping_cart']); 
+           _rsq.push(['_track']);
+       }
+    };
+    request.onerror = function() {
+       console.log("Shopify Cart JS Failed");
+    };
+    request.send();
+};
+
+function _check_cart() {
+    var request = new XMLHttpRequest();
+    request.open('GET', '/cart.js', true);
+    request.onload = function() {
+        if (request.status >= 200 && request.status < 400) { // Success!
+            var cart = JSON.parse(request.responseText);
+            for(var i=0; i<cart.items.length; i++){
+                var cartItem = cart.items[i];
+                var price = cartItem.price / 100;
+                _rsq.push(['_addItem', { 'id':cartItem.id.toString(), 'name':cartItem.title.toString(),'price':price.toFixed(2).toString() }]);
+            }
+            window._rsq.push(['_setAction', 'shopping_cart']); 
+            window._rsq.push(['_track']);
+        }
+     };
+     request.onerror = function() {
+        console.log("error");
+     };
+     request.send(); 
+} 
+/*** END FUNCTION FOR AJAX TRACKING ***/  
+
+/*** ReSci Script ***/
+(function() {
+  var rScix = document.createElement('script');
+    rScix.type = 'text/javascript';
+    rScix.async = true;
+   rScix.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'd1stxfv94hrhia.cloudfront.net/waves/v3/w.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(rScix);
+  })();
+</script>
+<!-- ReSci end -->

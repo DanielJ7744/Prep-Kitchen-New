@@ -25,6 +25,10 @@
     justify-content: center;
   }
 
+  .product_image .image-element__wrap {
+    height: 100%;
+  }
+
   .product_image a {
     width: 100%;
     height: 100%;
@@ -76,29 +80,29 @@
 
   @media only screen and (min-width: 768px) and (max-width: 991px) {
     .featured_collection_inner { gap: 15px; }
-    
+
     .product_image { height: 245px; }
-    
+
     .product_info { text-align: center; padding: 0 18px; }
   }
-  
+
   @media screen and (max-width: 767px) {
     .featured_collection_wrapper-{{ section.id }} { padding: 34px 0 50px; }
-    
+
     .featured_collection_head h2 { margin: 0 0 24px; font-size: 20px; line-height: 24px; }
-    
+
     .product_image { height: 140px; }
-    
+
     .product_info { padding: 0 5px; }
-    
+
     .product_info h3 { min-height: 42px; margin: 7px 0 10px; font-size: 12px; line-height: 14px; }
-    
+
     .product_info form button { margin: 0; min-width: 100px; font-size: 14px; line-height: 18px; }
   }
-  
+
   @media screen and (max-width: 640px) {
     .featured_collection_inner { grid-template-columns: 1fr 1fr; }
-    
+
     .product_block:last-child { display: none; }
   }
 </style>
@@ -106,44 +110,82 @@
 <div class="featured_collection_wrapper-{{ section.id }}">
   <div class="page-width">
     {% if section.settings.head != blank %}
-    <div class="featured_collection_head"><h2>{{ section.settings.head }}</h2></div>
+      <div class="featured_collection_head">
+        <h2>{{ section.settings.head }}</h2>
+      </div>
     {% endif %}
     <div class="featured_collection_inner">
       {% for block in section.blocks %}
-      {% assign product = block.settings.product %}
-      <div class="product_block">
-        <div class="product_image">
-          {% if block.settings.pro_img != blank %}
-          <a href="{{ product.url }}"><img src="{{ block.settings.pro_img | img_url: '1296x' }}" /></a>
-          {% else %}
-          <a href="{{ product.url }}"><img src="{{ product.featured_image | img_url: '1296x' }}" /></a>
-          {% endif %}
-        </div>
-        <div class="product_info">
-          <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+        {% assign product = block.settings.product %}
+        <div class="product_block">
+          <div class="product_image">
+            {% if block.settings.pro_img != blank %}
+              <a href="{{ product.url }}">
+                {% render 'image-element',
+                  image: block.settings.pro_img,
+                  alt: block.settings.pro_img.alt,
+                  stretch_width: true
+                %}
+              </a>
+            {% else %}
+              <a href="{{ product.url }}">
+                {% render 'image-element', image: product.featured_image, alt: product.title, stretch_width: true %}
+              </a>
+            {% endif %}
+          </div>
+          <div class="product_info">
+            <h3>
+              <a href="{{ product.url }}">{{ product.title }}</a>
+            </h3>
 
-          <form id="form-{{ forloop.index}}" method="post" action="/cart/add">
-            {%- if product.tags contains 'Prefixed' -%}
-              <input type="hidden" class="lifestyle" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
-              <input type="hidden" class="meal" name="properties[_meal-type]" value="prefixed"/>
-            
-              {%- assign mcollection = collections[product.handle] -%}
-              {%- if mcollection.all_products_count > 0 -%}   
+            <form id="form-{{ forloop.index}}" method="post" action="/cart/add">
+              {%- if product.tags contains 'Prefixed' -%}
+                <input
+                  type="hidden"
+                  class="lifestyle"
+                  name="properties[_lifestyleinfo]"
+                  value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"
+                >
+                <input type="hidden" class="meal" name="properties[_meal-type]" value="prefixed">
+
+                {%- assign mcollection = collections[product.handle] -%}
+                {%- if mcollection.all_products_count > 0 -%}
                   {%- for cproduct in mcollection.products -%}
-                        <input id="item-{{ forloop.index }}" readonly type="hidden" class="prefixitem" name="properties[_item-{{ forloop.index }}]" value="{{ cproduct.selected_or_first_available_variant.id  }}" data-qty="1" />
+                    <input
+                      id="item-{{ forloop.index }}"
+                      readonly
+                      type="hidden"
+                      class="prefixitem"
+                      name="properties[_item-{{ forloop.index }}]"
+                      value="{{ cproduct.selected_or_first_available_variant.id  }}"
+                      data-qty="1"
+                    >
                   {%- endfor -%}
-              {%- endif -%}	
-            {%- elsif product.tags contains 'lifestyle_meal' or product.tags contains 'breakfast_meal' -%}
-              <input type="hidden" class="lifestyle" name="properties[_lifestyleinfo]" value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"/>
-              <input type="hidden" class="meal" name="properties[_meal-type]" value="lifestyle_breakfast"/>
-            {%- endif -%}
-    
-            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-            <input type="hidden" name="quantity" value="1" />
-            <button name="add" data-label="Add to cart" class="action_button button--add-to-cart ajax-submit" type="submit" data-add-to-cart-trigger>Add To Cart</button>
-          </form>
+                {%- endif -%}
+              {%- elsif product.tags contains 'lifestyle_meal' or product.tags contains 'breakfast_meal' -%}
+                <input
+                  type="hidden"
+                  class="lifestyle"
+                  name="properties[_lifestyleinfo]"
+                  value="{{-product.selected_or_first_available_variant.metafields['mealinfo']['lifestyleinfo']-}}"
+                >
+                <input type="hidden" class="meal" name="properties[_meal-type]" value="lifestyle_breakfast">
+              {%- endif -%}
+
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <button
+                name="add"
+                data-label="Add to cart"
+                class="action_button button--add-to-cart ajax-submit"
+                type="submit"
+                data-add-to-cart-trigger
+              >
+                Add To Cart
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
       {% endfor %}
     </div>
   </div>
@@ -151,40 +193,40 @@
 
 {% schema %}
 {
-"name": "Featured Collection",
-"tag": "section",
-"class": "featured_collection_section",
-"settings": [
-{
-"type" : "text",
-"id" : "head",
-"label" : "Heading"
-}
-],
-"blocks": [
-{
-"name" : "Product",
-"type" : "product",
-"settings" : [
-{
-"type" : "product",
-"id" : "product",
-"label" : "Select Product"
-},
-{
-"type" : "image_picker",
-"id" : "pro_img",
-"label" : "Select Product Image"
-}
-] 
-}
-],
-"presets": [
-{
-"name" : "Featured Collection",
-"category" : "Image"
-}
-]
+  "name": "Featured Collection",
+  "tag": "section",
+  "class": "featured_collection_section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "head",
+      "label": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Product",
+      "type": "product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "pro_img",
+          "label": "Select Product Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "category": "Image"
+    }
+  ]
 }
 {% endschema %}
 
